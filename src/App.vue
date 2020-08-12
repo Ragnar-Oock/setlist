@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+	<div id="app">
+		<WelcomeScreen />
+
+		<div class="topbar">
+			topbar
+		</div>
+
+		<div class="rules">
+			rules
+		</div>
+
+		<div class="setlist">
+			list
+		</div>
+	</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import WelcomeScreen from './components/WelcomeScreen';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+	name: 'App',
+	components: {
+		WelcomeScreen
+	}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+	@import 'node_modules/css-reset-and-normalize/scss/reset-and-normalize';
+	@import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Quicksand:wght@400;600&display=swap');
+	body {
+		font-family: 'Quicksand', sans-serif;
+	}
 </style>
