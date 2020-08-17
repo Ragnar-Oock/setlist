@@ -1,6 +1,8 @@
 <template lang="html">
 	<form
+		ref="searchBar"
 		class="search-bar"
+		:class="{'docked': isSearchbarDocked}"
 		@submit="submit($event)"
 	>
 		<label
@@ -43,11 +45,22 @@ export default {
 	props: [],
 	data () {
 		return {
-			search: ''
+			search: '',
+			isSearchbarDocked: false
 		};
 	},
-	computed: {
+	mounted() {
+		const options = {
+			rootMargin: '-80px 0px 0px 0px',
+			threshold: 0
+		};
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				this.isSearchbarDocked = !entry.isIntersecting;
+			});
+		}, options);
 
+		observer.observe(this.$refs.searchBar);
 	},
 	methods: {
 		submit(event) {
@@ -67,7 +80,13 @@ export default {
 		margin-bottom: 3em;
 		overflow: hidden;
 		position: relative;
-		transition: scale 300ms ease-in-out;
+		transition: 300ms ease-in-out;
+		top: 1em;
+		position: sticky;
+		z-index: 100;
+		max-width: 100%;
+		width: 100%;
+		transition-property: max-width, scale;
 
 		&:focus-within {
 			scale: 1.05;
@@ -115,6 +134,10 @@ export default {
 			&-logo {
 				box-shadow: 0 0 5px 6px #d7d7d7;
 			}
+		}
+		&.docked{
+			max-width: 80vw;
+			margin: 0 auto 3em;
 		}
 	}
 </style>

@@ -1,5 +1,7 @@
 <template lang="html">
-	<section class="top-bar">
+	<section
+		class="top-bar"
+	>
 		<h1>top-bar Component</h1>
 	</section>
 </template>
@@ -13,12 +15,6 @@ export default {
 		return {
 
 		};
-	},
-	computed: {
-
-	},
-	methods: {
-
 	}
 };
 
@@ -28,8 +24,11 @@ export default {
 <style scoped lang="scss">
   .top-bar {
 		background-color: #253f55;
-		padding: 1.5em 0;
 		position: sticky;
 		top: 0;
-  }
+		height: 3em;
+		z-index: 15;
+		display: flex;
+		align-items: center;
+	}
 </style>
