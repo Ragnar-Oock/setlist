@@ -71,24 +71,30 @@
 								readonly
 							>
 
-							<button
-								ref="copyButton"
-								class="music-item__button"
-								title="copier la commande"
-								@click="copy"
-							>
-								<svg
-									width="1em"
-									height="1em"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg"
+							<ToolTip :displayed="showTooltip">
+								<button
+									ref="copyButton"
+									class="music-item__button"
+									title="copier la commande"
+									@click="copy"
 								>
-									<use
-										xlink:href="../assets/images/copy.svg#copy"
-									/>
-								</svg>
-							</button>
+									<svg
+										width="1em"
+										height="1em"
+										viewBox="0 0 16 16"
+										fill="currentColor"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<use
+											xlink:href="../assets/images/copy.svg#el"
+										/>
+									</svg>
+								</button>
+
+								<template v-slot:tooltip>
+									skjhdgfklb
+								</template>
+							</tooltip>
 						</div>
 					</div>
 				</div>
@@ -98,16 +104,21 @@
 </template>
 
 <script lang="js">
+import ToolTip from './ToolTip';
 
 export default {
 	name: 'MusicItem',
+	components: {
+		ToolTip
+	},
 	props: {
 		data: { type: Object, required: true }
 	},
 	data () {
 		return {
 			openned: false,
-			vip: false
+			vip: false,
+			showTooltip: false
 		};
 	},
 	computed: {
@@ -119,6 +130,13 @@ export default {
 		},
 		vipToggleTitle() {
 			return this.vip ? 'faire une request normale' : 'faire une request VIP';
+		}
+	},
+	watch: {
+		showTooltip() {
+			setTimeout(() => {
+				this.showTooltip = false;
+			}, 1500);
 		}
 	},
 	methods: {
@@ -185,6 +203,7 @@ export default {
 			console.log(this.$refs.output);
 			this.$refs.output.select();
 			document.execCommand('copy');
+			this.showTooltip = true;
 
 			this.$nextTick().then(() => {
 				this.$refs.copyButton.focus();
@@ -211,11 +230,15 @@ export default {
 			cursor: pointer;
 			z-index: 10;
 
-			&:focus {
+			&:focus,
+			&:hover:focus {
 				outline: none;
 				background-color: #d7d7d7;
 				box-shadow: 0 0 10px #0003;
-				// scale: 1.02;
+			}
+
+			&:hover {
+				background-color: #eee;
 			}
 
 			&::after {
@@ -314,8 +337,7 @@ export default {
 
 			&:active,
 			&:focus {
-				background-color: #ccc;
-				color: #fffef8;
+				background-color: #aaa;
 				outline: none;
 			}
 		}
