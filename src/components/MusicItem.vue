@@ -54,11 +54,11 @@
 
 									<use
 										v-if="vip"
-										xlink:href="../assets/images/star-filled.svg#star-filled"
+										xlink:href="../assets/images/star-filled.svg#el"
 									/>
 									<use
 										v-else
-										xlink:href="../assets/images/star.svg#star"
+										xlink:href="../assets/images/star.svg#el"
 									/>
 								</svg>
 							</button>
