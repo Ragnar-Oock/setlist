@@ -1,0 +1,28 @@
+[
+	{
+		"artiste": "A Band Called Death",
+		"title": "Keep On Knocking",
+		"tags": [
+			{
+				"title": "Officielle",
+				"color": "#325431"
+			},
+			{
+				"title": "funky",
+				"color": "#f01af7"
+			}
+		]
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"title": "Mayhem"
+	}
+]

@@ -1,0 +1,106 @@
+{
+  // c'est quoi?
+  "Vocals":true,
+  // ne pas envoyer sur l'API
+  "FilePath":"E:\\Steam\\steamapps\\common\\Rocksmith2014\\songs.psarc",
+  "CreationDate":1549400314.2170386,
+  // préformater les arrangement, convertir les tunning en affichage
+  "Arrangements":{
+    "B18A96F9F1C0080F54D17317C699970C":{
+      "Name":"Rhythm",
+      "Tuning":{
+        "string0":0,
+        "string1":0,
+        "string2":0,
+        "string3":0,
+        "string4":0,
+        "string5":0
+      },
+      "sng":"youreallygotme_rhythm2.sng",
+      "maxfret":{
+        "string0":10,
+        "string1":-1,
+        "string2":-1,
+        "string3":-1,
+        "string4":-1,
+        "string5":-1
+      },
+      "CapoFret":-1
+    },
+    "2064D536B36960EFB9896219FFC28E92":{
+      "Name":"Rhythm",
+      "Tuning":{
+        "string0":0,
+        "string1":0,
+        "string2":0,
+        "string3":0,
+        "string4":0,
+        "string5":0
+      },
+      "sng":"youreallygotme_rhythm.sng",
+      "maxfret":{
+        "string0":10,
+        "string1":12,
+        "string2":12,
+        "string3":11,
+        "string4":10,
+        "string5":10
+      },
+      "CapoFret":-1
+    },
+    "F5FCC9E44C830DA0E0130D7830267E9B":{
+      "Name":"Lead",
+      "Tuning":{
+        "string0":0,
+        "string1":0,
+        "string2":0,
+        "string3":0,
+        "string4":0,
+        "string5":0
+      },
+      "sng":"youreallygotme_lead.sng",
+      "maxfret":{
+        "string0":10,
+        "string1":12,
+        "string2":12,
+        "string3":11,
+        "string4":10,
+        "string5":10
+      },
+      "CapoFret":-1
+    },
+    "7C7784D0492E54BED6CB2DFD2A5BFD56":{
+      "Name":"Bass",
+      "Tuning":{
+        "string0":0,
+        "string1":0,
+        "string2":0,
+        "string3":0,
+        "string4":0,
+        "string5":0
+      },
+      "sng":"youreallygotme_bass.sng",
+      "maxfret":{
+        "string0":-1,
+        "string1":-1,
+        "string2":12,
+        "string3":7,
+        "string4":-1,
+        "string5":-1
+      },
+      "CapoFret":-1
+    }
+  },
+  "Title":"You Really Got Me",
+  "Artist":"The Kinks",
+  "Album":"Kinks",
+  "CentOffset":84.0,
+  "Length":142.671,
+  // isOfficiel
+  "ODLC":true,
+  "AudioBitRate":128,
+  // ne pas envoyer sur l'API
+  "ShowLights":[
+    "some complicated stuff goes here"
+  ]
+}

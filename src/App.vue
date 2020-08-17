@@ -2,27 +2,42 @@
 	<div id="app">
 		<WelcomeScreen />
 
-		<div class="topbar">
-			topbar
-		</div>
+		<TopBar />
 
-		<div class="rules">
-			rules
-		</div>
+		<RulesPage />
 
 		<div class="setlist">
-			list
+			<SearchBar />
+			<MusicItem
+				v-for="(music, index) in list"
+				:key="index"
+				:data="music"
+			/>
 		</div>
 	</div>
 </template>
 
 <script>
 import WelcomeScreen from './components/WelcomeScreen';
+import TopBar from './components/TopBar';
+import RulesPage from './components/RulesPage';
+import SearchBar from './components/SearchBar';
+import MusicItem from './components/MusicItem';
+import list from './dummy/list.json';
 
 export default {
 	name: 'App',
 	components: {
-		WelcomeScreen
+		WelcomeScreen,
+		TopBar,
+		RulesPage,
+		MusicItem,
+		SearchBar
+	},
+	data () {
+		return {
+			list: list
+		};
 	}
 };
 </script>
@@ -32,5 +47,28 @@ export default {
 	@import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Quicksand:wght@400;600&display=swap');
 	body {
 		font-family: 'Quicksand', sans-serif;
+		background-color: #fffef8;
+		overflow-x: hidden;
+	}
+
+	.setlist {
+		margin: 0 auto;
+		max-width: 60ch;
+		padding: 3em 0;
+		min-height: calc(100vh - 64px);
+	}
+
+	// from Bootstrap
+	// see: https://github.com/twbs/bootstrap/blob/a4a04cd9ec741050390746f8056cc79a9c04c8df/scss/mixins/_screen-reader.scss
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 </style>
