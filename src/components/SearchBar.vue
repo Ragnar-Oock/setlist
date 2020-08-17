@@ -43,7 +43,7 @@ export default {
 	props: [],
 	data () {
 		return {
-
+			search: ''
 		};
 	},
 	computed: {
