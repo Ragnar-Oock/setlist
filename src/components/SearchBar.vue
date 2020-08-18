@@ -74,19 +74,19 @@ export default {
 
 <style lang="scss">
   .search-bar {
-		padding: 0;
-		border-radius: 5px;
-		box-shadow: 0 0 5px 1px #0001;
-		margin-bottom: 3em;
-		overflow: hidden;
-		position: relative;
-		transition: 300ms ease-in-out;
-		top: 1em;
 		position: sticky;
-		z-index: 100;
-		max-width: 100%;
+		top: 3em;
+		padding: 0;
+		margin: 0 auto 3em;
 		width: 100%;
-		transition-property: max-width, scale;
+		max-width: 100%;
+		border-radius: 5px;
+		overflow: hidden;
+		box-shadow: 0 0 5px 1px #0001;
+		transition: 300ms ease-in-out;
+		transition-property: max-width, scale, width, box-shadow;
+		transform: translateY(-50%);
+		z-index: 100;
 
 		&:focus-within {
 			scale: 1.05;
@@ -98,9 +98,15 @@ export default {
 			border: none;
 			padding: .5em 1em;
 			background-color: #fffef8;
+			transition: background-color 300ms ease-in-out;
 
 			&:focus {
 				outline: none;
+			}
+
+			@at-root .docked & {
+				backdrop-filter: blur(5px);
+				background-color: #fff2;
 			}
 		}
 
@@ -136,8 +142,13 @@ export default {
 			}
 		}
 		&.docked{
-			max-width: 80vw;
-			margin: 0 auto 3em;
+			max-width: 100%;
+			box-shadow: 0 0 5px #0005;
+			width: calc(100vw - (2 * (50px + 2em)));
+
+			&:focus-within {
+				scale: 1.05;
+			}
 		}
 	}
 </style>
