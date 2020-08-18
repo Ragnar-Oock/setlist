@@ -216,6 +216,8 @@ export default {
 </script>
 
 <style lang="scss">
+	@import '../assets/scss/variables.scss';
+
   .music-item {
 		&__head {
 			padding: 1em 1.5em;
@@ -229,16 +231,29 @@ export default {
 			background-color: #fffef8;
 			cursor: pointer;
 			z-index: 10;
+			color: #404040;
+
+			@at-root .dark & {
+				background-color: #3e3e3e;
+				color: $dm-text;
+			}
 
 			&:focus,
 			&:hover:focus {
 				outline: none;
 				background-color: #d7d7d7;
 				box-shadow: 0 0 10px #0003;
+
+				@at-root .dark & {
+					background-color: #6f6f6f;
+				}
 			}
 
 			&:hover {
 				background-color: #eee;
+				@at-root .dark & {
+					background-color: #575757;
+				}
 			}
 
 			&::after {
@@ -254,6 +269,11 @@ export default {
 				top: 50%;
 				transform: translateY(-50%);
 				transition: transform ease-in-out 300ms;
+
+				@at-root .dark & {
+					color: $dm-text;
+					mix-blend-mode: color-dodge;
+				}
 			}
 
 			&.openned {
@@ -265,13 +285,9 @@ export default {
 				}
 			}
 		}
-		&__artiste {
-			color: #404040;
-		}
 		&__title {
 			font-weight: bold;
 			font-size: 1.2em;
-			color: #404040;
 		}
 
 		&__body {

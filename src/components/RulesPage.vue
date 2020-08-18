@@ -76,10 +76,13 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+	@import '../assets/scss/variables.scss';
+
   .rules-page {
 		padding: 3em 0;
 		line-height: 1.4;
+		margin: 0 auto;
 
 		&__title {
 			font-family: 'Poller One', Arial, Helvetica, sans-serif;
@@ -91,11 +94,17 @@ export default {
 			background-color: #E6E6E6;
 			border-radius: 5px;
 			padding: 2em 3em;
-			transition: box-shadow 300ms ease-in-out;
+			transition: 300ms ease-in-out;
+			transition-property: box-shadow, background-color, color;
 
 			&:focus {
 				outline: none;
 				box-shadow: 0 0 5px 1px #0003;
+			}
+
+			@at-root .dark & {
+				background-color: $dm-elements-bgc;
+				color: $dm-text;
 			}
 		}
 		&__item{
@@ -112,6 +121,12 @@ export default {
 			background-color: #00000020;
 			border-radius: 5px;
 			border: thin solid #00000033;
+
+			transition: color 300ms ease-in-out;
+
+			@at-root .dark & {
+				color: #fffb;
+			}
 		}
   }
 </style>

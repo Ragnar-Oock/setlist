@@ -1,5 +1,9 @@
 <template>
-	<div id="app">
+	<div
+		id="app"
+		class="app"
+		:class="{'dark': isDarkModeOn}"
+	>
 		<WelcomeScreen />
 
 		<TopBar />
@@ -25,6 +29,8 @@ import SearchBar from './components/SearchBar';
 import MusicItem from './components/MusicItem';
 import list from './dummy/list.json';
 
+import { mapState } from 'vuex';
+
 export default {
 	name: 'App',
 	components: {
@@ -38,6 +44,11 @@ export default {
 		return {
 			list: list
 		};
+	},
+	computed:{
+		...mapState({
+			isDarkModeOn: 'darkMode'
+		})
 	}
 };
 </script>
@@ -45,6 +56,7 @@ export default {
 <style lang="scss">
 	@import 'node_modules/css-reset-and-normalize/scss/reset-and-normalize';
 	@import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Quicksand:wght@400;600&display=swap');
+	@import 'assets/scss/variables.scss';
 	body {
 		font-family: 'Quicksand', sans-serif;
 		background-color: #fffef8;
@@ -54,7 +66,7 @@ export default {
 	.setlist {
 		margin: 0 auto;
 		max-width: 60ch;
-		padding: 3em 0;
+		padding: 3em 0 50vh;
 		min-height: calc(100vh - 64px);
 	}
 
@@ -70,5 +82,13 @@ export default {
 		clip: rect(0, 0, 0, 0);
 		white-space: nowrap;
 		border: 0;
+	}
+
+	.app {
+		transition: background-color 300ms ease-in-out;
+	}
+
+	.dark {
+		background-color: $dm-bgc;
 	}
 </style>
