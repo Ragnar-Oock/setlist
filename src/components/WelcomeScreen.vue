@@ -125,7 +125,7 @@ export default {
 				background-color: transparent;
 				color: #fffef8;
 				border: none;
-				padding-inline: 0;
+				padding: 0;
 				border: thin solid transparent;
 				border-radius: 15px;
 				transition: border-color ease-in-out 300ms;
@@ -133,7 +133,7 @@ export default {
 				&:active:hover,
 				&:focus,
 				&:hover:focus {
-					padding-inline: 0;
+					padding: 0;
 					border-color: #fffef8;
 					outline: none;
 				}

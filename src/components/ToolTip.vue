@@ -38,6 +38,8 @@ export default {
 		transform: translateY(-50%);
 		border-radius: 5px;
 		filter: drop-shadow(0 0 5px #0003);
+		width: max-content;
+		max-width: 18ch;
 
 		&::before {
 			content: '';
