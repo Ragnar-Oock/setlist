@@ -91,7 +91,8 @@ export default {
 		&__article {
 			max-width: 60ch;
 			margin: 1em auto;
-			background-color: #E6E6E6;
+			background-color: var(--elements-bgc);
+			color: var(--text);
 			border-radius: 5px;
 			padding: 2em 3em;
 			transition: 300ms ease-in-out;
@@ -100,11 +101,6 @@ export default {
 			&:focus {
 				outline: none;
 				box-shadow: 0 0 5px 1px #0003;
-			}
-
-			@at-root .dark & {
-				background-color: $dm-elements-bgc;
-				color: $dm-text;
 			}
 		}
 		&__item{
@@ -121,12 +117,6 @@ export default {
 			background-color: #00000020;
 			border-radius: 5px;
 			border: thin solid #00000033;
-
-			transition: color 300ms ease-in-out;
-
-			@at-root .dark & {
-				color: #fffb;
-			}
 		}
   }
 </style>

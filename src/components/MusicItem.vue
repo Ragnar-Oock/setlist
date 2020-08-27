@@ -227,33 +227,22 @@ export default {
 			display: block;
 			position: relative;
 			transition: ease-in-out 300ms;
-			transition-property: background-color, box-shadow, scale;
-			background-color: #fffef8;
+			transition-property: background-color, box-shadow, transform, color;
+			background-color: var(--elements-bgc);
 			cursor: pointer;
 			z-index: 10;
-			color: #404040;
-
-			@at-root .dark & {
-				background-color: #3e3e3e;
-				color: $dm-text;
-			}
+			color: var(--text);
 
 			&:focus,
 			&:hover:focus {
 				outline: none;
-				background-color: #d7d7d7;
+				background-color: var(--elements-bgc--hover-focus);
 				box-shadow: 0 0 10px #0003;
 
-				@at-root .dark & {
-					background-color: #6f6f6f;
-				}
 			}
 
 			&:hover {
-				background-color: #eee;
-				@at-root .dark & {
-					background-color: #575757;
-				}
+				background-color: var(--elements-bgc--hover);
 			}
 
 			&::after {
@@ -269,19 +258,25 @@ export default {
 				top: 50%;
 				transform: translateY(-50%);
 				transition: transform ease-in-out 300ms;
+				color: var(--text);
 
 				@at-root .dark & {
-					color: $dm-text;
 					mix-blend-mode: color-dodge;
 				}
 			}
 
 			&.openned {
-				// background-color: #d7d7d7;
 				box-shadow: 0 0 10px #0003;
-				scale: 1.02;
+				transform: scale(1.02);
+				background-color: var(--elements-bgc--focus);
+				color: var(--text);
+
 				&::after {
 					transform: translateY(-50%) rotateX(180deg);
+				}
+
+				&:hover {
+					background-color: var(--elements-bgc--hover-focus);
 				}
 			}
 		}
@@ -295,6 +290,7 @@ export default {
 			overflow-y: hidden;
 			border-radius: 0 0 5px 5px;
 			filter: drop-shadow(0 0 3px #0000001a);
+
 		}
 
 		&__tag {
@@ -323,9 +319,10 @@ export default {
 		}
 
 		&__section {
-			background-color: #fffef8;
+			background-color: var(--elements-bgc--hover);
 			margin: 0 0 3px;
 			padding: .5em 1.5em;
+			transition: background-color 300ms ease-in-out;
 
 			&:last-of-type {
 				border-radius: 0 0 5px 5px;

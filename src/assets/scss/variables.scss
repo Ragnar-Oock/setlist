@@ -1,9 +1,42 @@
 $primary: #1967AB;
 $dark: #253f55;
-$white: #f7f7f7;
+$white: #fffef8;
 
 // darkmode colors
 
 $dm-bgc: #555555;
 $dm-elements-bgc: #3e3e3e;
 $dm-text: $white;
+
+:root {
+	--white: #fffef8;
+
+	--primary: #1967AB;
+	--primary-1: #253f55;
+	--primary-2: #1f3242;
+
+	--primary: hsl(208, 74%, 38%);
+	--primary--hover: hsl(208, 24%, 38%);
+	--primary--focus: hsl(208, 74%, 31%);
+	--primary--hover-focus: hsl(208, 24%, 31%);
+
+	--bgc: hsl(51, 100%, 99%);
+
+	--elements-bgc: hsl(51, 0%, 90%);
+	--elements-bgc--hover: hsl(51, 0%, 83%);
+	--elements-bgc--focus: hsl(51, 0%, 77%);
+	--elements-bgc--hover-focus: hsl(51, 0%, 70%);
+
+	--text: #404040;
+}
+
+.dark {
+	--bgc: #555555;
+
+	--elements-bgc: hsl(0, 0%, 24%);
+	--elements-bgc--hover: hsl(0, 0%, 30%);
+	--elements-bgc--focus: hsl(0, 0%, 36%);
+	--elements-bgc--hover-focus: hsl(0, 0%, 42%);
+	
+	--text: #fffef8;
+}
