@@ -16,15 +16,32 @@
 		<transition name="fade">
 			<div
 				v-show="isMenuOpen"
-				class="top-bar__menu"
+				class="menu"
 			>
-				<label for="darkMode">dark Mode</label>
-				<input
-					id="darkMode"
-					v-model="isDarkModeOn"
-					type="checkbox"
-					name="darkMode"
-				>
+				<div class="menu__item">
+					<label
+						for="darkMode"
+						class="menu__label"
+						:class="{'checked': isDarkModeOn}"
+					>
+						<input
+							id="darkMode"
+							v-model="isDarkModeOn"
+							type="checkbox"
+							name="darkMode"
+							class="menu__checkbox"
+						>
+						<div class="menu__icon">
+							<img
+								src="../assets/images/tick.svg"
+								alt="tick"
+							>
+						</div>
+						<span class="menu__text">
+							dark Mode
+						</span>
+					</label>
+				</div>
 			</div>
 		</transition>
 	</div>
@@ -77,7 +94,7 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	@import '../assets/scss/variables.scss';
 
   .top-bar {
@@ -119,16 +136,7 @@ export default {
 			border-radius: .15em;
 		}
 
-		&__menu {
-			position: absolute;
-			top: calc(100% + 5px);
-			background-color: #253f55;
-			width: 30ch;
-			padding: .25em .5em;
-			border-radius: 5px;
-			left: 5px;
-			color: $white;
-		}
+
 
 		.fade-enter-active, .fade-leave-active {
 			transition: opacity .5s;
@@ -137,4 +145,89 @@ export default {
 			opacity: 0;
 		}
 	}
+	.menu {
+		position: absolute;
+		top: calc(100% + 1.1em);
+		background-color: #253f55;
+		width: 30ch;
+		padding: .5em;
+		border-radius: 5px;
+		left: 5px;
+		color: $white;
+		filter: drop-shadow(0px 0px 5px #0003);
+
+		&::before {
+			content: '';
+			display: block;
+			width: 1.5em;
+			height: 1.5em;
+			position: absolute;
+			background-color: var(--primary-1);
+			transform: rotate(45deg);
+			top: -0.7em;
+			left: 1.5em;
+			z-index: -1;
+			border-radius: 5px;
+		}
+
+		&__label {
+			display: flex;
+			align-items: center;
+			padding: .5em;
+			border-radius: 5px;
+			transition: background-color 300ms ease-in-out;
+			background-color: var(--primary-dark);
+			cursor: pointer;
+
+			&.checked {
+				background-color: var(--primary);
+			}
+
+			&:hover {
+				background-color: var(--primary--hover);
+			}
+
+			&:focus-within {
+				background-color: var(--primary--focus);
+
+				&:hover {
+					background-color: var(--primary--hover-focus);
+				}
+			}
+		}
+
+		&__text {
+			padding: .5em 1em;
+		}
+
+		&__checkbox {
+			position: absolute;
+			transform: scale(0);
+		}
+
+		&__icon {
+			display: flex;
+			width: 2em;
+			height: 2em;
+			border-radius: 5px;
+			background-color: transparent;
+			border: 2px solid var(--white);
+			align-items: center;
+			transition: background-color 300ms ease-in-out;
+
+			img {
+				width: 100%;
+				opacity: 0;
+				transition: opacity 300ms ease-in-out;
+			}
+
+			@at-root .top-bar .checked & {
+				background-color: white;
+
+				img {
+					opacity: 1;
+				}
+			}
+			}
+		}
 </style>
