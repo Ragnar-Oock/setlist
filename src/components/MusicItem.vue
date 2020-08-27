@@ -10,7 +10,12 @@
 			<p class="music-item__title">
 				{{ data.title }}
 			</p>
-			<p class="music-item__artiste">
+
+			<p
+				v-if="data.artiste"
+				class="music-item__artiste"
+			>
+				<span class="sr-only">by</span>
 				{{ data.artiste }}
 			</p>
 		</div>
@@ -35,6 +40,20 @@
 								{{ tag.title }}
 							</div>
 						</div>
+						<div class="music-item__meta-list">
+							<div
+								v-for="(value, key, index) in data.meta"
+								:key="index"
+								class="music-item__meta-item"
+							>
+								<span class="music-item__meta-key">
+									{{ key }}
+								</span>
+								<span class="music-item__meta-value">
+									{{ value }}
+								</span>
+							</div>
+						</div>
 					</div>
 					<div class="music-item__section">
 						<div class="music-item__prebuild">
@@ -50,7 +69,6 @@
 									fill="currentColor"
 									xmlns="http://www.w3.org/2000/svg"
 								>
-									<!-- <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" /> -->
 
 									<use
 										v-if="vip"
@@ -92,7 +110,7 @@
 								</button>
 
 								<template v-slot:tooltip>
-									skjhdgfklb
+									Commande copiée
 								</template>
 							</tooltip>
 						</div>
@@ -362,6 +380,19 @@ export default {
 			color: #484848;
 			padding: .5em;
 			border: none;
+		}
+
+		&__meta {
+			&-item {
+				display: flex;
+				justify-content: space-between;
+				padding: .25em 1.5em;
+				margin: 0 -1.5em;
+
+				&:nth-child(2n) {
+					background-color: #0001;
+				}
+			}
 		}
 
 		.open-enter-active {
