@@ -1,5 +1,8 @@
 <template lang="html">
-	<div class="music-item">
+	<div
+		class="music-item"
+		:class="{'openned': openned}"
+	>
 		<div
 			class="music-item__head"
 			:class="{'openned': openned}"
@@ -10,7 +13,7 @@
 			<p class="music-item__title">
 				{{ data.title }}
 			</p>
-
+			<hr class="music-item__hr">
 			<p
 				v-if="data.artiste"
 				class="music-item__artiste"
@@ -20,47 +23,83 @@
 			</p>
 		</div>
 
-		<transition name="open">
+		<transition
+			appear
+			name="open"
+		>
 			<div
-				v-show="openned"
+				v-if="openned"
 				class="music-item__body"
 			>
-				<div class="music-item__body-wrapper">
-					<div class="music-item__section">
+				<div
+					class="music-item__body-wrapper"
+				>
+					<div
+						v-if="haveTags"
+						class="music-item__section music-item__tags"
+					>
 						<div
-							v-if="haveTags"
-							class="music-item__tags"
+							v-for="(tag, index) in data.tags"
+							:key="index"
+							class="music-item__tag"
+							:style="{'background-color': tag.color, 'color': calcColor(tag.color)}"
 						>
-							<div
-								v-for="(tag, index) in data.tags"
-								:key="index"
-								class="music-item__tag"
-								:style="{'background-color': tag.color, 'color': calcColor(tag.color)}"
-							>
-								{{ tag.title }}
-							</div>
-						</div>
-						<div class="music-item__meta-list">
-							<div
-								v-for="(value, key, index) in data.meta"
-								:key="index"
-								class="music-item__meta-item"
-							>
-								<span class="music-item__meta-key">
-									{{ key }}
-								</span>
-								<span class="music-item__meta-value">
-									{{ value }}
-								</span>
-							</div>
+							{{ tag.title }}
 						</div>
 					</div>
-					<div class="music-item__section">
-						<div class="music-item__prebuild">
+					<div class="music-item__section music-item__meta-list">
+						<div
+							v-for="(value, key, index) in data.meta"
+							:key="index"
+							class="music-item__meta-item"
+						>
+							<span class="music-item__meta-key">
+								{{ key }}
+							</span>
+							<span class="music-item__meta-value">
+								{{ value }}
+							</span>
+						</div>
+					</div>
+					<div class="music-item__prebuild">
+						<button
+							class="music-item__button"
+							:title="vipToggleTitle"
+							@click="toggleVip"
+						>
+							<svg
+								width="1em"
+								height="1em"
+								viewBox="0 0 16 16"
+								fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+
+								<use
+									v-if="vip"
+									xlink:href="../assets/images/star-filled.svg#el"
+								/>
+								<use
+									v-else
+									xlink:href="../assets/images/star.svg#el"
+								/>
+							</svg>
+						</button>
+
+						<input
+							ref="output"
+							class="music-item__output"
+							type="text"
+							:value="command"
+							readonly
+						>
+
+						<ToolTip :displayed="showTooltip">
 							<button
+								ref="copyButton"
 								class="music-item__button"
-								:title="vipToggleTitle"
-								@click="toggleVip"
+								title="copier la commande"
+								@click="copy"
 							>
 								<svg
 									width="1em"
@@ -69,51 +108,16 @@
 									fill="currentColor"
 									xmlns="http://www.w3.org/2000/svg"
 								>
-
 									<use
-										v-if="vip"
-										xlink:href="../assets/images/star-filled.svg#el"
-									/>
-									<use
-										v-else
-										xlink:href="../assets/images/star.svg#el"
+										xlink:href="../assets/images/copy.svg#el"
 									/>
 								</svg>
 							</button>
 
-							<input
-								ref="output"
-								class="music-item__output"
-								type="text"
-								:value="command"
-								readonly
-							>
-
-							<ToolTip :displayed="showTooltip">
-								<button
-									ref="copyButton"
-									class="music-item__button"
-									title="copier la commande"
-									@click="copy"
-								>
-									<svg
-										width="1em"
-										height="1em"
-										viewBox="0 0 16 16"
-										fill="currentColor"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<use
-											xlink:href="../assets/images/copy.svg#el"
-										/>
-									</svg>
-								</button>
-
-								<template v-slot:tooltip>
-									Commande copiée
-								</template>
-							</tooltip>
-						</div>
+							<template v-slot:tooltip>
+								Commande copiée
+							</template>
+						</tooltip>
 					</div>
 				</div>
 			</div>
@@ -237,19 +241,59 @@ export default {
 	@import '../assets/scss/variables.scss';
 
   .music-item {
+		position: relative;
+		height: 67px;
+		margin-bottom: .25em;
+		display: flex;
+
+		transition: height 300ms ease-in-out;
+
+		&.openned {
+			height: 300px;
+		}
+
+		&__hr {
+			border-color: transparent;
+			width: 3em;
+			margin: 0;
+			transition: 300ms ease-in-out;
+			transition-property:  border-color, margin;
+
+			@at-root .openned & {
+				margin: 4px 0;
+				border-color: white;
+			}
+		}
+
 		&__head {
+			display: flex;
+			flex-direction: column;
+			justify-content: end;
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
 			padding: 1em 1.5em;
-			margin: 8px 0 0;
 			border-radius: 5px;
-			box-shadow: 0 0 5px 1px #0001;
-			display: block;
-			position: relative;
-			transition: ease-in-out 300ms;
-			transition-property: background-color, box-shadow, transform, color;
+
 			background-color: var(--elements-bgc);
-			cursor: pointer;
-			z-index: 10;
 			color: var(--text);
+			box-shadow: 0 0 5px 1px #0001;
+
+			transition:
+				background-color  ease-in-out 300ms 250ms,
+				box-shadow  ease-in-out 300ms 250ms,
+				transform ease-in-out 300ms 250ms,
+				color ease-in-out 300ms 250ms,
+				right ease-in-out 300ms 250ms,
+				padding-bottom ease-in-out 300ms;
+
+			z-index: 10;
+			cursor: pointer;
+
+			// opacity: .5;
 
 			&:focus,
 			&:hover:focus {
@@ -273,9 +317,8 @@ export default {
 				background-repeat: no-repeat;
 				position: absolute;
 				right: 1em;
-				top: 50%;
-				transform: translateY(-50%);
-				transition: transform ease-in-out 300ms;
+				top: 2em;
+				transition: transform ease-in-out 300ms 250ms;
 				color: var(--text);
 
 				@at-root .dark & {
@@ -285,30 +328,55 @@ export default {
 
 			&.openned {
 				box-shadow: 0 0 10px #0003;
-				transform: scale(1.02);
-				background-color: var(--elements-bgc--focus);
 				color: var(--text);
+				background-color: var(--secondary);
+				background-image: linear-gradient(18deg, hsla(260, 39%, 35%, 0.11) 0%, hsla(260, 39%, 52%, 0.271) 100%);
+				right: 66%;
+				padding-bottom: 3em;
+				transition:
+					background-color  ease-in-out 300ms 50ms,
+					box-shadow  ease-in-out 300ms 250ms,
+					transform ease-in-out 300ms 250ms,
+					color ease-in-out 300ms 250ms,
+					right ease-in-out 300ms 250ms,
+					padding-bottom ease-in-out 300ms;
 
 				&::after {
-					transform: translateY(-50%) rotateX(180deg);
+					transform: rotateX(180deg);
+					transition: transform ease-in-out 300ms;
 				}
 
 				&:hover {
-					background-color: var(--elements-bgc--hover-focus);
+					background-color: var(--secondary--hover-focus);
 				}
 			}
 		}
 		&__title {
 			font-weight: bold;
 			font-size: 1.2em;
+			transition: font-size 300ms ease-in-out;
+
+			@at-root .openned & {
+				font-size: 1.4em;
+			}
 		}
 
 		&__body {
-			max-height: 500px;
-			overflow-y: hidden;
-			border-radius: 0 0 5px 5px;
-			filter: drop-shadow(0 0 3px #0000001a);
+			display: flex;
+			position: relative;
+			left: 34%;
+			padding: 4px 0;
+			width: 66%;
+			max-width: 500px;
+			filter: drop-shadow(0 0 3px #00000038);
 
+			&-wrapper{
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				overflow: hidden;
+				border-radius: 0 10px 10px 0;
+			}
 		}
 
 		&__tag {
@@ -321,33 +389,13 @@ export default {
 			position: relative;
 			display: flex;
 			padding: .5em 0;
-
-			&::after {
-				content: '';
-				width: calc(100% + 20px);
-				display: block;
-				height: 1px;
-				background-color: #ccc;
-				margin: 0 auto;
-				bottom: 0;
-				position: absolute;
-				left: 50%;
-				transform: translateX(-50%);
-			}
 		}
 
 		&__section {
-			background-color: var(--elements-bgc--hover);
+			background-color: var(--white);
 			margin: 0 0 3px;
 			padding: .5em 1.5em;
 			transition: background-color 300ms ease-in-out;
-
-			&:last-of-type {
-				border-radius: 0 0 5px 5px;
-				padding: 0;
-				overflow-y: hidden;
-				background-color: transparent;
-			}
 		}
 
 		&__prebuild {
@@ -383,6 +431,10 @@ export default {
 		}
 
 		&__meta {
+			&-list {
+				height: 100%;
+				flex-grow: 1;
+			}
 			&-item {
 				display: flex;
 				justify-content: space-between;
@@ -396,15 +448,46 @@ export default {
 		}
 
 		.open-enter-active {
-			transition: max-height 300ms 150ms ease-in-out;
+			animation: clip 300ms 250ms;
 		}
 		.open-leave-active {
-			transition: max-height 300ms ease-in-out;
+			animation: clip 300ms reverse;
+
 		}
 
-		.open-enter,
+		.open-enter {
+			// opacity: .5;
+			transform: translateX(0);
+			// transform: translateX(-100%);
+			clip-path: inset(-10px -10px -10px -10px );
+		}
+
 		.open-leave-to {
-			max-height: 0px;
+			transform: translateX(0);
+			// transform: translateX(-100%);
+			clip-path: inset(-10px -10px -10px -10px );
+		}
+
+		.open-enter-to{
+			transform: translateX(-100%);
+			// transform: translateX(0);
+			clip-path: inset(-10px -10px -10px 90% );
+		}
+		.open-leave {
+			transform: translateX(-100%);
+			// transform: translateX(0);
+			clip-path: inset(-10px -10px -10px 90% );
+		}
+
+		@keyframes clip {
+			0% {
+				transform: translateX(-100%);
+				clip-path: inset(-10px -10px -10px 90% );
+			}
+			100% {
+				transform: translateX(0);
+				clip-path: inset(-10px -10px -10px -10px );
+			}
 		}
   }
 </style>
