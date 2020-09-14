@@ -152,19 +152,19 @@ export default {
 		width: 30ch;
 		padding: .5em;
 		border-radius: 5px;
-		left: 5px;
+		left: .5em;
 		color: $white;
 		filter: drop-shadow(0px 0px 5px #0003);
 
 		&::before {
 			content: '';
 			display: block;
-			width: 1.5em;
-			height: 1.5em;
+			width: 1em;
+			height: 1em;
 			position: absolute;
 			background-color: var(--primary-1);
 			transform: rotate(45deg);
-			top: -0.7em;
+			top: -0.4em;
 			left: 1.5em;
 			z-index: -1;
 			border-radius: 5px;
@@ -173,7 +173,7 @@ export default {
 		&__label {
 			display: flex;
 			align-items: center;
-			padding: .5em;
+			padding: .2em;
 			border-radius: 5px;
 			transition: background-color 300ms ease-in-out;
 			background-color: var(--primary-dark);
@@ -197,7 +197,7 @@ export default {
 		}
 
 		&__text {
-			padding: .5em 1em;
+			padding: .5em .8em;
 		}
 
 		&__checkbox {
@@ -207,12 +207,13 @@ export default {
 
 		&__icon {
 			display: flex;
-			width: 2em;
-			height: 2em;
+			width: 1.5em;
+			height: 1.5em;
 			border-radius: 5px;
 			background-color: transparent;
 			border: 2px solid var(--white);
 			align-items: center;
+			margin: auto .3em;
 			transition: background-color 300ms ease-in-out;
 
 			img {
