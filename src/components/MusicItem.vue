@@ -19,14 +19,14 @@
 
 			<p
 				v-if="openned"
-				:key="openned"
+				key="openned"
 				class="music-item__title"
 			>
 				{{ data.title }}
 			</p>
 			<p
 				v-else
-				:key="closed"
+				key="closed"
 				class="music-item__title"
 			>
 				{{ data.title }}
