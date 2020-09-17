@@ -5,7 +5,6 @@
 	>
 		<div
 			class="music-item__card"
-			:class="{'openned': openned}"
 			tabindex="0"
 			@click="toggleMusic"
 			@keypress.enter="toggleMusic"
@@ -40,49 +39,46 @@
 				class="music-item__body"
 			>
 				<div
-					class="music-item__body-wrapper"
+					v-if="haveTags"
+					class="music-item__section music-item__head"
 				>
 					<div
-						v-if="haveTags"
-						class="music-item__section music-item__head"
+						class=" music-item__tags"
 					>
 						<div
-							class=" music-item__tags"
+							v-for="(tag, index) in data.tags"
+							:key="index"
+							class="music-item__tag"
+							:style="{'background-color': tag.color, 'color': calcColor(tag.color)}"
 						>
-							<div
-								v-for="(tag, index) in data.tags"
-								:key="index"
-								class="music-item__tag"
-								:style="{'background-color': tag.color, 'color': calcColor(tag.color)}"
-							>
-								{{ tag.title }}
-							</div>
+							{{ tag.title }}
 						</div>
 					</div>
-					<div class="music-item__section music-item__section--main">
+				</div>
+				<div class="music-item__section music-item__section--main">
+					<div
+						v-if="typeof data.meta !== 'undefined' && data.meta.length !== 0"
+						class="music-item__meta-list"
+					>
 						<div
-							v-if="typeof data.meta !== 'undefined' && data.meta.length !== 0"
-							class="music-item__meta-list"
+							v-for="(value, key, index) in data.meta"
+							:key="index"
+							class="music-item__meta-item"
 						>
-							<div
-								v-for="(value, key, index) in data.meta"
-								:key="index"
-								class="music-item__meta-item"
-							>
-								<span class="music-item__meta-key">
-									{{ key }}
-								</span>
-								<span class="music-item__meta-value">
-									{{ value }}
-								</span>
-							</div>
+							<span class="music-item__meta-key">
+								{{ key }}
+							</span>
+							<span class="music-item__meta-value">
+								{{ value }}
+							</span>
 						</div>
-						<div
-							v-else
-							class="music-item__no-meta"
-						>
-							Aucune informations additionnelles
-						</div>
+					</div>
+					<div
+						v-else
+						class="music-item__no-meta"
+					>
+						Aucune informations additionnelles
+					</div>
 
 					<div class="music-item__arrangements-list">
 						<ArrangementItem
@@ -95,13 +91,13 @@
 							</template>
 						</ArrangementItem>
 					</div>
-					</div>
-					<div class="music-item__prebuild">
-						<button
-							class="music-item__button"
-							:title="vipToggleTitle"
-							@click="toggleVip"
-						>
+				</div>
+				<div class="music-item__prebuild">
+					<button
+						class="music-item__button music-item__vip"
+						:title="vipToggleTitle"
+						@click="toggleVip"
+					>
 						<img
 							v-if="vip"
 							src="../assets/images/star-filled.svg"
@@ -114,13 +110,13 @@
 						>
 					</button>
 
-						<input
-							ref="output"
-							class="music-item__output"
-							type="text"
-							:value="command"
-							readonly
-						>
+					<input
+						ref="output"
+						class="music-item__output"
+						type="text"
+						:value="command"
+						readonly
+					>
 
 					<ToolTip :displayed="showTooltip">
 						<button
@@ -135,11 +131,10 @@
 							>
 						</button>
 
-							<template v-slot:tooltip>
-								Commande copiée
-							</template>
-						</ToolTip>
-					</div>
+						<template v-slot:tooltip>
+							Commande copiée
+						</template>
+					</ToolTip>
 				</div>
 			</div>
 		</transition>
@@ -437,18 +432,13 @@ export default {
 			display: flex;
 			position: relative;
 			left: 34%;
-			padding: 4px 0;
 			width: 66%;
 			max-width: 500px;
 			filter: drop-shadow(0 0 3px #0000001a);
-
-			&-wrapper{
-				display: flex;
-				flex-direction: column;
-				width: 100%;
-				overflow: hidden;
-				border-radius: 0 10px 10px 0;
-			}
+			flex-direction: column;
+			overflow: hidden;
+			border-radius: 0 10px 10px 0;
+			margin: 4px 0;
 		}
 
 		&__tag {
