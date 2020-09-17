@@ -5,33 +5,41 @@
 		:class="{'docked': isSearchbarDocked}"
 		@submit="submit($event)"
 	>
-		<label
-			for="search"
-			class="sr-only"
-		>Rechercher une musique</label>
-		<input
-			id="search"
-			v-model="search"
-			type="search"
-			name="search"
-			class="search-bar__input"
-			placeholder="Recherche un titre, un artiste..."
-		>
-		<button
-			type="submit"
-			class="search-bar__button"
-		>
-			<span class="search-bar__button-text">Rechercher</span>
+		<div class="container">
+			<label
+				for="search"
+				class="sr-only"
+			>Rechercher une musique</label>
+			<input
+				id="search"
+				v-model="search"
+				type="search"
+				name="search"
+				class="search-bar__input"
+				placeholder="Recherche un titre, un artiste..."
+			>
+			<button
+				type="submit"
+				class="search-bar__button"
+			>
+				<span class="search-bar__button-text">Rechercher</span>
+				<img
+					src="../assets/images/search.svg"
+					alt="search icon"
+				>
+			</button>
+		</div>
+		<button class="search-bar__open-more">
 			<svg
 				width="1em"
 				height="1em"
 				viewBox="0 0 16 16"
+				fill="currentColor"
 				xmlns="http://www.w3.org/2000/svg"
-				aria-hidden="true"
-				class="search-bar__button-logo"
 			>
-				<use
-					xlink:href="../assets/images/search.svg#el"
+				<path
+					fill-rule="evenodd"
+					d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"
 				/>
 			</svg>
 		</button>
@@ -78,17 +86,21 @@ export default {
 		padding: 0;
 		margin: 0 auto 3em;
 		width: 100%;
-		max-width: 100%;
+		max-width: 60ch;
 		border-radius: 5px;
 		overflow: hidden;
-		box-shadow: 0 0 5px 1px #0001;
-		transition: 300ms ease-in-out;
-		transition-property: max-width, transform, width, box-shadow;
+		box-shadow: 0 0 5px 1px #0003;
+		transition:
+			max-width 300ms cubic-bezier(.31,.45,.21,1.76),
+			transform 300ms ease-in-out,
+			box-shadow 300ms ease-in-out,
+			background-color 300ms ease-in-out;
 		transform: translateY(-50%);
 		z-index: 100;
+		display: flex;
 
 		&:focus-within {
-			transform: translateY(-50%) scale(1.05);
+			box-shadow: 0 0 10px 3px #0003;
 		}
 
 		&__input {
@@ -98,9 +110,12 @@ export default {
 			padding: .5em 1em;
 			background-color: #fffef8;
 			transition: background-color 300ms ease-in-out;
-
+			border-radius: 5px;
+			box-shadow: 0 0 5px 0 #0008;
+			background-color: #999;
 			&:focus {
 				outline: none;
+				background-color: #fff;
 			}
 
 			&::placeholder {
@@ -108,8 +123,18 @@ export default {
 			}
 
 			@at-root .docked & {
-				backdrop-filter: blur(5px);
-				background-color: #fff6;
+				background-color: #fff;
+			}
+
+			@supports (backdrop-filter: blur(5px)) {
+				@at-root .docked & {
+					backdrop-filter: blur(5px);
+					background-color: #fff6;
+
+					&:focus {
+						background-color: #fff;
+					}
+				}
 			}
 		}
 
@@ -145,11 +170,44 @@ export default {
 				box-shadow: 0 0 5px 6px #d7d7d7;
 			}
 		}
+
 		&.docked{
-			max-width: 100%;
+			max-width: 80ch;
 			box-shadow: 0 0 5px #0005;
 			width: calc(100vw - (2 * (50px + 2em)));
 			position: sticky;
+		}
+
+		.container {
+			position: relative;
+			flex-grow: 1;
+			z-index: 10;
+		}
+
+		&__open-more {
+			border: none;
+			position: relative;
+			background-color: #404040;
+			color: white;
+
+			&::before,
+			&:after {
+				content: '';
+				display: block;
+				background-color: inherit;
+				width: 5px;
+				height: 5px;
+				position: absolute;
+				left: -5px;
+			}
+			&:before {
+				top: 0;
+				clip-path: path('M 0,0 A 5,5 0 0 1 5,5 V 0 Z');
+			}
+			&:after {
+				bottom: 0;
+				clip-path: path('M 5,0 A 5,5 0 0 1 0,5 H 5 Z');
+			}
 		}
 	}
 </style>
