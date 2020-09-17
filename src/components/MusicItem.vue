@@ -91,24 +91,17 @@
 							:title="vipToggleTitle"
 							@click="toggleVip"
 						>
-							<svg
-								width="1em"
-								height="1em"
-								viewBox="0 0 16 16"
-								fill="currentColor"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-
-								<use
-									v-if="vip"
-									xlink:href="../assets/images/star-filled.svg#el"
-								/>
-								<use
-									v-else
-									xlink:href="../assets/images/star.svg#el"
-								/>
-							</svg>
-						</button>
+						<img
+							v-if="vip"
+							src="../assets/images/star-filled.svg"
+							alt="star icon"
+						>
+						<img
+							v-else
+							src="../assets/images/star.svg"
+							alt="star icon"
+						>
+					</button>
 
 						<input
 							ref="output"
@@ -118,25 +111,18 @@
 							readonly
 						>
 
-						<ToolTip :displayed="showTooltip">
-							<button
-								ref="copyButton"
-								class="music-item__button"
-								title="copier la commande"
-								@click="copy"
+					<ToolTip :displayed="showTooltip">
+						<button
+							ref="copyButton"
+							class="music-item__button music-item__copy"
+							title="copier la commande"
+							@click="copy"
+						>
+							<img
+								src="../assets/images/copy.svg"
+								alt="star icon"
 							>
-								<svg
-									width="1em"
-									height="1em"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<use
-										xlink:href="../assets/images/copy.svg#el"
-									/>
-								</svg>
-							</button>
+						</button>
 
 							<template v-slot:tooltip>
 								Commande copiée
