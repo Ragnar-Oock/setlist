@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="music-item"
-		:class="{'openned': openned}"
+		:class="{'openned': openned, 'closed': !openned}"
 	>
 		<div
 			class="music-item__card"
@@ -17,7 +17,18 @@
 				{{ duration }}
 			</span>
 
-			<p class="music-item__title">
+			<p
+				v-if="openned"
+				:key="openned"
+				class="music-item__title"
+			>
+				{{ data.title }}
+			</p>
+			<p
+				v-else
+				:key="closed"
+				class="music-item__title"
+			>
 				{{ data.title }}
 			</p>
 			<hr class="music-item__hr">
@@ -272,13 +283,19 @@ export default {
 
   .music-item {
 		position: relative;
+		min-height: 67px;
+		height: auto;
+		max-height: 67px;
 		height: 67px;
 		margin-bottom: .25em;
+		margin: 0 auto .5em;
 		display: flex;
-
-		transition: height 300ms 150ms ease-in-out;
+		transition: 300ms ease-in-out;
+		transition-property: min-height, max-height, max-width;
 
 		&.openned {
+			min-height: 300px;
+			max-height: 300px;
 			height: 300px;
 			transition: height 300ms ease-in-out;
 		}
@@ -306,7 +323,7 @@ export default {
 			right: 0;
 			left: 0;
 			bottom: 0;
-			padding: 1em 2.5em 1em 1.5em;
+			padding: .9em 2.5em .9em 1.5em;
 			border-radius: 5px;
 
 			background-color: var(--elements-bgc);
@@ -314,19 +331,15 @@ export default {
 			box-shadow: 0 0 5px 1px #0001;
 
 			transition:
-				background-color  ease-in-out 300ms 0s,
-				box-shadow  ease-in-out 300ms 250ms,
-				transform ease-in-out 300ms 250ms,
-				color ease-in-out 300ms,
-				right ease-in-out 300ms 250ms,
-				padding-bottom ease-in-out 300ms 150ms;
-
-			overflow: hidden;
+				background-color  ease-in-out 500ms 0s,
+				box-shadow  ease-in-out 500ms 250ms,
+				transform ease-in-out 500ms 250ms,
+				color ease-in-out 500ms,
+				right ease-in-out 500ms,
+				padding-bottom ease-in-out 500ms 150ms;
 
 			z-index: 10;
 			cursor: pointer;
-
-			// opacity: .5;
 
 			&:focus,
 			&:hover:focus {
@@ -359,11 +372,12 @@ export default {
 				}
 			}
 
-			&.openned {
+			@at-root .openned & {
 				box-shadow: 0 0 10px #0003;
 				color: var(--white);
 				background-color: var(--secondary);
-				background-image: linear-gradient(18deg, hsla(260, 39%, 35%, 0.11) 0%, hsla(260, 39%, 52%, 0.271) 100%);
+				background-image: linear-gradient(18deg, rgba(91, 3, 3, 0.04) 0%, rgba(143, 255, 155, 0.26) 100%);
+				background-blend-mode: color-dodge;
 				right: 66%;
 				padding-bottom: 3em;
 				transition:
@@ -403,7 +417,6 @@ export default {
 		&__title {
 			font-weight: bold;
 			font-size: 1.2em;
-			transition: font-size 300ms ease-in-out, width 0s 200ms linear;
 			max-width: 80ch;
 			margin-top: auto;
 			// auto-elipsis
@@ -411,15 +424,42 @@ export default {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-
-			padding-bottom: 1.1em;
+			opacity: 0;
 
 			@at-root .openned & {
 				font-size: 1.4em;
-				max-width: 210px;
-				transition: font-size 300ms ease-in-out, width 0s 150ms linear;
 				white-space: unset;
 				text-overflow: unset;
+				overflow: unset;
+				max-width: 210px;
+				animation: title-transition-open 600ms ease-in-out 150ms 1 forwards;
+			}
+
+			@at-root .closed & {
+				animation: title-transition-close 300ms ease-in-out 150ms 1 forwards;
+			}
+
+		}
+
+		@keyframes title-transition-open {
+			0% {
+				opacity: 0;
+				transform: translateY(-1em);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes title-transition-close {
+			0% {
+				opacity: 0;
+				transform: translateY(-1em);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0);
 			}
 		}
 
@@ -452,7 +492,6 @@ export default {
 			}
 		}
 
-
 		&__section {
 			background-color: var(--white);
 			margin: 0 0 3px;
@@ -465,6 +504,11 @@ export default {
 				display: flex;
 				flex-direction: column;
 				padding: .5em 0;
+
+
+				& > :last-child{
+					margin-top: auto;
+				}
 			}
 		}
 
@@ -506,7 +550,6 @@ export default {
 				max-height: 10.5em;
 				overscroll-behavior: contain;
 				overflow-y: auto;
-				margin-top: auto;
 			}
 			&-item {
 				display: flex;
@@ -524,50 +567,114 @@ export default {
 			margin: auto auto 0 auto;
 		}
 
-// #region animation
-		.open-enter-active {
-			animation: clip 300ms 450ms;
+		&__arrangements {
+			&-list {
+				padding: 0 1.5em;
+				display: flex;
+				gap: .25em;
+			}
 		}
-		.open-leave-active {
-			animation: clip 300ms reverse;
 
+		.open-enter-active,
+		.open-leave-active {
+			transition: 300ms ease-out;
+			transition-property: transform, clip-path;
+		}
+
+		.open-enter-active {
+			transition-delay: 300ms;
 		}
 
 		.open-enter {
-			// opacity: .5;
-			transform: translateX(0);
-			// transform: translateX(-100%);
-			clip-path: inset(-10px -10px -10px -10px );
+			transform: translateX(-100%);
+			clip-path: inset(-10px -10px -10px 100%);
 		}
-
-		.open-leave-to {
-			transform: translateX(0);
-			// transform: translateX(-100%);
-			clip-path: inset(-10px -10px -10px -10px );
-		}
-
 		.open-enter-to{
-			transform: translateX(-100%);
-			// transform: translateX(0);
-			clip-path: inset(-10px -10px -10px 90% );
-		}
-		.open-leave {
-			transform: translateX(-100%);
-			// transform: translateX(0);
-			clip-path: inset(-10px -10px -10px 90% );
+			transform: translateX(0);
+			clip-path: inset(-10px -10px -10px -10px);
 		}
 
-		@keyframes clip {
-			0% {
-				transform: translateX(-100%);
-				clip-path: inset(-10px -10px -10px 90% );
+		.open-leave {
+			transform: translateX(0);
+			clip-path: inset(-10px -10px -10px -10px);
+		}
+		.open-leave-to {
+			transform: translateX(-100%);
+			clip-path: inset(-10px -10px -10px 100%);
+		}
+
+		@media screen and (max-width: 43) {
+			flex-direction: column;
+			&.openned {
+				height: auto;
+				min-height: 300px;
+				max-height: 500px;
 			}
-			100% {
-				transform: translateX(0);
-				clip-path: inset(-10px -10px -10px -10px );
+			&__card {
+				position: static;
+				overflow: unset;
+
+				@at-root .openned & {
+					padding-bottom: 1em;
+					position: static;
+					right: 0;
+				}
+			}
+
+			&__title {
+				height: auto;
+				padding: 0;
+				margin: 0;
+				@at-root .openned & {
+					max-width: unset;
+				}
+				@at-root .openned &, .closed & {
+					animation: none;
+					opacity: 1;
+				}
+			}
+
+			&__body {
+				left: unset;
+				width: unset;
+				border-radius: 0 0 10px 10px;
+				margin: 0 4px;
+				max-width: unset;
+				overflow: unset;
+				flex-grow: 1;
+			}
+
+			.open-enter-active,
+			.open-leave-active {
+				transition: 300ms ease-in-out;
+				transition-property: transform, clip-path;
+			}
+
+			.open-enter {
+				transform: translateY(-100%);
+				clip-path: inset(100% -10px -10px -10px );
+			}
+			.open-enter-to{
+				transform: translateY(0);
+				clip-path: inset(-10px -10px -10px -10px);
+			}
+
+			.open-leave {
+				transform: translateY(0);
+				clip-path: inset(-10px -10px -10px -10px);
+			}
+			.open-leave-to {
+				transform: translateY(-100%);
+				clip-path: inset(100% -10px -10px -10px );
+			}
+
+			.music-item__copy {
+				border-radius: 0 0 10px 0;
+			}
+			.music-item__vip {
+				border-radius: 0 0 0 10px;
 			}
 		}
-  }
-	// #endregion animation
+	}
 
 </style>
