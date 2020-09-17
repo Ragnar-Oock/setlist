@@ -84,6 +84,17 @@
 							Aucune informations additionnelles
 						</div>
 
+					<div class="music-item__arrangements-list">
+						<ArrangementItem
+							v-for="(arrangement, id) in data.arrangements"
+							:key="id"
+						>
+							{{ arrangement.Name }}
+							<template #accord>
+								{{ arrangement.tunning }}
+							</template>
+						</ArrangementItem>
+					</div>
 					</div>
 					<div class="music-item__prebuild">
 						<button
@@ -137,11 +148,13 @@
 
 <script lang="js">
 import ToolTip from './ToolTip';
+import ArrangementItem from './ArrangementItem';
 
 export default {
 	name: 'MusicItem',
 	components: {
-		ToolTip
+		ToolTip,
+		ArrangementItem
 	},
 	props: {
 		data: { type: Object, required: true }
