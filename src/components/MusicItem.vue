@@ -335,7 +335,7 @@ export default {
 				transform ease-in-out 500ms 250ms,
 				color ease-in-out 500ms,
 				right ease-in-out 500ms,
-				padding-bottom ease-in-out 500ms 150ms;
+				padding-bottom ease-in-out 150ms 150ms;
 
 			z-index: 10;
 			cursor: pointer;
