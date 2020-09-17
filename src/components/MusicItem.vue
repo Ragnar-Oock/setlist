@@ -286,8 +286,7 @@ export default {
 		min-height: 67px;
 		height: auto;
 		max-height: 67px;
-		height: 67px;
-		margin-bottom: .25em;
+		max-width: 60ch;
 		margin: 0 auto .5em;
 		display: flex;
 		transition: 300ms ease-in-out;
@@ -296,8 +295,8 @@ export default {
 		&.openned {
 			min-height: 300px;
 			max-height: 300px;
-			height: 300px;
-			transition: height 300ms ease-in-out;
+			max-width: 100%;
+			max-width: 80ch;
 		}
 
 		&__hr {

@@ -65,8 +65,7 @@ export default {
 
 	.setlist {
 		margin: 0 auto;
-		max-width: 80ch;
-		padding: 3em 0 50vh;
+		padding: 3em .25em 50vh;
 		min-height: calc(100vh - 64px);
 	}
 
