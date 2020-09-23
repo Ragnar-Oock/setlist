@@ -1,70 +1,133 @@
-<template lang="html">
-	<form
-		ref="searchBar"
-		class="search-bar"
-		:class="{'docked': isSearchbarDocked}"
-		@submit="submit($event)"
-	>
-		<div class="container">
-			<label
-				for="search"
-				class="sr-only"
-			>Rechercher une musique</label>
-			<input
-				id="search"
-				v-model="search"
-				type="search"
-				name="search"
-				class="search-bar__input"
-				placeholder="Recherche un titre, un artiste..."
-			>
-			<button
-				type="submit"
-				class="search-bar__button"
-			>
-				<span class="search-bar__button-text">Rechercher</span>
-				<img
-					src="../assets/images/search.svg"
-					alt="search icon"
+<template>
+	<Fragment>
+		<form
+			ref="searchBar"
+			class="search-bar"
+			:class="{'docked': isSearchbarDocked}"
+			@submit="submit($event)"
+		>
+			<div class="container">
+				<label
+					for="search"
+					class="sr-only"
+				>Rechercher une musique</label>
+				<input
+					id="search"
+					v-model="search"
+					type="search"
+					name="search"
+					class="search-bar__input"
+					placeholder="Recherche un titre, un artiste..."
 				>
-			</button>
-		</div>
-		<button class="search-bar__open-more">
-			<svg
-				width="1em"
-				height="1em"
-				viewBox="0 0 16 16"
-				fill="currentColor"
-				xmlns="http://www.w3.org/2000/svg"
+				<button
+					type="submit"
+					class="search-bar__button"
+				>
+					<span class="search-bar__button-text">Rechercher</span>
+					<img
+						src="../assets/images/search.svg"
+						alt="search icon"
+					>
+				</button>
+			</div>
+			<button
+				class="search-bar__open-more"
+				title="recherche avancée"
+				@click="openAdvencedSearch"
 			>
-				<path
-					fill-rule="evenodd"
-					d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"
-				/>
-			</svg>
-		</button>
-	</form>
+				<svg
+					width="1em"
+					height="1em"
+					viewBox="0 0 16 16"
+					fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"
+					/>
+				</svg>
+
+				<span class="sr-only">recherche avancée</span>
+			</button>
+		</form>
+		<div
+			v-if="isAdvencedSearchOpen"
+			class="search-bar__advenced"
+		>
+			<DoubleSliderRange
+				v-model="interpretationRange"
+				:min="interpretationMin"
+				:max="interpretationMax"
+			>
+				Dernière interprétation (en jours)
+				<template #help>
+					Nombre de jours depuis la dernière foi que cette musique a été jouée.<br>0 équivalent à aujourd'hui et 100 à tout le temps
+				</template>
+				<template #label-min-value>
+					Durée minimum
+				</template>
+				<template #label-max-value>
+					Durée maximum
+				</template>
+			</DoubleSliderRange>
+			<DoubleSliderRange
+				v-model="interpretationRange"
+				:min="interpretationMin"
+				:max="interpretationMax"
+			>
+				Nombre d'interprétation
+				<template #label-min-value>
+					Durée minimum
+				</template>
+				<template #label-max-value>
+					Durée maximum
+				</template>
+			</DoubleSliderRange>
+		</div>
+	</Fragment>
 </template>
 
 <script lang="js">
 
+import { Fragment } from 'vue-fragment';
+import DoubleSliderRange from './DoubleSliderRange';
+
 export default {
 	name: 'SearchBar',
+	components: {
+		Fragment,
+		DoubleSliderRange
+	},
 	props: [],
 	data () {
 		return {
 			search: '',
-			isSearchbarDocked: false
+			isSearchbarDocked: false,
+			isAdvencedSearchOpen: false,
+			interpretationRange: [0, 100],
+			interpretationMin: 0,
+			interpretationMax: 100
 		};
+	},
+	computed: {
+
 	},
 	mounted() {
 		const options = {
-			rootMargin: '-80px 0px 10000px 0px',
-			threshold: 0
+			rootMargin: '-48px 0px 10000px 0px',
+			threshold: 1
 		};
 		const observer = new IntersectionObserver(entries => {
 			entries.forEach(entry => {
+				// let the advenced search open when scrolled past
 				this.isSearchbarDocked = !entry.isIntersecting;
+
+				/*
+				// close the advenced search when scrolled past
+				// if the bar just docked close the advenced search, if the bar undocked don't change the value
+				this.isAdvencedSearchOpen = this.isSearchbarDocked ? false : this.isAdvencedSearchOpen;
+				*/
 			});
 		}, options);
 
@@ -73,6 +136,25 @@ export default {
 	methods: {
 		submit(event) {
 			event.preventDefault();
+		},
+		openAdvencedSearch() {
+			if (this.isSearchbarDocked) {
+				this.isAdvencedSearchOpen = true;
+				this.isSearchbarDocked = false;
+
+				this.$nextTick().then(() => {
+					this.$refs.searchBar.scrollIntoView();
+					document.getElementsByTagName('HTML')[0].scrollBy({
+						top: -100,
+						left: 0,
+						behavior: 'smooth'
+					});
+					console.log('scroll');
+				});
+			}
+			else {
+				this.isAdvencedSearchOpen = !this.isAdvencedSearchOpen;
+			}
 		}
 	}
 };
@@ -208,6 +290,13 @@ export default {
 				bottom: 0;
 				clip-path: path('M 5,0 A 5,5 0 0 1 0,5 H 5 Z');
 			}
+		}
+
+		&__advenced {
+			max-width: 60ch;
+			margin: auto;
+			border-radius: 5px;
+			box-shadow: 0 0 5px 0 #0001;
 		}
 	}
 </style>
