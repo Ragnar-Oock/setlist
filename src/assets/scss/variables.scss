@@ -11,37 +11,61 @@ $dm-text: $white;
 :root {
 	--white: #fffef8;
 
-	--primary: #1967AB;
-	--primary-1: #253f55;
-	--primary-2: #1f3242;
+	// --primary: #1967AB;
+	// --primary-1: #253f55;
+	// --primary-2: #1f3242;
 
-	--primary: hsl(208, 74%, 38%);
-	--primary--hover: hsl(208, 24%, 38%);
-	--primary--focus: hsl(208, 74%, 31%);
-	--primary--hover-focus: hsl(208, 24%, 31%);
+	// --primary: hsl(208, 74%, 38%);
+	// --primary--hover: hsl(208, 24%, 38%);
+	// --primary--focus: hsl(208, 74%, 31%);
+	// --primary--hover-focus: hsl(208, 24%, 31%);
 
-	--secondary: #5d4195;
-	--secondary--hover: hsl(260, 30%, 38%);
-	--secondary--focus: hsl(260, 39%, 31%);
-	--secondary--hover-focus: hsl(260, 30%, 31%);
+	// --secondary: #5d4195;
+	// --secondary--hover: hsl(260, 30%, 38%);
+	// --secondary--focus: hsl(260, 39%, 31%);
+	// --secondary--hover-focus: hsl(260, 30%, 31%);
 
-	--bgc: hsl(51, 100%, 99%);
+	// --bgc: hsl(51, 100%, 99%);
 
-	--elements-bgc: hsl(51, 0%, 90%);
-	--elements-bgc--hover: hsl(51, 0%, 83%);
-	--elements-bgc--focus: hsl(51, 0%, 77%);
-	--elements-bgc--hover-focus: hsl(51, 0%, 70%);
+	// --elements-bgc: hsl(51, 0%, 90%);
+	// --elements-bgc--hover: hsl(51, 0%, 83%);
+	// --elements-bgc--focus: hsl(51, 0%, 77%);
+	// --elements-bgc--hover-focus: hsl(51, 0%, 70%);
+
+	--shadow: 0.5px 0.5px 2px 1px rgba(0, 0, 0, 0.32);
 
 	--text: #404040;
+	--counter-text: var(--white);
+
+
+	--filler-1: hsl(0, 0%, 88%);
+	--filler-2: hsl(0, 0%, 92%);
+	--filler-3: hsl(0, 0%, 72%);
+
+	--counter-filler-1: hsl(0, 0%, 21%);
+	--counter-filler-2: hsl(0, 0%, 25%);
+	--counter-filler-3: hsl(0, 0%, 15%);
+	
+	--primary-1: #583A94;
+	--primary-2: #665784;
 }
 
 .dark {
-	--bgc: #555555;
+	// --bgc: #555555;
 
-	--elements-bgc: hsl(0, 0%, 24%);
-	--elements-bgc--hover: hsl(0, 0%, 30%);
-	--elements-bgc--focus: hsl(0, 0%, 36%);
-	--elements-bgc--hover-focus: hsl(0, 0%, 42%);
+	// --elements-bgc: hsl(0, 0%, 24%);
+	// --elements-bgc--hover: hsl(0, 0%, 30%);
+	// --elements-bgc--focus: hsl(0, 0%, 36%);
+	// --elements-bgc--hover-focus: hsl(0, 0%, 42%);
 	
-	--text: #fffef8;
+	--text:var(--white);
+	--counter-text: #404040;
+
+	--filler-1: hsl(0, 0%, 21%);
+	--filler-2: hsl(0, 0%, 25%);
+	--filler-3: hsl(0, 0%, 15%);
+
+	--counter-filler-1: hsl(0, 0%, 88%);
+	--counter-filler-2: hsl(0, 0%, 92%);
+	--counter-filler-3: hsl(0, 0%, 72%);
 }

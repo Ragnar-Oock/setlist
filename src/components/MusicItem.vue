@@ -325,7 +325,7 @@ export default {
 			padding: .9em 2.5em .9em 1.5em;
 			border-radius: 5px;
 
-			background-color: var(--elements-bgc);
+			background-color: var(--filler-1);
 			color: var(--text);
 			box-shadow: 0 0 5px 1px #0001;
 
@@ -343,13 +343,9 @@ export default {
 			&:focus,
 			&:hover:focus {
 				outline: none;
-				background-color: var(--elements-bgc--hover-focus);
+				background-color: var(--filler-3);
 				box-shadow: 0 0 10px #0003;
 
-			}
-
-			&:hover {
-				background-color: var(--elements-bgc--hover);
 			}
 
 			&::after {
@@ -374,7 +370,7 @@ export default {
 			@at-root .openned & {
 				box-shadow: 0 0 10px #0003;
 				color: var(--white);
-				background-color: var(--secondary);
+				background-color: var(--primary-1);
 				background-image: linear-gradient(18deg, rgba(91, 3, 3, 0.04) 0%, rgba(143, 255, 155, 0.26) 100%);
 				background-blend-mode: color-dodge;
 				right: 66%;
@@ -393,7 +389,7 @@ export default {
 				}
 
 				&:hover {
-					background-color: var(--secondary--hover-focus);
+					background-color: var(--primary-2);
 				}
 			}
 		}
@@ -602,12 +598,13 @@ export default {
 			clip-path: inset(-10px -10px -10px 100%);
 		}
 
-		@media screen and (max-width: 43) {
+		@media screen and (max-width: 43em) {
 			flex-direction: column;
 			&.openned {
 				height: auto;
 				min-height: 300px;
 				max-height: 500px;
+				max-width: 60ch;
 			}
 			&__card {
 				position: static;

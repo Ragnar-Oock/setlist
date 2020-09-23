@@ -148,7 +148,7 @@ export default {
 	.menu {
 		position: absolute;
 		top: calc(100% + 1.1em);
-		background-color: #253f55;
+		background-color: var(--primary-1);
 		width: 30ch;
 		padding: .5em;
 		border-radius: 5px;
@@ -176,23 +176,15 @@ export default {
 			padding: .2em;
 			border-radius: 5px;
 			transition: background-color 300ms ease-in-out;
-			background-color: var(--primary-dark);
+			background-color: var(--primary-1);
 			cursor: pointer;
 
 			&.checked {
-				background-color: var(--primary);
-			}
-
-			&:hover {
-				background-color: var(--primary--hover);
+				background-color: var(--primary-2);
 			}
 
 			&:focus-within {
-				background-color: var(--primary--focus);
-
-				&:hover {
-					background-color: var(--primary--hover-focus);
-				}
+				background-color: var(--primary-2);
 			}
 		}
 

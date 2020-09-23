@@ -48,7 +48,7 @@
 				</li>
 				<li class="rules-page__item">
 					Modifier sa request prioritaire (VIP) :<br>
-					<code>!sr titre - artiste</code>
+					<code>!vipedit titre - artiste</code>
 				</li>
 			</ul>
 		</article>
@@ -91,7 +91,7 @@ export default {
 		&__article {
 			max-width: 60ch;
 			margin: 1em auto;
-			background-color: var(--elements-bgc);
+			background-color: var(--filler-1);
 			color: var(--text);
 			border-radius: 5px;
 			padding: 2em 3em;
