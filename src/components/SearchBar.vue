@@ -51,10 +51,17 @@
 				<span class="sr-only">recherche avancée</span>
 			</button>
 		</form>
-		<div
+		<form
 			v-if="isAdvencedSearchOpen"
 			class="search-bar__advenced"
+			@submit="submit"
 		>
+			<button
+				class="search-bar__close"
+				@click="openAdvencedSearch"
+			>
+				<span class="sr-only">Close</span>
+			</button>
 			<DoubleSliderRange
 				v-model="interpretationRange"
 				:min="interpretationMin"
@@ -84,20 +91,120 @@
 					Durée maximum
 				</template>
 			</DoubleSliderRange>
-		</div>
+			<DoubleSliderRange
+				v-model="score"
+				:min="0"
+				:max="100"
+			>
+				Score
+				<template #label-min-value>
+					Score minimum
+				</template>
+				<template #label-max-value>
+					Score maximum
+				</template>
+			</DoubleSliderRange>
+			<div class="search-bar__row search-bar__sm-col">
+				<div class="search-bar__col-left">
+					<div class="search-bar__row">
+						<div class="search-bar__group">
+							<input
+								id="odlc"
+								v-model="odlc"
+								type="checkbox"
+								class="search-bar__checkbox"
+							>
+							<label
+								for="odlc"
+								class="search-bar__label"
+							>Officielle</label>
+							<input
+								id="cdlc"
+								v-model="cdlc"
+								type="checkbox"
+								class="search-bar__checkbox"
+							>
+							<label
+								for="cdlc"
+								class="search-bar__label"
+							>CDLC</label>
+						</div>
+						<HoverTip>
+							put some text here
+						</HoverTip>
+					</div>
+					<div class="search-bar__row">
+						<div class="search-bar__group">
+							<input
+								id="showlight"
+								v-model="showlight"
+								type="checkbox"
+								class="search-bar__checkbox"
+							>
+							<label
+								for="showlight"
+								class="search-bar__label"
+							>Showlight</label>
+						</div>
+						<HoverTip>
+							put some more text here
+						</HoverTip>
+					</div>
+				</div>
+				<div class="search-bar__col-right">
+					<p class="search-bar__label">
+						Arrangement&nbsp;:
+					</p>
+					<div
+						v-for="ar in arrangementsList"
+						:key="ar"
+						class="search-bar__radio_group"
+					>
+						<input
+							:id="'arrangement-' + ar"
+							v-model="arrangement"
+							type="radio"
+							class="search-bar__radio"
+							:value="ar"
+						>
+						<label
+							:for="'arrangement-' + ar"
+							class="search-bar__label"
+						>
+							{{ ar }}
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="search-bar__btn-group">
+				<button class="search-bar__reset">
+					Reset
+				</button>
+
+				<button
+					type="submit"
+					class="search-bar__submit"
+				>
+					Rechercher
+				</button>
+			</div>
+		</form>
 	</Fragment>
 </template>
 
 <script lang="js">
-
 import { Fragment } from 'vue-fragment';
+
 import DoubleSliderRange from './DoubleSliderRange';
+import HoverTip from './HoverTip';
 
 export default {
 	name: 'SearchBar',
 	components: {
 		Fragment,
-		DoubleSliderRange
+		DoubleSliderRange,
+		HoverTip
 	},
 	props: [],
 	data () {
@@ -107,11 +214,26 @@ export default {
 			isAdvencedSearchOpen: false,
 			interpretationRange: [0, 100],
 			interpretationMin: 0,
-			interpretationMax: 100
+			interpretationMax: 100,
+			arrangementsList: ['tous', 'rythm', 'lead', 'bass'],
+			arrangement: 'tous',
+			showlight: false,
+			odlc: false,
+			cdlc: false,
+			score: [0, 100]
+
 		};
 	},
 	computed: {
 
+	},
+	watch: {
+		odlc(newValue) {
+			this.cdlc = newValue ? false : this.cdlc;
+		},
+		cdlc(newValue) {
+			this.odlc = newValue ? false : this.odlc;
+		}
 	},
 	mounted() {
 		const options = {
@@ -224,8 +346,9 @@ export default {
 			display: flex;
 			padding: .25em .5em;
 			border: none;
-			background-color: #d7d7d7;
-			color: #fffef8;
+			background: var(--primary-1);
+			background: linear-gradient(18deg, var(--primary-1) 0%, var(--primary-2) 100%);
+			color: var(--white);
 			position: absolute;
 			right: 1em;
 			top: 50%;
@@ -235,7 +358,6 @@ export default {
 			cursor: pointer;
 
 			&-text {
-				color: #404040;
 				overflow: hidden;
 				max-width: 0ch;
 				transition: 300ms ease-out;
@@ -271,6 +393,7 @@ export default {
 			position: relative;
 			background-color: #404040;
 			color: white;
+			cursor: pointer;
 
 			&::before,
 			&:after {
@@ -294,9 +417,239 @@ export default {
 
 		&__advenced {
 			max-width: 60ch;
-			margin: auto;
+			margin: -3.5em auto 2em;
 			border-radius: 5px;
 			box-shadow: 0 0 5px 0 #0001;
+			background: var(--primary-1);
+			background: var(--bg-gradient);
+			padding: 1em .5em;
+
+			@media screen and (min-width: 25em) {
+				padding: 1.5em;
+			}
+		}
+
+		&__close {
+			position: relative;
+			height: 1em;
+			width: 1em;
+			border: 0;
+			padding: 0;
+			background-color: #fff0;
+			cursor: pointer;
+			margin-left: auto;
+			display: block;
+			margin-top: -.5em;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				display: block;
+				width: .1em;
+				height: 1.4em;
+				border-radius: .05em;
+				background-color: #fff;
+			}
+
+			&::before {
+				top: 0;
+				left: 0;
+				transform: rotate(-45deg) translateX(-50%);
+				transform-origin: top left;
+			}
+			&::after {
+				top: 0;
+				right: 0;
+				transform: rotate(45deg) translateX(50%);
+				transform-origin: top right;
+			}
+		}
+
+		&__row {
+			display: flex;
+			flex-direction: row;
+			gap: 1em;
+			align-items: center;
+
+			&:not(:last-child) {
+				margin-bottom: .75em;
+			}
+
+		}
+		&__col-left,
+		&__col-right {
+			width: 50%;
+			display: flex;
+			flex-direction: column;
+		}
+		@media screen and (max-width: 20em) {
+			&__sm-col {
+				display: flex;
+				flex-direction: column;
+			}
+			&__col-left,
+			&__col-right {
+				width: 100%;
+			}
+		}
+
+		&__group {
+			width: 100%;
+		}
+		&__group &__checkbox + &__label:first-of-type {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+		&__group &__checkbox + &__label:last-of-type {
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+
+		&__checkbox {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+		&__checkbox + &__label {
+			cursor: pointer;
+			background-color: var(--filler-1);
+			padding: .5em;
+			width: 100%;
+			display: block;
+			color: var(--text);
+			text-align: center;
+			font-weight: bold;
+			transition: 300ms ease-in-out;
+			transition-property: color, background-color;
+		}
+
+		&__checkbox:checked + &__label {
+			background-color: var(--primary-2);
+			color: var(--white);
+		}
+		&__checkbox:focus + &__label,
+		&__checkbox:active + &__label {
+			box-shadow: 0 0 5px 2px #0004;
+			background-color: var(--filler-2);
+			outline: none;
+		}
+		&__checkbox:checked:focus + &__label,
+		&__checkbox:checked:active + &__label {
+			background-color: var(--primary-1);
+		}
+
+		&__label {
+			font-weight: bold;
+			color: var(--text);
+		}
+
+		&__radio {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		&__radio + &__label {
+			position: relative;
+			display: block;
+			background-color: var(--filler-1);
+			margin-top: .25em;
+			margin-left: 2em;
+			width: max-content;
+			padding: .25em;
+			box-shadow: var(--shadow);
+			border-radius: 5px;
+			cursor: pointer;
+
+			&::before {
+				content:'';
+				position: absolute;
+				display: block;
+				width: 1em;
+				height: 1em;
+				background-color: var(--filler-1);
+				left: -1em;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				border: 3px solid var(--filler-1);
+				border-radius: 5px;
+				transition: background-color 300ms ease-in-out;
+			}
+		}
+
+		&__radio:checked + &__label::before {
+			background-color: var(--primary-2);
+		}
+
+		&__radio:focus + &__label,
+		&__radio:active + &__label {
+			box-shadow: 0 0 5px 2px #0004;
+			background-color: var(--filler-2);
+
+			&::before {
+				box-shadow: 0 0 5px 2px #0004;
+				background-color: var(--filler-2);
+			}
+		}
+
+		&__radio:checked:focus + &__label,
+		&__radio:checked:active + &__label {
+			box-shadow: 0 0 5px 2px #0004;
+			background-color: var(--primary-1);
+
+			&::before {
+				box-shadow: 0 0 5px 2px #0004;
+				background-color: var(--primary-1);
+			}
+		}
+
+		&__btn-group {
+			display: flex;
+		}
+
+		&__reset,
+		&__submit {
+			padding: .5em 1em;
+			width: 100%;
+			max-width: 15ch;
+			font-weight: bold;
+			color: var(--text);
+			border-radius: 5px;
+		}
+
+		&__reset {
+			border: 3px solid var(--filler-2);
+			background-color: #0000;
+
+			&:focus {
+				outline: 0;
+				box-shadow: 0 0 5px 2px #0004, inset 0 0 5px 2px #0002;
+			}
+		}
+
+		&__submit {
+			background-color: var(--filler-2);
+			border: 3px solid var(--filler-2);
+			margin-left: auto;
+			display: inline-block;
+
+			&:focus {
+				outline: 0;
+				box-shadow: 0 0 5px 2px #0004;
+			}
 		}
 	}
 </style>
