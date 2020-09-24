@@ -26,6 +26,7 @@ export default {
 		display: inline-block;
 		position: relative;
 		z-index: 15;
+		width: 1em;
 		&__nob {
 			width: 1em;
 			height: 1em;
@@ -50,7 +51,7 @@ export default {
 
 		&__tip {
 			position: absolute;
-			left: -100vw;
+			left: -1000vw;
 			opacity: 0;
 			width: max-content;
 			max-width: 25ch;
@@ -76,7 +77,9 @@ export default {
 		}
 
 		&__nob:hover + &__tip,
-		&__nob:focus + &__tip {
+		&__nob:focus + &__tip,
+		&__tip:hover,
+		&__tip:focus {
 			left: 50%;
 			opacity: 1;
 			transform: translate(-50%, .2em);
