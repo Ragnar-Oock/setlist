@@ -178,15 +178,20 @@
 			</div>
 
 			<div class="search-bar__btn-group">
-				<button class="search-bar__reset">
+				<button class="search-bar__reset search-bar__btn">
 					Reset
 				</button>
 
 				<button
 					type="submit"
-					class="search-bar__submit"
+					class="search-bar__submit search-bar__btn search-bar__btn--with-icon"
 				>
 					Rechercher
+					<img
+						class="search-bar__btn-icon"
+						src="../assets/images/search.svg"
+						alt="search icon"
+					>
 				</button>
 			</div>
 		</form>
@@ -620,14 +625,22 @@ export default {
 			display: flex;
 		}
 
-		&__reset,
-		&__submit {
+		&__btn {
 			padding: .5em 1em;
 			width: 100%;
 			max-width: 15ch;
 			font-weight: bold;
 			color: var(--text);
 			border-radius: 5px;
+
+			&-icon {
+				margin-left: .5em;
+			}
+
+			&--with-icon {
+				display: flex;
+				flex-direction: row;
+			}
 		}
 
 		&__reset {
@@ -644,7 +657,6 @@ export default {
 			background-color: var(--filler-2);
 			border: 3px solid var(--filler-2);
 			margin-left: auto;
-			display: inline-block;
 
 			&:focus {
 				outline: 0;
