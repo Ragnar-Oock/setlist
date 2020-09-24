@@ -4,7 +4,7 @@
 		role="group"
 		aria-labelledby="multi-label"
 	>
-		<div id="double-slider-range__multi-label">
+		<div class="double-slider-range__multi-label">
 			<slot />
 			<HoverTip v-if="$slots.help">
 				<slot name="help" />
@@ -120,6 +120,7 @@ export default {
 
 <style lang="scss">
   .double-slider-range {
+		margin-bottom: 1em;
 
 		&__input {
 			appearance: textfield;
@@ -133,10 +134,24 @@ export default {
 			transition-property: background-color, box-shadow;
 
 			&:focus {
-				box-shadow: inset 0 0 5px 2px #0004;
+				box-shadow: 0 0 5px 2px #0004;
 				background-color: var(--filler-2);
 				outline: none;
 			}
+
+			&:first-of-type {
+				grid-area: input1;
+			}
+
+			&:last-of-type {
+				grid-area: input2;
+				margin-left: auto;
+			}
+		}
+
+		&__multi-label {
+			font-weight: bold;
+			color: var(--text);
 		}
 
 		&__wrapper {
@@ -144,21 +159,11 @@ export default {
 			grid-template-columns: auto 1fr auto;
 			grid-template-areas: 'input1 range input2';
 			gap: .5em;
-			padding: .5em 0;
+			padding-top: .5em ;
 
 			@media screen and (max-width: 25em) {
-				grid-template-areas: 'input1 input2' 'range range';
+				grid-template-areas:'range range' 'input1 input2' ;
 				grid-template-columns: 1fr 1fr;
-			}
-		}
-
-		&__input {
-			&:first-of-type {
-				grid-area: input1;
-			}
-			&:last-of-type {
-				grid-area: input2;
-				margin-left: auto;
 			}
 		}
 
@@ -171,7 +176,7 @@ export default {
 				border-radius: 3px;
 			}
 			.vue-slider-dot-handle {
-				background-color: var(--primary-1);
+				background-color: var(--primary-2);
 				width: .5em;
 				height: 1em;
 				border-radius: 5px;
@@ -182,7 +187,7 @@ export default {
 				transition: background-color 300ms ease-in-out;
 			}
 			.vue-slider-dot-handle-focus{
-				background-color: var(--filler-3);
+				background-color: var(--primary-1);
 				box-shadow: var(--shadow);
 			}
 			.vue-slider-process {
