@@ -486,6 +486,10 @@ export default {
 				transition-property: max-width, margin-right;
 			}
 
+			&:focus {
+				outline: none;
+			}
+
 			&:focus > &-text,
 			&:hover > &-text {
 				margin-right: .5em;
