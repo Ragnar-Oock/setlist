@@ -1,6 +1,7 @@
-<template lang="html">
+<template>
 	<span
 		class="arrangement-item"
+		tabindex="0"
 		@click="open = !open"
 	>
 		<span class="arrangement-item__label">
@@ -40,7 +41,7 @@ export default {
 
 <style lang="scss">
   .arrangement-item {
-		background-color: #ccc;
+		background-color: var(--filler-2);
 		padding: .25em .5em;
 		font-size: 85%;
 		border-radius: 5px;
@@ -51,31 +52,9 @@ export default {
 		&__accord {
 			display: inline-block;
 			white-space: nowrap;
-			overflow-x: hidden;
 			padding-left: .5ch;
 		}
   }
-
-	// .slide {
-		// &-enter-active,
-		// &-leave-active {
-		// 	transition: transform 300ms ease-in-out;
-		// 	// transform-origin: left center;
-		// }
-
-		// &-enter,
-		// &-leave-to {
-		// 	transform: scaleX(0);
-		// }
-
-		// &-enter-to,
-		// &-leave {
-		// 	transform: scale(1);
-		// }
-	// }
-
-	/* Enter and leave animations can use different */
-	/* durations and timing functions.              */
 	.slide-fade-enter-active {
 		transition: max-width 300ms ease-in,
 		padding-left 100ms linear,
