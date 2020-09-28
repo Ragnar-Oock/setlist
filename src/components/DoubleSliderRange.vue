@@ -82,14 +82,14 @@ export default {
 		},
 		value: {
 			type: Array,
-			required: false,
-			default: () => ([this.min, this.max])
+			required: true
+			// default: () => ([this.min, this.max])
 		}
 	},
 	data () {
 		return {
-			minValue: this.min,
-			maxValue: this.max
+			minValue: this.value[0] || this.min,
+			maxValue: this.value[1] || this.max
 		};
 	},
 	computed: {
@@ -106,9 +106,16 @@ export default {
 	watch: {
 		value : function (newValue) {
 			this.range = newValue;
+		},
+		minValue() {
+			this.$emit('input', this.range);
+		},
+		maxValue() {
+			this.$emit('input', this.range);
 		}
 	},
 	methods: {
+		// on blur realocate the value so they are ordered
 		onBlur() {
 			this.range = [this.minValue, this.maxValue];
 		}
@@ -132,6 +139,7 @@ export default {
 			color: var(--text);
 			transition: 300ms ease-in-out;
 			transition-property: background-color, box-shadow;
+			box-shadow: var(--shadow);
 
 			&:focus {
 				box-shadow: 0 0 5px 2px #0004;
@@ -174,6 +182,7 @@ export default {
 				background-color: var(--filler-1);
 				height: .5em;
 				border-radius: 3px;
+				box-shadow: var(--shadow);
 			}
 			.vue-slider-dot-handle {
 				background-color: var(--primary-2);
