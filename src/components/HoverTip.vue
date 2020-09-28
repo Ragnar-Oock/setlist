@@ -25,7 +25,7 @@ export default {
   .hover-tip {
 		display: inline-block;
 		position: relative;
-		z-index: 15;
+		z-index: 11;
 		width: 1em;
 		&__nob {
 			width: 1em;
