@@ -396,7 +396,7 @@ export default {
 			border: none;
 			background: var(--primary-1);
 			background: linear-gradient(18deg, var(--primary-1) 0%, var(--primary-2) 100%);
-			color: var(--white);
+			color: var(--text);
 			position: absolute;
 			right: 1em;
 			top: 50%;
@@ -556,7 +556,7 @@ export default {
 				height: 1.4em;
 				border-radius: .05em;
 				box-shadow: var(--shadow);
-				background-color: #fff;
+				background-color: var(--text);
 			}
 
 			&::before {
@@ -576,7 +576,7 @@ export default {
 			&:hover {
 				outline: 0;
 				opacity: .5;
-				animation: close-idle 7s cubic-bezier(.65,.05,.36,1) infinite;
+				animation: close-idle 7s cubic-bezier(.65,.05,.11,1.12) infinite;
 			}
 		}
 		@keyframes close-idle {

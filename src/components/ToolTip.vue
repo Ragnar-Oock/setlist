@@ -4,7 +4,6 @@
 		<div
 			class="tool-tip__wrapper"
 			:class="{'tool-tip--show': props.displayed, 'tool-tip--show-on-hover': props.showOnHover}"
-			:style="{'background-color': props.color}"
 		>
 			<slot name="tooltip" />
 		</div>
@@ -16,7 +15,6 @@
 export default {
 	name: 'ToolTip',
 	props: {
-		color: { type: String, required: false, default: '#d7d7d7' },
 		displayed: { type: Boolean, required: true },
 		showOnHover: { type: Boolean, required: false, default: false }
 	}
@@ -43,6 +41,7 @@ export default {
 		opacity: 0;
 		transition: 300ms ease-in-out;
 		transition-property: opacity, transform;
+		background-color: #d7d7d7;
 
 		&::before {
 			content: '';

@@ -346,7 +346,7 @@ export default {
 
 			@at-root .openned & {
 				margin: 4px 0;
-				border-color: white;
+				border-color: var(--text);
 			}
 		}
 
@@ -406,7 +406,7 @@ export default {
 
 			@at-root .openned & {
 				box-shadow: 0 0 10px #0003;
-				color: var(--white);
+				color: var(--text);
 				background-color: var(--primary-1);
 				background-image: linear-gradient(18deg, rgba(91, 3, 3, 0.04) 0%, rgba(143, 255, 155, 0.26) 100%);
 				background-blend-mode: color-dodge;
@@ -575,7 +575,8 @@ export default {
 		}
 
 		&__section {
-			background-color: var(--white);
+			background-color: var(--filler-1);
+			color: var(--text);
 			margin: 0 0 3px;
 			padding: .5em 1.5em;
 			transition: background-color 300ms ease-in-out;
@@ -586,7 +587,6 @@ export default {
 				display: flex;
 				flex-direction: column;
 				padding: .5em 0;
-
 
 				& > :last-child{
 					margin-top: auto;
@@ -599,8 +599,8 @@ export default {
 		}
 
 		&__button {
-			background-color: #d7d7d7;
-			color: #404040;
+			background-color: var(--filler-2-translucent);
+			color: var(--text);
 			border: none;
 			padding: .5em;
 			cursor: pointer;
@@ -613,16 +613,20 @@ export default {
 
 			&:active,
 			&:focus {
-				background-color: #aaa;
+				background-color: var(--filler-2);
 				outline: none;
 			}
+		}
+
+		.tool-tip__wrapper{
+			background-color: var(--filler-2);
 		}
 
 		&__output {
 			margin: 0 3px;
 			flex-grow: 1;
-			background-color: #d7d7d7;
-			color: #484848;
+			background-color: var(--filler-2-translucent);
+			color: var(--text);
 			padding: .5em;
 			border: none;
 		}
@@ -765,9 +769,9 @@ export default {
 				transform: translateY(-50%);
 				width: max-content;
 				left: unset;
-				right: 3em;
+				right: 2.5em;
 				bottom: unset;
-				padding: .25em .5em;
+				padding: 0.5em .75em;
 				border-radius: 5px;
 				opacity: 0;
 
@@ -779,7 +783,7 @@ export default {
 			&__quick-copy:focus,
 			&__quick-copy:hover {
 				left: unset;
-				right: 3em;
+				right: 2.5em;
 				z-index: 11;
 			}
 			&__card:hover + &__quick-copy,
@@ -793,6 +797,14 @@ export default {
 
 				transition: opacity 300ms ease-in-out;
 			}
+			.openned &__quick-copy,
+		.openned &__card:hover + &__quick-copy,
+		.openned &__card:focus + &__quick-copy,
+		.openned &__quick-copy:hover,
+		.openned &__quick-copy:focus {
+			left: unset;
+			opacity: 0;
+		}
 		}
 	}
 
