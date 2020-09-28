@@ -42,9 +42,10 @@
 		</div>
 
 		<button
-			ref="copyButton"
+			ref="quickCopyButton"
 			class="music-item__quick-copy"
-			@click="copy"
+			:class="{'play': isQuickCopyCliked}"
+			@click="quickCopy"
 		>
 			<span class="music-item__quick-copy-text">Copier la commande</span>
 			<!-- don't change this svg import if you don't want to skrew up the styling -->
@@ -62,12 +63,20 @@
 			</svg>
 		</button>
 
+		<input
+			ref="outputExt"
+			class="music-item__output-ext"
+			type="text"
+			:value="command"
+			readonly
+		>
+
 		<transition
 			appear
 			name="open"
 		>
 			<div
-				v-if="openned"
+				v-show="openned"
 				class="music-item__body"
 			>
 				<div
@@ -207,7 +216,8 @@ export default {
 		return {
 			openned: false,
 			vip: false,
-			showTooltip: false
+			showTooltip: false,
+			isQuickCopyCliked: false
 		};
 	},
 	computed: {
@@ -301,7 +311,6 @@ export default {
 			this.vip = !this.vip;
 		},
 		copy() {
-			console.log(this.$refs.output);
 			this.$refs.output.select();
 			document.execCommand('copy');
 			this.showTooltip = true;
@@ -309,6 +318,26 @@ export default {
 			this.$nextTick().then(() => {
 				this.$refs.copyButton.focus();
 			});
+		},
+		quickCopy($event) {
+			this.$refs.outputExt.select();
+			document.execCommand('copy');
+
+			if ($event.layerX !== 0 && $event.layerY !== 0) {
+				this.$refs.quickCopyButton.style.setProperty('--mouse-x', `${ $event.layerX }px`);
+				this.$refs.quickCopyButton.style.setProperty('--mouse-y', `${ $event.layerY }px`);
+			}
+
+			this.isQuickCopyCliked = true;
+
+			this.$nextTick().then(() => {
+				this.$refs.copyButton.focus();
+			});
+			setTimeout(() => {
+				this.isQuickCopyCliked = false;
+				this.$refs.quickCopyButton.style.setProperty('--mouse-x', '50%');
+				this.$refs.quickCopyButton.style.setProperty('--mouse-y', '50%');
+			}, 500);
 		}
 	}
 };
@@ -432,6 +461,9 @@ export default {
 		}
 
 		&__quick-copy {
+			--mouse-x: 50%;
+			--mouse-y: 50%;
+
 			position: absolute;
 			left: calc(100% - 37px);
 			border: none;
@@ -444,6 +476,7 @@ export default {
 			cursor: pointer;
 			display: flex;
 			align-items: center;
+			overflow: hidden;
 			transition: left 300ms 100ms ease-out,
 				opacity 300ms ease-in-out;
 
@@ -459,6 +492,38 @@ export default {
 			&:hover > &-text {
 				margin-right: .5em;
 				max-width: 20ch;
+			}
+
+			&::before {
+				content: '';
+				display: block;
+				width: 0;
+				height: 0;
+				position: absolute;
+				left: var(--mouse-x);
+				top: var(--mouse-y);
+				transform: translate(-50%, -50%);
+				border-radius: 50%;
+				box-shadow: inset 0 0 1em 0 #fff6;
+			}
+			&.play::before {
+				animation: click 500ms ease-out 1;
+			}
+
+			@keyframes click {
+				0% {
+					width: 0;
+					padding-top: 0;
+					opacity: 1;
+				}
+				80% {
+					opacity: 1;
+				}
+				100% {
+					width: 300px;
+					padding: 100%;
+					opacity: 0;
+				}
 			}
 		}
 		&__card:hover + &__quick-copy,
@@ -629,6 +694,11 @@ export default {
 			color: var(--text);
 			padding: .5em;
 			border: none;
+
+			&-ext {
+				position: absolute;
+				left: 1000vh;
+			}
 		}
 
 		&__meta {
