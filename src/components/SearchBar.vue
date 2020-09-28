@@ -33,22 +33,23 @@
 			<button
 				class="search-bar__open-more"
 				title="recherche avancée"
+				:class="{'active': isAdvencedSearchOpen}"
 				@click="openAdvencedSearch"
 			>
+				<span class="search-bar__open-more-text">filtres</span>
+				<!-- don't change this svg import if you don't want to skrew up the styling -->
 				<svg
 					width="1em"
 					height="1em"
 					viewBox="0 0 16 16"
-					fill="currentColor"
 					xmlns="http://www.w3.org/2000/svg"
+					aria-hidden="true"
+					class="search-bar__open-more-icon"
 				>
-					<path
-						fill-rule="evenodd"
-						d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"
+					<use
+						xlink:href="../assets/images/gear.svg#el"
 					/>
 				</svg>
-
-				<span class="sr-only">recherche avancée</span>
 			</button>
 		</form>
 		<form
@@ -156,29 +157,32 @@
 						Arrangement&nbsp;:
 					</p>
 					<div
-						v-for="ar in arrangementsList"
-						:key="ar"
+						v-for="(value, key) in arrangement"
+						:key="key"
 						class="search-bar__radio_group"
 					>
 						<input
-							:id="'arrangement-' + ar"
-							v-model="arrangement"
-							type="radio"
+							:id="'arrangement-' + key"
+							v-model="arrangement[key]"
+							type="checkbox"
 							class="search-bar__radio"
-							:value="ar"
+							:value="value"
 						>
 						<label
-							:for="'arrangement-' + ar"
+							:for="'arrangement-' + key"
 							class="search-bar__label"
 						>
-							{{ ar }}
+							{{ key }}
 						</label>
 					</div>
 				</div>
 			</div>
 
 			<div class="search-bar__btn-group">
-				<button class="search-bar__reset search-bar__btn">
+				<button
+					class="search-bar__reset search-bar__btn"
+					@click="resetForm"
+				>
 					Reset
 				</button>
 
@@ -223,8 +227,7 @@ export default {
 			interpretationNumber: [0, 100],
 			interpretationNumberMin: 0,
 			interpretationNumberMax: 100,
-			arrangementsList: ['tous', 'rythm', 'lead', 'bass'],
-			arrangement: 'tous',
+			arrangement: { 'rythm': false, 'lead': false, 'bass': false },
 			showlight: false,
 			odlc: false,
 			cdlc: false,
@@ -286,6 +289,21 @@ export default {
 			else {
 				this.isAdvencedSearchOpen = !this.isAdvencedSearchOpen;
 			}
+		},
+		resetForm() {
+			this.lastInterpretation = [0, 100];
+			this.lastInterpretationMin = 0;
+			this.lastInterpretationMax = 100;
+			this.interpretationNumber = [0, 100];
+			this.interpretationNumberMin = 0;
+			this.interpretationNumberMax = 100;
+			this.arrangement = { 'rythm': false, 'lead': false, 'bass': false };
+			this.showlight = false;
+			this.odlc = false;
+			this.cdlc = false;
+			this.score = [0, 100];
+			this.scoreMin = 0;
+			this.scoreMax = 100;
 		}
 	}
 };
@@ -321,31 +339,35 @@ export default {
 			height: 100%;
 			border: none;
 			padding: .5em 1em;
-			background-color: #fffef8;
-			transition: background-color 300ms ease-in-out;
 			border-radius: 5px;
 			box-shadow: 0 0 5px 0 #0008;
-			background-color: #999;
-			&:focus {
-				outline: none;
-				background-color: #fff;
-			}
+			background-color: var(--filler-2);
+			color: var(--counter-text);
+			transition: background-color 300ms ease-in-out;
 
 			&::placeholder {
-				color: #1d1d1d;
+				color: var(--text);
+				opacity: .8;
+				transition: opacity 300ms ease-in-out;
 			}
 
-			@at-root .docked & {
-				background-color: #fff;
+			&:focus {
+				outline: none;
+				background-color: var(--filler-2);
+
+				&::placeholder {
+					opacity: .4;
+				}
 			}
 
 			@supports (backdrop-filter: blur(5px)) {
 				@at-root .docked & {
 					backdrop-filter: blur(5px);
-					background-color: #fff6;
+					background-color: var(--filler-2-translucent);
 
 					&:focus {
-						background-color: #fff;
+						outline: none;
+						background-color: var(--filler-2);
 					}
 				}
 			}
@@ -382,6 +404,10 @@ export default {
 			&-logo {
 				box-shadow: 0 0 5px 6px #d7d7d7;
 			}
+
+			&:focus {
+				outline: none;
+			}
 		}
 
 		&.docked{
@@ -398,11 +424,22 @@ export default {
 		}
 
 		&__open-more {
-			border: none;
 			position: relative;
-			background-color: #404040;
-			color: white;
+			display: flex;
+			width: 100%;
+			max-width: max-content;
+			height: 36px;
+			padding: 0 8px;
+
+			align-items: center;
+
+			border: none;
+			color: var(--text);
+			background-color: var(--filler-1);
+
 			cursor: pointer;
+
+			transition: background-color 300ms ease-in-out;
 
 			&::before,
 			&:after {
@@ -413,6 +450,7 @@ export default {
 				height: 5px;
 				position: absolute;
 				left: -5px;
+				transition: background-color 300ms ease-in-out;
 			}
 			&:before {
 				top: 0;
@@ -421,6 +459,48 @@ export default {
 			&:after {
 				bottom: 0;
 				clip-path: path('M 5,0 A 5,5 0 0 1 0,5 H 5 Z');
+			}
+
+			&-text {
+				overflow: hidden;
+				max-width: 0ch;
+				transition: 300ms ease-out;
+				white-space: nowrap;
+				transition-property: max-width, margin-right;
+			}
+
+			&:focus > &-text,
+			&:hover > &-text {
+				margin-right: .5em;
+				max-width: 15ch;
+			}
+
+			&.active {
+				background: var(--bg-gradient);
+
+				&::before {
+					background-color: var(--gradient-2);
+				}
+				&:after {
+					background-color: var(--gradient-1);
+				}
+			}
+
+			&-icon {
+				animation: rotate 3s linear infinite paused;
+			}
+			&:focus &-icon,
+			&:hover &-icon {
+				animation-play-state: running;
+			}
+
+			@keyframes rotate {
+				from {
+					transform: rotate(0turn);
+				}
+				to {
+					transform: rotate(1turn);
+				}
 			}
 		}
 
@@ -458,6 +538,7 @@ export default {
 				width: .1em;
 				height: 1.4em;
 				border-radius: .05em;
+				box-shadow: var(--shadow);
 				background-color: #fff;
 			}
 
@@ -472,6 +553,24 @@ export default {
 				right: 0;
 				transform: rotate(45deg) translateX(50%);
 				transform-origin: top right;
+			}
+
+			&:focus,
+			&:hover {
+				outline: 0;
+				opacity: .5;
+				animation: close-idle 7s cubic-bezier(.65,.05,.36,1) infinite;
+			}
+		}
+		@keyframes close-idle {
+			0% {
+				transform: rotate(0deg);
+			}
+			30% {
+				transform: rotate(90deg);
+			}
+			100% {
+				transform: rotate(90deg);
 			}
 		}
 
@@ -505,6 +604,8 @@ export default {
 
 		&__group {
 			width: 100%;
+			box-shadow: var(--shadow);
+			border-radius: 5px;
 		}
 		&__group &__checkbox + &__label:first-of-type {
 			border-top-left-radius: 5px;
@@ -541,7 +642,7 @@ export default {
 
 		&__checkbox:checked + &__label {
 			background-color: var(--primary-2);
-			color: var(--white);
+			color: black;
 		}
 		&__checkbox:focus + &__label,
 		&__checkbox:active + &__label {
@@ -551,6 +652,7 @@ export default {
 		}
 		&__checkbox:checked:focus + &__label,
 		&__checkbox:checked:active + &__label {
+			color: var(--white);
 			background-color: var(--primary-1);
 		}
 
@@ -582,6 +684,7 @@ export default {
 			box-shadow: var(--shadow);
 			border-radius: 5px;
 			cursor: pointer;
+			transition: background-color 300ms ease-in-out;
 
 			&::before {
 				content:'';
@@ -636,6 +739,8 @@ export default {
 			font-weight: bold;
 			color: var(--text);
 			border-radius: 5px;
+			box-shadow: var(--shadow);
+			cursor: pointer;
 
 			&-icon {
 				margin-left: .5em;
@@ -650,6 +755,8 @@ export default {
 		&__reset {
 			border: 3px solid var(--filler-2);
 			background-color: #0000;
+			box-shadow: var(--shadow), inset var(--shadow);
+			transition: box-shadow 300ms ease-in-out;
 
 			&:focus {
 				outline: 0;
