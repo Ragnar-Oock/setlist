@@ -24,10 +24,19 @@
 					class="search-bar__button"
 				>
 					<span class="search-bar__button-text">Rechercher</span>
-					<img
-						src="../assets/images/search.svg"
-						alt="search icon"
+					<!-- don't change this svg import if you don't want to skrew up the styling -->
+					<svg
+						width="1em"
+						height="1em"
+						viewBox="0 0 16 16"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						class="search-bar__open-more-icon"
 					>
+						<use
+							xlink:href="../assets/images/search.svg#el"
+						/>
+					</svg>
 				</button>
 			</div>
 			<button
@@ -191,11 +200,19 @@
 					class="search-bar__submit search-bar__btn search-bar__btn--with-icon"
 				>
 					Rechercher
-					<img
+					<!-- don't change this svg import if you don't want to skrew up the styling -->
+					<svg
 						class="search-bar__btn-icon"
-						src="../assets/images/search.svg"
-						alt="search icon"
+						width="1em"
+						height="1em"
+						viewBox="0 0 16 16"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
 					>
+						<use
+							xlink:href="../assets/images/search.svg#el"
+						/>
+					</svg>
 				</button>
 			</div>
 		</form>

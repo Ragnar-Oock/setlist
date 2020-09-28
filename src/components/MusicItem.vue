@@ -130,16 +130,24 @@
 						:title="vipToggleTitle"
 						@click="toggleVip"
 					>
-						<img
-							v-if="vip"
-							src="../assets/images/star-filled.svg"
-							alt="star icon"
+						<!-- don't change this svg import if you don't want to skrew up the styling -->
+						<svg
+							width="1em"
+							height="1em"
+							viewBox="0 0 16 16"
+							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden="true"
+							class="search-bar__open-more-icon"
 						>
-						<img
-							v-else
-							src="../assets/images/star.svg"
-							alt="star icon"
-						>
+							<use
+								v-if="vip"
+								xlink:href="../assets/images/star-filled.svg#el"
+							/>
+							<use
+								v-else
+								xlink:href="../assets/images/star.svg#el"
+							/>
+						</svg>
 					</button>
 
 					<input
@@ -157,10 +165,19 @@
 							title="copier la commande"
 							@click="copy"
 						>
-							<img
-								src="../assets/images/copy.svg"
-								alt="star icon"
+							<!-- don't change this svg import if you don't want to skrew up the styling -->
+							<svg
+								width="1em"
+								height="1em"
+								viewBox="0 0 16 16"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+								class="search-bar__open-more-icon"
 							>
+								<use
+									xlink:href="../assets/images/copy.svg#el"
+								/>
+							</svg>
 						</button>
 
 						<template v-slot:tooltip>
