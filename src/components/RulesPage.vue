@@ -85,8 +85,8 @@ export default {
 		margin: 0 auto;
 
 		&__title {
-			font-family: 'Poller One', Arial, Helvetica, sans-serif;
 			padding: 0.5em 0 .75em;
+			font-weight: bold;
 		}
 		&__article {
 			max-width: 60ch;
