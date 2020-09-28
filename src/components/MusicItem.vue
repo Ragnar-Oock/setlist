@@ -41,6 +41,27 @@
 			</p>
 		</div>
 
+		<button
+			ref="copyButton"
+			class="music-item__quick-copy"
+			@click="copy"
+		>
+			<span class="music-item__quick-copy-text">Copier la commande</span>
+			<!-- don't change this svg import if you don't want to skrew up the styling -->
+			<svg
+				width="1em"
+				height="1em"
+				viewBox="0 0 16 16"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+				class="search-bar__open-more-icon"
+			>
+				<use
+					xlink:href="../assets/images/copy.svg#el"
+				/>
+			</svg>
+		</button>
+
 		<transition
 			appear
 			name="open"
@@ -343,7 +364,6 @@ export default {
 			&:focus,
 			&:hover:focus {
 				outline: none;
-				background-color: var(--filler-3);
 				box-shadow: 0 0 10px #0003;
 
 			}
@@ -392,6 +412,56 @@ export default {
 					background-color: var(--primary-2);
 				}
 			}
+		}
+
+		&__quick-copy {
+			position: absolute;
+			left: calc(100% - 37px);
+			border: none;
+			top: 0;
+			bottom: 0;
+			border-radius: 0 5px 5px 0;
+			background: var(--bg-gradient);
+			padding: 0 8px 0 13px;
+			color: var(--text);
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			transition: left 300ms 100ms ease-out,
+				opacity 300ms ease-in-out;
+
+			&-text {
+				overflow: hidden;
+				max-width: 0ch;
+				white-space: nowrap;
+				transition: 300ms 100ms ease-out;
+				transition-property: max-width, margin-right;
+			}
+
+			&:focus > &-text,
+			&:hover > &-text {
+				margin-right: .5em;
+				max-width: 20ch;
+			}
+		}
+		&__card:hover + &__quick-copy,
+		&__card:focus + &__quick-copy,
+		&__quick-copy:hover,
+		&__quick-copy:focus {
+			left: calc(100% - 5px);
+			outline: none;
+
+			transition: left 300ms 200ms ease-out,
+				opacity 300ms ease-in-out;
+		}
+
+		.openned &__quick-copy,
+		.openned &__card:hover + &__quick-copy,
+		.openned &__card:focus + &__quick-copy,
+		.openned &__quick-copy:hover,
+		.openned &__quick-copy:focus {
+			left: 50%;
+			opacity: 0;
 		}
 
 		&__duration {
@@ -669,6 +739,42 @@ export default {
 			}
 			.music-item__vip {
 				border-radius: 0 0 0 10px;
+			}
+		}
+
+		@media screen  and (max-width: 60em){
+			&__quick-copy {
+				top: 50%;
+				transform: translateY(-50%);
+				width: max-content;
+				left: unset;
+				right: 3em;
+				bottom: unset;
+				padding: .25em .5em;
+				border-radius: 5px;
+				opacity: 0;
+
+				&-text {
+					max-width: unset;
+					margin-right: .5em;
+				}
+			}
+			&__quick-copy:focus,
+			&__quick-copy:hover {
+				left: unset;
+				right: 3em;
+				z-index: 11;
+			}
+			&__card:hover + &__quick-copy,
+			&__card:focus + &__quick-copy,
+			&__quick-copy:hover,
+			&__quick-copy:focus {
+				left: unset;
+				z-index: 11;
+				outline: none;
+				opacity: 1;
+
+				transition: opacity 300ms ease-in-out;
 			}
 		}
 	}
