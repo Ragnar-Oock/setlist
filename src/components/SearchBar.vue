@@ -63,9 +63,9 @@
 				<span class="sr-only">Close</span>
 			</button>
 			<DoubleSliderRange
-				v-model="interpretationRange"
-				:min="interpretationMin"
-				:max="interpretationMax"
+				v-model="lastInterpretation"
+				:min="lastInterpretationMin"
+				:max="lastInterpretationMax"
 			>
 				Dernière interprétation (en jours)
 				<template #help>
@@ -79,9 +79,9 @@
 				</template>
 			</DoubleSliderRange>
 			<DoubleSliderRange
-				v-model="interpretationRange"
-				:min="interpretationMin"
-				:max="interpretationMax"
+				v-model="interpretationNumber"
+				:min="interpretationNumberMin"
+				:max="interpretationNumberMax"
 			>
 				Nombre d'interprétation
 				<template #label-min-value>
@@ -93,8 +93,8 @@
 			</DoubleSliderRange>
 			<DoubleSliderRange
 				v-model="score"
-				:min="0"
-				:max="100"
+				:min="scoreMin"
+				:max="scoreMax"
 			>
 				Score
 				<template #label-min-value>
@@ -217,16 +217,20 @@ export default {
 			search: '',
 			isSearchbarDocked: false,
 			isAdvencedSearchOpen: false,
-			interpretationRange: [0, 100],
-			interpretationMin: 0,
-			interpretationMax: 100,
+			lastInterpretation: [0, 100],
+			lastInterpretationMin: 0,
+			lastInterpretationMax: 100,
+			interpretationNumber: [0, 100],
+			interpretationNumberMin: 0,
+			interpretationNumberMax: 100,
 			arrangementsList: ['tous', 'rythm', 'lead', 'bass'],
 			arrangement: 'tous',
 			showlight: false,
 			odlc: false,
 			cdlc: false,
-			score: [0, 100]
-
+			score: [0, 100],
+			scoreMin: 0,
+			scoreMax: 100
 		};
 	},
 	computed: {
