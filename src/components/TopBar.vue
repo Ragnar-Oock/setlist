@@ -122,7 +122,6 @@ export default {
 		align-items: center;
 		box-shadow: 0 0 5px #0003;
 		display: flex;
-		justify-content: right;
 		padding: 0 2em;
 		transition: background-image 300ms ease-in-out;
 
@@ -134,7 +133,7 @@ export default {
 			padding: .5em;
 			border-radius: 5px;
 			cursor: pointer;
-
+			margin-left: auto;
 			transition: opacity 300ms ease-in-out;
 
 			@media screen and (max-width: 58.25rem) {
