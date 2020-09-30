@@ -114,10 +114,12 @@
 				"CapoFret":-1,
 				"tunning": "drop"
 			}
-		}
+		},
+		"showlight": true
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"length": 242.671,
 		"title": "Mayhem",
 		"meta": {
 			"some random key": "some random value",
@@ -216,36 +218,13 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
-		"title": "Mayhem"
+		"length": 354,
+		"title": "Mayhem",
+		"showlight": true
 	},
 	{
 		"artiste": "A Call To Sincerity",
-		"title": "Mayhem"
-	},
-	{
-		"artiste": "A Band Called Death",
-		"title": "Keep On Knocking",
-		"tags": [
-			{
-				"title": "Officielle",
-				"color": "#325431"
-			},
-			{
-				"title": "funky",
-				"color": "#f01af7"
-			}
-		]
-	},
-	{
-		"artiste": "A Call To Sincerity",
-		"title": "Mayhem"
-	},
-	{
-		"artiste": "A Call To Sincerity",
-		"title": "Mayhem"
-	},
-	{
-		"artiste": "A Call To Sincerity",
+		"length": 1214,
 		"title": "Mayhem"
 	},
 	{
@@ -260,22 +239,88 @@
 				"title": "funky",
 				"color": "#f01af7"
 			}
-		]
+		],
+		"length": 421,
+		"showlight": true
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"length": 512,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"length": 404,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"length": 186,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Band Called Death",
+		"title": "Keep On Knocking",
+		"length": 272,
+		"tags": [
+			{
+				"title": "Officielle",
+				"color": "#325431"
+			},
+			{
+				"title": "funky",
+				"color": "#f01af7"
+			}
+		]
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"length": 222,
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"length": 142.671,
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"length": 124,
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Band Called Death",
+		"title": "Keep On Knocking",
+		"length": 142.671,
+		"tags": [
+			{
+				"title": "Officielle",
+				"color": "#325431"
+			},
+			{
+				"title": "funky",
+				"color": "#f01af7"
+			}
+		]
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"length": 142.671,
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"length": 142.671,
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Call To Sincerity",
+		"length": 321,
+		"title": "Mayhem"
+	},
+	{
+		"artiste": "A Band Called Death",
+		"length": 219,
 		"title": "Keep On Knocking",
 		"tags": [
 			{
@@ -290,40 +335,17 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"length": 295,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"length": 240,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
-		"title": "Mayhem"
-	},
-	{
-		"artiste": "A Band Called Death",
-		"title": "Keep On Knocking",
-		"tags": [
-			{
-				"title": "Officielle",
-				"color": "#325431"
-			},
-			{
-				"title": "funky",
-				"color": "#f01af7"
-			}
-		]
-	},
-	{
-		"artiste": "A Call To Sincerity",
-		"title": "Mayhem"
-	},
-	{
-		"artiste": "A Call To Sincerity",
-		"title": "Mayhem"
-	},
-	{
-		"artiste": "A Call To Sincerity",
+		"length": 132,
 		"title": "Mayhem"
 	}
 ]
