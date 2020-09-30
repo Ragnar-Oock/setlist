@@ -1,11 +1,13 @@
 <template functional>
 	<div class="hover-tip">
-		<div
-			class="hover-tip__nob"
-			tabindex="0"
-		>
-			<span class="sr-only">aide</span>
-		</div>
+		<slot name="nob">
+			<div
+				class="hover-tip__nob"
+				tabindex="0"
+			>
+				<span class="sr-only">aide</span>
+			</div>
+		</slot>
 		<div class="hover-tip__tip">
 			<slot />
 		</div>
@@ -76,10 +78,7 @@ export default {
 			}
 		}
 
-		&__nob:hover + &__tip,
-		&__nob:focus + &__tip,
-		&__tip:hover,
-		&__tip:focus {
+		&:hover &__tip {
 			left: 50%;
 			opacity: 1;
 			transform: translate(-50%, .2em);
