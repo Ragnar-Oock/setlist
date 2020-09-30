@@ -39,6 +39,24 @@
 					</svg>
 				</button>
 			</div>
+
+			<svg
+				width="0"
+				height="0"
+				viewBox="0 0 16 16"
+				xmlns="http://www.w3.org/2000/svg"
+				aria-hidden="true"
+				class="search-bar__open-more-icon"
+			>
+				<defs>
+					<clipPath id="open-more-top">
+						<path d="M 0,0 A 5,5 0 0 1 5,5 V 0 Z" />
+					</clipPath>
+					<clipPath id="open-more-bottom">
+						<path d="M 5,0 A 5,5 0 0 1 0,5 H 5 Z" />
+					</clipPath>
+				</defs>
+			</svg>
 			<button
 				class="search-bar__open-more"
 				title="recherche avancée"
@@ -462,11 +480,11 @@ export default {
 			}
 			&:before {
 				top: 0;
-				clip-path: path('M 0,0 A 5,5 0 0 1 5,5 V 0 Z');
+				clip-path: url(#open-more-top);
 			}
 			&:after {
 				bottom: 0;
-				clip-path: path('M 5,0 A 5,5 0 0 1 0,5 H 5 Z');
+				clip-path: url(#open-more-bottom);
 			}
 
 			&-text {
