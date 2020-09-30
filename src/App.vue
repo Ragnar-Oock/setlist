@@ -62,6 +62,7 @@ export default {
 		font-family: 'Quicksand', sans-serif;
 		background-color: #fffef8;
 		overflow-x: hidden;
+		width: 100vw;
 	}
 
 	.setlist {
