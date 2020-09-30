@@ -6,12 +6,12 @@
 	>
 		<WelcomeScreen />
 
-		<TopBar />
+		<TopBar :is-search-bar-docked="isSearchBarDocked" />
 
 		<RulesPage />
 
 		<div class="setlist">
-			<SearchBar />
+			<SearchBar @docked="isSearchBarDocked=$event" />
 			<MusicItem
 				v-for="(music, index) in list"
 				:key="index"
@@ -42,7 +42,8 @@ export default {
 	},
 	data () {
 		return {
-			list: list
+			list: list,
+			isSearchBarDocked: false
 		};
 	},
 	computed:{

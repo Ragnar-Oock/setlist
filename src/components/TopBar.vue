@@ -1,49 +1,70 @@
-<template lang="html">
+<template>
 	<div
-		ref="menu"
 		class="top-bar"
+		:class="{'docked': isSearchBarDocked}"
 	>
-		<button
-			class="top-bar__toggle"
-			@click="toggleMenu"
+		<label
+			for="darkMode"
+			class="top-bar__label"
+			:class="{'checked': isDarkModeOn}"
 		>
-			<span class="sr-only">Menu</span>
-			<div class="top-bar__icon-bar bar1" />
-			<div class="top-bar__icon-bar bar2" />
-			<div class="top-bar__icon-bar bar3" />
-		</button>
-
-		<transition name="fade">
-			<div
-				v-show="isMenuOpen"
-				class="menu"
+			<input
+				id="darkMode"
+				v-model="isDarkModeOn"
+				type="checkbox"
+				name="darkMode"
+				class="sr-only"
 			>
-				<div class="menu__item">
-					<label
-						for="darkMode"
-						class="menu__label"
-						:class="{'checked': isDarkModeOn}"
-					>
-						<input
-							id="darkMode"
-							v-model="isDarkModeOn"
-							type="checkbox"
-							name="darkMode"
-							class="menu__checkbox"
-						>
-						<div class="menu__icon">
-							<img
-								src="../assets/images/tick.svg"
-								alt="tick"
-							>
-						</div>
-						<span class="menu__text">
-							dark Mode
-						</span>
-					</label>
-				</div>
-			</div>
-		</transition>
+
+			<transition
+				name="rise"
+				mode="out-in"
+			>
+				<!-- icon if darkMode is on -->
+				<svg
+					v-if="isDarkModeOn"
+					key="on"
+					class="top-bar__icon"
+					viewBox="0 0 16 16"
+					fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"
+					/>
+				</svg>
+				<svg
+					v-else
+					key="off"
+					class="top-bar__icon"
+					viewBox="0 0 16 16"
+					fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+					<path
+						fill-rule="evenodd"
+						d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+					/>
+				</svg>
+			</transition>
+
+			<div
+				v-if="isDarkModeOn"
+				key="on"
+				class="top-bar__horizon on"
+			/>
+			<div
+				v-else
+				key="off"
+				class="top-bar__horizon off"
+			/>
+
+			<span class="sr-only">
+				dark Mode
+			</span>
+		</label>
 	</div>
 </template>
 
@@ -51,7 +72,13 @@
 
 export default {
 	name: 'TopBar',
-	props: [],
+	props: {
+		isSearchBarDocked: {
+			type: Boolean,
+			required: false,
+			default: false
+		}
+	},
 	data () {
 		return {
 			isMenuOpen: false
@@ -66,18 +93,6 @@ export default {
 				this.$store.commit('SET_DARK_MODE', newValue);
 			}
 		}
-	},
-	mounted() {
-		// close the mennu if clic occure outside of it or the topbar
-		document.addEventListener('click', event => {
-			const isClickOnElement = event.composedPath().includes(this.$refs.menu);
-
-			this.$nextTick().then(() => {
-				if (this.isMenuOpen && !isClickOnElement) {
-					this.toggleMenu(false);
-				}
-			});
-		});
 	},
 	methods: {
 		toggleMenu(state) {
@@ -98,7 +113,7 @@ export default {
 	@import '../assets/scss/variables.scss';
 
   .top-bar {
-		background-color: $dark;
+		background: var(--bg-gradient);
 		position: sticky;
 		top: 0;
 		height: 3em;
@@ -106,121 +121,99 @@ export default {
 		display: flex;
 		align-items: center;
 		box-shadow: 0 0 5px #0003;
+		display: flex;
+		justify-content: right;
+		padding: 0 2em;
+		transition: background-image 300ms ease-in-out;
 
-		&__toggle {
-			background-color: transparent;
-			border: none;
-			padding: .25em .5em;
-			margin-left: 1em;
-			border: thin solid transparent;
-			border-radius: 5px;
-			transition: ease-in-out 300ms;
-			transition-property: border-color, opacity;
-
-			&:focus {
-				outline: none;
-				border-color: $white;
-			}
-
-			&:hover {
-				opacity: .5;
-			}
-		}
-
-		&__icon-bar {
-			display: block;
-			background-color: $white;
-			height: .3em;
-			width: 2em;
-			margin: .3em 0;
-			border-radius: .15em;
-		}
-
-
-
-		.fade-enter-active, .fade-leave-active {
-			transition: opacity .5s;
-		}
-		.fade-enter, .fade-leave-to {
-			opacity: 0;
-		}
-	}
-	.menu {
-		position: absolute;
-		top: calc(100% + 1.1em);
-		background-color: var(--primary-1);
-		width: 30ch;
-		padding: .5em;
-		border-radius: 5px;
-		left: .5em;
-		color: $white;
-		filter: drop-shadow(0px 0px 5px #0003);
-
-		&::before {
-			content: '';
-			display: block;
-			width: 1em;
-			height: 1em;
-			position: absolute;
-			background-color: var(--primary-1);
-			transform: rotate(45deg);
-			top: -0.4em;
-			left: 1.5em;
-			z-index: -1;
-			border-radius: 5px;
-		}
 
 		&__label {
 			display: flex;
+			flex-direction: column;
 			align-items: center;
-			padding: .2em;
+			padding: .5em;
 			border-radius: 5px;
-			transition: background-color 300ms ease-in-out;
-			background-color: var(--primary-1);
 			cursor: pointer;
 
-			&.checked {
-				background-color: var(--primary-2);
-			}
+			transition: opacity 300ms ease-in-out;
 
-			&:focus-within {
-				background-color: var(--primary-2);
+			@media screen and (max-width: 58.25rem) {
+				@at-root .docked & {
+					opacity: 0;
+				}
 			}
 		}
 
-		&__text {
-			padding: .5em .8em;
-		}
+		&__horizon {
+			background-color: var(--text);
+			height: 2px;
+			width: 0;
+			border-radius: 1.5px;
+			margin-bottom: -2px;
 
-		&__checkbox {
-			position: absolute;
-			transform: scale(0);
+			&.on, &.off {
+				animation: grow 1250ms 1 ease-out;
+
+				@keyframes grow {
+					0% {
+						width: 0%;
+					}
+					20% {
+						width: 150%;
+					}
+					80% {
+						width: 150%;
+					}
+					100% {
+						width: 0%;
+					}
+				}
+			}
 		}
 
 		&__icon {
-			display: flex;
-			width: 1.5em;
-			height: 1.5em;
-			border-radius: 5px;
-			background-color: transparent;
-			border: 2px solid var(--white);
-			align-items: center;
-			margin: auto .3em;
-			transition: background-color 300ms ease-in-out;
+			width: 1.25em;
+			height: 1.25em;
+			color: var(--text);
 
-			img {
-				width: 100%;
-				opacity: 0;
-				transition: opacity 300ms ease-in-out;
-			}
-
-			@at-root .top-bar .checked & {
-				background-color: white;
-
-				img {
-					opacity: 1;
-				}
-			}
-			}
 		}
+		.rise-enter-active,
+		.rise-leave-active {
+			transition: 250ms 250ms ease-out;
+			transition-property: transform, clip-path;
+		}
+
+		.rise-enter {
+			transform: translateY(100%);
+			clip-path: inset(0 0 100% 0);
+		}
+		.rise-enter-to{
+			transform: translateY(0);
+			clip-path: inset(0 0 0 0);
+		}
+
+		.rise-leave {
+			transform: translateY(0);
+			clip-path: inset(0 0 0 0);
+		}
+		.rise-leave-to {
+			transform: translateY(100%);
+			clip-path: inset(0 0 100% 0);
+		}
+
+		.fade-enter-active,
+		.fade-leave-active {
+			transition: opacity 300ms ease-out;
+		}
+
+		.fade-enter,
+		.fade-leave-to {
+			opacity: 0;
+		}
+
+		.fade-enter-to,
+		.fade-leave {
+			opacity: 1;
+		}
+	}
 </style>

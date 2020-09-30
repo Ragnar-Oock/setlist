@@ -253,15 +253,15 @@ export default {
 			scoreMax: 100
 		};
 	},
-	computed: {
-
-	},
 	watch: {
 		odlc(newValue) {
 			this.cdlc = newValue ? false : this.cdlc;
 		},
 		cdlc(newValue) {
 			this.odlc = newValue ? false : this.odlc;
+		},
+		isSearchbarDocked(newValue) {
+			this.$emit('docked', newValue);
 		}
 	},
 	mounted() {
@@ -330,7 +330,7 @@ export default {
 
 <style lang="scss">
   .search-bar {
-		top: 3em;
+		top: 1.5em;
 		padding: 0;
 		margin: 0 auto 3em;
 		width: 100%;
@@ -339,7 +339,7 @@ export default {
 		overflow: hidden;
 		box-shadow: 0 0 5px 1px #0003;
 		transition:
-			max-width 300ms cubic-bezier(.31,.45,.21,1.76),
+			max-width 300ms cubic-bezier(.19,1,.22,1),
 			transform 300ms ease-in-out,
 			box-shadow 300ms ease-in-out,
 			background-color 300ms ease-in-out;
@@ -376,17 +376,8 @@ export default {
 					opacity: .4;
 				}
 			}
-
-			@supports (backdrop-filter: blur(5px)) {
-				@at-root .docked & {
-					backdrop-filter: blur(5px);
-					background-color: var(--filler-2-translucent);
-
-					&:focus {
-						outline: none;
-						background-color: var(--filler-2);
-					}
-				}
+			@at-root .docked & {
+				background-color: var(--filler-2-translucent);
 			}
 		}
 
@@ -430,7 +421,7 @@ export default {
 		&.docked{
 			max-width: 80ch;
 			box-shadow: 0 0 5px #0005;
-			width: calc(100vw - (2 * (50px + 2em)));
+			width: calc(100vw - 2em);
 			position: sticky;
 		}
 
