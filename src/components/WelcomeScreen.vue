@@ -5,7 +5,7 @@
 				WART<span class="fliker">H</span>S' STREAM SE<span class="fliker">T</span>LI<span class="fliker">S</span>T
 			</h1>
 			<p class="welcome-screen__comment">
-				Have a look, who know...<br>You may find something you'd like.
+				Have a look, who knows...<br>You may find something you'd like.
 			</p>
 		</div>
 
