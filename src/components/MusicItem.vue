@@ -9,36 +9,60 @@
 			@click="toggleMusic"
 			@keypress.enter="toggleMusic"
 		>
-			<span
-				v-if="duration"
-				class="music-item__duration"
-				title="durée de la musique"
-			>
-				{{ duration }}
-			</span>
-
-			<p
-				v-if="openned"
-				key="openned"
-				class="music-item__title"
-			>
-				{{ data.title }}
-			</p>
-			<p
-				v-else
-				key="closed"
-				class="music-item__title"
-			>
-				{{ data.title }}
-			</p>
-			<hr class="music-item__hr">
-			<p
-				v-if="data.artiste"
-				class="music-item__artiste"
-			>
-				<span class="sr-only">by</span>
-				{{ data.artiste }}
-			</p>
+			<div class="music-item__col-left">
+				<span
+					v-if="duration"
+					class="music-item__duration"
+					title="durée de la musique"
+				>
+					{{ duration }}
+				</span>
+				<p
+					v-if="openned"
+					:key="openned"
+					class="music-item__title"
+				>
+					{{ data.title }}
+				</p>
+				<p
+					v-else
+					key="closed"
+					class="music-item__title"
+				>
+					{{ data.title }}
+				</p>
+				<hr class="music-item__hr">
+				<p
+					v-if="data.artiste"
+					class="music-item__artiste"
+				>
+					<span class="sr-only">by</span>
+					{{ data.artiste }}
+				</p>
+			</div>
+			<div class="music-item__col-right">
+				<svg
+					v-if="data.showlight"
+					key="off"
+					class="top-bar__icon"
+					viewBox="0 0 16 16"
+					fill="currentColor"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+					<path
+						fill-rule="evenodd"
+						d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+					/>
+				</svg>
+				<span
+					v-if="duration"
+					class="music-item__duration"
+					title="durée de la musique"
+				>
+					{{ duration }}
+				</span>
+			</div>
 		</div>
 
 		<button
@@ -65,6 +89,8 @@
 
 		<input
 			ref="outputExt"
+			tabindex="-1"
+			aria-hidden="true"
 			class="music-item__output-ext"
 			type="text"
 			:value="command"
@@ -84,7 +110,7 @@
 					class="music-item__section music-item__head"
 				>
 					<div
-						class=" music-item__tags"
+						class="music-item__tags"
 					>
 						<div
 							v-for="(tag, index) in data.tags"
@@ -95,6 +121,25 @@
 							{{ tag.title }}
 						</div>
 					</div>
+					<HoverTip>
+						Cette musique a des effets de lumieres
+						<template #nob>
+							<svg
+								v-if="data.showlight"
+								key="off"
+								class="top-bar__icon"
+								viewBox="0 0 16 16"
+								fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+								<path
+									fill-rule="evenodd"
+									d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+								/>
+							</svg>
+						</template>
+					</HoverTip>
 				</div>
 				<div class="music-item__section music-item__section--main">
 					<div
@@ -201,12 +246,14 @@
 
 <script lang="js">
 import ToolTip from './ToolTip';
+import HoverTip from './HoverTip';
 import ArrangementItem from './ArrangementItem';
 
 export default {
 	name: 'MusicItem',
 	components: {
 		ToolTip,
+		HoverTip,
 		ArrangementItem
 	},
 	props: {
@@ -234,7 +281,7 @@ export default {
 			let duration;
 
 			if (typeof this.data.length !== 'undefined') {
-				duration = new Date(142.671 * 1000).toISOString().substr(14, 5);
+				duration = new Date(this.data.length * 1000).toISOString().substr(14, 5);
 			}
 			else {
 				duration = false;
@@ -381,8 +428,7 @@ export default {
 
 		&__card {
 			display: flex;
-			flex-direction: column;
-			justify-content: right;
+			flex-direction: row;
 
 			position: absolute;
 			top: 0;
@@ -549,6 +595,10 @@ export default {
 		&__duration {
 			margin-top: 0;
 			height: 0;
+			display: block;
+		}
+
+		&__col-left &__duration {
 			font-variant-numeric: tabular-nums;
 			opacity: 0;
 			transition:  150ms ease-in-out;
@@ -558,6 +608,45 @@ export default {
 				opacity: 1;
 				margin-top: 0.7em;
 				height: auto;
+			}
+		}
+
+		&__col-left {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			flex-grow: 1;
+		}
+
+		&__col-right {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			transition: opacity 300ms ease-in-out, z-index 0s 300ms;
+
+			& > * {
+				margin: 0 .25em;
+			}
+
+			@at-root .openned & {
+				opacity: 0;
+				position: absolute;
+				z-index: -10;
+				pointer-events: none;
+			}
+		}
+
+		&__col-right &__duration {
+			opacity: .8;
+			height: auto;
+
+			@at-root .openned & {
+				margin-top: 0;
+				opacity: 0;
+				height: 0;
+				display: block;
 			}
 		}
 
