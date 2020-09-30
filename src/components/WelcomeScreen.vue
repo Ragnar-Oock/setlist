@@ -74,7 +74,7 @@ export default {
 
   .welcome-screen {
 		height: 100vh;
-		min-height: 500px;
+		min-height: 670px;
 		display: flex;
 		flex-direction: column;
 		position: relative;
@@ -82,9 +82,7 @@ export default {
 		overflow: hidden;
 
 		&__texts {
-			top: 50%;
-			position: relative;
-			transform: translateY(-50%);
+			margin: auto;
 		}
 
 		&__title,
@@ -94,6 +92,7 @@ export default {
 
 		&__title {
 			color: white;
+			font-size: 15vw;
 			font-size: clamp(5rem, 15vw, 11rem);
 			font-family: 'Poiret One', Arial, Helvetica, sans-serif;
 			filter: drop-shadow(0 0 5px white) drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
@@ -172,15 +171,15 @@ export default {
 
 		&__comment {
 			font-size: 1.2rem;
-			color: #fffef8;
+			color: var(--text);
 		}
 
 		&__scrolldown {
-			margin: auto auto 1em;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			color: #fffef8;
+			color: var(--text);
+			margin-bottom: 2em;
 		}
 
 		.scrolldown {
@@ -199,23 +198,18 @@ export default {
 			&__logo {
 				position: relative;
 				background-color: transparent;
-				color: #fffef8;
-				border: none;
+				color: var(--text);
 				padding: 0;
-				border: thin solid transparent;
+				border: 1px solid transparent;
 				border-radius: 15px;
 				transition: border-color ease-in-out 300ms;
 
-				&:active:hover,
+				&:active,
 				&:focus,
-				&:hover:focus {
-					padding: 0;
-					border-color: #fffef8;
-					outline: none;
-				}
-
 				&:hover {
-					border-color: #fffef870;
+					padding: 0;
+					border-color: var(--text);
+					outline: none;
 				}
 			}
 
