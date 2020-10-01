@@ -175,7 +175,24 @@
 							>Showlight</label>
 						</div>
 						<HoverTip>
-							put some more text here
+							La musique recherchée a des effets de lumiere
+						</HoverTip>
+					</div>
+					<div class="search-bar__row">
+						<div class="search-bar__group">
+							<input
+								id="vocals"
+								v-model="vocals"
+								type="checkbox"
+								class="search-bar__checkbox"
+							>
+							<label
+								for="vocals"
+								class="search-bar__label"
+							>Paroles</label>
+						</div>
+						<HoverTip>
+							La musique recherchée affiche ses paroles.
 						</HoverTip>
 					</div>
 				</div>
@@ -234,6 +251,8 @@
 				</button>
 			</div>
 		</form>
+
+		<OrderWidget />
 	</Fragment>
 </template>
 
@@ -242,13 +261,15 @@ import { Fragment } from 'vue-fragment';
 
 import DoubleSliderRange from './DoubleSliderRange';
 import HoverTip from './HoverTip';
+import OrderWidget from './OrderWidget';
 
 export default {
 	name: 'SearchBar',
 	components: {
 		Fragment,
 		DoubleSliderRange,
-		HoverTip
+		HoverTip,
+		OrderWidget
 	},
 	props: [],
 	data () {
@@ -264,6 +285,7 @@ export default {
 			interpretationNumberMax: 100,
 			arrangement: { 'rythm': false, 'lead': false, 'bass': false },
 			showlight: false,
+			vocals: false,
 			odlc: false,
 			cdlc: false,
 			score: [0, 100],
@@ -364,6 +386,7 @@ export default {
 		transform: translateY(-50%);
 		z-index: 100;
 		display: flex;
+		position: relative;
 
 		&:focus-within {
 			box-shadow: 0 0 10px 3px #0003;
