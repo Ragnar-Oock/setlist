@@ -63,6 +63,20 @@
 					{{ duration }}
 				</span>
 			</div>
+			<svg
+				class="music-item__arrow"
+				version="1.1"
+				viewBox="0 0 16 9.4999"
+				xmlns="http://www.w3.org/2000/svg"
+			><path
+				class="a"
+				d="M 1.5,1.5 8,8 14.5,1.5"
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="1.5"
+			/></svg>
 		</div>
 
 		<button
@@ -458,25 +472,6 @@ export default {
 
 			}
 
-			&::after {
-				content: '';
-				background-image: url('../assets/images/scrolldown/chevron_down.svg');
-				width: 1em;
-				display: block;
-				height: 0.5em;
-				background-size: contain;
-				background-repeat: no-repeat;
-				position: absolute;
-				right: 1em;
-				top: 2em;
-				transition: transform ease-in-out 300ms 250ms;
-				color: var(--text);
-
-				@at-root .dark & {
-					mix-blend-mode: color-dodge;
-				}
-			}
-
 			@at-root .openned & {
 				box-shadow: 0 0 10px #0003;
 				color: var(--text);
@@ -491,18 +486,28 @@ export default {
 					transform ease-in-out 300ms 250ms,
 					color ease-in-out 300ms,
 					right ease-in-out 300ms 250ms,
-					padding-bottom ease-in-out 300ms;
-
-				&::after {
-					transform: rotateX(180deg);
-					transition: transform ease-in-out 300ms;
-				}
+					padding ease-in-out 300ms;
 
 				&:hover {
 					background-color: var(--primary-2);
 				}
 			}
 		}
+
+		&__arrow {
+				width: 1em;
+				height: 0.5em;
+				position: absolute;
+				right: 1em;
+				top: 2em;
+				transition: transform ease-in-out 300ms 250ms;
+				color: var(--text);
+
+				@at-root .openned & {
+					transform: rotateX(180deg);
+					transition: transform ease-in-out 300ms;
+				}
+			}
 
 		&__quick-copy {
 			--mouse-x: 50%;
