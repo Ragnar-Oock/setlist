@@ -195,11 +195,11 @@
 						>
 							<use
 								v-if="vip"
-								xlink:href="../assets/images/star-filled.svg#el"
+								xlink:href="../assets/images/diamond-fill.svg#el"
 							/>
 							<use
 								v-else
-								xlink:href="../assets/images/star.svg#el"
+								xlink:href="../assets/images/diamond.svg#el"
 							/>
 						</svg>
 					</button>
