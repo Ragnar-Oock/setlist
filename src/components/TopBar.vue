@@ -110,8 +110,6 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../assets/scss/variables.scss';
-
   .top-bar {
 		background: var(--bg-gradient);
 		position: sticky;

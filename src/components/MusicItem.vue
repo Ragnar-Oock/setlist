@@ -393,8 +393,6 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../assets/scss/variables.scss';
-
   .music-item {
 		position: relative;
 		min-height: 67px;

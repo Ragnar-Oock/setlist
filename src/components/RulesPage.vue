@@ -77,8 +77,6 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../assets/scss/variables.scss';
-
   .rules-page {
 		padding: 3em 0;
 		line-height: 1.4;

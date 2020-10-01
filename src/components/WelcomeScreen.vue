@@ -68,8 +68,6 @@ export default {
 </script>
 
 <style lang="scss">
-	@import '../assets/scss/variables.scss';
-
 	@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 
   .welcome-screen {
