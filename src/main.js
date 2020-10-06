@@ -18,7 +18,10 @@ store.subscribe((mutation, state) => {
 	}
 });
 
+import mixins from './mixins';
+
 new Vue({
+	mixins: [mixins],
 	render: h => h(App),
 	store
 }).$mount('#app');
