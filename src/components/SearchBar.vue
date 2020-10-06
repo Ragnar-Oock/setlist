@@ -372,7 +372,7 @@ export default {
   .search-bar {
 		top: 1.5em;
 		padding: 0;
-		margin: 0 auto 3em;
+		margin: 0 auto 2em;
 		width: 100%;
 		max-width: 60ch;
 		border-radius: 5px;
@@ -559,7 +559,7 @@ export default {
 
 		&__advenced {
 			max-width: 60ch;
-			margin: -3.5em auto 2em;
+			margin: 0 auto 2em;
 			border-radius: 5px;
 			box-shadow: 0 0 5px 0 #0001;
 			background: var(--primary-1);
