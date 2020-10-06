@@ -77,7 +77,6 @@ export default {
 		flex-direction: column;
 		position: relative;
 		background-image: var(--bg-gradient);
-		overflow: hidden;
 
 		&__texts {
 			margin: auto;
