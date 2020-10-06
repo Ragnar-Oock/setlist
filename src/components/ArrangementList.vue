@@ -1,0 +1,285 @@
+<template>
+	<div
+		ref="localRoot"
+		class="arrangements"
+	>
+		<div
+			ref="list"
+			class="arrangements__list"
+			:class="{'right': scrollableToRight, 'left': scrollableToLeft}"
+			@scroll="calculatedBorders"
+		>
+			<div
+				v-for="(arrangement, key, index) in list"
+				:key="key"
+				class="arrangement__item"
+			>
+				<input
+					:id="'arrangement-'+id+'-'+key"
+					type="checkbox"
+					:name="'arrangement-'+id"
+					:value="selected(index)"
+					class="arrangements__input"
+					@focus="keepInView"
+					@change="onChange(index, $event)"
+				>
+				<label
+					class="arrangements__label"
+					:for="'arrangement-'+id+'-'+key"
+				>
+					{{ arrangement.Name }}
+					<transition
+						name="slide-fade"
+					>
+						<span
+							v-if="open"
+							class="arrangements__tunning"
+						>
+							: {{ arrangement.tunning }}
+						</span>
+					</transition>
+				</label>
+			</div>
+		</div>
+
+		<button
+			class="arrangements__toggle"
+			:class="{'open': open}"
+			@click="onclick"
+		>
+			<span class="sr-only">toggle tunning display</span>
+			<svg
+				fill="currentColor"
+				viewBox="0 0 16 16"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<use
+					v-if="open"
+					xlink:href="../assets/images/eye-fill.svg#el"
+				/>
+				<use
+					v-else
+					xlink:href="../assets/images/eye.svg#el"
+				/>
+			</svg>
+		</button>
+	</div>
+</template>
+
+<script lang="js">
+
+import mixins from '../mixins';
+
+export default {
+	name: 'ArrangementList',
+	mixins: [mixins],
+	props: {
+		list: {
+			type: Object,
+			required: false,
+			default: () => ({})
+		},
+		value: {
+			type: String,
+			required: false,
+			default: ''
+		}
+	},
+	data () {
+		return {
+			open: false,
+			selectedIndex: undefined,
+			id: this.uuid(),
+			scrollableToLeft: false,
+			scrollableToRight: false
+		};
+	},
+	computed: {
+		select: {
+			set(newValue) {
+				this.selectedIndex = newValue;
+				this.$emit('input', this.select);
+			},
+			get() {
+				return this.selectedIndex >= 0 ? Object.values(this.list)[this.selectedIndex].Name : '';
+			}
+		}
+	},
+	watch: {
+		value(newValue) {
+			this.selectedIndex = Object.values(this.list).findIndex(e => e.Name === newValue);
+		}
+	},
+	mounted() {
+		this.calculatedBorders();
+	},
+	methods: {
+		onclick() {
+			this.open = !this.open;
+			setTimeout(() => {
+				this.calculatedBorders();
+			}, 300);
+		},
+		onChange(index, event) {
+			this.select = index === this.selectedIndex ? -1 : index;
+			this.$refs.localRoot.querySelectorAll('.arrangements__input').forEach(e => (event.target !== e ? e.checked = false : false));
+		},
+		keepInView(event) {
+			const scrollElement = event.target.offsetParent.firstElementChild;
+			const scrollAmount = event.target.offsetLeft - scrollElement.clientWidth / 2;
+
+			if(getComputedStyle(document.body).scrollBehavior === 'smooth') {
+				scrollElement.scroll({ left: scrollAmount, behavior: 'smooth' });
+			}
+			else {
+				scrollElement.scroll(event.target.offsetLeft - scrollElement.offsetLeft, 0);
+			}
+
+		},
+		selected(i) {
+			return this.list[i];
+		},
+		calculatedBorders() {
+			const list = this.$refs.list;
+
+			this.scrollableToLeft = !!list.scrollLeft;
+			this.scrollableToRight = list.offsetWidth + list.scrollLeft !== list.scrollWidth;
+		}
+	}
+};
+
+
+</script>
+
+<style lang="scss">
+  .arrangements {
+		display: flex;
+		justify-items: space-between;
+		padding: 0 1.5em;
+		transform: rotate(0);
+		&__list {
+			display: flex;
+			height: auto;
+			align-items: center;
+			overflow-x: auto;
+			scrollbar-width: thin;
+			scrollbar-color: var(--filler-2) transparent;
+
+			&::before,
+			&::after {
+				content: '';
+				position: fixed;
+				width: 20px;
+				height: 100%;
+				left: calc(1.5rem);
+				background-image: linear-gradient(-90deg, transparent 0%, var(--filler-1) 100%);
+				top: 0;
+				pointer-events: none;
+				opacity: 0;
+				transition: opacity 300ms ease-in-out;
+			}
+			&::after {
+				left: unset;
+				right: calc(1.5rem + 28px);
+				background-image: linear-gradient(90deg, transparent 0%, var(--filler-1) 100%);
+			}
+
+			&.left::before{
+				opacity: 1;
+			}
+			&.right::after{
+				opacity: 1;
+			}
+		}
+		&__input {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+		&__label {
+			background-color: var(--filler-2);
+			padding: .25em .5em;
+			font-size: 85%;
+			border-radius: 5px;
+			cursor: pointer;
+			display: flex;
+			transition: background-color 300ms ease-in-out;
+			width: max-content;
+			height: max-content;
+			margin-right: .25em;
+			border: 1px solid transparent;
+
+			&:hover,
+			&:focus {
+				background-color: var(--filler-2-translucent);
+				border-color: var(--primary-2);
+				outline: none;
+			}
+		}
+		&__input:checked + &__label {
+			background-color: var(--primary-1);
+		}
+		&__input:focus + &__label {
+			background-color: var(--primary-2);
+			border-color: var(--primary-2);
+			outline: none;
+		}
+
+		&__tunning {
+			display: inline-block;
+			white-space: nowrap;
+			padding-left: .5ch;
+		}
+		&__toggle {
+			background-color: transparent;
+			border: none;
+			border-radius: 5px;
+			padding: .25em;
+			color: var(--text);
+			transition: background-color 300ms ease-in-out;
+			cursor: pointer;
+			margin-left: auto;
+
+			&.open {
+				background-color: var(--filler-2);
+			}
+			&:focus,
+			&:hover {
+				background-color: var(--filler-2-translucent);
+				outline: none;
+			}
+
+			svg {
+				width: 1.25em;
+				height: 1.25em;
+			}
+
+		}
+	}
+	.slide-fade-enter-active {
+		transition: max-width 300ms ease-in,
+		padding-left 100ms linear,
+		opacity 300ms ease-in-out;
+	}
+	.slide-fade-leave-active {
+		transition: max-width 300ms ease-out,
+		padding-left 100ms 200ms linear,
+		opacity 300ms ease-in-out;
+	}
+	.slide-fade-enter, .slide-fade-leave-to {
+		max-width: 0px;
+		padding-left: 0;
+		opacity: 0
+	}
+	.slide-fade-leave, .slide-fade-enter-to {
+		max-width: 100px;
+		padding-left: .5ch;
+		opacity: 1
+	}
+</style>

@@ -180,17 +180,11 @@
 						Aucune informations additionnelles
 					</div>
 
-					<div class="music-item__arrangements-list">
-						<ArrangementItem
-							v-for="(arrangement, id) in data.arrangements"
-							:key="id"
-						>
-							{{ arrangement.Name }}
-							<template #accord>
-								{{ arrangement.tunning }}
-							</template>
-						</ArrangementItem>
-					</div>
+					<ArrangementList
+						v-if="data.arrangements"
+						v-model="selectedArrangement"
+						:list="data.arrangements"
+					/>
 				</div>
 				<div class="music-item__prebuild">
 					<button
@@ -260,15 +254,13 @@
 
 <script lang="js">
 import ToolTip from './ToolTip';
-import HoverTip from './HoverTip';
-import ArrangementItem from './ArrangementItem';
+import ArrangementList from './ArrangementList';
 
 export default {
 	name: 'MusicItem',
 	components: {
 		ToolTip,
-		HoverTip,
-		ArrangementItem
+		ArrangementList,
 	},
 	props: {
 		data: { type: Object, required: true }
@@ -278,7 +270,8 @@ export default {
 			openned: false,
 			vip: false,
 			showTooltip: false,
-			isQuickCopyCliked: false
+			isQuickCopyCliked: false,
+			selectedArrangement: ''
 		};
 	},
 	computed: {
@@ -286,7 +279,7 @@ export default {
 			return typeof this.data.tags !== 'undefined' && this.data.tags.length > 0;
 		},
 		command() {
-			return `!${ this.vip ? 'vip' : 'sr' } ${ this.data.title } - ${ this.data.artiste }`;
+			return `!${ this.vip ? 'vip' : 'sr' } ${ this.data.title } - ${ this.data.artiste } ${ this.selectedArrangement !== '' ? `*${ this.selectedArrangement }` : '' }`;
 		},
 		vipToggleTitle() {
 			return this.vip ? 'faire une request normale' : 'faire une request VIP';
