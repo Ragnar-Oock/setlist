@@ -113,6 +113,28 @@
 				},
 				"CapoFret":-1,
 				"tunning": "drop"
+			},
+			"zxldokkjfhzsdlkhifgzslkiyftglki":{
+				"Name":"Guitare bass",
+				"Tuning":{
+					"string0":0,
+					"string1":0,
+					"string2":0,
+					"string3":0,
+					"string4":0,
+					"string5":0
+				},
+				"sng":"youreallygotme_bass.sng",
+				"maxfret":{
+					"string0":-1,
+					"string1":-1,
+					"string2":12,
+					"string3":7,
+					"string4":-1,
+					"string5":-1
+				},
+				"CapoFret":-1,
+				"tunning": "drop"
 			}
 		},
 		"showlight": true
@@ -220,7 +242,31 @@
 		"artiste": "A Call To Sincerity",
 		"length": 354,
 		"title": "Mayhem",
-		"showlight": true
+		"showlight": true,
+		"arrangements":{
+			"B18A96F9F1C0080F54D17317C699970C":{
+				"Name":"Rhythm",
+				"Tuning":{
+					"string0":0,
+					"string1":0,
+					"string2":0,
+					"string3":0,
+					"string4":0,
+					"string5":0
+				},
+				"sng":"youreallygotme_rhythm2.sng",
+				"maxfret":{
+					"string0":10,
+					"string1":-1,
+					"string2":-1,
+					"string3":-1,
+					"string4":-1,
+					"string5":-1
+				},
+				"CapoFret":-1,
+				"tunning": "drop"	
+			}
+		}
 	},
 	{
 		"artiste": "A Call To Sincerity",
