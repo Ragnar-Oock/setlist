@@ -1,5 +1,8 @@
 <template lang="html">
 	<div class="order-widget">
+		<p class="sr-only">
+			Order the list by :
+		</p>
 		<button
 			v-for="(value, key) in availableOrders"
 			:id="key"
@@ -83,7 +86,11 @@ export default {
 		justify-content: space-around;
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
-		gap: 1em;
+		gap: .5em 1em;
+
+		@media screen and( max-width: 35em) {
+			grid-template-columns: repeat(2, 1fr);
+		}
 
 		&__btn {
 			padding: .25em .5em;
