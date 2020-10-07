@@ -81,7 +81,7 @@ export default {
 		width: 100%;
 		max-width: 60ch;
 		border-radius: 5px;
-		box-shadow: 0 0 5px 1px #0003;
+		box-shadow: 0 0 5px 1px #0001;
 		transition: background-color 300ms ease-in-out;
 		display: flex;
 		justify-content: space-around;

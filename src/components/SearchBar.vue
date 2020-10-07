@@ -382,7 +382,7 @@ export default {
 		max-width: 60ch;
 		border-radius: 5px;
 		overflow: hidden;
-		box-shadow: 0 0 5px 1px #0003;
+		box-shadow: 0 0 5px 1px #0001;
 		transition:
 			max-width 300ms cubic-bezier(.19,1,.22,1),
 			transform 300ms ease-in-out,
@@ -405,7 +405,7 @@ export default {
 			border-radius: 5px;
 			box-shadow: 0 0 5px 0 #0008;
 			background-color: var(--filler-2);
-			color: var(--counter-text);
+			color: var(--text);
 			transition: background-color 300ms ease-in-out;
 
 			&::placeholder {
@@ -813,6 +813,7 @@ export default {
 
 		&__btn-group {
 			display: flex;
+			gap: 1em;
 		}
 
 		&__btn {
