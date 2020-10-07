@@ -2,6 +2,7 @@
 	{
 		"artiste": "A Day To Remember",
 		"title": "Sometimes You're The Hammer, Sometimes You're The Nail",
+		"album": "Some really loooooooooooong album name",
 		"tags": [
 			{
 				"title": "Officielle",
@@ -141,6 +142,7 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 242.671,
 		"title": "Mayhem",
 		"meta": {
@@ -241,6 +243,7 @@
 	{
 		"artiste": "A Call To Sincerity",
 		"length": 354,
+		"album": "album",
 		"title": "Mayhem",
 		"showlight": true,
 		"arrangements":{
@@ -270,11 +273,13 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 1214,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Band Called Death",
+		"album": "album",
 		"title": "Keep On Knocking",
 		"tags": [
 			{
@@ -291,21 +296,25 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 512,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 404,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 186,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Band Called Death",
+		"album": "album",
 		"title": "Keep On Knocking",
 		"length": 272,
 		"tags": [
@@ -321,21 +330,25 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 222,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 142.671,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 124,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Band Called Death",
+		"album": "album",
 		"title": "Keep On Knocking",
 		"length": 142.671,
 		"tags": [
@@ -351,21 +364,25 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 142.671,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 142.671,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 321,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Band Called Death",
+		"album": "album",
 		"length": 219,
 		"title": "Keep On Knocking",
 		"tags": [
@@ -381,16 +398,19 @@
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 295,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 240,
 		"title": "Mayhem"
 	},
 	{
 		"artiste": "A Call To Sincerity",
+		"album": "album",
 		"length": 132,
 		"title": "Mayhem"
 	}
