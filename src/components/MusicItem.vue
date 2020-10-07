@@ -781,6 +781,16 @@ export default {
 				max-height: 10.5em;
 				overscroll-behavior: contain;
 				overflow-y: auto;
+				overflow-y: overlay;
+
+				&::-webkit-scrollbar {
+					width: .4em;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					background-color: var(--filler-2-translucent);
+					border-radius: .4em;
+				}
 			}
 			&-item {
 				display: flex;

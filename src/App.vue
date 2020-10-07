@@ -94,9 +94,21 @@ export default {
 
 	.app {
 		transition: background-color 300ms ease-in-out;
+		background-color: var(--root-bg);
 	}
 
-	.dark {
-		background-color: $dm-bgc;
+	html {
+		scrollbar-color: var(--filler-1) var(--root-bg);
+
+		&::-webkit-scrollbar {
+			width: .6em;
+			background-color: var(--root-bg);
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--filler-1);
+			border-radius: .4em;
+		}
 	}
+
 </style>

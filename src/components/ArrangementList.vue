@@ -190,6 +190,15 @@ export default {
 			&.right::after{
 				opacity: 1;
 			}
+
+			&::-webkit-scrollbar {
+				height: .4em;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background-color: var(--filler-2-translucent);
+				border-radius: .4em;
+			}
 		}
 		&__input {
 			position: absolute;
