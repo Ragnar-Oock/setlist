@@ -26,11 +26,11 @@
 					<span class="search-bar__button-text">Rechercher</span>
 					<!-- don't change this svg import if you don't want to skrew up the styling -->
 					<svg
+						aria-hidden="true"
 						width="1em"
 						height="1em"
 						viewBox="0 0 16 16"
 						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
 						class="search-bar__open-more-icon"
 					>
 						<use
@@ -41,11 +41,11 @@
 			</div>
 
 			<svg
+				aria-hidden="true"
 				width="0"
 				height="0"
 				viewBox="0 0 16 16"
 				xmlns="http://www.w3.org/2000/svg"
-				aria-hidden="true"
 				class="search-bar__open-more-icon"
 			>
 				<defs>
@@ -66,11 +66,11 @@
 				<span class="search-bar__open-more-text">filtres</span>
 				<!-- don't change this svg import if you don't want to skrew up the styling -->
 				<svg
+					aria-hidden="true"
 					width="1em"
 					height="1em"
 					viewBox="0 0 16 16"
 					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
 					class="search-bar__open-more-icon"
 				>
 					<use
@@ -244,12 +244,12 @@
 					Rechercher
 					<!-- don't change this svg import if you don't want to skrew up the styling -->
 					<svg
+						aria-hidden="true"
 						class="search-bar__btn-icon"
 						width="1em"
 						height="1em"
 						viewBox="0 0 16 16"
 						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
 					>
 						<use
 							xlink:href="../assets/images/search.svg#el"

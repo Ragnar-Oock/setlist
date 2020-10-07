@@ -18,6 +18,7 @@
 				:class="by[key]"
 			>{{ by[key] }}</span>
 			<svg
+				aria-hidden="true"
 				class="order-widget__arrow"
 				version="1.1"
 				viewBox="0 0 16 9.4999"

@@ -24,6 +24,7 @@
 				<svg
 					v-if="isDarkModeOn"
 					key="on"
+					aria-hidden="true"
 					class="top-bar__icon"
 					viewBox="0 0 16 16"
 					fill="currentColor"
@@ -37,6 +38,7 @@
 				<svg
 					v-else
 					key="off"
+					aria-hidden="true"
 					class="top-bar__icon"
 					viewBox="0 0 16 16"
 					fill="currentColor"

@@ -19,11 +19,11 @@
 				@click="scroll"
 			>
 				<svg
+					aria-hidden="true"
 					width="42px"
 					height="82px"
 					viewBox="0 0 42 82"
 					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
 					class="scrolldown__static"
 				>
 					<use
@@ -31,17 +31,20 @@
 					/>
 				</svg>
 				<svg
+					aria-hidden="true"
 					width="31.796"
 					height="17.398"
 					viewBox="0 0 31.796 17.398"
 					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
 					class="scrolldown__moving"
 				>
 					<use
 						xlink:href="../assets/images/scrolldown/moving.svg#el"
 					/>
 				</svg>
+				<div class="sr-only">
+					scrolldown
+				</div>
 			</button>
 		</div>
 	</section>

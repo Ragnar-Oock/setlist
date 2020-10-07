@@ -44,6 +44,7 @@
 				<svg
 					v-if="data.showlight"
 					key="off"
+					aria-hidden="true"
 					class="top-bar__icon"
 					viewBox="0 0 16 16"
 					fill="currentColor"
@@ -64,6 +65,7 @@
 				</span>
 			</div>
 			<svg
+				aria-hidden="true"
 				class="music-item__arrow"
 				version="1.1"
 				viewBox="0 0 16 9.4999"
@@ -88,11 +90,11 @@
 			<span class="music-item__quick-copy-text">Copier la commande</span>
 			<!-- don't change this svg import if you don't want to skrew up the styling -->
 			<svg
+				aria-hidden="true"
 				width="1em"
 				height="1em"
 				viewBox="0 0 16 16"
 				xmlns="http://www.w3.org/2000/svg"
-				aria-hidden="true"
 				class="search-bar__open-more-icon"
 			>
 				<use
@@ -143,6 +145,16 @@
 					>
 						<svg
 							key="off"
+							aria-hidden="true"
+							class="top-bar__icon"
+							viewBox="0 0 16 16"
+							fill="currentColor"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+							<path
+								fill-rule="evenodd"
+								d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
 							/>
 						</svg>
 						<div class="sr-only">
@@ -194,7 +206,6 @@
 							viewBox="0 0 16 16"
 							xmlns="http://www.w3.org/2000/svg"
 							aria-hidden="true"
-							class="search-bar__open-more-icon"
 						>
 							<use
 								v-if="vip"
@@ -205,6 +216,9 @@
 								xlink:href="../assets/images/diamond.svg#el"
 							/>
 						</svg>
+						<div class="sr-only">
+							{{ vipToggleTitle }}
+						</div>
 					</button>
 
 					<input
@@ -219,14 +233,17 @@
 						title="copier la commande"
 						:name="id+'copy'"
 						@click="copy"
+					>
+						<!-- don't change this svg import if you don't want to skrew up the styling -->
+						<svg
+							aria-hidden="true"
+							width="1em"
+							height="1em"
+							viewBox="0 0 16 16"
+							xmlns="http://www.w3.org/2000/svg"
+							class="search-bar__open-more-icon"
 						>
-							<!-- don't change this svg import if you don't want to skrew up the styling -->
-							<svg
-								width="1em"
-								height="1em"
-								viewBox="0 0 16 16"
-								xmlns="http://www.w3.org/2000/svg"
-								aria-hidden="true"
+							<use
 								xlink:href="../assets/images/copy.svg#el"
 							/>
 						</svg>
