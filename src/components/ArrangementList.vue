@@ -177,7 +177,7 @@ export default {
 				top: 0;
 				pointer-events: none;
 				opacity: 0;
-				transition: opacity 300ms ease-in-out;
+				transition: opacity 300ms ease-out;
 			}
 			&::after {
 				left: unset;
