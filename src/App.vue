@@ -2,7 +2,6 @@
 	<div
 		id="app"
 		class="app"
-		:class="{'dark': isDarkModeOn}"
 	>
 		<WelcomeScreen />
 
@@ -50,6 +49,14 @@ export default {
 		...mapState({
 			isDarkModeOn: 'darkMode'
 		})
+	},
+	watch: {
+		isDarkModeOn() {
+			document.getElementsByTagName('html')[0].classList.toggle('dark', this.isDarkModeOn);
+		}
+	},
+	mounted() {
+		document.getElementsByTagName('html')[0].classList.toggle('dark', this.isDarkModeOn);
 	}
 };
 </script>
