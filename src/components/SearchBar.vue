@@ -94,6 +94,7 @@
 				v-model="lastInterpretation"
 				:min="lastInterpretationMin"
 				:max="lastInterpretationMax"
+				help="Nombre de jours depuis la dernière foi que cette musique a été jouée.<br>0 équivalent à aujourd'hui et 100 à tout le temps"
 			>
 				Dernière interprétation (en jours)
 				<template #help>
@@ -157,9 +158,11 @@
 								class="search-bar__label"
 							>CDLC</label>
 						</div>
-						<HoverTip>
-							put some text here
-						</HoverTip>
+						<div
+							v-tippy="{placement: 'right'}"
+							class="search-bar__nob"
+							content="put some text here"
+						/>
 					</div>
 					<div class="search-bar__row">
 						<div class="search-bar__group">
@@ -174,9 +177,11 @@
 								class="search-bar__label"
 							>Showlight</label>
 						</div>
-						<HoverTip>
-							La musique recherchée a des effets de lumiere
-						</HoverTip>
+						<div
+							v-tippy="{placement: 'right'}"
+							class="search-bar__nob"
+							content="La musique recherchée a des effets de lumiere"
+						/>
 					</div>
 					<div class="search-bar__row">
 						<div class="search-bar__group">
@@ -191,9 +196,11 @@
 								class="search-bar__label"
 							>Paroles</label>
 						</div>
-						<HoverTip>
-							La musique recherchée affiche ses paroles.
-						</HoverTip>
+						<div
+							v-tippy="{placement: 'right'}"
+							class="search-bar__nob"
+							content="La musique recherchée affiche ses paroles."
+						/>
 					</div>
 				</div>
 				<div class="search-bar__col-right">
@@ -260,7 +267,6 @@
 import { Fragment } from 'vue-fragment';
 
 import DoubleSliderRange from './DoubleSliderRange';
-import HoverTip from './HoverTip';
 import OrderWidget from './OrderWidget';
 
 export default {
@@ -268,7 +274,6 @@ export default {
 	components: {
 		Fragment,
 		DoubleSliderRange,
-		HoverTip,
 		OrderWidget
 	},
 	props: [],
@@ -456,6 +461,31 @@ export default {
 
 			&:focus {
 				outline: none;
+			}
+		}
+
+		&__nob {
+			z-index: 11;
+			width: 1em;
+			height: 1em;
+			border-radius: 50%;
+			background-color: var(--filler-1);
+			transition: background-color 200ms ease-in-out;
+			flex-shrink: 0;
+
+
+			&:focus {
+				outline: none;
+			}
+
+			&::before {
+				content: '?';
+				width: 100%;
+				height: 100%;
+				display: block;
+				color: var(--text);
+				text-align: center;
+				transition: color 200ms ease-in-out;
 			}
 		}
 

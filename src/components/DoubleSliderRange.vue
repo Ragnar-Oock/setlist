@@ -6,9 +6,12 @@
 	>
 		<div class="double-slider-range__multi-label">
 			<slot />
-			<HoverTip v-if="$slots.help">
-				<slot name="help" />
-			</HoverTip>
+			<div
+				v-if="help"
+				v-tippy="{placement: 'right'}"
+				class="double-slider-range__nob"
+				:content="help"
+			/>
 		</div>
 		<div class="double-slider-range__wrapper">
 			<label
@@ -63,13 +66,10 @@
 import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/default.css';
 
-import HoverTip from './HoverTip';
-
 export default {
 	name: 'DoubleSliderRange',
 	components: {
-		VueSlider,
-		HoverTip
+		VueSlider
 	},
 	props: {
 		min: {
@@ -84,6 +84,11 @@ export default {
 			type: Array,
 			required: true
 			// default: () => ([this.min, this.max])
+		},
+		help: {
+			type: String,
+			required: false,
+			default: undefined
 		}
 	},
 	data () {
@@ -183,6 +188,10 @@ export default {
 				height: .5em;
 				border-radius: 3px;
 				box-shadow: var(--shadow);
+
+				&:focus-within {
+					background-color: var(--filler-2);
+				}
 			}
 			.vue-slider-dot-handle {
 				background-color: var(--primary-2);
@@ -201,6 +210,30 @@ export default {
 			}
 			.vue-slider-process {
 				background-color: #0000;
+			}
+		}
+
+		&__nob {
+			z-index: 11;
+			width: 1em;
+			height: 1em;
+			border-radius: 50%;
+			background-color: var(--filler-1);
+			transition: background-color 200ms ease-in-out;
+			display: inline-block;
+
+			&:focus {
+				outline: none;
+			}
+
+			&::before {
+				content: '?';
+				width: 100%;
+				height: 100%;
+				display: block;
+				color: var(--text);
+				text-align: center;
+				transition: color 200ms ease-in-out;
 			}
 		}
 

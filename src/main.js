@@ -20,6 +20,11 @@ store.subscribe((mutation, state) => {
 
 import mixins from './mixins';
 
+import VueTippy, { TippyComponent } from 'vue-tippy';
+
+Vue.use(VueTippy);
+Vue.component('tippy', TippyComponent);
+
 new Vue({
 	mixins: [mixins],
 	render: h => h(App),

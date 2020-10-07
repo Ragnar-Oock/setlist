@@ -135,25 +135,20 @@
 							{{ tag.title }}
 						</div>
 					</div>
-					<HoverTip>
-						Cette musique a des effets de lumieres
-						<template #nob>
-							<svg
-								v-if="data.showlight"
-								key="off"
-								class="top-bar__icon"
-								viewBox="0 0 16 16"
-								fill="currentColor"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
-								<path
-									fill-rule="evenodd"
-									d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
-								/>
-							</svg>
-						</template>
-					</HoverTip>
+					<div
+						v-if="data.showlight"
+						v-tippy="{placement: 'right'}"
+						class="music-item__showlight"
+						content="Cette musique a des effets de lumieres"
+					>
+						<svg
+							key="off"
+							/>
+						</svg>
+						<div class="sr-only">
+							Cette musique a des effets de lumieres
+						</div>
+					</div>
 				</div>
 				<div class="music-item__section music-item__section--main">
 					<div
@@ -220,12 +215,10 @@
 						readonly
 					>
 
-					<ToolTip :displayed="showTooltip">
-						<button
-							ref="copyButton"
-							class="music-item__button music-item__copy"
-							title="copier la commande"
-							@click="copy"
+						class="music-item__button music-item__copy"
+						title="copier la commande"
+						:name="id+'copy'"
+						@click="copy"
 						>
 							<!-- don't change this svg import if you don't want to skrew up the styling -->
 							<svg
@@ -234,18 +227,13 @@
 								viewBox="0 0 16 16"
 								xmlns="http://www.w3.org/2000/svg"
 								aria-hidden="true"
-								class="search-bar__open-more-icon"
-							>
-								<use
-									xlink:href="../assets/images/copy.svg#el"
-								/>
-							</svg>
-						</button>
-
-						<template v-slot:tooltip>
-							Commande copiée
-						</template>
-					</ToolTip>
+								xlink:href="../assets/images/copy.svg#el"
+							/>
+						</svg>
+						<div class="sr-only">
+							Copier la commande
+						</div>
+					</button>
 				</div>
 			</div>
 		</transition>
@@ -259,9 +247,10 @@ import ArrangementList from './ArrangementList';
 export default {
 	name: 'MusicItem',
 	components: {
-		ToolTip,
 		ArrangementList,
+		TippyComponent
 	},
+	mixins: [mixins],
 	props: {
 		data: { type: Object, required: true }
 	},
@@ -271,7 +260,8 @@ export default {
 			vip: false,
 			showTooltip: false,
 			isQuickCopyCliked: false,
-			selectedArrangement: ''
+			selectedArrangement: '',
+			id: this.uuid()
 		};
 	},
 	computed: {
