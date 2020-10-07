@@ -33,11 +33,10 @@
 				</p>
 				<hr class="music-item__hr">
 				<p
-					v-if="data.artiste"
-					class="music-item__artiste"
+					class="music-item__source"
 				>
 					<span class="sr-only">by</span>
-					{{ data.artiste }}
+					{{ source }}
 				</p>
 			</div>
 			<div class="music-item__col-right">
@@ -118,11 +117,11 @@
 			name="open"
 		>
 			<div
-				v-show="openned"
+				v-if="openned"
 				class="music-item__body"
 			>
 				<div
-					v-if="haveTags"
+					v-if="haveTags || data.showlight"
 					class="music-item__section music-item__head"
 				>
 					<div
@@ -229,6 +228,16 @@
 						readonly
 					>
 
+					<TippyComponent
+						:to="id+'copy'"
+						:visible="showTooltip"
+						trigger="manual"
+						placement="left"
+					>
+						Commande copiée
+					</TippyComponent>
+					<button
+						ref="copyButton"
 						class="music-item__button music-item__copy"
 						title="copier la commande"
 						:name="id+'copy'"
@@ -258,8 +267,9 @@
 </template>
 
 <script lang="js">
-import ToolTip from './ToolTip';
 import ArrangementList from './ArrangementList';
+import mixins from '../mixins';
+import { TippyComponent } from 'vue-tippy';
 
 export default {
 	name: 'MusicItem',
@@ -302,6 +312,9 @@ export default {
 			}
 
 			return duration;
+		},
+		source() {
+			return `${ this.data.artiste ? this.data.artiste : '' }${ this.data.artiste && this.data.album ? ' - ' : '' }${ this.data.album ? this.data.album : '' }`;
 		}
 	},
 	watch: {
@@ -447,7 +460,7 @@ export default {
 			right: 0;
 			left: 0;
 			bottom: 0;
-			padding: .9em 2.5em .9em 1.5em;
+			padding: 0.7em 2.5em 0.7em 1.5em;
 			border-radius: 5px;
 
 			background-color: var(--filler-1);
@@ -460,16 +473,37 @@ export default {
 				transform ease-in-out 500ms 250ms,
 				color ease-in-out 500ms,
 				right ease-in-out 500ms,
-				padding-bottom ease-in-out 150ms 150ms;
+				padding ease-in-out 150ms 150ms;
 
 			z-index: 10;
 			cursor: pointer;
+			overflow: hidden;
 
-			&:focus,
-			&:hover:focus {
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-image: linear-gradient(18deg, var(--primary-1) 0%, rgba(91, 3, 3, 0.04) 100%);
+				z-index: -1;
+				transition: opacity 300ms ease-in-out;
+				opacity: 0;
+			}
+
+			&:focus {
 				outline: none;
 				box-shadow: 0 0 10px #0003;
+				background-color: var(--filler-1);
 
+				&::before {
+					opacity: .8;
+				}
+			}
+
+			&:hover::before {
+				opacity: .8;
 			}
 
 			@at-root .openned & {
@@ -480,6 +514,7 @@ export default {
 				background-blend-mode: color-dodge;
 				right: 66%;
 				padding-bottom: 3em;
+				padding-top: 1.5em;
 				transition:
 					background-color  ease-in-out 300ms,
 					box-shadow  ease-in-out 300ms 250ms,
@@ -490,6 +525,10 @@ export default {
 
 				&:hover {
 					background-color: var(--primary-2);
+				}
+
+				&::before {
+					content: unset;
 				}
 			}
 		}
@@ -609,7 +648,6 @@ export default {
 
 			@at-root .openned & {
 				opacity: 1;
-				margin-top: 0.7em;
 				height: auto;
 			}
 		}
@@ -671,16 +709,16 @@ export default {
 				text-overflow: unset;
 				overflow: unset;
 				max-width: 210px;
-				animation: title-transition-open 600ms ease-in-out 150ms 1 forwards;
+				animation: title-transition 600ms ease-in-out 150ms 1 forwards;
 			}
 
 			@at-root .closed & {
-				animation: title-transition-close 300ms ease-in-out 150ms 1 forwards;
+				animation: title-transition 300ms ease-in-out 150ms 1 forwards;
 			}
 
 		}
 
-		@keyframes title-transition-open {
+		@keyframes title-transition {
 			0% {
 				opacity: 0;
 				transform: translateY(-1em);
@@ -691,15 +729,23 @@ export default {
 			}
 		}
 
-		@keyframes title-transition-close {
-			0% {
-				opacity: 0;
-				transform: translateY(-1em);
+		&__source {
+			// auto-elipsis
+			width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+
+			@at-root .openned & {
+				white-space: unset;
+				text-overflow: unset;
+				overflow: unset;
 			}
-			100% {
-				opacity: 1;
-				transform: translateY(0);
-			}
+		}
+
+		&__title,
+		&__source {
+			line-height: 1.2;
 		}
 
 		&__head {
@@ -823,13 +869,8 @@ export default {
 		&__no-meta {
 			padding: 0 1.25em;
 			margin: auto auto 0 auto;
-		}
-
-		&__arrangements {
-			&-list {
-				padding: 0 1.5em;
-				display: flex;
-				gap: .25em;
+			&:only-child {
+				margin: auto;
 			}
 		}
 
