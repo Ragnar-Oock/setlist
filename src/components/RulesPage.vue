@@ -112,9 +112,9 @@ export default {
 		}
 
 		code {
-			background-color: #00000020;
+			background-color: var(--filler-2-translucent);
 			border-radius: 5px;
-			border: thin solid #00000033;
+			border: thin solid var(--primary-2);
 		}
   }
 </style>
