@@ -24,6 +24,7 @@
 			</label>
 			<input
 				id="minValue"
+				ref="inputMin"
 				v-model="minValue"
 				class="double-slider-range__input"
 				type="number"
@@ -51,6 +52,7 @@
 			</label>
 			<input
 				id="maxValue"
+				ref="inputMax"
 				v-model="maxValue"
 				class="double-slider-range__input"
 				type="number"
@@ -103,8 +105,25 @@ export default {
 				return [this.minValue, this.maxValue];
 			},
 			set(newValue) {
-				this.minValue = Math.min(newValue[0], newValue[1]);
-				this.maxValue = Math.max(newValue[0], newValue[1]);
+				// force cast to number to avoide evaluating the length instead of the value
+				newValue[0] = Number(newValue[0]);
+				newValue[1] = Number(newValue[1]);
+
+				if (newValue[0] < newValue[1]) {
+					this.minValue = newValue[0];
+					this.maxValue = newValue[1];
+				}
+				else {
+					this.minValue = newValue[1];
+					this.maxValue = newValue[0];
+
+					if (this.$refs.inputMin === document.activeElement) {
+						this.$refs.inputMax.focus();
+					}
+					else if (this.$refs.inputMax === document.activeElement) {
+						this.$refs.inputMin.focus();
+					}
+				}
 			}
 		}
 	},
