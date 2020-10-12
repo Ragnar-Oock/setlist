@@ -259,7 +259,7 @@
 			</div>
 		</form>
 
-		<OrderWidget />
+		<OrderWidget v-model="orderBy" />
 	</Fragment>
 </template>
 
@@ -295,7 +295,13 @@ export default {
 			cdlc: false,
 			score: [0, 100],
 			scoreMin: 0,
-			scoreMax: 100
+			scoreMax: 100,
+			orderBy: {
+				title: '',
+				album: '',
+				artist: '',
+				new: ''
+			},
 		};
 	},
 	watch: {

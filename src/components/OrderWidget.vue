@@ -4,19 +4,19 @@
 			Order the list by :
 		</p>
 		<button
-			v-for="(value, key) in availableOrders"
+			v-for="(val, key) in orderBy"
 			:id="key"
 			:key="key"
-			:class="by[key]"
+			:class="orderBy[key]"
 			class="order-widget__btn"
 			@click="cicleOrderBy(key)"
 		>
-			{{ value }}
+			{{ key }}
 			<span
-				v-if="by.hasOwnProperty(key)"
+				v-if="orderBy.hasOwnProperty(key)"
 				class="order-widget__direction sr-only"
-				:class="by[key]"
-			>{{ by[key] }}</span>
+				:class="orderBy[key]"
+			>{{ orderBy[key] }}</span>
 			<svg
 				aria-hidden="true"
 				class="order-widget__arrow"
@@ -40,32 +40,39 @@
 
 export default {
 	name: 'OrderWidget',
-	props: [],
+	props: {
+		value: {
+			type: Object,
+			default: () => ({}),
+			required: false
+		}
+	},
 	data () {
 		return {
-			by: {},
-			availableOrders: {
-				title: 'titre',
-				album: 'album',
-				artist: 'artiste',
-				new: 'nouveau'
-			}
+			orderBy: {}
 		};
 	},
-	computed: {
-
+	watch: {
+		value(newValue) {
+			this.orderBy = newValue;
+		}
+	},
+	mounted() {
+		this.orderBy = this.value;
 	},
 	methods: {
 		cicleOrderBy(target) {
-			if (typeof this.by[target] === 'undefined' || this.by[target] === '') {
-				this.$set(this.by, target, 'ASC');
+			if (typeof this.orderBy[target] === 'undefined' || this.orderBy[target] === '') {
+				this.$set(this.orderBy, target, 'ASC');
 			}
-			else if (this.by[target] === 'ASC') {
-				this.by[target] = 'DESC';
+			else if (this.orderBy[target] === 'ASC') {
+				this.orderBy[target] = 'DESC';
 			}
 			else {
-				this.by[target] = '';
+				this.orderBy[target] = '';
 			}
+
+			this.$emit('input', this.orderBy);
 		}
 	}
 };
