@@ -4,6 +4,7 @@
 			ref="searchBar"
 			class="search-bar"
 			:class="{'docked': isSearchbarDocked}"
+			autocomplete="off"
 			@submit="submit($event)"
 		>
 			<div class="container">
@@ -11,19 +12,64 @@
 					for="search"
 					class="sr-only"
 				>Rechercher une musique</label>
-				<input
-					id="search"
-					v-model="search"
-					type="search"
-					name="search"
-					class="search-bar__input"
-					placeholder="Recherche un titre, un artiste..."
+				<div class="search-bar__input-wrapper">
+					<input
+						id="search"
+						ref="search"
+						v-model="search"
+						type="text"
+						name="search"
+						class="search-bar__input"
+						placeholder="Recherche un titre, un artiste..."
+						@focus="toggleInputFocusState(true)"
+						@blur="toggleInputFocusState(false)"
+						@keydown.down="focusFirstSuggestion"
+					>
+					<button
+						ref="submit"
+						type="submit"
+						class="search-bar__button"
+					>
+						<span class="search-bar__button-text">Rechercher</span>
+						<!-- don't change this svg import if you don't want to skrew up the styling -->
+						<svg
+							aria-hidden="true"
+							width="1em"
+							height="1em"
+							viewBox="0 0 16 16"
+							xmlns="http://www.w3.org/2000/svg"
+							class="search-bar__open-more-icon"
+						>
+							<use
+								xlink:href="../assets/images/search.svg#el"
+							/>
+						</svg>
+					</button>
+				</div>
+				<svg
+					aria-hidden="true"
+					width="0"
+					height="0"
+					viewBox="0 0 16 16"
+					xmlns="http://www.w3.org/2000/svg"
+					class="search-bar__open-more-icon"
 				>
+					<defs>
+						<clipPath id="open-more-top">
+							<path d="M 0,0 A 5,5 0 0 1 5,5 V 0 Z" />
+						</clipPath>
+						<clipPath id="open-more-bottom">
+							<path d="M 5,0 A 5,5 0 0 1 0,5 H 5 Z" />
+						</clipPath>
+					</defs>
+				</svg>
 				<button
-					type="submit"
-					class="search-bar__button"
+					class="search-bar__open-more"
+					title="recherche avancée"
+					:class="{'active': isAdvencedSearchOpen}"
+					@click="openAdvencedSearch"
 				>
-					<span class="search-bar__button-text">Rechercher</span>
+					<span class="search-bar__open-more-text">filtres</span>
 					<!-- don't change this svg import if you don't want to skrew up the styling -->
 					<svg
 						aria-hidden="true"
@@ -34,50 +80,61 @@
 						class="search-bar__open-more-icon"
 					>
 						<use
-							xlink:href="../assets/images/search.svg#el"
+							xlink:href="../assets/images/gear.svg#el"
 						/>
 					</svg>
 				</button>
 			</div>
 
-			<svg
-				aria-hidden="true"
-				width="0"
-				height="0"
-				viewBox="0 0 16 16"
-				xmlns="http://www.w3.org/2000/svg"
-				class="search-bar__open-more-icon"
+			<div
+				ref="suggestions"
+				:class="{'show': showSuggestions}"
+				class="search-bar__suggestions suggestions"
 			>
-				<defs>
-					<clipPath id="open-more-top">
-						<path d="M 0,0 A 5,5 0 0 1 5,5 V 0 Z" />
-					</clipPath>
-					<clipPath id="open-more-bottom">
-						<path d="M 5,0 A 5,5 0 0 1 0,5 H 5 Z" />
-					</clipPath>
-				</defs>
-			</svg>
-			<button
-				class="search-bar__open-more"
-				title="recherche avancée"
-				:class="{'active': isAdvencedSearchOpen}"
-				@click="openAdvencedSearch"
-			>
-				<span class="search-bar__open-more-text">filtres</span>
-				<!-- don't change this svg import if you don't want to skrew up the styling -->
-				<svg
-					aria-hidden="true"
-					width="1em"
-					height="1em"
-					viewBox="0 0 16 16"
-					xmlns="http://www.w3.org/2000/svg"
-					class="search-bar__open-more-icon"
-				>
-					<use
-						xlink:href="../assets/images/gear.svg#el"
-					/>
-				</svg>
-			</button>
+				<div class="suggestions__wrapper">
+					<span class="suggestions__label">Artistes</span>
+					<ul class="suggestions__list">
+						<li
+							v-for="(artist, index) in suggestionsArtists"
+							:key="index"
+							tabindex="-1"
+							class="suggestions__item"
+							@keydown.down="focusSuggestion(1, $event)"
+							@keydown.up="focusSuggestion(-1, $event)"
+							@click="selectArtist(index)"
+							@keydown.enter="selectArtist(index)"
+							@blur="isSuggestionFocused = false"
+						>
+							<span class="suggestions__name">
+								{{ artist }}
+							</span>
+						</li>
+					</ul>
+				</div>
+				<div class="suggestions__wrapper">
+					<span class="suggestions__label">Musiques</span>
+					<ul class="suggestions__list">
+						<li
+							v-for="(song, index) in suggestionsSongs"
+							:key="index"
+							tabindex="-1"
+							class="suggestions__item"
+							@keydown.down="focusSuggestion(1, $event)"
+							@keydown.up="focusSuggestion(-1, $event)"
+							@blur="isSuggestionFocused = false"
+							@click="selectSong(index)"
+							@keydown.enter="selectSong(index)"
+						>
+							<span class="suggestions__name">
+								{{ song.name }}
+							</span>
+							<span class="suggestions__subname">
+								{{ song.artist }}
+							</span>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</form>
 		<form
 			v-if="isAdvencedSearchOpen"
@@ -276,7 +333,6 @@ export default {
 		DoubleSliderRange,
 		OrderWidget
 	},
-	props: [],
 	data () {
 		return {
 			search: '',
@@ -302,7 +358,41 @@ export default {
 				artist: '',
 				new: ''
 			},
+			suggestionsArtists: [
+				'A Day To Remember',
+				'A Nanana',
+				'Je suis un artiste'
+			],
+			suggestionsSongs: [
+				{
+					name: 'All I want',
+					artist: 'A Day To Remember'
+				},
+				{
+					name: 'All Sign Point to Lauderdale',
+					artist: 'A Day To Remember'
+				},
+				{
+					name: 'If It Means a Lot to You',
+					artist: 'A Day To Remember'
+				},
+				{
+					name: 'It\'s Complicated',
+					artist: 'A Day To Remember'
+				},
+				{
+					name: 'A Day To Depart',
+					artist: 'Noumena'
+				}
+			],
+			isInputFocused: false,
+			isSuggestionFocused: false
 		};
+	},
+	computed: {
+		showSuggestions() {
+			return (this.isInputFocused || this.isSuggestionFocused) && this.search !== '';
+		}
 	},
 	watch: {
 		odlc(newValue) {
@@ -334,10 +424,20 @@ export default {
 		}, options);
 
 		observer.observe(this.$refs.searchBar);
+
+		document.addEventListener('click', event => {
+			this.isSuggestionFocused = event.composedPath().includes(this.$refs.suggestions);
+		});
+		this.$refs.suggestions.addEventListener('focusin', event => {
+			event.preventDefault();
+			this.isSuggestionFocused = event.composedPath().includes(this.$refs.suggestions);
+		});
 	},
 	methods: {
 		submit(event) {
-			event.preventDefault();
+			if (event) {
+				event.preventDefault();
+			}
 		},
 		openAdvencedSearch() {
 			if (this.isSearchbarDocked) {
@@ -351,7 +451,6 @@ export default {
 						left: 0,
 						behavior: 'smooth'
 					});
-					console.log('scroll');
 				});
 			}
 			else {
@@ -372,6 +471,45 @@ export default {
 			this.score = [0, 100];
 			this.scoreMin = 0;
 			this.scoreMax = 100;
+		},
+		toggleInputFocusState(state) {
+			this.isInputFocused = state;
+		},
+		focusFirstSuggestion(event) {
+			event.preventDefault();
+			this.$refs.suggestions.querySelector('.suggestions__item').focus();
+		},
+		focusSuggestion(padding, event) {
+			event.preventDefault();
+			let index = -1;
+			const allSuggestions = this.$refs.suggestions.querySelectorAll('.suggestions__item');
+
+			for (let i = 0; i < allSuggestions.length; i++) {
+				if (event.target === allSuggestions[i]) {
+					index = i;
+					break;
+				}
+			}
+
+			if (allSuggestions.length !== index + padding && index + padding >= 0) {
+				allSuggestions[(index + padding) % allSuggestions.length].focus();
+			}
+			else if (index + padding < 0) {
+				this.$refs.search.focus();
+			}
+
+		},
+		selectArtist(index) {
+			this.search = this.suggestionsArtists[index];
+			this.$refs.submit.focus();
+			this.isSuggestionFocused = false;
+			this.submit();
+		},
+		selectSong(index) {
+			this.search = `${ this.suggestionsSongs[index].name } - ${ this.suggestionsSongs[index].artist }`;
+			this.$refs.submit.focus();
+			this.isSuggestionFocused = false;
+			this.submit();
 		}
 	}
 };
@@ -381,27 +519,22 @@ export default {
 
 <style lang="scss">
   .search-bar {
-		top: 1.5em;
 		padding: 0;
 		margin: 0 auto 2em;
 		width: 100%;
 		max-width: 60ch;
-		border-radius: 5px;
-		overflow: hidden;
-		box-shadow: 0 0 5px 1px #0001;
 		transition:
 			max-width 300ms cubic-bezier(.19,1,.22,1),
 			transform 300ms ease-in-out,
 			box-shadow 300ms ease-in-out,
 			background-color 300ms ease-in-out;
-		transform: translateY(-50%);
 		z-index: 100;
-		display: flex;
 		position: relative;
+		border-radius: 5px;
 
-		&:focus-within {
-			box-shadow: 0 0 10px 3px #0003;
-		}
+		// &:focus-within {
+		// 	box-shadow: 0 0 10px 3px #0003;
+		// }
 
 		&__input {
 			width: 100%;
@@ -409,7 +542,6 @@ export default {
 			border: none;
 			padding: .5em 1em;
 			border-radius: 5px;
-			box-shadow: 0 0 5px 0 #0008;
 			background-color: var(--filler-2);
 			color: var(--text);
 			transition: background-color 300ms ease-in-out;
@@ -430,6 +562,19 @@ export default {
 			}
 			@at-root .docked & {
 				background-color: var(--filler-2-translucent);
+
+				&:focus {
+					background-color: var(--filler-2);
+
+					&::placeholder {
+						opacity: .9;
+					}
+				}
+			}
+
+			&-wrapper {
+				position: relative;
+				flex-grow: 1;
 			}
 		}
 
@@ -497,15 +642,90 @@ export default {
 
 		&.docked{
 			max-width: 80ch;
-			box-shadow: 0 0 5px #0005;
 			width: calc(100vw - 2em);
 			position: sticky;
+			top: .4em;
 		}
 
 		.container {
-			position: relative;
-			flex-grow: 1;
-			z-index: 10;
+			display: flex;
+			width: 100%;
+			border-radius: 5px;
+			transition: box-shadow 300ms ease-in-out;
+			&:focus-within {
+				box-shadow: 0 0 5px 0 #0003;
+			}
+		}
+
+		.suggestions {
+			position: absolute;
+			top: 2em;
+			left: .5em;
+			right: 2.5em;
+
+			padding: .75em 1em .5em;
+			border-radius: 0 0 5px 5px;
+			z-index: -1;
+
+			background-color: var(--filler-2);
+			color: var(--text);
+			box-shadow: 0 0 5px 0 #0003;
+			clip-path: inset(100% 0 0 0);
+			transform: translateY(-100%);
+			transition: 150ms 100ms ease-out;
+			transition-property: clip-path, transform;
+
+
+			&__label {
+				font-size: small;
+			}
+			&__list {
+				padding: .25em 0;
+			}
+			&__item {
+				padding: .25em .5em;
+				cursor: pointer;
+				border-radius: 5px;
+				position: relative;
+				z-index: 5;
+				display: block;
+				outline: none;
+
+				&::before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					border-radius: 5px;
+					z-index: -1;
+					transition: opacity 300ms ease-in-out;
+					opacity: 0;
+
+					background-image: linear-gradient(90deg, var(--primary-2) 0%, rgba(91, 3, 3, 0) 100%);
+
+					@at-root .dark & {
+						background-image: linear-gradient(90deg, var(--primary-1) 0%, rgba(91, 3, 3, 0) 100%);
+					}
+				}
+
+				&:hover::before,
+				&:focus::before {
+					opacity: 1;
+				}
+			}
+			&__name {
+				font-weight: bold;
+			}
+			&__subname {
+				font-size: small;
+				margin-left: .5em;
+			}
+			&.show {
+				clip-path: inset(-10px -10px -10px -10px);
+				transform: translateY(0);
+			}
 		}
 
 		&__open-more {
@@ -519,6 +739,7 @@ export default {
 			align-items: center;
 
 			border: none;
+			border-radius: 0 5px 5px 0;
 			color: var(--text);
 			background-color: var(--filler-1);
 
