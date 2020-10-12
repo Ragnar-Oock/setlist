@@ -18,7 +18,7 @@
 					Si vous êtes absent trop longtemps, votre request est <strong>automatiquement retirée</strong> de la playlist.
 				</li>
 				<li class="rules-page__item">
-					La request d'une musique suppose l'acceptation des règles. Le non respect des regles entrainera le <strong>bloquage de la request</strong>. Tous manquements répétés à celles-ci entrainera des <strong>sanction à la discrétion des moderateurs</strong> (bannissement des requests, bannissement temporaire ou definitif du chat...).
+					La request d'une musique suppose l'acceptation des règles. Le non respect des regles entrainera le <strong>bloquage de la request</strong>. Tous manquements répétés à celles-ci entrainera des <strong>sanctions à la discrétion des modérateurs</strong> (bannissement des requests, bannissement temporaire ou definitif du chat...).
 				</li>
 			</ul>
 		</article>
@@ -31,7 +31,7 @@
 				Comment demander une musique
 			</h3>
 			<p>
-				Toutes les commandes utilisent la meme structure un point d'exclamation <code>!</code>, suivit du nom de la commande puis du <code>titre</code> et de l'<code>artiste</code> de la musique.
+				Toutes les commandes utilisent la même structure un point d'exclamation <code>!</code>, suivi du <code>nom de la commande</code> puis du <code>titre</code> et de l'<code>artiste</code> de la musique.
 			</p>
 			<ul class="rules-page__list">
 				<li class="rules-page__item">
