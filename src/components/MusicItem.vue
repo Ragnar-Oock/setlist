@@ -12,8 +12,9 @@
 			<div class="music-item__col-left">
 				<span
 					v-if="duration"
+					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
-					title="durée de la musique"
+					content="durée de la musique"
 				>
 					{{ duration }}
 				</span>
@@ -57,8 +58,9 @@
 				</svg>
 				<span
 					v-if="duration"
+					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
-					title="durée de la musique"
+					content="durée de la musique"
 				>
 					{{ duration }}
 				</span>
@@ -194,8 +196,9 @@
 				</div>
 				<div class="music-item__prebuild">
 					<button
+						v-tippy="{placement: 'bottom'}"
 						class="music-item__button music-item__vip"
-						:title="vipToggleTitle"
+						:content="vipToggleTitle"
 						@click="toggleVip"
 					>
 						<!-- don't change this svg import if you don't want to skrew up the styling -->
@@ -220,6 +223,36 @@
 						</div>
 					</button>
 
+					<button
+						ref="copyButton"
+						v-tippy="{placement: 'bottom'}"
+						class="music-item__button music-item__edit"
+						content="commande d'édition"
+						@click="toggleEdit"
+					>
+						<!-- don't change this svg import if you don't want to skrew up the styling -->
+						<svg
+							aria-hidden="true"
+							width="1em"
+							height="1em"
+							viewBox="0 0 16 16"
+							xmlns="http://www.w3.org/2000/svg"
+							class="search-bar__open-more-icon"
+						>
+							<use
+								v-if="edit"
+								xlink:href="../assets/images/edit-fill.svg#el"
+							/>
+							<use
+								v-else
+								xlink:href="../assets/images/edit.svg#el"
+							/>
+						</svg>
+						<div class="sr-only">
+							commande d'édition
+						</div>
+					</button>
+
 					<input
 						ref="output"
 						class="music-item__output"
@@ -238,8 +271,9 @@
 					</TippyComponent>
 					<button
 						ref="copyButton"
+						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__copy"
-						title="copier la commande"
+						content="copier la commande"
 						:name="id+'copy'"
 						@click="copy"
 					>
@@ -285,6 +319,7 @@ export default {
 		return {
 			openned: false,
 			vip: false,
+			edit: false,
 			showTooltip: false,
 			isQuickCopyCliked: false,
 			selectedArrangement: '',
@@ -296,7 +331,26 @@ export default {
 			return typeof this.data.tags !== 'undefined' && this.data.tags.length > 0;
 		},
 		command() {
-			return `!${ this.vip ? 'vip' : 'sr' } ${ this.data.title } - ${ this.data.artiste } ${ this.selectedArrangement !== '' ? `*${ this.selectedArrangement }` : '' }`;
+			let command;
+
+			if (this.vip) {
+				if (this.edit) {
+					command = 'vipedit';
+				}
+				else {
+					command = 'vip';
+				}
+			}
+			else {
+				if (this.edit) {
+					command = 'edit';
+				}
+				else {
+					command = 'sr';
+				}
+			}
+
+			return `!${ command } ${ this.data.title } - ${ this.data.artiste } ${ this.selectedArrangement !== '' ? `*${ this.selectedArrangement }` : '' }`;
 		},
 		vipToggleTitle() {
 			return this.vip ? 'faire une request normale' : 'faire une request VIP';
@@ -383,6 +437,9 @@ export default {
 		},
 		toggleVip() {
 			this.vip = !this.vip;
+		},
+		toggleEdit() {
+			this.edit = !this.edit;
 		},
 		copy() {
 			this.$refs.output.select();
@@ -819,6 +876,9 @@ export default {
 				background-color: var(--filler-2);
 				outline: none;
 			}
+		}
+		&__vip {
+			margin-right: 3px;
 		}
 
 		.tool-tip__wrapper{
