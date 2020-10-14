@@ -626,6 +626,7 @@ export default {
 			background-color: var(--filler-1);
 			transition: background-color 200ms ease-in-out;
 			flex-shrink: 0;
+			align-self: center;
 
 
 			&:focus {
@@ -872,18 +873,6 @@ export default {
 			&:hover {
 				outline: 0;
 				opacity: .5;
-				animation: close-idle 7s cubic-bezier(.65,.05,.11,1.12) infinite;
-			}
-		}
-		@keyframes close-idle {
-			0% {
-				transform: rotate(0deg);
-			}
-			30% {
-				transform: rotate(90deg);
-			}
-			100% {
-				transform: rotate(90deg);
 			}
 		}
 
@@ -891,7 +880,6 @@ export default {
 			display: flex;
 			flex-direction: row;
 			gap: 1em;
-			align-items: center;
 
 			&:not(:last-child) {
 				margin-bottom: .75em;
