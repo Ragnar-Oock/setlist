@@ -227,7 +227,7 @@
 						ref="copyButton"
 						v-tippy="{placement: 'bottom'}"
 						class="music-item__button music-item__edit"
-						content="commande d'édition"
+						:content="editToggleTitle"
 						@click="toggleEdit"
 					>
 						<!-- don't change this svg import if you don't want to skrew up the styling -->
@@ -354,6 +354,9 @@ export default {
 		},
 		vipToggleTitle() {
 			return this.vip ? 'faire une request normale' : 'faire une request VIP';
+		},
+		editToggleTitle() {
+			return this.edit ? 'faire une request' : 'éditer un requete';
 		},
 		duration() {
 			let duration;
