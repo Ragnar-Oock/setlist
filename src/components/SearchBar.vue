@@ -143,7 +143,7 @@
 		>
 			<button
 				class="search-bar__close"
-				@click="openAdvencedSearch"
+				@click="closeAdvencedSearch"
 			>
 				<span class="sr-only">Close</span>
 			</button>
@@ -456,6 +456,9 @@ export default {
 			else {
 				this.isAdvencedSearchOpen = !this.isAdvencedSearchOpen;
 			}
+		},
+		closeAdvencedSearch() {
+			this.isAdvencedSearchOpen = false;
 		},
 		resetForm() {
 			this.lastInterpretation = [0, 100];
