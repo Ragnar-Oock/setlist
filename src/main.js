@@ -21,6 +21,7 @@ store.subscribe((mutation, state) => {
 import mixins from './mixins';
 
 import VueTippy, { TippyComponent } from 'vue-tippy';
+import i18n from './i18n';
 
 Vue.use(VueTippy);
 Vue.component('tippy', TippyComponent);
@@ -28,5 +29,6 @@ Vue.component('tippy', TippyComponent);
 new Vue({
 	mixins: [mixins],
 	render: h => h(App),
+	i18n,
 	store
 }).$mount('#app');
