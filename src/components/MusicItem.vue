@@ -12,7 +12,7 @@
 			<div class="music-item__col-left">
 				<span
 					v-if="duration"
-					v-tippy="{placement: 'bottom'}"
+					v-tippy="{placement: 'right'}"
 					class="music-item__duration"
 					content="durée de la musique"
 				>
@@ -698,6 +698,7 @@ export default {
 			margin-top: 0;
 			height: 0;
 			display: block;
+			width: max-content;
 		}
 
 		&__col-left &__duration {
