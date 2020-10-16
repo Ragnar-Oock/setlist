@@ -1,3 +1,9 @@
 {
-  "message": "hello i18n !!"
+  "message": "salut i18n !!",
+  "rules": {
+    "title": "The rules",
+    "list": {
+      "tos": "The request of a song imply the"
+    }
+  }
 }

@@ -1,3 +1,9 @@
 {
-  "message": "salut i18n !!"
+  "message": "salut i18n !!",
+  "rules": {
+    "title": "Les regles",
+    "list": {
+      "tos": "La request d'une musique suppose l'acceptation des règles. Le non respect des regles entrainera le <strong>bloquage de la request</strong>. Tous manquements répétés à celles-ci entrainera des <strong>sanctions à la discrétion des modérateurs</strong> (bannissement des requests, bannissement temporaire ou definitif du chat...)."
+    }
+  }
 }
