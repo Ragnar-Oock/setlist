@@ -3,6 +3,7 @@
 		class="top-bar"
 		:class="{'docked': isSearchBarDocked}"
 	>
+		<LangSelector />
 		<label
 			for="darkMode"
 			class="top-bar__label"
@@ -71,9 +72,13 @@
 </template>
 
 <script lang="js">
+import LangSelector from '@/components/LangSelector';
 
 export default {
 	name: 'TopBar',
+	components: {
+		LangSelector
+	},
 	props: {
 		isSearchBarDocked: {
 			type: Boolean,
