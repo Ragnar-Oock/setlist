@@ -4,22 +4,27 @@
 			class="rules-page__article"
 			tabindex="0"
 		>
+			{{ $t("message") }}
 			<h3 class="rules-page__title">
-				Les regles
+				{{ $t("rules.title") }}
 			</h3>
 			<ul class="rules-page__list">
 				<li class="rules-page__item">
 					Les requests standards sont <strong>jouées aléatoirement</strong> et les requests VIP sont <strong>jouées dans l'ordre</strong>.
+					{{ $t("rules.list.standard") }}
 				</li>
 				<li class="rules-page__item">
 					On peut vous demander de <strong>changer votre request</strong> pour diverses raisons (musique deja jouée durant le stream, accordage trop contraignant, lien mort, mauvaise partition, diffulté trop élevée...)
+					{{ $t("rules.list.change") }}
 				</li>
 				<li class="rules-page__item">
 					Si vous êtes absent trop longtemps, votre request est <strong>automatiquement retirée</strong> de la playlist.
+					{{ $t("rules.list.delete") }}
 				</li>
-				<li class="rules-page__item">
-					La request d'une musique suppose l'acceptation des règles. Le non respect des regles entrainera le <strong>bloquage de la request</strong>. Tous manquements répétés à celles-ci entrainera des <strong>sanctions à la discrétion des modérateurs</strong> (bannissement des requests, bannissement temporaire ou definitif du chat...).
-				</li>
+				<li
+					class="rules-page__item"
+					v-html="$t('rules.list.tos')"
+				/>
 			</ul>
 		</article>
 
@@ -58,19 +63,7 @@
 <script lang="js">
 
 export default {
-	name: 'RulesPage',
-	props: [],
-	data () {
-		return {
-
-		};
-	},
-	computed: {
-
-	},
-	methods: {
-
-	}
+	name: 'RulesPage'
 };
 
 
