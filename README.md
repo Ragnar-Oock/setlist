@@ -1,24 +1,3 @@
 # setlist
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+An API driven list of all songs available for requests on twitch.tv/warths. Currently in developpement, see it live (not API integration yet) at https://ragnar-oock.github.io/setlist-staging/
