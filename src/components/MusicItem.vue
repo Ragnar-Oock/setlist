@@ -198,7 +198,7 @@
 				</div>
 				<div class="music-item__prebuild">
 					<button
-						v-tippy="{placement: 'bottom'}"
+						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__vip"
 						:content="vipToggleTitle"
 						@click="toggleVip"
@@ -227,7 +227,7 @@
 
 					<button
 						ref="copyButton"
-						v-tippy="{placement: 'bottom'}"
+						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__edit"
 						:content="editToggleTitle"
 						@click="toggleEdit"
@@ -864,7 +864,7 @@ export default {
 		}
 
 		&__button {
-			background-color: var(--filler-2-translucent);
+			background-color: var(--filler-1);
 			color: var(--text);
 			border: none;
 			padding: .5em;
@@ -921,7 +921,7 @@ export default {
 		&__output {
 			margin: 0 3px;
 			flex-grow: 1;
-			background-color: var(--filler-2-translucent);
+			background-color: var(--filler-1);
 			color: var(--text);
 			padding: .5em;
 			border: none;
@@ -1061,10 +1061,10 @@ export default {
 				clip-path: inset(100% -10px -10px -10px );
 			}
 
-			.music-item__copy {
+			&__copy {
 				border-radius: 0 0 10px 0;
 			}
-			.music-item__vip {
+			&__vip {
 				border-radius: 0 0 0 10px;
 			}
 		}
