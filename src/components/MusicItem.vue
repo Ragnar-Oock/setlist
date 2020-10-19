@@ -11,7 +11,7 @@
 		>
 			<div class="music-item__col-left">
 				<span
-					v-if="duration"
+					v-if="duration && openned"
 					v-tippy="{placement: 'right'}"
 					class="music-item__duration"
 					content="durée de la musique"
@@ -57,7 +57,7 @@
 					/>
 				</svg>
 				<span
-					v-if="duration"
+					v-if="duration && !openned"
 					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
 					content="durée de la musique"
@@ -86,6 +86,7 @@
 			ref="quickCopyButton"
 			class="music-item__quick-copy"
 			:class="{'play': isQuickCopyCliked}"
+			:tabindex="openned?-1:0"
 			@click="quickCopy"
 		>
 			<span class="music-item__quick-copy-text">Copier la commande</span>
@@ -253,7 +254,12 @@
 						</div>
 					</button>
 
+					<label
+						:for="id+'output'"
+						class="sr-only"
+					>command output</label>
 					<input
+						:id="id+'output'"
 						ref="output"
 						class="music-item__output"
 						type="text"
@@ -261,20 +267,11 @@
 						readonly
 					>
 
-					<TippyComponent
-						:to="id+'copy'"
-						:visible="showTooltip"
-						trigger="manual"
-						placement="left"
-					>
-						Commande copiée
-					</TippyComponent>
 					<button
 						ref="copyButton"
 						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__copy"
 						content="copier la commande"
-						:name="id+'copy'"
 						@click="copy"
 					>
 						<!-- don't change this svg import if you don't want to skrew up the styling -->
@@ -293,6 +290,14 @@
 						<div class="sr-only">
 							Copier la commande
 						</div>
+						<transition name="in-out">
+							<div
+								v-if="showTooltip"
+								class="music-item__success"
+							>
+								Commande copiée
+							</div>
+						</transition>
 					</button>
 				</div>
 			</div>
@@ -303,13 +308,11 @@
 <script lang="js">
 import ArrangementList from '@/components/ArrangementList';
 import mixins from '@/mixins';
-import { TippyComponent } from 'vue-tippy';
 
 export default {
 	name: 'MusicItem',
 	components: {
-		ArrangementList,
-		TippyComponent
+		ArrangementList
 	},
 	mixins: [mixins],
 	props: {
@@ -880,6 +883,34 @@ export default {
 				background-color: var(--filler-2);
 				outline: none;
 			}
+		}
+		&__copy {
+			display: flex;
+
+			.in-out-enter-active,
+			.in-out-leave-active {
+				overflow: hidden;
+				transition: max-width 300ms ease-out;
+			}
+
+			.in-out-enter {
+				max-width: 0ch;
+			}
+			.in-out-enter-to{
+				max-width: 15ch;
+			}
+
+			.in-out-leave {
+				max-width: 15ch;
+
+			}
+			.in-out-leave-to {
+				max-width: 0ch;
+			}
+		}
+		&__success {
+			margin-left: .5em;
+			white-space: nowrap;
 		}
 		&__vip {
 			margin-right: 3px;
