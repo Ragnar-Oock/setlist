@@ -105,6 +105,7 @@ export default {
 			border: none;
 			color: var(--text);
 			border-radius: 5px;
+			border: 1px solid transparent;
 			overflow: hidden;
 			background: transparent;
 			cursor: pointer;
@@ -114,11 +115,8 @@ export default {
 
 			&:hover,
 			&:focus {
-				&::before {
-					opacity: 1;
-					background-image: none;
-				}
 				outline: 0;
+				border-color: var(--primary-1);
 			}
 
 			&::before {
