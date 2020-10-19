@@ -301,8 +301,8 @@
 </template>
 
 <script lang="js">
-import ArrangementList from './ArrangementList';
-import mixins from '../mixins';
+import ArrangementList from '@/components/ArrangementList';
+import mixins from '@/mixins';
 import { TippyComponent } from 'vue-tippy';
 
 export default {
@@ -390,7 +390,7 @@ export default {
 		 * @param {String} bgc color of the background
 		 */
 		calcColor(bgc) {
-			const invertColor = color => {
+			function invertColor(color) {
 				let prefix = '';
 
 				if (color.includes('#')) {
@@ -405,18 +405,18 @@ export default {
 				color = invertChannel(r) + invertChannel(g) + invertChannel(b);
 
 				return prefix + color;
-			};
+			}
 
-			const invertChannel = channel => {
+			function invertChannel(channel) {
 				let c = parseInt(channel, 16);
 
 				c = 255 - c;
 				c = c.toString(16);
 
 				return c;
-			};
+			}
 
-			const colorToBW = color => {
+			function colorToBW(color) {
 				let prefix = '';
 
 				if (color.includes('#')) {
@@ -434,7 +434,7 @@ export default {
 					: '000000';
 
 				return prefix + color;
-			};
+			}
 
 			return colorToBW(invertColor(bgc));
 		},

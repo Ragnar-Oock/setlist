@@ -36,7 +36,7 @@ module.exports = {
 		'comma-spacing': ['warn', { before: false, after: true }],
 		'comma-style': ['warn', 'last'],
 		'func-call-spacing': 'warn',
-		'func-style': ['warn', 'expression'],
+		'func-style': ['warn', 'declaration'],
 		'id-length': ['warn', { min: 1, max: 30 }],
 		'lines-between-class-members': ['warn', 'always'],
 		'new-cap': 'warn',
