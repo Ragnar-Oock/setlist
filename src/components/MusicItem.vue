@@ -34,6 +34,7 @@
 				</p>
 				<hr class="music-item__hr">
 				<p
+					:key="openned+'source'"
 					class="music-item__source"
 				>
 					<span class="sr-only">by</span>
@@ -766,6 +767,7 @@ export default {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			opacity: 0;
+			animation: title-transition 600ms ease-in-out 150ms 1 forwards;
 
 			@at-root .openned & {
 				font-size: 1.4em;
@@ -773,13 +775,7 @@ export default {
 				text-overflow: unset;
 				overflow: unset;
 				max-width: 210px;
-				animation: title-transition 600ms ease-in-out 150ms 1 forwards;
 			}
-
-			@at-root .closed & {
-				animation: title-transition 300ms ease-in-out 150ms 1 forwards;
-			}
-
 		}
 
 		@keyframes title-transition {
@@ -799,11 +795,13 @@ export default {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			animation: title-transition 500ms ease-in-out 100ms 1 forwards;
 
 			@at-root .openned & {
 				white-space: unset;
 				text-overflow: unset;
 				overflow: unset;
+				max-width: 210px;
 			}
 		}
 
