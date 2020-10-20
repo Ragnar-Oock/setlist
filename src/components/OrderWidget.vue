@@ -116,7 +116,7 @@ export default {
 			&:hover,
 			&:focus {
 				outline: 0;
-				border-color: var(--primary-1);
+				border-color: var(--counter-text);
 			}
 
 			&::before {
