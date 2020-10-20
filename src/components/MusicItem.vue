@@ -11,7 +11,7 @@
 		>
 			<div class="music-item__col-left">
 				<span
-					v-if="duration"
+					v-if="duration && openned"
 					v-tippy="{placement: 'right'}"
 					class="music-item__duration"
 					content="durée de la musique"
@@ -34,6 +34,7 @@
 				</p>
 				<hr class="music-item__hr">
 				<p
+					:key="openned+'source'"
 					class="music-item__source"
 				>
 					<span class="sr-only">by</span>
@@ -44,6 +45,8 @@
 				<svg
 					v-if="data.showlight"
 					key="off"
+					v-tippy="{placement: 'bottom'}"
+					content="cette musique a des effets de lumiere"
 					aria-hidden="true"
 					class="top-bar__icon"
 					viewBox="0 0 16 16"
@@ -57,7 +60,7 @@
 					/>
 				</svg>
 				<span
-					v-if="duration"
+					v-if="duration && !openned"
 					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
 					content="durée de la musique"
@@ -86,6 +89,7 @@
 			ref="quickCopyButton"
 			class="music-item__quick-copy"
 			:class="{'play': isQuickCopyCliked}"
+			:tabindex="openned?-1:0"
 			@click="quickCopy"
 		>
 			<span class="music-item__quick-copy-text">Copier la commande</span>
@@ -196,7 +200,7 @@
 				</div>
 				<div class="music-item__prebuild">
 					<button
-						v-tippy="{placement: 'bottom'}"
+						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__vip"
 						:content="vipToggleTitle"
 						@click="toggleVip"
@@ -225,7 +229,7 @@
 
 					<button
 						ref="copyButton"
-						v-tippy="{placement: 'bottom'}"
+						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__edit"
 						:content="editToggleTitle"
 						@click="toggleEdit"
@@ -253,7 +257,12 @@
 						</div>
 					</button>
 
+					<label
+						:for="id+'output'"
+						class="sr-only"
+					>command output</label>
 					<input
+						:id="id+'output'"
 						ref="output"
 						class="music-item__output"
 						type="text"
@@ -261,20 +270,11 @@
 						readonly
 					>
 
-					<TippyComponent
-						:to="id+'copy'"
-						:visible="showTooltip"
-						trigger="manual"
-						placement="left"
-					>
-						Commande copiée
-					</TippyComponent>
 					<button
 						ref="copyButton"
 						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__copy"
 						content="copier la commande"
-						:name="id+'copy'"
 						@click="copy"
 					>
 						<!-- don't change this svg import if you don't want to skrew up the styling -->
@@ -293,6 +293,14 @@
 						<div class="sr-only">
 							Copier la commande
 						</div>
+						<transition name="in-out">
+							<div
+								v-if="showTooltip"
+								class="music-item__success"
+							>
+								Commande copiée
+							</div>
+						</transition>
 					</button>
 				</div>
 			</div>
@@ -301,15 +309,13 @@
 </template>
 
 <script lang="js">
-import ArrangementList from './ArrangementList';
-import mixins from '../mixins';
-import { TippyComponent } from 'vue-tippy';
+import ArrangementList from '@/components/ArrangementList';
+import mixins from '@/mixins';
 
 export default {
 	name: 'MusicItem',
 	components: {
-		ArrangementList,
-		TippyComponent
+		ArrangementList
 	},
 	mixins: [mixins],
 	props: {
@@ -390,7 +396,7 @@ export default {
 		 * @param {String} bgc color of the background
 		 */
 		calcColor(bgc) {
-			const invertColor = color => {
+			function invertColor(color) {
 				let prefix = '';
 
 				if (color.includes('#')) {
@@ -405,18 +411,18 @@ export default {
 				color = invertChannel(r) + invertChannel(g) + invertChannel(b);
 
 				return prefix + color;
-			};
+			}
 
-			const invertChannel = channel => {
+			function invertChannel(channel) {
 				let c = parseInt(channel, 16);
 
 				c = 255 - c;
 				c = c.toString(16);
 
 				return c;
-			};
+			}
 
-			const colorToBW = color => {
+			function colorToBW(color) {
 				let prefix = '';
 
 				if (color.includes('#')) {
@@ -434,7 +440,7 @@ export default {
 					: '000000';
 
 				return prefix + color;
-			};
+			}
 
 			return colorToBW(invertColor(bgc));
 		},
@@ -763,6 +769,7 @@ export default {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			opacity: 0;
+			animation: title-transition 10ms ease-out 150ms 1 forwards;
 
 			@at-root .openned & {
 				font-size: 1.4em;
@@ -770,13 +777,8 @@ export default {
 				text-overflow: unset;
 				overflow: unset;
 				max-width: 210px;
-				animation: title-transition 600ms ease-in-out 150ms 1 forwards;
+				animation: title-transition 600ms ease-out 150ms 1 forwards;
 			}
-
-			@at-root .closed & {
-				animation: title-transition 300ms ease-in-out 150ms 1 forwards;
-			}
-
 		}
 
 		@keyframes title-transition {
@@ -801,6 +803,8 @@ export default {
 				white-space: unset;
 				text-overflow: unset;
 				overflow: unset;
+				max-width: 210px;
+				animation: title-transition 600ms ease-in-out 150ms 1 forwards;
 			}
 		}
 
@@ -863,7 +867,7 @@ export default {
 		}
 
 		&__button {
-			background-color: var(--filler-2-translucent);
+			background-color: var(--filler-1);
 			color: var(--text);
 			border: none;
 			padding: .5em;
@@ -881,6 +885,34 @@ export default {
 				outline: none;
 			}
 		}
+		&__copy {
+			display: flex;
+
+			.in-out-enter-active,
+			.in-out-leave-active {
+				overflow: hidden;
+				transition: max-width 300ms ease-out;
+			}
+
+			.in-out-enter {
+				max-width: 0ch;
+			}
+			.in-out-enter-to{
+				max-width: 15ch;
+			}
+
+			.in-out-leave {
+				max-width: 15ch;
+
+			}
+			.in-out-leave-to {
+				max-width: 0ch;
+			}
+		}
+		&__success {
+			margin-left: .5em;
+			white-space: nowrap;
+		}
 		&__vip {
 			margin-right: 3px;
 		}
@@ -892,7 +924,7 @@ export default {
 		&__output {
 			margin: 0 3px;
 			flex-grow: 1;
-			background-color: var(--filler-2-translucent);
+			background-color: var(--filler-1);
 			color: var(--text);
 			padding: .5em;
 			border: none;
@@ -1032,10 +1064,10 @@ export default {
 				clip-path: inset(100% -10px -10px -10px );
 			}
 
-			.music-item__copy {
+			&__copy {
 				border-radius: 0 0 10px 0;
 			}
-			.music-item__vip {
+			&__vip {
 				border-radius: 0 0 0 10px;
 			}
 		}
