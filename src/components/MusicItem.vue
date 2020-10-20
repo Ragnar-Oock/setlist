@@ -45,6 +45,8 @@
 				<svg
 					v-if="data.showlight"
 					key="off"
+					v-tippy="{placement: 'bottom'}"
+					content="cette musique a des effets de lumiere"
 					aria-hidden="true"
 					class="top-bar__icon"
 					viewBox="0 0 16 16"
@@ -767,7 +769,7 @@ export default {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			opacity: 0;
-			animation: title-transition 600ms ease-in-out 150ms 1 forwards;
+			animation: title-transition 10ms ease-out 150ms 1 forwards;
 
 			@at-root .openned & {
 				font-size: 1.4em;
@@ -775,6 +777,7 @@ export default {
 				text-overflow: unset;
 				overflow: unset;
 				max-width: 210px;
+				animation: title-transition 600ms ease-out 150ms 1 forwards;
 			}
 		}
 
@@ -795,13 +798,13 @@ export default {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			animation: title-transition 500ms ease-in-out 100ms 1 forwards;
 
 			@at-root .openned & {
 				white-space: unset;
 				text-overflow: unset;
 				overflow: unset;
 				max-width: 210px;
+				animation: title-transition 600ms ease-in-out 150ms 1 forwards;
 			}
 		}
 
