@@ -123,7 +123,7 @@
 			name="open"
 		>
 			<div
-				v-if="openned"
+				v-show="openned"
 				class="music-item__body"
 			>
 				<div
@@ -359,10 +359,10 @@ export default {
 			return `!${ command } ${ this.data.title } - ${ this.data.artiste } ${ this.selectedArrangement !== '' ? `*${ this.selectedArrangement }` : '' }`;
 		},
 		vipToggleTitle() {
-			return this.vip ? 'faire une request normale' : 'faire une request VIP';
+			return this.vip ? this.$t('song.prebuild.regular') : this.$t('song.prebuild.vip');
 		},
 		editToggleTitle() {
-			return this.edit ? 'faire une request' : 'éditer un requete';
+			return this.edit ? this.$t('song.prebuild.rquest') : this.$t('song.prebuild.edit');
 		},
 		duration() {
 			let duration;
@@ -592,7 +592,7 @@ export default {
 					box-shadow  ease-in-out 300ms 250ms,
 					transform ease-in-out 300ms 250ms,
 					color ease-in-out 300ms,
-					right ease-in-out 300ms 250ms,
+					right ease-out 400ms 150ms,
 					padding ease-in-out 300ms;
 
 				&:hover {
