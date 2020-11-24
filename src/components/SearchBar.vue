@@ -11,7 +11,7 @@
 				<label
 					for="search"
 					class="sr-only"
-				>Rechercher une musique</label>
+				>{{ $t('search.label') }}</label>
 				<div class="search-bar__input-wrapper">
 					<input
 						id="search"
@@ -20,7 +20,7 @@
 						type="text"
 						name="search"
 						class="search-bar__input"
-						placeholder="Recherche un titre, un artiste..."
+						:placeholder="$t('search.placeholder')"
 						@focus="toggleInputFocusState(true)"
 						@blur="toggleInputFocusState(false)"
 						@keydown.down="focusFirstSuggestion"
@@ -30,7 +30,7 @@
 						type="submit"
 						class="search-bar__button"
 					>
-						<span class="search-bar__button-text">Rechercher</span>
+						<span class="search-bar__button-text">{{ $t('search.submit') }}</span>
 						<!-- don't change this svg import if you don't want to skrew up the styling -->
 						<svg
 							aria-hidden="true"
@@ -69,7 +69,7 @@
 					:class="{'active': isAdvencedSearchOpen}"
 					@click="openAdvencedSearch"
 				>
-					<span class="search-bar__open-more-text">filtres</span>
+					<span class="search-bar__open-more-text">{{ $t('search.filters') }}</span>
 					<!-- don't change this svg import if you don't want to skrew up the styling -->
 					<svg
 						aria-hidden="true"
@@ -92,7 +92,7 @@
 				class="search-bar__suggestions suggestions"
 			>
 				<div class="suggestions__wrapper">
-					<span class="suggestions__label">Artistes</span>
+					<span class="suggestions__label">{{ $t('search.suggestion.artists') }}</span>
 					<ul class="suggestions__list">
 						<li
 							v-for="(artist, index) in suggestionsArtists"
@@ -112,7 +112,7 @@
 					</ul>
 				</div>
 				<div class="suggestions__wrapper">
-					<span class="suggestions__label">Musiques</span>
+					<span class="suggestions__label">{{ $t('search.suggestion.songs') }}</span>
 					<ul class="suggestions__list">
 						<li
 							v-for="(song, index) in suggestionsSongs"
@@ -151,17 +151,14 @@
 				v-model="lastInterpretation"
 				:min="lastInterpretationMin"
 				:max="lastInterpretationMax"
-				help="Nombre de jours depuis la dernière foi que cette musique a été jouée.<br>0 équivalent à aujourd'hui et 100 à tout le temps"
+				:help="$t('search.advenced.lastInterpretation.help')"
 			>
-				Dernière interprétation (en jours)
-				<template #help>
-					Nombre de jours depuis la dernière foi que cette musique a été jouée.<br>0 équivalent à aujourd'hui et 100 à tout le temps
-				</template>
+				{{ $t('search.advenced.lastInterpretation.title') }}
 				<template #label-min-value>
-					Durée minimum
+					{{ $t('search.advenced.lastInterpretation.min') }}
 				</template>
 				<template #label-max-value>
-					Durée maximum
+					{{ $t('search.advenced.lastInterpretation.max') }}
 				</template>
 			</DoubleSliderRange>
 			<DoubleSliderRange
@@ -169,12 +166,12 @@
 				:min="interpretationNumberMin"
 				:max="interpretationNumberMax"
 			>
-				Nombre d'interprétation
+				{{ $t('search.advenced.InterpretationNumber.title') }}
 				<template #label-min-value>
-					Durée minimum
+					{{ $t('search.advenced.InterpretationNumber.min') }}
 				</template>
 				<template #label-max-value>
-					Durée maximum
+					{{ $t('search.advenced.InterpretationNumber.max') }}
 				</template>
 			</DoubleSliderRange>
 			<DoubleSliderRange
@@ -182,12 +179,12 @@
 				:min="scoreMin"
 				:max="scoreMax"
 			>
-				Score
+				{{ $t('search.advenced.score.title') }}
 				<template #label-min-value>
-					Score minimum
+					{{ $t('search.advenced.score.min') }}
 				</template>
 				<template #label-max-value>
-					Score maximum
+					{{ $t('search.advenced.score.max') }}
 				</template>
 			</DoubleSliderRange>
 			<div class="search-bar__row search-bar__sm-col">
@@ -203,7 +200,7 @@
 							<label
 								for="odlc"
 								class="search-bar__label"
-							>Officielle</label>
+							>{{ $t('search.advenced.dlc.official') }}</label>
 							<input
 								id="cdlc"
 								v-model="cdlc"
@@ -213,12 +210,12 @@
 							<label
 								for="cdlc"
 								class="search-bar__label"
-							>CDLC</label>
+							>{{ $t('search.advenced.dlc.cdlc') }}</label>
 						</div>
 						<div
 							v-tippy="{placement: 'right'}"
 							class="search-bar__nob"
-							content="put some text here"
+							:content="$t('search.advenced.dlc.help')"
 						/>
 					</div>
 					<div class="search-bar__row">
@@ -232,12 +229,12 @@
 							<label
 								for="showlight"
 								class="search-bar__label"
-							>Showlight</label>
+							>{{ $t('search.advenced.light.button') }}</label>
 						</div>
 						<div
 							v-tippy="{placement: 'right'}"
 							class="search-bar__nob"
-							content="La musique recherchée a des effets de lumiere"
+							:content="$t('search.advenced.light.help')"
 						/>
 					</div>
 					<div class="search-bar__row">
@@ -251,18 +248,18 @@
 							<label
 								for="vocals"
 								class="search-bar__label"
-							>Paroles</label>
+							>{{ $t('search.advenced.lirics.button') }}</label>
 						</div>
 						<div
 							v-tippy="{placement: 'right'}"
 							class="search-bar__nob"
-							content="La musique recherchée affiche ses paroles."
+							:content="$t('search.advenced.lirics.help')"
 						/>
 					</div>
 				</div>
 				<div class="search-bar__col-right">
 					<p class="search-bar__label">
-						Arrangement&nbsp;:
+						{{ $t('search.advenced.arrangement.label') }}
 					</p>
 					<div
 						v-for="(value, key) in arrangement"
@@ -280,7 +277,7 @@
 							:for="'arrangement-' + key"
 							class="search-bar__label"
 						>
-							{{ key }}
+							{{ $t('search.advenced.arrangement.'+key) }}
 						</label>
 					</div>
 				</div>
@@ -291,14 +288,14 @@
 					class="search-bar__reset search-bar__btn"
 					@click="resetForm"
 				>
-					Reset
+					{{ $t('search.advenced.reset') }}
 				</button>
 
 				<button
 					type="submit"
 					class="search-bar__submit search-bar__btn search-bar__btn--with-icon"
 				>
-					Rechercher
+					{{ $t('search.advenced.submit') }}
 					<!-- don't change this svg import if you don't want to skrew up the styling -->
 					<svg
 						aria-hidden="true"
@@ -344,7 +341,7 @@ export default {
 			interpretationNumber: [0, 100],
 			interpretationNumberMin: 0,
 			interpretationNumberMax: 100,
-			arrangement: { 'rythm': false, 'lead': false, 'bass': false },
+			arrangement: { 'rhythm': false, 'lead': false, 'bass': false },
 			showlight: false,
 			vocals: false,
 			odlc: false,
@@ -467,7 +464,7 @@ export default {
 			this.interpretationNumber = [0, 100];
 			this.interpretationNumberMin = 0;
 			this.interpretationNumberMax = 100;
-			this.arrangement = { 'rythm': false, 'lead': false, 'bass': false };
+			this.arrangement = { 'rhythm': false, 'lead': false, 'bass': false };
 			this.showlight = false;
 			this.odlc = false;
 			this.cdlc = false;
@@ -1036,8 +1033,8 @@ export default {
 
 		&__btn {
 			padding: .5em 1em;
-			width: 100%;
-			max-width: 15ch;
+			width: max-content;
+			min-width: 15ch;
 			font-weight: bold;
 			color: var(--text);
 			border-radius: 5px;
@@ -1046,10 +1043,12 @@ export default {
 
 			&-icon {
 				margin-left: .5em;
+				margin-right: -.5em;
 			}
 
 			&--with-icon {
 				display: flex;
+				justify-content: center;
 				flex-direction: row;
 			}
 		}

@@ -5,13 +5,13 @@
 				WART<span class="fliker">H</span>S' STREAM SE<span class="fliker">T</span>LI<span class="fliker">S</span>T
 			</h1>
 			<p class="welcome-screen__comment">
-				Have a look, who knows...<br>You may find something you'd like.
+				{{ $t('welcome.message.part1') }}<br>{{ $t('welcome.message.part2') }}
 			</p>
 		</div>
 
 		<div class="welcome-screen__scrolldown">
 			<div class="scrolldown__text">
-				See for yourself
+				{{ $t('welcome.see') }}
 			</div>
 
 			<button
@@ -43,7 +43,7 @@
 					/>
 				</svg>
 				<div class="sr-only">
-					scrolldown
+					{{ $t('welcome.scrolldown') }}
 				</div>
 			</button>
 		</div>

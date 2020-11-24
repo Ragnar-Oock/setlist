@@ -1,7 +1,7 @@
 <template lang="html">
 	<div class="order-widget">
 		<p class="sr-only">
-			Order the list by :
+			{{ $t('order.by') }}
 		</p>
 		<button
 			v-for="(val, key) in orderBy"
@@ -11,7 +11,7 @@
 			class="order-widget__btn"
 			@click="cicleOrderBy(key)"
 		>
-			{{ key }}
+			{{ $t('order.values.'+key) }}
 			<span
 				v-if="orderBy.hasOwnProperty(key)"
 				class="order-widget__direction sr-only"
@@ -143,7 +143,7 @@ export default {
 			width: 1em;
 			opacity: 0;
 			position: absolute;
-			right: .5em;
+			right: .2em;
 			top: 50%;
 			transform: translateY(-50%);
 			transition: opacity 150ms ease-in-out, transform 300ms 150ms ease-in-out;

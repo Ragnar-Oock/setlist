@@ -14,7 +14,7 @@
 					v-if="duration && openned"
 					v-tippy="{placement: 'right'}"
 					class="music-item__duration"
-					content="durée de la musique"
+					:content="$t('song.duration')"
 				>
 					{{ duration }}
 				</span>
@@ -46,7 +46,7 @@
 					v-if="data.showlight"
 					key="off"
 					v-tippy="{placement: 'bottom'}"
-					content="cette musique a des effets de lumiere"
+					:content="$t('song.showlight')"
 					aria-hidden="true"
 					class="top-bar__icon"
 					viewBox="0 0 16 16"
@@ -63,7 +63,7 @@
 					v-if="duration && !openned"
 					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
-					content="durée de la musique"
+					:content="$t('song.duration')"
 				>
 					{{ duration }}
 				</span>
@@ -92,7 +92,7 @@
 			:tabindex="openned?-1:0"
 			@click="quickCopy"
 		>
-			<span class="music-item__quick-copy-text">Copier la commande</span>
+			<span class="music-item__quick-copy-text"><span>{{ $t('song.quickCopy') }}</span></span>
 			<!-- don't change this svg import if you don't want to skrew up the styling -->
 			<svg
 				aria-hidden="true"
@@ -139,14 +139,14 @@
 							class="music-item__tag"
 							:style="{'background-color': tag.color, 'color': calcColor(tag.color)}"
 						>
-							{{ tag.title }}
+							{{ i18nFallback(tag.title) }}
 						</div>
 					</div>
 					<div
 						v-if="data.showlight"
 						v-tippy="{placement: 'right'}"
 						class="music-item__showlight"
-						content="Cette musique a des effets de lumieres"
+						:content="$t('song.showlight')"
 					>
 						<svg
 							key="off"
@@ -163,7 +163,7 @@
 							/>
 						</svg>
 						<div class="sr-only">
-							Cette musique a des effets de lumieres
+							{{ $t('song.showlight') }}
 						</div>
 					</div>
 				</div>
@@ -189,7 +189,7 @@
 						v-else
 						class="music-item__no-meta"
 					>
-						Aucune informations additionnelles
+						{{ $t('song.noMeta') }}
 					</div>
 
 					<ArrangementList
@@ -253,14 +253,14 @@
 							/>
 						</svg>
 						<div class="sr-only">
-							commande d'édition
+							{{ editToggleTitle }}
 						</div>
 					</button>
 
 					<label
 						:for="id+'output'"
 						class="sr-only"
-					>command output</label>
+					>{{ $t('song.prebuild.output') }}</label>
 					<input
 						:id="id+'output'"
 						ref="output"
@@ -274,7 +274,7 @@
 						ref="copyButton"
 						v-tippy="{placement: 'right'}"
 						class="music-item__button music-item__copy"
-						content="copier la commande"
+						:content="$t('song.prebuild.copy')"
 						@click="copy"
 					>
 						<!-- don't change this svg import if you don't want to skrew up the styling -->
@@ -291,14 +291,14 @@
 							/>
 						</svg>
 						<div class="sr-only">
-							Copier la commande
+							{{ $t('song.prebuild.copy') }}
 						</div>
 						<transition name="in-out">
 							<div
 								v-if="showTooltip"
 								class="music-item__success"
 							>
-								Commande copiée
+								{{ $t('song.prebuild.copied') }}
 							</div>
 						</transition>
 					</button>
@@ -390,6 +390,12 @@ export default {
 	methods: {
 		toggleMusic() {
 			this.openned = !this.openned;
+		},
+		i18nFallback(key) {
+			const template = `song.tags.${ key }`;
+			const i18n = this.$t(template);
+
+			return i18n !== template ? i18n : key.replace('-', ' ');
 		},
 		/**
 		 * infer the font color from the background color to maximise the contrast
@@ -640,6 +646,12 @@ export default {
 				white-space: nowrap;
 				transition: 300ms 100ms ease-out;
 				transition-property: max-width, margin-right;
+				display: flex;
+				height: 100%;
+
+				span {
+					margin: auto;
+				}
 			}
 
 			&:focus > &-text,
@@ -941,6 +953,7 @@ export default {
 				overscroll-behavior: contain;
 				overflow-y: auto;
 				overflow-y: overlay;
+				scrollbar-color: var(--filler-2-translucent) var(--filler-1);
 
 				&::-webkit-scrollbar {
 					width: .4em;

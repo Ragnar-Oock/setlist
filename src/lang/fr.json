@@ -1,9 +1,89 @@
 {
   "message": "salut i18n !!",
-  "rules": {
-    "title": "Les regles",
-    "list": {
-      "tos": "La request d'une musique suppose l'acceptation des règles. Le non respect des regles entrainera le <strong>bloquage de la request</strong>. Tous manquements répétés à celles-ci entrainera des <strong>sanctions à la discrétion des modérateurs</strong> (bannissement des requests, bannissement temporaire ou definitif du chat...)."
+  "rules": "## Les regles\nLes requetes standard sont jouées dans un ordre aleatoire et les VIP dans l'ordre d'ajout.\n\nUn moderateur peut vous demander de modifier votre requete pour diverse raison parmis mais non limité a :\n- la musique a deja été joué durant le live en cours\n- l'accordage n'est pas possible a reproduire avec le materiel a disposition\n- le lien vers le fichier de la musique est mort\n- la musique est mal chartée\n- la musique est trop compliquée  \nNe pas obeir a une telle demande resultera au blockage de votre requete.\n\nVotre requete sera automatiquement supprimé si vous etes absent pour une trop longue periode.\n\nNe pas se conformer au regles menera au blockage de votre requete. Toute infraction répétées mainerons a des sanction a la discretion des moderateurs (supperssion de la quete, bannissement temporaire ou definitif du chat... ).",
+  "tuto": "## Comment faire une requete ?\nSi vous avez trouver la musique qui vous plais, over la carte de la musique, copiez la commande présente en bas de celle-ci and collez la dans le chat Twitch.\n\n**Vous voulez un arrangement en particulier?**  \nChoisiez le dans la liste.\n\n**Vous voulez faire une requete VIP?**  \nCliquez sur le diamand a gauche du champ de commande.\n\n**Vous voulez modifier une requete?**  \nCliquez sur le crayon a gauche du champ de commande.",
+  "welcome" : {
+    "message": {
+      "part1": "Regardez, sait-on jamais...",
+      "part2": "Vous trouverez surment une musique qui vous plait"
+    },
+    "see": "Aller voir",
+    "scrolldown": "Section suivante"
+  },
+  "search": {
+    "label": "Rechercher une musique",
+    "placeholder": "Recherche un titre, un artiste...",
+    "submit": "Rechercher",
+    "filters": "Filtres",
+    "suggestion": {
+      "artists": "Artistes",
+      "songs": "Musiques"
+    },
+    "advenced": {
+      "lastInterpretation": {
+        "title": "Dernière interprétation (en jours)",
+        "help": "Nombre de jours depuis la dernière foi que cette musique a été jouée.<br>100 equivaux à jamais jouée",
+        "min": "Durée minimum",
+        "max": "Durée maximum"
+      },
+      "InterpretationNumber": {
+        "title": "Nombre d'interpréations",
+        "min": "Nombre minimum",
+        "max": "Nombre maximum"
+      },
+      "score": {
+        "title": "Score",
+        "min": "Score minimum",
+        "max": "Score maximum"
+      },
+      "dlc": {
+        "official": "Officielles",
+        "cdlc": "CDLC",
+        "help": "Afficher uniquement les musiques officielles du jeu, uniquement les musiques de la communauté ou les deux"
+      },
+      "light": {
+        "button": "Effets de lumière",
+        "help": "La musique recherchée a des effets de lumiere"
+      },
+      "lirics": {
+        "button": "Paroles",
+        "help": "La musique recherchée affiche ses paroles"
+      },
+      "arrangement": {
+        "label": "Arrangement :",
+        "rhythm": "Rhythmique",
+        "lead": "Guitare principale",
+        "bass": "Basse"
+      },
+      "reset": "Vider les champs",
+      "submit": "Rechercher"
+    }
+  },
+  "order": {
+    "by": "Ranger la liste par :",
+    "values": {
+      "title": "Titre",
+      "album": "Album",
+      "artist": "Artiste",
+      "new": "Nouveauté"
+    }
+  },
+  "song": {
+    "duration": "Durée de la musique",
+    "showlight": "Cette musique a des effets de lumiere",
+    "quickCopy": "Copier la commande",
+    "noMeta": "Aucune information additionnelle",
+    "prebuild": {
+      "output": "Command output",
+      "copy": "Copier la commande",
+      "copied": "Commande copiée",
+      "vip": "faire une request VIP",
+      "regular": "faire une request normal",
+      "request": "faire une request",
+      "edit": "éditer un requete"
+    },
+    "tags": {
+      "Officielle": "Officielle"
     }
   }
 }

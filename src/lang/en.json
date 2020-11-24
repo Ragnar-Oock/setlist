@@ -1,9 +1,89 @@
 {
   "message": "salut i18n !!",
-  "rules": {
-    "title": "The rules",
-    "list": {
-      "tos": "The request of a song imply the"
+  "rules": "## The rules\nStandard requests are performed in random order, and VIP requests are played in order.\n\nA moderator can ask you to change your request for various reasons that can be but are not limited to:\n- the song has been played already during the current stream\n- the tunning is not achievable with the hardware on hand\n- the link to the chart is dead\n- the song is poorly charted\n- the chart is too hard to perform  \nNot complying with the injunction of the moderator will result in your request being blocked.\n\nYour request is automatically removed from the playlist if you were absent for a prolonged period.\n\nNot respecting the rules will lead to the blocking of the request. Any repeated infraction will lead to sanctions at the discretion of the moderators (removing of your request, temporary or definitive banishment on the chat... )",
+  "tuto": "## How to request?\nIf you find the song you'd like to request open its card, copy the command at the bottom, and past it in the Twitch chat during a stream.\n\n**Want a specific arrangement?**  \nClick it on the list.\n\n**Want to make a VIP request?**  \nClick on the diamond on the left of the field.\n\n**Want to edit your previous request?**  \nClick on the pen on the left of the field.",
+  "welcome" : {
+    "message": {
+      "part1": "Have a look, who knows...",
+      "part2": "You may find something you'd like."
+    },
+    "see": "See for yourself",
+    "scrolldown": "Scrolldown"
+  },
+  "search": {
+    "label": "Search a song",
+    "placeholder": "Search a song, an artist...",
+    "submit": "Search",
+    "filters": "Filters",
+    "suggestion": {
+      "artists": "Artists",
+      "songs": "Songs"
+    },
+    "advenced": {
+      "lastInterpretation": {
+        "title": "Last interpretation (in days)",
+        "help": "Number of days since the music was last played<br>100 equals to neverplayed",
+        "min": "Lower bound",
+        "max": "Upper bound"
+      },
+      "InterpretationNumber": {
+        "title": "Number of interpretation",
+        "min": "Lower bound",
+        "max": "Upper bound"
+      },
+      "score": {
+        "title": "Score",
+        "min": "Lower bound",
+        "max": "Upper bound"
+      },
+      "dlc": {
+        "official": "Officials",
+        "cdlc": "CDLC",
+        "help": "Display only official songs of the game, only songs from the community or all songs."
+      },
+      "light": {
+        "button": "Show lights",
+        "help": "The researched song have show lights"
+      },
+      "lirics": {
+        "button": "Lyrics",
+        "help": "The researched song displays its lyrics"
+      },
+      "arrangement": {
+        "label": "Arrangement :",
+        "rhythm": "rhythm",
+        "lead": "Lead",
+        "bass": "Bass"
+      },
+      "reset": "Reset",
+      "submit": "Search"
+    }
+  },
+  "order": {
+    "by": "Order the list by :",
+    "values": {
+      "title": "Title",
+      "album": "Album",
+      "artist": "Artist",
+      "new": "New"
+    }
+  },
+  "song": {
+    "duration": "Song duration",
+    "showlight": "This song have light's effects",
+    "quickCopy": "Copy command",
+    "noMeta": "No additionnal info",
+    "prebuild": {
+      "output": "Command output",
+      "copy": "Copy command",
+      "copied": "Command copied",
+      "vip": "Make a VIP request",
+      "regular": "Make a regular request",
+      "request": "Make a request",
+      "edit": "Edit a request"
+    },
+    "tags": {
+      "Officielle": "Official"
     }
   }
 }
