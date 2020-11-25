@@ -12,6 +12,7 @@
 				name="lang"
 				:value="key"
 				class="lang-selector__input"
+				@change="change"
 			>
 			<label
 				v-tippy="{placement: 'bottom'}"
@@ -42,6 +43,11 @@ export default {
 		return {
 			supportedLocales
 		};
+	},
+	methods:{
+		change() {
+			localStorage.setItem('langLocal', this.$i18n.locale);
+		}
 	}
 };
 

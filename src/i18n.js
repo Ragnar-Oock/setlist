@@ -42,10 +42,22 @@ export function getBrowserLocale(options = {}) {
 	return trimmedLocale;
 }
 
+export function getSavedLocal() {
+	return localStorage.getItem('langLocal') || '';
+}
+
 function getStartingLocale() {
 	const browserLocale = getBrowserLocale({ countryCodeOnly: true });
+	const savedLocale = getSavedLocal();
 
-	if (supportedLocalesInclude(browserLocale)) {
+	// if a lang was shousen by the user use it
+	// otherwise use the browser local
+	// fallback to the app local if previous options are not satifisable
+	// if everithing else fail, use french
+	if (savedLocale !== '' && supportedLocalesInclude(savedLocale)) {
+		return savedLocale;
+	}
+	else if (supportedLocalesInclude(browserLocale)) {
 		return browserLocale;
 	}
 	else {
