@@ -1,14 +1,25 @@
 <template>
 	<section class="lang-selector">
-		<select v-model="$i18n.locale">
-			<option
-				v-for="(value, key) in supportedLocales"
-				:key="key"
+		<div
+			v-for="(value, key) in supportedLocales"
+			:key="key"
+			class="lang-selector__item"
+		>
+			<input
+				:id="key"
+				v-model="$i18n.locale"
+				type="radio"
+				name="lang"
 				:value="key"
+				class="lang-selector__input"
 			>
-				{{ value }}
-			</option>
-		</select>
+			<label
+				v-tippy="{placement: 'bottom'}"
+				:for="key"
+				:content="value"
+				class="lang-selector__label"
+			>{{ key | toUpper }}</label>
+		</div>
 	</section>
 </template>
 
@@ -18,6 +29,15 @@ import { supportedLocales } from '@/lang/supported';
 
 export default {
 	name: 'LangSelector',
+	filters: {
+		toUpper: function (value) {
+			if (!value) {
+				return '';
+			}
+
+			return value.toString().toUpperCase();
+		}
+	},
 	data () {
 		return {
 			supportedLocales
@@ -28,10 +48,53 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .lang-selector {
-		&__button {
-			border: groove 5px lime;
+		display: flex;
+		color: var(--text);
+
+		&__input{
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			padding: 0;
+			margin: -1px;
+			overflow: hidden;
+			clip: rect(0, 0, 0, 0);
+			white-space: nowrap;
+			border: 0;
+		}
+
+		&__label {
+			padding: .25em .5em;
+			border-radius: 5px;
+			cursor: pointer;
+			border: thin solid transparent;
+
+			&:hover {
+				border-color: var(--counter-text);
+			}
+		}
+
+		&__item + &__item{
+			position: relative;
+			margin-left: calc(.5em + 3px);
+
+			&::before {
+				content: '';
+				position: absolute;
+				display: block;
+				width: 3px;
+				height: calc(100% + .5em);
+				top: -.25em;
+				left: calc(-.25em - 3px);
+				border-radius: 100px;
+				background-color: #fff;
+			}
+		}
+
+		&__input:checked + &__label {
+			background-color: var(--primary-1);
 		}
   }
 </style>
