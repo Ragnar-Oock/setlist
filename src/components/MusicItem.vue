@@ -513,7 +513,6 @@ export default {
 		&.openned {
 			min-height: 300px;
 			max-height: 300px;
-			max-width: 100%;
 			max-width: 80ch;
 		}
 
