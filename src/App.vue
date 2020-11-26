@@ -12,8 +12,6 @@
 		<div class="setlist">
 			<SearchBar @docked="isSearchBarDocked=$event" />
 
-			{{ songList.length }}
-
 			<RecycleScroller
 				class="scroller"
 				:items="songList"
@@ -76,6 +74,7 @@ export default {
 	},
 	mounted() {
 		document.getElementsByTagName('html')[0].classList.toggle('dark', this.isDarkModeOn);
+		document.documentElement.scroll({ top:0 });
 
 		this.$store
 			.dispatch('getSongList')
