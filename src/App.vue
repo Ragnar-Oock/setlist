@@ -122,6 +122,14 @@ export default {
 		scroll-behavior: smooth;
 	}
 
+	.tippy-tooltip {
+		color: var(--text);
+
+		.tippy-backdrop{
+			background-color: var(--filler-1);
+		}
+	}
+
 	.setlist {
 		margin: 0 auto;
 		padding: 3em .25em 50vh;
