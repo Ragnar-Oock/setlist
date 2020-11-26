@@ -10,12 +10,12 @@
 			@scroll="calculatedBorders"
 		>
 			<div
-				v-for="(arrangement, key, index) in list"
-				:key="key"
+				v-for="(arrangement, index) in list"
+				:key="index"
 				class="arrangement__item"
 			>
 				<input
-					:id="'arrangement-'+id+'-'+key"
+					:id="'arrangement-'+id+'-'+index"
 					type="checkbox"
 					:name="'arrangement-'+id"
 					:value="selected(index)"
@@ -25,7 +25,7 @@
 				>
 				<label
 					class="arrangements__label"
-					:for="'arrangement-'+id+'-'+key"
+					:for="'arrangement-'+id+'-'+index"
 				>
 					{{ arrangement.name }}
 					<transition
@@ -89,7 +89,7 @@ export default {
 	data () {
 		return {
 			open: false,
-			selectedIndex: undefined,
+			selectedIndex: -1,
 			id: this.uuid(),
 			scrollableToLeft: false,
 			scrollableToRight: false
@@ -102,13 +102,13 @@ export default {
 				this.$emit('input', this.select);
 			},
 			get() {
-				return this.selectedIndex >= 0 ? Object.values(this.list)[this.selectedIndex].Name : '';
+				return this.selectedIndex >= 0 ? this.list[this.selectedIndex].name : '';
 			}
 		}
 	},
 	watch: {
 		value(newValue) {
-			this.selectedIndex = Object.values(this.list).findIndex(e => e.Name === newValue);
+			this.selectedIndex = this.list.findIndex(e => e.name === newValue);
 		}
 	},
 	mounted() {
