@@ -10,7 +10,7 @@ Vue.config.productionTip = false;
 store.commit('RELOAD_FROM_LOCALSTORAGE');
 store.subscribe((mutation, state) => {
 	try {
-		localStorage.setItem('store', JSON.stringify(state));
+		localStorage.setItem('percistantStorage', JSON.stringify(state.percist));
 	}
 	catch (error) {
 		// may log an error on safary if setItem fail

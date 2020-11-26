@@ -1,7 +1,9 @@
 const state = {
-	darkMode: false,
 	songs: [],
-	page: 0
+	page: 0,
+	percist: {
+		darkMode: false
+	}
 };
 
 export default state;

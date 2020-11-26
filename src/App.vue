@@ -33,7 +33,7 @@ import MusicItem from './components/MusicItem';
 import list from './dummy/list.json';
 import debounce from 'debounce';
 
-import { mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
 	name: 'App',
@@ -52,9 +52,11 @@ export default {
 	},
 	computed:{
 		...mapState({
-			isDarkModeOn: 'darkMode',
 			songList: 'songs'
-		})
+		}),
+		...mapGetters([
+			'isDarkModeOn'
+		])
 	},
 	watch: {
 		isDarkModeOn() {

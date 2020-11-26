@@ -94,7 +94,7 @@ export default {
 	computed: {
 		isDarkModeOn: {
 			get() {
-				return this.$store.state.darkMode;
+				return this.$store.getters.isDarkModeOn;
 			},
 			set(newValue) {
 				this.$store.commit('SET_DARK_MODE', newValue);

@@ -1,6 +1,8 @@
+import defaultState from './state';
+
 const mutations = {
 	SET_DARK_MODE(state, isEnabled) {
-		state.darkMode = isEnabled;
+		state.percist.darkMode = isEnabled;
 	},
 
 	/**
@@ -19,6 +21,7 @@ const mutations = {
 	 */
 	SET_SONG_LIST(state, songList) {
 		state.songs = songList;
+		state.pag = 1;
 	},
 
 	INCREMENT_PAGE(state) {
@@ -28,28 +31,11 @@ const mutations = {
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {
-		const localStore = JSON.parse(localStorage.getItem('store'));
+		const localStore = JSON.parse(localStorage.getItem('percistantStorage'));
 
-		// following commented code is used to validate a JSON Web Token to check if the retrieved data should be restored or not
-		// if (localStorage.getItem('store')) {
-		// 	let tokenHasExpired = false;
+		state.percist = localStore || defaultState.percist;
 
-		// 	try {
-		// 		const token = localStore.token;
-		// 		const base64Url = token.split('.')[1];
-		// 		const base64Content = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-		// 		const payload = JSON.parse(atob(base64Content));
-
-		// 		tokenHasExpired = payload && (payload.exp < Date.now() / 1000);
-		// 	}
-		// 	catch (e) {
-		// 		tokenHasExpired = true;
-		// 	}
-
-		// 	if (!tokenHasExpired) {
-		this.replaceState(Object.assign(state, localStore));
-		// 	}
-		// }
+		console.log('%c setlist %c store %c   Realoaded precistent state', 'background: #583A94; color:#fff; border-radius:3px 0 0 3px', 'background: lime; color:#404040; border-radius:0 3px 3px 0', 'background: none');
 	}
 };
 
