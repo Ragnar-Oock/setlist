@@ -12,11 +12,15 @@
 		<div class="setlist">
 			<SearchBar @docked="isSearchBarDocked=$event" />
 			<MusicItem
-				v-for="(music, index) in list"
+				v-for="(music, index) in songList"
 				:key="index"
 				:data="music"
 			/>
 		</div>
+		<div
+			id="bottom"
+			ref="bottom"
+		/>
 	</div>
 </template>
 
@@ -27,6 +31,7 @@ import RulesPage from './components/RulesPage';
 import SearchBar from './components/SearchBar';
 import MusicItem from './components/MusicItem';
 import list from './dummy/list.json';
+import debounce from 'debounce';
 
 import { mapState } from 'vuex';
 
@@ -47,7 +52,8 @@ export default {
 	},
 	computed:{
 		...mapState({
-			isDarkModeOn: 'darkMode'
+			isDarkModeOn: 'darkMode',
+			songList: 'songs'
 		})
 	},
 	watch: {
@@ -57,6 +63,47 @@ export default {
 	},
 	mounted() {
 		document.getElementsByTagName('html')[0].classList.toggle('dark', this.isDarkModeOn);
+
+		this.$store
+			.dispatch('getSongList')
+			.catch(e => {
+				console.error(e);
+			});
+
+		const debouncedFunc = debounce(() => this.getMoreSongs(), 500, true);
+
+		const options = {
+			rootMargin: '0px 0px 1000px 0px',
+			threshold: 1
+		};
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				// let the advenced search open when scrolled past
+				if (entry.isIntersecting) {
+					// console.log('intersect', entry);
+					// alert(1)
+
+					debouncedFunc();
+				}
+
+				/*
+				// close the advenced search when scrolled past
+				// if the bar just docked close the advenced search, if the bar undocked don't change the value
+				this.isAdvencedSearchOpen = this.isSearchbarDocked ? false : this.isAdvencedSearchOpen;
+				*/
+			});
+		}, options);
+
+		observer.observe(this.$refs.bottom);
+	},
+	methods: {
+		getMoreSongs() {
+			this.$store
+				.dispatch('getMoreSongs')
+				.catch(e => {
+					console.error(e);
+				});
+		}
 	}
 };
 </script>

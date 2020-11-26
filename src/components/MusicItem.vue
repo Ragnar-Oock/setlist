@@ -23,14 +23,14 @@
 					:key="openned"
 					class="music-item__title"
 				>
-					{{ data.title }}
+					{{ data.name }}
 				</p>
 				<p
 					v-else
 					key="closed"
 					class="music-item__title"
 				>
-					{{ data.title }}
+					{{ data.name }}
 				</p>
 				<hr class="music-item__hr">
 				<p
@@ -43,7 +43,7 @@
 			</div>
 			<div class="music-item__col-right">
 				<svg
-					v-if="data.showlight"
+					v-if="data.showlights"
 					key="off"
 					v-tippy="{placement: 'bottom'}"
 					:content="$t('song.showlight')"
@@ -127,12 +127,14 @@
 				class="music-item__body"
 			>
 				<div
-					v-if="haveTags || data.showlight"
+					v-if="haveTags || data.showlights"
 					class="music-item__section music-item__head"
 				>
 					<div
+						v-if="haveTags"
 						class="music-item__tags"
 					>
+						lzfiydhgzlisdfyhg
 						<div
 							v-for="(tag, index) in data.tags"
 							:key="index"
@@ -143,7 +145,7 @@
 						</div>
 					</div>
 					<div
-						v-if="data.showlight"
+						v-if="data.showlights"
 						v-tippy="{placement: 'right'}"
 						class="music-item__showlight"
 						:content="$t('song.showlight')"
@@ -258,11 +260,11 @@
 					</button>
 
 					<label
-						:for="id+'output'"
+						:for="data.id+'output'"
 						class="sr-only"
 					>{{ $t('song.prebuild.output') }}</label>
 					<input
-						:id="id+'output'"
+						:id="data.id+'output'"
 						ref="output"
 						class="music-item__output"
 						type="text"
@@ -310,14 +312,12 @@
 
 <script lang="js">
 import ArrangementList from '@/components/ArrangementList';
-import mixins from '@/mixins';
 
 export default {
 	name: 'MusicItem',
 	components: {
 		ArrangementList
 	},
-	mixins: [mixins],
 	props: {
 		data: { type: Object, required: true }
 	},
@@ -328,8 +328,7 @@ export default {
 			edit: false,
 			showTooltip: false,
 			isQuickCopyCliked: false,
-			selectedArrangement: '',
-			id: this.uuid()
+			selectedArrangement: ''
 		};
 	},
 	computed: {
@@ -356,7 +355,7 @@ export default {
 				}
 			}
 
-			return `!${ command } ${ this.data.title } - ${ this.data.artiste } ${ this.selectedArrangement !== '' ? `*${ this.selectedArrangement }` : '' }`;
+			return `!${ command } ${ this.data.name } - ${ this.data.artist } ${ this.selectedArrangement !== '' ? `*${ this.selectedArrangement }` : '' }`;
 		},
 		vipToggleTitle() {
 			return this.vip ? this.$t('song.prebuild.regular') : this.$t('song.prebuild.vip');
@@ -377,7 +376,7 @@ export default {
 			return duration;
 		},
 		source() {
-			return `${ this.data.artiste ? this.data.artiste : '' }${ this.data.artiste && this.data.album ? ' - ' : '' }${ this.data.album ? this.data.album : '' }`;
+			return `${ this.data.artiste || '' }${ this.data.artiste && this.data.album ? ' - ' : '' }${ this.data.album || '' }`;
 		}
 	},
 	watch: {
@@ -392,10 +391,18 @@ export default {
 			this.openned = !this.openned;
 		},
 		i18nFallback(key) {
-			const template = `song.tags.${ key }`;
-			const i18n = this.$t(template);
+			if (key) {
+				const template = `song.tags.${ key }`;
 
-			return i18n !== template ? i18n : key.replace('-', ' ');
+				const i18n = this.$t(template);
+
+				return i18n !== template ? i18n : key;
+			}
+			else {
+				return '';
+			}
+
+			// return i18n !== template ? i18n : key.replace('-', ' ');
 		},
 		/**
 		 * infer the font color from the background color to maximise the contrast
@@ -717,6 +724,8 @@ export default {
 			height: 0;
 			display: block;
 			width: max-content;
+			width: 42px;
+			text-align: center;
 		}
 
 		&__col-left &__duration {

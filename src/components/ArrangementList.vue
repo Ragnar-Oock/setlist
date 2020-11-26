@@ -27,7 +27,7 @@
 					class="arrangements__label"
 					:for="'arrangement-'+id+'-'+key"
 				>
-					{{ arrangement.Name }}
+					{{ arrangement.name }}
 					<transition
 						name="slide-fade"
 					>
@@ -35,7 +35,7 @@
 							v-if="open"
 							class="arrangements__tunning"
 						>
-							: {{ arrangement.tunning }}
+							: {{ arrangement.tuning }}
 						</span>
 					</transition>
 				</label>
@@ -76,7 +76,7 @@ export default {
 	mixins: [mixins],
 	props: {
 		list: {
-			type: Object,
+			type: Array,
 			required: false,
 			default: () => ({})
 		},

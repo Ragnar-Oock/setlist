@@ -12,6 +12,7 @@
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "css-reset-and-normalize": "^2.1.0",
+    "debounce": "^1.2.0",
     "js-cookie": "^2.2.1",
     "marked": "^1.2.0",
     "moment": "^2.27.0",
