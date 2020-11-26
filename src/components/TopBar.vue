@@ -3,10 +3,10 @@
 		class="top-bar"
 		:class="{'docked': isSearchBarDocked}"
 	>
-		<LangSelector />
+		<LangSelector class="top-bar__item" />
 		<label
 			for="darkMode"
-			class="top-bar__label"
+			class="top-bar__label top-bar__item"
 			:class="{'checked': isDarkModeOn}"
 		>
 			<input
@@ -130,6 +130,15 @@ export default {
 		padding: 0 2em;
 		transition: background-image 300ms ease-in-out;
 
+		&__item {
+			transition: opacity 300ms ease-in-out;
+			@media screen and (max-width: 63.75em) {
+				@at-root .docked & {
+					opacity: 0;
+				}
+			}
+		}
+
 
 		&__label {
 			display: flex;
@@ -139,13 +148,6 @@ export default {
 			border-radius: 5px;
 			cursor: pointer;
 			margin-left: auto;
-			transition: opacity 300ms ease-in-out;
-
-			@media screen and (max-width: 58.25rem) {
-				@at-root .docked & {
-					opacity: 0;
-				}
-			}
 		}
 
 		&__horizon {
