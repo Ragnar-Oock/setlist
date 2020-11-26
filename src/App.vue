@@ -11,11 +11,21 @@
 
 		<div class="setlist">
 			<SearchBar @docked="isSearchBarDocked=$event" />
-			<MusicItem
-				v-for="(music, index) in songList"
-				:key="index"
-				:data="music"
-			/>
+
+			{{ songList.length }}
+
+			<RecycleScroller
+				class="scroller"
+				:items="songList"
+				:item-size="75"
+				key-field="id"
+			>
+				<template v-slot="{ item }">
+					<MusicItem
+						:data="item"
+					/>
+				</template>
+			</RecycleScroller>
 		</div>
 		<div
 			id="bottom"
@@ -30,8 +40,9 @@ import TopBar from './components/TopBar';
 import RulesPage from './components/RulesPage';
 import SearchBar from './components/SearchBar';
 import MusicItem from './components/MusicItem';
-import list from './dummy/list.json';
+import { RecycleScroller } from 'vue-virtual-scroller';
 import debounce from 'debounce';
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
 import { mapGetters, mapState } from 'vuex';
 
@@ -42,11 +53,11 @@ export default {
 		TopBar,
 		RulesPage,
 		MusicItem,
+		RecycleScroller,
 		SearchBar
 	},
 	data () {
 		return {
-			list: list,
 			isSearchBarDocked: false
 		};
 	},
@@ -72,7 +83,7 @@ export default {
 				console.error(e);
 			});
 
-		const debouncedFunc = debounce(() => this.getMoreSongs(), 500, true);
+		const debouncedFunc = debounce(() => this.getMoreSongs(), 100, true);
 
 		const options = {
 			rootMargin: '0px 0px 1000px 0px',
@@ -82,9 +93,6 @@ export default {
 			entries.forEach(entry => {
 				// let the advenced search open when scrolled past
 				if (entry.isIntersecting) {
-					// console.log('intersect', entry);
-					// alert(1)
-
 					debouncedFunc();
 				}
 
@@ -120,6 +128,10 @@ export default {
 		overflow-x: hidden;
 		width: 100%;
 		scroll-behavior: smooth;
+	}
+
+	.scroller {
+		min-height: 100vh;
 	}
 
 	.tippy-tooltip {
