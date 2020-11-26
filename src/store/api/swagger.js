@@ -34,6 +34,16 @@ function parseSwagger (yamlDoc) {
 
 				if (parameters) {
 					parameters.forEach(parameter => {
+						if (parameter.$ref) {
+							const location = parameter.$ref.slice(2).split('/');
+							let fragment = obj;
+
+							location.forEach(segment => {
+								fragment = fragment[segment];
+							});
+							parameter = fragment;
+						}
+
 						if (parameter.required) {
 							if (parameter.in === 'path') {
 								params.push(parameter.name);
