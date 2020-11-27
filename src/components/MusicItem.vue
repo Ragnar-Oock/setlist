@@ -467,6 +467,9 @@ export default {
 			this.$refs.output.select();
 			document.execCommand('copy');
 			this.idState.showTooltip = true;
+			setTimeout(() => {
+				this.idState.showTooltip = false;
+			}, 1500);
 
 			this.$nextTick().then(() => {
 				this.$refs.copyButton.focus();
