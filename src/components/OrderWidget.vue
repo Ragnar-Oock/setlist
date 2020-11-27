@@ -4,24 +4,24 @@
 			{{ $t('order.by') }}
 		</p>
 		<button
-			v-for="(val, key) in orderBy"
-			:id="key"
-			:key="key"
-			:class="orderBy[key]"
+			v-for="(item, index) in orderBy"
+			:id="index"
+			:key="index"
+			:class="item.direction"
 			class="order-widget__btn"
-			@click="cicleOrderBy(key)"
+			@click="cycleOrderBy(index)"
 		>
-			{{ $t('order.values.'+key) }}
+			{{ $t('order.values.' + item.name) }}
 			<span
-				v-if="orderBy.hasOwnProperty(key)"
+				v-if="orderBy.direction !== ''"
 				class="order-widget__direction sr-only"
-				:class="orderBy[key]"
-			>{{ orderBy[key] }}</span>
+				:class="item.direction"
+			>{{ item.direction }}</span>
 			<svg
 				aria-hidden="true"
 				class="order-widget__arrow"
 				version="1.1"
-				viewBox="0 0 16 9.4999"
+				viewBox="0 0 16 9.5"
 				xmlns="http://www.w3.org/2000/svg"
 			><path
 				class="a"
@@ -42,14 +42,14 @@ export default {
 	name: 'OrderWidget',
 	props: {
 		value: {
-			type: Object,
-			default: () => ({}),
+			type: Array,
+			default: () => ([]),
 			required: false
 		}
 	},
 	data () {
 		return {
-			orderBy: {}
+			orderBy: []
 		};
 	},
 	watch: {
@@ -61,15 +61,39 @@ export default {
 		this.orderBy = this.value;
 	},
 	methods: {
-		cicleOrderBy(target) {
-			if (typeof this.orderBy[target] === 'undefined' || this.orderBy[target] === '') {
-				this.$set(this.orderBy, target, 'ASC');
+		cycleOrderBy(index) {
+			// cycle the order direction of the clicked element
+			// and make its weight the maximum
+			switch (this.orderBy[index].direction) {
+				// no order => ASC
+				case '':
+					this.orderBy[index].direction = 'ASC';
+					this.orderBy[index].weight = this.orderBy.length - 1;
+					break;
+
+				// ASC => DESC
+				case 'ASC':
+					this.orderBy[index].direction = 'DESC';
+					this.orderBy[index].weight = this.orderBy.length - 1;
+					break;
+
+				// DESC => no order
+				case 'DESC':
+					this.orderBy[index].direction = '';
+					this.orderBy[index].weight = 0;
+					break;
+
+				default:
+					break;
 			}
-			else if (this.orderBy[target] === 'ASC') {
-				this.orderBy[target] = 'DESC';
-			}
-			else {
-				this.orderBy[target] = '';
+
+			// shave the weight of all other direction
+			for (let i = 0; i < this.orderBy.length; i++) {
+				if (i !== index) {
+					const w = this.orderBy[i].weight;
+
+					this.orderBy[i].weight = w > 0 ? w - 1 : 0;
+				}
 			}
 
 			this.$emit('input', this.orderBy);

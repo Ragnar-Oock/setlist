@@ -349,12 +349,6 @@ export default {
 			score: [0, 100],
 			scoreMin: 0,
 			scoreMax: 100,
-			orderBy: {
-				title: '',
-				album: '',
-				artist: '',
-				new: ''
-			},
 			suggestionsArtists: [
 				'A Day To Remember',
 				'A Nanana',
@@ -389,6 +383,14 @@ export default {
 	computed: {
 		showSuggestions() {
 			return (this.isInputFocused || this.isSuggestionFocused) && this.search !== '';
+
+		orderBy: {
+			get() {
+				return this.$store.state.orderBy;
+			},
+			set(newValue) {
+				this.$store.commit('SET_ORDER_BY', newValue);
+			}
 		}
 	},
 	watch: {

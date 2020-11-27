@@ -5,6 +5,10 @@ const mutations = {
 		state.percist.darkMode = isEnabled;
 	},
 
+	SET_ORDER_BY(state, orderBy) {
+		state.orderBy = orderBy;
+	},
+
 	/**
 	 * add a list of song at the end of the current list
 	 * @param {Object} state Vuex state
