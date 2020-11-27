@@ -1,4 +1,5 @@
 import defaultState from './state';
+import prettyLog from '@/helpers/methods';
 
 const mutations = {
 	SET_DARK_MODE(state, isEnabled) {
@@ -39,7 +40,7 @@ const mutations = {
 
 		state.percist = localStore || defaultState.percist;
 
-		console.log('%c setlist %c store %c   Realoaded precistent state', 'background: #583A94; color:#fff; border-radius:3px 0 0 3px', 'background: lime; color:#404040; border-radius:0 3px 3px 0', 'background: none');
+		prettyLog('setlist', 'store', 'Realoaded percistent state');
 	}
 };
 

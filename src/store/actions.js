@@ -1,4 +1,5 @@
 import SwaggerClient from 'swagger-client';
+import prettyLog from '@/helpers/methods';
 
 
 function getClient() {
@@ -20,7 +21,7 @@ function getClient() {
 const actions = {
 	async getSongList({ commit }) {
 		try {
-			console.log('%c setlist %c API %c   Loading songs', 'background: #583A94; color:#fff; border-radius:3px 0 0 3px', 'background: lightblue; color:#404040; border-radius:0 3px 3px 0', 'background: none');
+			prettyLog('setlist', 'API', 'Loading songs');
 			const client = await getClient();
 
 			const response = await client.apis.public.songs_get();
@@ -32,10 +33,11 @@ const actions = {
 			console.error(error);
 		}
 	},
+
 	async getMoreSongs({ commit, getters }) {
 		try {
 			if (getters.getPage > 0) {
-				console.log('%c setlist %c API %c   Loading more songs', 'background: #583A94; color:#fff; border-radius:3px 0 0 3px', 'background: lightblue; color:#404040; border-radius:0 3px 3px 0', 'background: none');
+				prettyLog('setlist', 'API', 'Loading more songs');
 
 				const client = await getClient();
 
@@ -46,7 +48,7 @@ const actions = {
 
 			}
 			else {
-				console.log('%c setlist %c API %c   no songs loaded waiting for first page', 'background: #583A94; color:#fff; border-radius:3px 0 0 3px', 'background: lightblue; color:#404040; border-radius:0 3px 3px 0', 'background: none');
+				prettyLog('setlist', 'API', 'First page of song not yet loaded, abord loading more songs');
 			}
 		}
 		catch (error) {
