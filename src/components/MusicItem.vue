@@ -362,7 +362,7 @@ export default {
 			return this.idState.vip ? this.$t('song.prebuild.regular') : this.$t('song.prebuild.vip');
 		},
 		editToggleTitle() {
-			return this.idState.edit ? this.$t('song.prebuild.rquest') : this.$t('song.prebuild.edit');
+			return this.idState.edit ? this.$t('song.prebuild.request') : this.$t('song.prebuild.edit');
 		},
 		duration() {
 			let duration;
