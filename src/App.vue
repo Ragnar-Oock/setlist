@@ -120,16 +120,9 @@ export default {
 		};
 		const observer = new IntersectionObserver(entries => {
 			entries.forEach(entry => {
-				// let the advenced search open when scrolled past
 				if (entry.isIntersecting) {
 					debouncedFunc();
 				}
-
-				/*
-				// close the advenced search when scrolled past
-				// if the bar just docked close the advenced search, if the bar undocked don't change the value
-				this.isAdvencedSearchOpen = this.isSearchbarDocked ? false : this.isAdvencedSearchOpen;
-				*/
 			});
 		}, options);
 
