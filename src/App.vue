@@ -11,11 +11,44 @@
 
 		<div class="setlist">
 			<SearchBar @docked="isSearchBarDocked=$event" />
-			<MusicItem
-				v-for="(music, index) in songList"
-				:key="index"
-				:data="music"
-			/>
+
+			<!-- <RecycleScroller
+				class="scroller"
+				:items="songList"
+				:item-size="75"
+				key-field="id"
+			>
+				<template v-slot="{ item }">
+					<MusicItem
+						:data="item"
+					/>
+				</template>
+			</RecycleScroller> -->
+
+			<DynamicScroller
+				class="scroller"
+				:items="songList"
+				:min-item-size="95"
+				key-field="id"
+				page-mode
+				:buffer="500"
+			>
+				<template v-slot="{ item, index, active }">
+					<DynamicScrollerItem
+						:item="item"
+						:active="active"
+						:size-dependencies="[
+							item.open
+						]"
+						:data-index="index"
+					>
+						<MusicItem
+							:data="item"
+							@open="open(index)"
+						/>
+					</DynamicScrollerItem>
+				</template>
+			</DynamicScroller>
 		</div>
 		<div
 			id="bottom"
@@ -30,7 +63,7 @@ import TopBar from './components/TopBar';
 import RulesPage from './components/RulesPage';
 import SearchBar from './components/SearchBar';
 import MusicItem from './components/MusicItem';
-import list from './dummy/list.json';
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import debounce from 'debounce';
 
 import { mapState } from 'vuex';
@@ -42,11 +75,12 @@ export default {
 		TopBar,
 		RulesPage,
 		MusicItem,
+		DynamicScroller,
+		DynamicScrollerItem,
 		SearchBar
 	},
 	data () {
 		return {
-			list: list,
 			isSearchBarDocked: false
 		};
 	},
@@ -103,6 +137,9 @@ export default {
 				.catch(e => {
 					console.error(e);
 				});
+		},
+		open(index) {
+			this.$store.commit('ACTIVATE_ITEM', index);
 		}
 	}
 };
