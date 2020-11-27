@@ -26,6 +26,10 @@ import i18n from './i18n';
 Vue.use(VueTippy);
 Vue.component('tippy', TippyComponent);
 
+
+// enable devtools in prod
+Vue.config.devtools = true;
+
 new Vue({
 	mixins: [mixins],
 	render: h => h(App),
