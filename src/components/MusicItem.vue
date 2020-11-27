@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="music-item"
-		:class="{'openned': openned, 'closed': !openned}"
+		:class="{'openned': idState.openned, 'closed': !idState.openned}"
 	>
 		<div
 			class="music-item__card"
@@ -11,7 +11,7 @@
 		>
 			<div class="music-item__col-left">
 				<span
-					v-if="duration && openned"
+					v-if="idState.duration && idState.openned"
 					v-tippy="{placement: 'right'}"
 					class="music-item__duration"
 					:content="$t('song.duration')"
@@ -19,22 +19,14 @@
 					{{ duration }}
 				</span>
 				<p
-					v-if="openned"
-					:key="openned"
-					class="music-item__title"
-				>
-					{{ data.name }}
-				</p>
-				<p
-					v-else
-					key="closed"
+					:key="idState.openned"
 					class="music-item__title"
 				>
 					{{ data.name }}
 				</p>
 				<hr class="music-item__hr">
 				<p
-					:key="openned+'source'"
+					:key="idState.openned+'source'"
 					class="music-item__source"
 				>
 					<span class="sr-only">by</span>
@@ -60,7 +52,7 @@
 					/>
 				</svg>
 				<span
-					v-if="duration && !openned"
+					v-if="duration && !idState.openned"
 					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
 					:content="$t('song.duration')"
@@ -88,8 +80,8 @@
 		<button
 			ref="quickCopyButton"
 			class="music-item__quick-copy"
-			:class="{'play': isQuickCopyCliked}"
-			:tabindex="openned?-1:0"
+			:class="{'play': idState.isQuickCopyCliked}"
+			:tabindex="idState.openned?-1:0"
 			@click="quickCopy"
 		>
 			<span class="music-item__quick-copy-text"><span>{{ $t('song.quickCopy') }}</span></span>
@@ -123,7 +115,7 @@
 			name="open"
 		>
 			<div
-				v-show="openned"
+				v-show="idState.openned"
 				class="music-item__body"
 			>
 				<div
@@ -134,7 +126,6 @@
 						v-if="haveTags"
 						class="music-item__tags"
 					>
-						lzfiydhgzlisdfyhg
 						<div
 							v-for="(tag, index) in data.tags"
 							:key="index"
@@ -196,7 +187,7 @@
 
 					<ArrangementList
 						v-if="data.arrangements"
-						v-model="selectedArrangement"
+						v-model="idState.selectedArrangement"
 						:list="data.arrangements"
 					/>
 				</div>
@@ -216,7 +207,7 @@
 							aria-hidden="true"
 						>
 							<use
-								v-if="vip"
+								v-if="idState.vip"
 								xlink:href="../assets/images/diamond-fill.svg#el"
 							/>
 							<use
@@ -246,7 +237,7 @@
 							class="search-bar__open-more-icon"
 						>
 							<use
-								v-if="edit"
+								v-if="idState.edit"
 								xlink:href="../assets/images/edit-fill.svg#el"
 							/>
 							<use
@@ -297,7 +288,7 @@
 						</div>
 						<transition name="in-out">
 							<div
-								v-if="showTooltip"
+								v-if="idState.showTooltip"
 								class="music-item__success"
 							>
 								{{ $t('song.prebuild.copied') }}
@@ -312,16 +303,24 @@
 
 <script lang="js">
 import ArrangementList from '@/components/ArrangementList';
+import { IdState } from 'vue-virtual-scroller';
 
 export default {
 	name: 'MusicItem',
 	components: {
 		ArrangementList
 	},
+	mixins: [
+		// eslint-disable-next-line new-cap
+		IdState({
+			// You can customize this
+			idProp: vm => vm.data.id
+		})
+	],
 	props: {
 		data: { type: Object, required: true }
 	},
-	data () {
+	idState () {
 		return {
 			openned: false,
 			vip: false,
@@ -338,8 +337,8 @@ export default {
 		command() {
 			let command;
 
-			if (this.vip) {
-				if (this.edit) {
+			if (this.idState.vip) {
+				if (this.idState.edit) {
 					command = 'vipedit';
 				}
 				else {
@@ -347,7 +346,7 @@ export default {
 				}
 			}
 			else {
-				if (this.edit) {
+				if (this.idState.edit) {
 					command = 'edit';
 				}
 				else {
@@ -355,13 +354,13 @@ export default {
 				}
 			}
 
-			return `!${ command } ${ this.data.name } - ${ this.data.artist } ${ this.selectedArrangement !== '' ? `*${ this.selectedArrangement }` : '' }`;
+			return `!${ command } ${ this.data.name } - ${ this.data.artist } ${ this.idState.selectedArrangement !== '' ? `*${ this.idState.selectedArrangement }` : '' }`;
 		},
 		vipToggleTitle() {
-			return this.vip ? this.$t('song.prebuild.regular') : this.$t('song.prebuild.vip');
+			return this.idState.vip ? this.$t('song.prebuild.regular') : this.$t('song.prebuild.vip');
 		},
 		editToggleTitle() {
-			return this.edit ? this.$t('song.prebuild.rquest') : this.$t('song.prebuild.edit');
+			return this.idState.edit ? this.$t('song.prebuild.rquest') : this.$t('song.prebuild.edit');
 		},
 		duration() {
 			let duration;
@@ -382,13 +381,14 @@ export default {
 	watch: {
 		showTooltip() {
 			setTimeout(() => {
-				this.showTooltip = false;
+				this.idState.showTooltip = false;
 			}, 1500);
 		}
 	},
 	methods: {
 		toggleMusic() {
-			this.openned = !this.openned;
+			this.idState.openned = !this.idState.openned;
+			this.$emit('open', this.idState.openned);
 		},
 		i18nFallback(key) {
 			if (key) {
@@ -458,15 +458,15 @@ export default {
 			return colorToBW(invertColor(bgc));
 		},
 		toggleVip() {
-			this.vip = !this.vip;
+			this.idState.vip = !this.idState.vip;
 		},
 		toggleEdit() {
-			this.edit = !this.edit;
+			this.idState.edit = !this.idState.edit;
 		},
 		copy() {
 			this.$refs.output.select();
 			document.execCommand('copy');
-			this.showTooltip = true;
+			this.idState.showTooltip = true;
 
 			this.$nextTick().then(() => {
 				this.$refs.copyButton.focus();
@@ -481,13 +481,13 @@ export default {
 				this.$refs.quickCopyButton.style.setProperty('--mouse-y', `${ $event.layerY }px`);
 			}
 
-			this.isQuickCopyCliked = true;
+			this.idState.isQuickCopyCliked = true;
 
 			this.$nextTick().then(() => {
 				this.$refs.copyButton.focus();
 			});
 			setTimeout(() => {
-				this.isQuickCopyCliked = false;
+				this.idState.isQuickCopyCliked = false;
 				this.$refs.quickCopyButton.style.setProperty('--mouse-x', '50%');
 				this.$refs.quickCopyButton.style.setProperty('--mouse-y', '50%');
 			}, 500);

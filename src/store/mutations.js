@@ -33,6 +33,13 @@ const mutations = {
 		state.page += 1;
 	},
 
+	ACTIVATE_ITEM(state, index) {
+		state.songs[index].open = true;
+		setTimeout(() => {
+			state.songs[index].open = false;
+		}, 500);
+	},
+
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {
