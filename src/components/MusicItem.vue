@@ -130,9 +130,9 @@
 							v-for="(tag, index) in data.tags"
 							:key="index"
 							class="music-item__tag"
-							:style="{'background-color': tag.color, 'color': calcColor(tag.color)}"
+							:style="{'background-color': '#'+tag.color, 'color': calcColor(tag.color)}"
 						>
-							{{ i18nFallback(tag.title) }}
+							{{ i18nFallback(tag.name) }}
 						</div>
 					</div>
 					<div
