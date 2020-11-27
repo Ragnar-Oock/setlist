@@ -161,6 +161,9 @@ export default {
 	.scroller {
 		min-height: 100vh;
 	}
+	[data-index] {
+		padding-bottom: .5em;
+	}
 
 	.tippy-tooltip {
 		color: var(--text);

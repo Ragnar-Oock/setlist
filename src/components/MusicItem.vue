@@ -505,7 +505,7 @@ export default {
 		height: auto;
 		max-height: 67px;
 		max-width: 60ch;
-		margin: 0 auto .5em;
+		margin: 0 auto;
 		display: flex;
 		transition: 300ms ease-in-out;
 		transition-property: min-height, max-height, max-width;
