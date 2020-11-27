@@ -382,7 +382,9 @@ export default {
 	},
 	computed: {
 		showSuggestions() {
-			return (this.isInputFocused || this.isSuggestionFocused) && this.search !== '';
+			// return (this.isInputFocused || this.isSuggestionFocused) && this.search !== '';
+			return false;
+		},
 
 		orderBy: {
 			get() {
