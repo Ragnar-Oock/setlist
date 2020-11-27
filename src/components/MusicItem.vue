@@ -1,7 +1,8 @@
 <template>
 	<div
+		ref="root"
 		class="music-item"
-		:class="{'openned': idState.openned, 'closed': !idState.openned}"
+		:class="{'openned': idState.openned, 'closed': !idState.openned, 'hidden': idState.hidden}"
 	>
 		<div
 			class="music-item__card"
@@ -327,7 +328,8 @@ export default {
 			edit: false,
 			showTooltip: false,
 			isQuickCopyCliked: false,
-			selectedArrangement: ''
+			selectedArrangement: '',
+			hidden: true
 		};
 	},
 	computed: {
@@ -378,12 +380,26 @@ export default {
 			return `${ this.data.artiste || '' }${ this.data.artiste && this.data.album ? ' - ' : '' }${ this.data.album || '' }`;
 		}
 	},
-	watch: {
-		showTooltip() {
-			setTimeout(() => {
-				this.idState.showTooltip = false;
-			}, 1500);
-		}
+	mounted() {
+		const options = {
+			rootMargin: '0px 0px 0px 0px',
+			threshold: 1
+		};
+		const io = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					this.idState.hidden = false;
+					if (this.$refs.root.contains(document.activeElement)) {
+						document.activeElement.blur();
+					}
+				}
+				else {
+					this.idState.hidden = true;
+				}
+			}, options);
+		});
+
+		io.observe(this.$refs.root);
 	},
 	methods: {
 		toggleMusic() {
@@ -502,6 +518,21 @@ export default {
 </script>
 
 <style lang="scss">
+	// disable any transition/animation if the component is not visible
+	.hidden,
+	.hidden *,
+	.hidden *::before,
+	.hidden *::after
+	{
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+	}
+
   .music-item {
 		position: relative;
 		min-height: 67px;
