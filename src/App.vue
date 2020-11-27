@@ -3,6 +3,10 @@
 		id="app"
 		class="app"
 	>
+		<div class="beta">
+			THIS IS A BETA VERSION
+		</div>
+
 		<WelcomeScreen />
 
 		<TopBar :is-search-bar-docked="isSearchBarDocked" />
@@ -156,6 +160,17 @@ export default {
 		overflow-x: hidden;
 		width: 100%;
 		scroll-behavior: smooth;
+	}
+
+	.beta {
+		font-size: 1.2em;
+		background-color: red;
+		position: fixed;
+		z-index: 9999;
+		padding: 0.5em 1em;
+		border-radius: 0.4em;
+		left: 1em;
+		bottom: 1em;
 	}
 
 	.scroller {
