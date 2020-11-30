@@ -21,10 +21,17 @@ const getters = {
 				returnString += `,${ dir }${ column.name }`;
 			}
 		});
+		if (returnString.length > 0) {
+			return returnString.slice(1);
+		}
+		else {
+			return '';
+		}
 
-		return returnString.slice(1);
 	},
-	getOrderBy: state => state.percist.orderBy
+	getOrderBy: state => state.percist.orderBy,
+	getSeed: state => state.orderByRandomSeed,
+	getOrderByOrSeed: (_, otherGetters) => (otherGetters.getOrderByAsText === '' ? { seed: otherGetters.getSeed } : { orderby: otherGetters.getOrderByAsText })
 };
 
 export default getters;

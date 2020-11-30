@@ -9,7 +9,8 @@ const state = {
 			{ name:'artist', direction:'', weight:0 },
 			{ name:'update_date', direction:'', weight:0 }
 		]
-	}
+	},
+	orderByRandomSeed: Date.now()
 };
 
 export default state;
