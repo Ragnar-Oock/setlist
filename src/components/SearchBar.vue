@@ -257,30 +257,9 @@
 						/>
 					</div>
 				</div>
-				<div class="search-bar__col-right">
-					<p class="search-bar__label">
-						{{ $t('search.advenced.arrangement.label') }}
-					</p>
-					<div
-						v-for="(value, key) in arrangement"
-						:key="key"
-						class="search-bar__radio_group"
-					>
-						<input
-							:id="'arrangement-' + key"
-							v-model="arrangement[key]"
-							type="checkbox"
-							class="search-bar__radio"
-							:value="value"
-						>
-						<label
-							:for="'arrangement-' + key"
-							class="search-bar__label"
-						>
-							{{ $t('search.advenced.arrangement.'+key) }}
-						</label>
-					</div>
-				</div>
+				<ArrangementsFilter
+					class="search-bar__col-right"
+				/>
 			</div>
 
 			<div class="search-bar__btn-group">
@@ -322,13 +301,15 @@ import { Fragment } from 'vue-fragment';
 import DoubleSliderRange from './DoubleSliderRange';
 import OrderWidget from './OrderWidget';
 import { mapFields } from 'vuex-map-fields';
+import ArrangementsFilter from './ArrangementsFilter';
 
 export default {
 	name: 'SearchBar',
 	components: {
 		Fragment,
 		DoubleSliderRange,
-		OrderWidget
+		OrderWidget,
+		ArrangementsFilter
 	},
 	data () {
 		return {

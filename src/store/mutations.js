@@ -1,5 +1,6 @@
 import defaultState from './state';
 import prettyLog from '@/helpers/methods';
+import Vue from 'vue';
 import { updateField } from 'vuex-map-fields';
 
 const mutations = {
@@ -43,6 +44,12 @@ const mutations = {
 		}, 500);
 	},
 
+	SET_ARRANGEMENTS_FILTER(state, arrangements) {
+		state.searchSettings.arrangements = arrangements;
+	},
+	SET_ARRANGEMENTS_FILTER_KEY(state, { key, value }) {
+		Vue.set(state.searchSettings.arrangements, key, value);
+	},
 	RESET_FORM(state) {
 		const defaultForm = { ...defaultState.searchSettings };
 
