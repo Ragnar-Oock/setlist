@@ -62,7 +62,7 @@
   "order": {
     "by": "Order the list by :",
     "values": {
-      "title": "Title",
+      "name": "Title",
       "album": "Album",
       "artist": "Artist",
       "new": "New"

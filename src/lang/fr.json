@@ -62,7 +62,7 @@
   "order": {
     "by": "Ranger la liste par :",
     "values": {
-      "title": "Titre",
+      "name": "Titre",
       "album": "Album",
       "artist": "Artiste",
       "new": "Nouveauté"
