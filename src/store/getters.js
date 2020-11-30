@@ -1,7 +1,7 @@
 const getters = {
 	getPage: state => state.page,
 	isDarkModeOn: state => state.percist.darkMode,
-	getOrderBy: state => {
+	getOrderByAsText: state => {
 		let returnString = '';
 		const _orderBy = [...state.orderBy];
 

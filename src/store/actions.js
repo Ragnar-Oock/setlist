@@ -19,12 +19,16 @@ function getClient() {
 }
 
 const actions = {
-	async getSongList({ commit }) {
+	async getSongList({ commit, getters }) {
 		try {
 			prettyLog('setlist', 'API', 'Loading songs');
 			const client = await getClient();
 
-			const response = await client.apis.public.songs_get();
+			const response = await client.apis.public.songs_get(
+				{
+					limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+					orderby: getters.getOrderByAsText
+				});
 
 			commit('SET_SONG_LIST', response.obj.data);
 			commit('INCREMENT_PAGE');
@@ -41,7 +45,12 @@ const actions = {
 
 				const client = await getClient();
 
-				const response = await client.apis.public.songs_get({ padding: getters.getPage * 50 });
+				const response = await client.apis.public.songs_get(
+					{
+						limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+						padding: getters.getPage * process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+						orderby: getters.getOrderByAsText
+					});
 
 				commit('ADD_SONGS_TO_LIST', response.obj.data);
 				commit('INCREMENT_PAGE');
