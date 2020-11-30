@@ -14,20 +14,10 @@
 		<RulesPage />
 
 		<div class="setlist">
-			<SearchBar @docked="isSearchBarDocked=$event" />
-
-			<!-- <RecycleScroller
-				class="scroller"
-				:items="songList"
-				:item-size="75"
-				key-field="id"
-			>
-				<template v-slot="{ item }">
-					<MusicItem
-						:data="item"
-					/>
-				</template>
-			</RecycleScroller> -->
+			<SearchBar
+				@docked="isSearchBarDocked=$event"
+				@refresh="refreshList"
+			/>
 
 			<DynamicScroller
 				class="scroller"
@@ -86,7 +76,8 @@ export default {
 	},
 	data () {
 		return {
-			isSearchBarDocked: false
+			isSearchBarDocked: false,
+			dbRefreshList: debounce(() => this.$store.dispatch('refreshList'), 300, true)
 		};
 	},
 	computed:{
@@ -138,6 +129,10 @@ export default {
 		},
 		open(index) {
 			this.$store.commit('ACTIVATE_ITEM', index);
+		},
+		refreshList() {
+			// execute de debounced version of the refresh function
+			this.dbRefreshList();
 		}
 	}
 };

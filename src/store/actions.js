@@ -63,6 +63,21 @@ const actions = {
 		catch (error) {
 			console.error(error);
 		}
+	},
+
+	async refreshList({ commit, dispatch }) {
+		try {
+			prettyLog('setlist', 'API', 'Realoading list');
+
+			// reset page number to 0 (first page)
+			commit('SET_PAGE', 0);
+
+			// get the first page
+			dispatch('getSongList');
+		}
+		catch (error) {
+			console.error(error);
+		}
 	}
 
 };

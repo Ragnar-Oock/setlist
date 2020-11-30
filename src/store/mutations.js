@@ -29,6 +29,9 @@ const mutations = {
 		state.pag = 1;
 	},
 
+	SET_PAGE(state, value) {
+		state.page = value;
+	},
 	INCREMENT_PAGE(state) {
 		state.page += 1;
 	},

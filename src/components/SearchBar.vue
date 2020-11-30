@@ -319,7 +319,6 @@
 
 <script lang="js">
 import { Fragment } from 'vue-fragment';
-
 import DoubleSliderRange from './DoubleSliderRange';
 import OrderWidget from './OrderWidget';
 
@@ -388,10 +387,11 @@ export default {
 
 		orderBy: {
 			get() {
-				return this.$store.state.orderBy;
+				return this.$store.getters.getOrderBy;
 			},
 			set(newValue) {
 				this.$store.commit('SET_ORDER_BY', newValue);
+				this.refreshList();
 			}
 		}
 	},
@@ -514,6 +514,9 @@ export default {
 			this.$refs.submit.focus();
 			this.isSuggestionFocused = false;
 			this.submit();
+		},
+		refreshList() {
+			this.$emit('refresh');
 		}
 	}
 };
