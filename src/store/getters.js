@@ -13,10 +13,8 @@ const getters = {
 
 				let dir = '';
 
-				if (column.direction === 'ASC') {
-					dir = '+';
-				}
-				else if (column.direction === 'DESC') {
+				// ASC hav no operator, DESC is -
+				if (column.direction === 'DESC') {
 					dir = '-';
 				}
 
