@@ -1,7 +1,7 @@
 import SwaggerClient from 'swagger-client';
 import prettyLog from '@/helpers/methods';
 
-
+// get the spec, prse it, return and cache the result for future calls
 function getClient() {
 	return new Promise((resolve, reject) => {
 		if (getClient.cachedClient) {

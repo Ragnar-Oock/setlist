@@ -94,15 +94,19 @@ export default {
 		}
 	},
 	mounted() {
+		// set dark/light mode
 		document.getElementsByTagName('html')[0].classList.toggle('dark', this.isDarkModeOn);
+		// set scroll position to top
 		document.documentElement.scroll({ top:0 });
 
+		// get first songs page
 		this.$store
 			.dispatch('getSongList')
 			.catch(e => {
 				console.error(e);
 			});
 
+		// setup the infinite scroll loader
 		const debouncedFunc = debounce(() => this.getMoreSongs(), 100, true);
 
 		const options = {
@@ -117,6 +121,7 @@ export default {
 			});
 		}, options);
 
+		// activate the infinite scroll loader
 		observer.observe(this.$refs.bottom);
 	},
 	methods: {
