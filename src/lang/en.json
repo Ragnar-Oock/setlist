@@ -65,7 +65,7 @@
       "name": "Title",
       "album": "Album",
       "artist": "Artist",
-      "new": "New"
+      "update_date": "New"
     }
   },
   "song": {

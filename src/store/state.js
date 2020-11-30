@@ -7,7 +7,7 @@ const state = {
 			{ name:'name', direction:'', weight:0 },
 			{ name:'album', direction:'', weight:0 },
 			{ name:'artist', direction:'', weight:0 },
-			{ name:'new', direction:'', weight:0 }
+			{ name:'update_date', direction:'', weight:0 }
 		]
 	}
 };
