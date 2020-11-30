@@ -7,7 +7,7 @@ const mutations = {
 	},
 
 	SET_ORDER_BY(state, orderBy) {
-		state.orderBy = orderBy;
+		state.percist.orderBy = orderBy;
 	},
 
 	/**
@@ -45,7 +45,7 @@ const mutations = {
 	RELOAD_FROM_LOCALSTORAGE(state) {
 		const localStore = JSON.parse(localStorage.getItem('percistantStorage'));
 
-		state.percist = localStore || defaultState.percist;
+		state.percist = { ...defaultState.percist, ...localStore } || defaultState.percist;
 
 		prettyLog('setlist', 'store', 'Realoaded percistent state');
 	}

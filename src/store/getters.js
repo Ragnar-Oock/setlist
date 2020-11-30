@@ -3,7 +3,7 @@ const getters = {
 	isDarkModeOn: state => state.percist.darkMode,
 	getOrderByAsText: state => {
 		let returnString = '';
-		const _orderBy = [...state.orderBy];
+		const _orderBy = [...state.percist.orderBy];
 
 		// order the array by weight and reverse it
 		_orderBy.sort((a, b) => a.weight - b.weight).reverse();
@@ -23,7 +23,8 @@ const getters = {
 		});
 
 		return returnString.slice(1);
-	}
+	},
+	getOrderBy: state => state.percist.orderBy
 };
 
 export default getters;
