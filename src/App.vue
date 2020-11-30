@@ -77,7 +77,7 @@ export default {
 	data () {
 		return {
 			isSearchBarDocked: false,
-			dbRefreshList: debounce(() => this.$store.dispatch('refreshList'), 300, true)
+			dbRefreshList: debounce(() => this.$store.dispatch('refreshList'), 300)
 		};
 	},
 	computed:{
