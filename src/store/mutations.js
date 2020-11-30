@@ -1,5 +1,6 @@
 import defaultState from './state';
 import prettyLog from '@/helpers/methods';
+import { updateField } from 'vuex-map-fields';
 
 const mutations = {
 	SET_DARK_MODE(state, isEnabled) {
@@ -26,7 +27,6 @@ const mutations = {
 	 */
 	SET_SONG_LIST(state, songList) {
 		state.songs = songList;
-		state.pag = 1;
 	},
 
 	SET_PAGE(state, value) {
@@ -43,6 +43,13 @@ const mutations = {
 		}, 500);
 	},
 
+	RESET_FORM(state) {
+		const defaultForm = { ...defaultState.searchSettings };
+
+		console.log(defaultForm);
+		delete defaultForm.search;
+		state.searchSettings = defaultForm;
+	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {
@@ -51,7 +58,9 @@ const mutations = {
 		state.percist = { ...defaultState.percist, ...localStore } || defaultState.percist;
 
 		prettyLog('setlist', 'store', 'Realoaded percistent state');
-	}
+	},
+
+	updateField
 };
 
 export default mutations;

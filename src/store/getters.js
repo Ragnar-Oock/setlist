@@ -1,3 +1,5 @@
+import { getField } from 'vuex-map-fields';
+
 const getters = {
 	getPage: state => state.page,
 	isDarkModeOn: state => state.percist.darkMode,
@@ -31,7 +33,9 @@ const getters = {
 	},
 	getOrderBy: state => state.percist.orderBy,
 	getSeed: state => state.orderByRandomSeed,
-	getOrderByOrSeed: (_, otherGetters) => (otherGetters.getOrderByAsText === '' ? { seed: otherGetters.getSeed } : { orderby: otherGetters.getOrderByAsText })
+	getOrderByOrSeed: (_, otherGetters) => (otherGetters.getOrderByAsText === '' ? { seed: otherGetters.getSeed } : { orderby: otherGetters.getOrderByAsText }),
+
+	getField
 };
 
 export default getters;

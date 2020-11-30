@@ -321,6 +321,7 @@
 import { Fragment } from 'vue-fragment';
 import DoubleSliderRange from './DoubleSliderRange';
 import OrderWidget from './OrderWidget';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
 	name: 'SearchBar',
@@ -331,21 +332,12 @@ export default {
 	},
 	data () {
 		return {
-			search: '',
 			isSearchbarDocked: false,
 			isAdvencedSearchOpen: false,
-			lastInterpretation: [0, 100],
 			lastInterpretationMin: 0,
 			lastInterpretationMax: 100,
-			interpretationNumber: [0, 100],
 			interpretationNumberMin: 0,
 			interpretationNumberMax: 100,
-			arrangement: { 'rhythm': false, 'lead': false, 'bass': false },
-			showlight: false,
-			vocals: false,
-			odlc: false,
-			cdlc: false,
-			score: [0, 100],
 			scoreMin: 0,
 			scoreMax: 100,
 			suggestionsArtists: [
@@ -393,7 +385,17 @@ export default {
 				this.$store.commit('SET_ORDER_BY', newValue);
 				this.refreshList();
 			}
-		}
+		},
+		...mapFields([
+			'searchSettings.search',
+			'searchSettings.lastInterpretation',
+			'searchSettings.interpretationNumber',
+			'searchSettings.score',
+			'searchSettings.showlight',
+			'searchSettings.vocals',
+			'searchSettings.odlc',
+			'searchSettings.cdlc'
+		])
 	},
 	watch: {
 		odlc(newValue) {
@@ -462,19 +464,7 @@ export default {
 			this.isAdvencedSearchOpen = false;
 		},
 		resetForm() {
-			this.lastInterpretation = [0, 100];
-			this.lastInterpretationMin = 0;
-			this.lastInterpretationMax = 100;
-			this.interpretationNumber = [0, 100];
-			this.interpretationNumberMin = 0;
-			this.interpretationNumberMax = 100;
-			this.arrangement = { 'rhythm': false, 'lead': false, 'bass': false };
-			this.showlight = false;
-			this.odlc = false;
-			this.cdlc = false;
-			this.score = [0, 100];
-			this.scoreMin = 0;
-			this.scoreMax = 100;
+			this.$store.commit('RESET_FORM');
 		},
 		toggleInputFocusState(state) {
 			this.isInputFocused = state;
