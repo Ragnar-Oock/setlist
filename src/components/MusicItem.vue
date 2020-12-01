@@ -110,195 +110,196 @@
 			:value="command"
 			readonly
 		>
-
-		<transition
-			appear
-			name="open"
-		>
-			<div
-				v-show="idState.openned"
-				class="music-item__body"
+		<div class="music-item__body-wrapper">
+			<transition
+				appear
+				name="open"
 			>
 				<div
-					v-if="haveTags || data.showlights"
-					class="music-item__section music-item__head"
+					v-show="idState.openned"
+					class="music-item__body"
 				>
 					<div
-						v-if="haveTags"
-						class="music-item__tags"
+						v-if="haveTags || data.showlights"
+						class="music-item__section music-item__head"
 					>
 						<div
-							v-for="(tag, index) in data.tags"
-							:key="index"
-							class="music-item__tag"
-							:style="{'background-color': '#'+tag.color, 'color': calcColor(tag.color)}"
+							v-if="haveTags"
+							class="music-item__tags"
 						>
-							{{ i18nFallback(tag.name) }}
-						</div>
-					</div>
-					<div
-						v-if="data.showlights"
-						v-tippy="{placement: 'right'}"
-						class="music-item__showlight"
-						:content="$t('song.showlight')"
-					>
-						<svg
-							key="off"
-							aria-hidden="true"
-							class="top-bar__icon"
-							viewBox="0 0 16 16"
-							fill="currentColor"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
-							<path
-								fill-rule="evenodd"
-								d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
-							/>
-						</svg>
-						<div class="sr-only">
-							{{ $t('song.showlight') }}
-						</div>
-					</div>
-				</div>
-				<div class="music-item__section music-item__section--main">
-					<div
-						v-if="typeof data.meta !== 'undefined' && data.meta.length !== 0"
-						class="music-item__meta-list"
-					>
-						<div
-							v-for="(value, key, index) in data.meta"
-							:key="index"
-							class="music-item__meta-item"
-						>
-							<span class="music-item__meta-key">
-								{{ key }}
-							</span>
-							<span class="music-item__meta-value">
-								{{ value }}
-							</span>
-						</div>
-					</div>
-					<div
-						v-else
-						class="music-item__no-meta"
-					>
-						{{ $t('song.noMeta') }}
-					</div>
-
-					<ArrangementList
-						v-if="data.arrangements"
-						v-model="idState.selectedArrangement"
-						:list="data.arrangements"
-					/>
-				</div>
-				<div class="music-item__prebuild">
-					<button
-						v-tippy="{placement: 'right'}"
-						class="music-item__button music-item__vip"
-						:content="vipToggleTitle"
-						@click="toggleVip"
-					>
-						<!-- don't change this svg import if you don't want to skrew up the styling -->
-						<svg
-							width="1em"
-							height="1em"
-							viewBox="0 0 16 16"
-							xmlns="http://www.w3.org/2000/svg"
-							aria-hidden="true"
-						>
-							<use
-								v-if="idState.vip"
-								xlink:href="../assets/images/diamond-fill.svg#el"
-							/>
-							<use
-								v-else
-								xlink:href="../assets/images/diamond.svg#el"
-							/>
-						</svg>
-						<div class="sr-only">
-							{{ vipToggleTitle }}
-						</div>
-					</button>
-
-					<button
-						ref="copyButton"
-						v-tippy="{placement: 'right'}"
-						class="music-item__button music-item__edit"
-						:content="editToggleTitle"
-						@click="toggleEdit"
-					>
-						<!-- don't change this svg import if you don't want to skrew up the styling -->
-						<svg
-							aria-hidden="true"
-							width="1em"
-							height="1em"
-							viewBox="0 0 16 16"
-							xmlns="http://www.w3.org/2000/svg"
-							class="search-bar__open-more-icon"
-						>
-							<use
-								v-if="idState.edit"
-								xlink:href="../assets/images/edit-fill.svg#el"
-							/>
-							<use
-								v-else
-								xlink:href="../assets/images/edit.svg#el"
-							/>
-						</svg>
-						<div class="sr-only">
-							{{ editToggleTitle }}
-						</div>
-					</button>
-
-					<label
-						:for="data.id+'output'"
-						class="sr-only"
-					>{{ $t('song.prebuild.output') }}</label>
-					<input
-						:id="data.id+'output'"
-						ref="output"
-						class="music-item__output"
-						type="text"
-						:value="command"
-						readonly
-					>
-
-					<button
-						ref="copyButton"
-						v-tippy="{placement: 'right'}"
-						class="music-item__button music-item__copy"
-						:content="$t('song.prebuild.copy')"
-						@click="copy"
-					>
-						<!-- don't change this svg import if you don't want to skrew up the styling -->
-						<svg
-							aria-hidden="true"
-							width="1em"
-							height="1em"
-							viewBox="0 0 16 16"
-							xmlns="http://www.w3.org/2000/svg"
-							class="search-bar__open-more-icon"
-						>
-							<use
-								xlink:href="../assets/images/copy.svg#el"
-							/>
-						</svg>
-						<div class="sr-only">
-							{{ $t('song.prebuild.copy') }}
-						</div>
-						<transition name="in-out">
 							<div
-								v-if="idState.showTooltip"
-								class="music-item__success"
+								v-for="(tag, index) in data.tags"
+								:key="index"
+								class="music-item__tag"
+								:style="{'background-color': '#'+tag.color, 'color': calcColor(tag.color)}"
 							>
-								{{ $t('song.prebuild.copied') }}
+								{{ i18nFallback(tag.name) }}
 							</div>
-						</transition>
-					</button>
+						</div>
+						<div
+							v-if="data.showlights"
+							v-tippy="{placement: 'right'}"
+							class="music-item__showlight"
+							:content="$t('song.showlight')"
+						>
+							<svg
+								key="off"
+								aria-hidden="true"
+								class="top-bar__icon"
+								viewBox="0 0 16 16"
+								fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+								<path
+									fill-rule="evenodd"
+									d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+								/>
+							</svg>
+							<div class="sr-only">
+								{{ $t('song.showlight') }}
+							</div>
+						</div>
+					</div>
+					<div class="music-item__section music-item__section--main">
+						<div
+							v-if="typeof data.meta !== 'undefined' && data.meta.length !== 0"
+							class="music-item__meta-list"
+						>
+							<div
+								v-for="(value, key, index) in data.meta"
+								:key="index"
+								class="music-item__meta-item"
+							>
+								<span class="music-item__meta-key">
+									{{ key }}
+								</span>
+								<span class="music-item__meta-value">
+									{{ value }}
+								</span>
+							</div>
+						</div>
+						<div
+							v-else
+							class="music-item__no-meta"
+						>
+							{{ $t('song.noMeta') }}
+						</div>
+
+						<ArrangementList
+							v-if="data.arrangements"
+							v-model="idState.selectedArrangement"
+							:list="data.arrangements"
+						/>
+					</div>
+					<div class="music-item__prebuild">
+						<button
+							v-tippy="{placement: 'right'}"
+							class="music-item__button music-item__vip"
+							:content="vipToggleTitle"
+							@click="toggleVip"
+						>
+							<!-- don't change this svg import if you don't want to skrew up the styling -->
+							<svg
+								width="1em"
+								height="1em"
+								viewBox="0 0 16 16"
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+							>
+								<use
+									v-if="idState.vip"
+									xlink:href="../assets/images/diamond-fill.svg#el"
+								/>
+								<use
+									v-else
+									xlink:href="../assets/images/diamond.svg#el"
+								/>
+							</svg>
+							<div class="sr-only">
+								{{ vipToggleTitle }}
+							</div>
+						</button>
+
+						<button
+							ref="copyButton"
+							v-tippy="{placement: 'right'}"
+							class="music-item__button music-item__edit"
+							:content="editToggleTitle"
+							@click="toggleEdit"
+						>
+							<!-- don't change this svg import if you don't want to skrew up the styling -->
+							<svg
+								aria-hidden="true"
+								width="1em"
+								height="1em"
+								viewBox="0 0 16 16"
+								xmlns="http://www.w3.org/2000/svg"
+								class="search-bar__open-more-icon"
+							>
+								<use
+									v-if="idState.edit"
+									xlink:href="../assets/images/edit-fill.svg#el"
+								/>
+								<use
+									v-else
+									xlink:href="../assets/images/edit.svg#el"
+								/>
+							</svg>
+							<div class="sr-only">
+								{{ editToggleTitle }}
+							</div>
+						</button>
+
+						<label
+							:for="data.id+'output'"
+							class="sr-only"
+						>{{ $t('song.prebuild.output') }}</label>
+						<input
+							:id="data.id+'output'"
+							ref="output"
+							class="music-item__output"
+							type="text"
+							:value="command"
+							readonly
+						>
+
+						<button
+							ref="copyButton"
+							v-tippy="{placement: 'right'}"
+							class="music-item__button music-item__copy"
+							:content="$t('song.prebuild.copy')"
+							@click="copy"
+						>
+							<!-- don't change this svg import if you don't want to skrew up the styling -->
+							<svg
+								aria-hidden="true"
+								width="1em"
+								height="1em"
+								viewBox="0 0 16 16"
+								xmlns="http://www.w3.org/2000/svg"
+								class="search-bar__open-more-icon"
+							>
+								<use
+									xlink:href="../assets/images/copy.svg#el"
+								/>
+							</svg>
+							<div class="sr-only">
+								{{ $t('song.prebuild.copy') }}
+							</div>
+							<transition name="in-out">
+								<div
+									v-if="idState.showTooltip"
+									class="music-item__success"
+								>
+									{{ $t('song.prebuild.copied') }}
+								</div>
+							</transition>
+						</button>
+					</div>
 				</div>
-			</div>
-		</transition>
+			</transition>
+		</div>
 	</div>
 </template>
 
@@ -535,19 +536,27 @@ export default {
 
   .music-item {
 		position: relative;
-		min-height: 67px;
-		height: auto;
-		max-height: 67px;
+		--height: 67px;
+		height: var(--height);
+		min-height: var(--height);
+		max-height: var(--height);
 		max-width: 60ch;
 		margin: 0 auto;
 		display: flex;
-		transition: 300ms ease-in-out;
-		transition-property: min-height, max-height, max-width;
+		transition: max-width 300ms ease-in-out,
+		height 300ms ease-in-out;
+		transition:
+			max-width 300ms ease-in-out,
+			height 300ms cubic-bezier(.39,.58,.57,1),
+			max-height 300ms cubic-bezier(.39,.58,.57,1),
+			min-height 300ms cubic-bezier(.39,.58,.57,1);
+
+
+		--width: min(80ch, calc(100vw - .5em));
 
 		&.openned {
-			min-height: 300px;
-			max-height: 300px;
-			max-width: 80ch;
+			--height: 300px;
+			// max-width: 80ch;
 		}
 
 		&__hr {
@@ -568,10 +577,6 @@ export default {
 			flex-direction: row;
 
 			position: absolute;
-			top: 0;
-			right: 0;
-			left: 0;
-			bottom: 0;
 			padding: 0.7em 2.5em 0.7em 1.5em;
 			border-radius: 5px;
 
@@ -580,12 +585,14 @@ export default {
 			box-shadow: 0 0 5px 1px #0001;
 
 			transition:
-				background-color  ease-in-out 500ms 0s,
-				box-shadow  ease-in-out 500ms 250ms,
-				transform ease-in-out 500ms 250ms,
-				color ease-in-out 500ms,
-				right ease-in-out 500ms,
-				padding ease-in-out 150ms 150ms;
+				background-color ease-in-out 300ms,
+				transform ease-in-out 300ms 250ms,
+				color ease-in-out 300ms,
+				transform ease-out 400ms,
+				width ease-in-out 400ms,
+				padding ease-in-out 300ms;
+			width: 100%;
+			height: 100%;
 
 			z-index: 10;
 			cursor: pointer;
@@ -624,15 +631,16 @@ export default {
 				background-color: var(--primary-1);
 				background-image: linear-gradient(18deg, rgba(91, 3, 3, 0.04) 0%, rgba(143, 255, 155, 0.26) 100%);
 				background-blend-mode: color-dodge;
-				right: 66%;
 				padding-bottom: 3em;
 				padding-top: 1.5em;
+				width: calc(var(--width) * .34);
+				transform: translateX(calc(var(--width) * -0.125));
 				transition:
-					background-color  ease-in-out 300ms,
-					box-shadow  ease-in-out 300ms 250ms,
+					background-color ease-in-out 300ms,
 					transform ease-in-out 300ms 250ms,
 					color ease-in-out 300ms,
-					right ease-out 400ms 150ms,
+					transform ease-out 400ms,
+					width ease-in-out 400ms,
 					padding ease-in-out 300ms;
 
 				&:hover {
@@ -646,19 +654,19 @@ export default {
 		}
 
 		&__arrow {
-				width: 1em;
-				height: 0.5em;
-				position: absolute;
-				right: 1em;
-				top: 2em;
-				transition: transform ease-in-out 300ms 250ms;
-				color: var(--text);
+			width: 1em;
+			height: 0.5em;
+			position: absolute;
+			right: 1em;
+			top: 2em;
+			transition: transform ease-in-out 300ms 250ms;
+			color: var(--text);
 
-				@at-root .openned & {
-					transform: rotateX(180deg);
-					transition: transform ease-in-out 300ms;
-				}
+			@at-root .openned & {
+				transform: rotateX(180deg);
+				transition: transform ease-in-out 300ms;
 			}
+		}
 
 		&__quick-copy {
 			--mouse-x: 50%;
@@ -667,22 +675,25 @@ export default {
 			position: absolute;
 			left: calc(100% - 37px);
 			border: none;
-			top: 0;
-			bottom: 0;
-			border-radius: 0 5px 5px 0;
-			background: var(--bg-gradient);
-			padding: 0 8px 0 13px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: max-content;
+			left: unset;
+			right: 2.5em;
+			bottom: unset;
+			padding: 0.5em .75em;
+			border-radius: 5px;
+			opacity: 0;
 			color: var(--text);
+			background: var(--bg-gradient);
 			cursor: pointer;
 			display: flex;
 			align-items: center;
 			overflow: hidden;
-			transition: left 300ms 100ms ease-out,
-				opacity 300ms ease-in-out;
 
 			&-text {
+				margin-right: .5em;
 				overflow: hidden;
-				max-width: 0ch;
 				white-space: nowrap;
 				transition: 300ms 100ms ease-out;
 				transition-property: max-width, margin-right;
@@ -690,14 +701,8 @@ export default {
 				height: 100%;
 
 				span {
-					margin: auto;
-				}
-			}
-
-			&:focus > &-text,
-			&:hover > &-text {
-				margin-right: .5em;
-				max-width: 20ch;
+						margin: auto;
+					}
 			}
 
 			&::before {
@@ -732,24 +737,70 @@ export default {
 				}
 			}
 		}
+		&__quick-copy:focus,
+		&__quick-copy:hover {
+			right: 2.5em;
+			z-index: 11;
+		}
 		&__card:hover + &__quick-copy,
 		&__card:focus + &__quick-copy,
 		&__quick-copy:hover,
 		&__quick-copy:focus {
-			left: calc(100% - 5px);
+			z-index: 11;
 			outline: none;
+			opacity: 1;
 
-			transition: left 300ms 200ms ease-out,
-				opacity 300ms ease-in-out;
+			transition: opacity 300ms ease-in-out;
+
+			@at-root .openned & {
+				opacity: 0;
+			}
 		}
 
-		.openned &__quick-copy,
-		.openned &__card:hover + &__quick-copy,
-		.openned &__card:focus + &__quick-copy,
-		.openned &__quick-copy:hover,
-		.openned &__quick-copy:focus {
-			left: 50%;
-			opacity: 0;
+		@media screen  and (min-width: 60em){
+			&__quick-copy {
+				top: 0;
+				bottom: 0;
+				left: 100%;
+				right: unset;
+				border-radius: 0 5px 5px 0;
+				padding: 0 8px 0 13px;
+				transition:
+					transform 300ms 100ms ease-out,
+					opacity 0s 500ms;
+				z-index: 0;
+				transform: translateX(-45px);
+				opacity: 1;
+
+				@at-root .openned & {
+					opacity: 0;
+					transform: translateX(calc(var(--width) * -0.5));
+				}
+
+				&-text {
+					max-width: 0ch;
+					margin-right: 0;
+				}
+
+				&:focus > &-text,
+				&:hover > &-text {
+					margin-right: .5em;
+					max-width: 20ch;
+				}
+			}
+			&__card:hover + &__quick-copy,
+			&__card:focus + &__quick-copy,
+			&__quick-copy:hover,
+			&__quick-copy:focus {
+				transform: translateX(-5px);
+				z-index: 0;
+				transition:
+					transform 300ms 200ms ease-out;
+				@at-root .openned & {
+					opacity: 0;
+					transform: translateX(calc(var(--width) * -0.5));
+				}
+			}
 		}
 
 		&__duration {
@@ -779,14 +830,19 @@ export default {
 			flex-direction: column;
 			overflow: hidden;
 			flex-grow: 1;
+
+			@at-root .openned & {
+				width: calc(min(80ch, calc(100vw - .5em)) * .34 - 4em);
+				height: calc(100% - 4.5em);
+				position: absolute;
+			}
 		}
 
 		&__col-right {
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-
-			transition: opacity 300ms ease-in-out, z-index 0s 300ms;
+			transition: opacity 200ms ease-in-out 300ms;
 
 			& > * {
 				margin: 0 .25em;
@@ -797,6 +853,7 @@ export default {
 				position: absolute;
 				z-index: -10;
 				pointer-events: none;
+				transition: opacity 0s 0s;
 			}
 		}
 
@@ -822,8 +879,6 @@ export default {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			opacity: 0;
-			animation: title-transition 10ms ease-out 150ms 1 forwards;
 
 			@at-root .openned & {
 				font-size: 1.4em;
@@ -831,18 +886,6 @@ export default {
 				text-overflow: unset;
 				overflow: unset;
 				max-width: 210px;
-				animation: title-transition 600ms ease-out 150ms 1 forwards;
-			}
-		}
-
-		@keyframes title-transition {
-			0% {
-				opacity: 0;
-				transform: translateY(-1em);
-			}
-			100% {
-				opacity: 1;
-				transform: translateY(0);
 			}
 		}
 
@@ -857,8 +900,6 @@ export default {
 				white-space: unset;
 				text-overflow: unset;
 				overflow: unset;
-				max-width: 210px;
-				animation: title-transition 600ms ease-in-out 150ms 1 forwards;
 			}
 		}
 
@@ -875,14 +916,25 @@ export default {
 		&__body {
 			display: flex;
 			position: relative;
-			left: 34%;
-			width: 66%;
+			width: 100%;
 			max-width: 500px;
 			filter: drop-shadow(0 0 3px #0000001a);
 			flex-direction: column;
 			overflow: hidden;
 			border-radius: 0 10px 10px 0;
 			margin: 4px 0;
+
+			&-wrapper {
+				width: 100%;
+				overflow: hidden;
+				display: flex;
+				width: calc(var(--width) * .66);
+				transition: transform 0ms 300ms;
+				@at-root .openned & {
+					// make the layout changes via transform instead of right (improved performances)
+					transform: translateX(calc(var(--width) * .215));
+				}
+			}
 		}
 
 		&__tag {
@@ -894,6 +946,9 @@ export default {
 				position: relative;
 				display: flex;
 			}
+		}
+		&__showlight {
+			margin-left: auto;
 		}
 
 		&__section {
@@ -1028,7 +1083,7 @@ export default {
 		.open-enter-active,
 		.open-leave-active {
 			transition: 300ms ease-out;
-			transition-property: transform, clip-path;
+			transition-property: transform;
 		}
 
 		.open-enter-active {
@@ -1037,23 +1092,19 @@ export default {
 
 		.open-enter {
 			transform: translateX(-100%);
-			clip-path: inset(-10px -10px -10px 100%);
 		}
 		.open-enter-to{
 			transform: translateX(0);
-			clip-path: inset(-10px -10px -10px -10px);
 		}
 
 		.open-leave {
 			transform: translateX(0);
-			clip-path: inset(-10px -10px -10px -10px);
 		}
 		.open-leave-to {
 			transform: translateX(-100%);
-			clip-path: inset(-10px -10px -10px 100%);
 		}
 
-		@media screen and (max-width: 43em) {
+		@media screen and (max-width: 48.25em) {
 			flex-direction: column;
 			&.openned {
 				height: auto;
@@ -1066,10 +1117,17 @@ export default {
 				overflow: unset;
 
 				@at-root .openned & {
-					padding-bottom: 1em;
+					padding: 0.7em 2.5em 0.7em 1.5em;
 					position: static;
-					right: 0;
+					width: auto;
+					transform: none;
 				}
+			}
+
+			@at-root .openned &__col-left {
+				height: unset;
+				position: static;
+				width: unset;
 			}
 
 			&__title {
@@ -1078,6 +1136,7 @@ export default {
 				margin: 0;
 				@at-root .openned & {
 					max-width: unset;
+					font-size: 1.2em;
 				}
 				@at-root .openned &, .closed & {
 					animation: none;
@@ -1087,36 +1146,35 @@ export default {
 
 			&__body {
 				left: unset;
-				width: unset;
 				border-radius: 0 0 10px 10px;
 				margin: 0 4px;
 				max-width: unset;
-				overflow: unset;
-				flex-grow: 1;
+
+				&-wrapper {
+					width: 100%;
+					flex-grow: 1;
+					transform: none;
+				}
 			}
 
 			.open-enter-active,
 			.open-leave-active {
 				transition: 300ms ease-in-out;
-				transition-property: transform, clip-path;
+				transition-property: transform;
 			}
 
 			.open-enter {
 				transform: translateY(-100%);
-				clip-path: inset(100% -10px -10px -10px );
 			}
 			.open-enter-to{
 				transform: translateY(0);
-				clip-path: inset(-10px -10px -10px -10px);
 			}
 
 			.open-leave {
 				transform: translateY(0);
-				clip-path: inset(-10px -10px -10px -10px);
 			}
 			.open-leave-to {
 				transform: translateY(-100%);
-				clip-path: inset(100% -10px -10px -10px );
 			}
 
 			&__copy {
@@ -1125,51 +1183,14 @@ export default {
 			&__vip {
 				border-radius: 0 0 0 10px;
 			}
+
+			&__quick-copy#{&}__quick-copy {
+				top: 17.5px;
+				transform: none;
+			}
 		}
 
-		@media screen  and (max-width: 60em){
-			&__quick-copy {
-				top: 50%;
-				transform: translateY(-50%);
-				width: max-content;
-				left: unset;
-				right: 2.5em;
-				bottom: unset;
-				padding: 0.5em .75em;
-				border-radius: 5px;
-				opacity: 0;
 
-				&-text {
-					max-width: unset;
-					margin-right: .5em;
-				}
-			}
-			&__quick-copy:focus,
-			&__quick-copy:hover {
-				left: unset;
-				right: 2.5em;
-				z-index: 11;
-			}
-			&__card:hover + &__quick-copy,
-			&__card:focus + &__quick-copy,
-			&__quick-copy:hover,
-			&__quick-copy:focus {
-				left: unset;
-				z-index: 11;
-				outline: none;
-				opacity: 1;
-
-				transition: opacity 300ms ease-in-out;
-			}
-			.openned &__quick-copy,
-		.openned &__card:hover + &__quick-copy,
-		.openned &__card:focus + &__quick-copy,
-		.openned &__quick-copy:hover,
-		.openned &__quick-copy:focus {
-			left: unset;
-			opacity: 0;
-		}
-		}
 	}
 
 </style>
