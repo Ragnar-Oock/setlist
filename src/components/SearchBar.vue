@@ -64,6 +64,7 @@
 					</defs>
 				</svg>
 				<button
+					type="button"
 					class="search-bar__open-more"
 					title="recherche avancée"
 					:class="{'active': isAdvencedSearchOpen}"
@@ -142,6 +143,7 @@
 			@submit="submit"
 		>
 			<button
+				type="button"
 				class="search-bar__close"
 				@click="closeAdvencedSearch"
 			>
@@ -264,6 +266,7 @@
 
 			<div class="search-bar__btn-group">
 				<button
+					type="reset"
 					class="search-bar__reset search-bar__btn"
 					@click="resetForm"
 				>
