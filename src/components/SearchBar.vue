@@ -425,6 +425,21 @@ export default {
 			if (event) {
 				event.preventDefault();
 			}
+
+			this.$store.dispatch('getSearch');
+
+			if (this.isSearchbarDocked) {
+				this.isSearchbarDocked = false;
+
+				this.$nextTick().then(() => {
+					this.$refs.searchBar.scrollIntoView();
+					document.getElementsByTagName('HTML')[0].scrollBy({
+						top: -100,
+						left: 0,
+						behavior: 'smooth'
+					});
+				});
+			}
 		},
 		openAdvencedSearch() {
 			if (this.isSearchbarDocked) {
@@ -449,6 +464,7 @@ export default {
 		},
 		resetForm() {
 			this.$store.commit('RESET_FORM');
+			this.$store.commit('SET_IS_SEARCH', false);
 		},
 		toggleInputFocusState(state) {
 			this.isInputFocused = state;
