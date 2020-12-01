@@ -377,7 +377,7 @@ export default {
 			return duration;
 		},
 		source() {
-			return `${ this.data.artiste || '' }${ this.data.artiste && this.data.album ? ' - ' : '' }${ this.data.album || '' }`;
+			return `${ this.data.artist || '' }${ this.data.artist && this.data.album ? ' - ' : '' }${ this.data.album || '' }`;
 		}
 	},
 	mounted() {
