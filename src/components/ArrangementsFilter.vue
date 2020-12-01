@@ -46,7 +46,6 @@ export default {
 	},
 	methods: {
 		onChange(key, event) {
-			console.log(key, event.target.checked);
 			this.$store.commit('SET_ARRANGEMENTS_FILTER_KEY', { key, value: event.target.checked });
 		}
 	}
