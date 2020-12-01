@@ -1,4 +1,7 @@
 import { getField } from 'vuex-map-fields';
+import { getDiffKeys } from '@/helpers/methods';
+import { getDefaultState } from './state';
+
 
 const getters = {
 	getPage: state => state.page,
@@ -34,6 +37,43 @@ const getters = {
 	getOrderBy: state => state.percist.orderBy,
 	getSeed: state => state.orderByRandomSeed,
 	getOrderByOrSeed: (_, otherGetters) => (otherGetters.getOrderByAsText === '' ? { seed: otherGetters.getSeed } : { orderby: otherGetters.getOrderByAsText }),
+
+	getSearchParams: state => {
+		const nonDefaultParams = getDiffKeys(state.searchSettings, getDefaultState().searchSettings);
+		const searchParams = {};
+
+		const arrangements = [];
+
+		nonDefaultParams.forEach(param => {
+
+			switch (param) {
+				case 'cdlc':
+					searchParams['odlc'] = false;
+					break;
+
+				case 'odlc':
+					searchParams['odlc'] = true;
+					break;
+
+				case 'arrangements':
+					Object.entries(state.searchSettings.arrangements).forEach(arrangement => {
+						if (arrangement[1]) {
+							arrangements.push(arrangement[0]);
+						}
+					});
+					searchParams['arrangements'] = arrangements;
+					break;
+
+				default:
+					searchParams[param] = state.searchSettings[param];
+					break;
+			}
+		});
+
+		return searchParams;
+
+	},
+	isSearch: state => state.isSearch,
 
 	getField
 };
