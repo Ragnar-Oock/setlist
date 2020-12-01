@@ -1,5 +1,5 @@
 import SwaggerClient from 'swagger-client';
-import prettyLog from '@/helpers/methods';
+import { prettyLog } from '@/helpers/methods';
 
 // get the spec, prse it, return and cache the result for future calls
 function getClient() {
@@ -25,11 +25,21 @@ const actions = {
 
 			const client = await getClient();
 
-			const response = await client.apis.public.songs_get(
-				{
+			let response;
+
+			if (getters.isSearch) {
+				response = await client.apis.public.search_get({
+					limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+					orderby: getters.getOrderByAsText,
+					...getters.getSearchParams
+				});
+			}
+			else {
+				response = await client.apis.public.songs_get({
 					limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
 					...getters.getOrderByOrSeed
 				});
+			}
 
 			commit('SET_SONG_LIST', response.obj.data);
 			commit('INCREMENT_PAGE');
@@ -45,13 +55,23 @@ const actions = {
 				prettyLog('setlist', 'API', 'Loading more songs');
 
 				const client = await getClient();
+				let response;
 
-				const response = await client.apis.public.songs_get(
-					{
+				if (getters.isSearch) {
+					response = await client.apis.public.search_get({
+						limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+						padding: getters.getPage * process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+						orderby: getters.getOrderByAsText,
+						...getters.getSearchParams
+					});
+				}
+				else {
+					response = await client.apis.public.songs_get({
 						limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
 						padding: getters.getPage * process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
 						...getters.getOrderByOrSeed
 					});
+				}
 
 				commit('ADD_SONGS_TO_LIST', response.obj.data);
 				commit('INCREMENT_PAGE');
@@ -73,6 +93,27 @@ const actions = {
 			// reset page number to 0 (first page)
 			commit('SET_PAGE', 0);
 
+			// get the first page
+			dispatch('getSongList');
+		}
+		catch (error) {
+			console.error(error);
+		}
+	},
+
+	async getSearch({ commit, dispatch, getters }) {
+		try {
+			prettyLog('setlist', 'API', 'Begining search');
+
+			// reset page number to 0 (first page)
+			commit('SET_PAGE', 0);
+			commit('SET_IS_SEARCH', true);
+
+			console.log(JSON.stringify({
+				limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+				...getters.getOrderByOrSeed,
+				...getters.getSearchParams
+			}));
 			// get the first page
 			dispatch('getSongList');
 		}
