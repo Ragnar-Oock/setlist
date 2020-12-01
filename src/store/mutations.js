@@ -1,5 +1,4 @@
-import defaultState from './state';
-import prettyLog from '@/helpers/methods';
+import { getDefaultState } from './state';
 import Vue from 'vue';
 import { updateField } from 'vuex-map-fields';
 
@@ -51,18 +50,21 @@ const mutations = {
 		Vue.set(state.searchSettings.arrangements, key, value);
 	},
 	RESET_FORM(state) {
-		const defaultForm = { ...defaultState.searchSettings };
+		const defaultForm = { ...getDefaultState().searchSettings };
 
-		console.log(defaultForm);
 		delete defaultForm.search;
 		state.searchSettings = defaultForm;
+		state.searchSettings.arrangements = defaultForm.arrangements;
+	},
+	SET_IS_SEARCH(state, value) {
+		state.isSearch = value;
 	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {
 		const localStore = JSON.parse(localStorage.getItem('percistantStorage'));
 
-		state.percist = { ...defaultState.percist, ...localStore } || defaultState.percist;
+		state.percist = { ...getDefaultState().percist, ...localStore } || getDefaultState().percist;
 
 		prettyLog('setlist', 'store', 'Realoaded percistent state');
 	},
