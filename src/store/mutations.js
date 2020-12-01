@@ -1,4 +1,5 @@
 import { getDefaultState } from './state';
+import { prettyLog } from '@/helpers/methods';
 import Vue from 'vue';
 import { updateField } from 'vuex-map-fields';
 
