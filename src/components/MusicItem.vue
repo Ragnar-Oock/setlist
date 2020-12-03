@@ -555,19 +555,19 @@ export default {
 
 		&.openned {
 			--height: 300px;
-			// max-width: 80ch;
 		}
 
 		&__hr {
-			border-color: transparent;
+			border-color: var(--text);
 			width: 3em;
 			margin: 0;
+			opacity: 0;
 			transition: 300ms ease-in-out;
-			transition-property:  border-color, margin;
+			transition-property:  opacity, margin;
 
 			@at-root .openned & {
 				margin: 4px 0;
-				border-color: var(--text);
+				opacity: 1;
 			}
 		}
 
