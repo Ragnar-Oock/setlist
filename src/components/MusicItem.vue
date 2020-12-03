@@ -1036,6 +1036,10 @@ export default {
 			color: var(--text);
 			padding: .5em;
 			border: none;
+			&:focus{
+				outline: none;
+				background-color: var(--filler-2);
+			}
 
 			&-ext {
 				position: absolute;
