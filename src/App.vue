@@ -175,6 +175,7 @@ export default {
 
 	.tippy-tooltip {
 		color: var(--text);
+		box-shadow: var(--shadow);
 
 		.tippy-backdrop{
 			background-color: var(--filler-1);
