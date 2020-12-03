@@ -64,9 +64,7 @@
 				class="top-bar__horizon off"
 			/>
 
-			<span class="sr-only">
-				dark Mode
-			</span>
+			<span class="sr-only">{{ $t('topBar.darkMode') }}</span>
 		</label>
 	</div>
 </template>

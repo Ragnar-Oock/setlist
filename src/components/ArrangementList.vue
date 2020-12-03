@@ -47,7 +47,7 @@
 			:class="{'open': open}"
 			@click="onclick"
 		>
-			<span class="sr-only">toggle tunning display</span>
+			<span class="sr-only">{{ $t('song.diplayTunnings') }}</span>
 			<svg
 				aria-hidden="true"
 				fill="currentColor"

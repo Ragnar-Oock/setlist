@@ -147,7 +147,7 @@
 				class="search-bar__close"
 				@click="closeAdvencedSearch"
 			>
-				<span class="sr-only">Close</span>
+				<span class="sr-only">{{ $t('advenced.close') }}</span>
 			</button>
 			<DoubleSliderRange
 				v-model="lastInterpretation"

@@ -30,7 +30,7 @@
 					:key="idState.openned+'source'"
 					class="music-item__source"
 				>
-					<span class="sr-only">by</span>
+					<span class="sr-only">{{ $t('song.byArtist') }}</span>
 					{{ source }}
 				</p>
 			</div>

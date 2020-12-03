@@ -56,7 +56,8 @@
         "bass": "Basse"
       },
       "reset": "Vider les champs",
-      "submit": "Rechercher"
+      "submit": "Rechercher",
+      "close": "Fermer"
     }
   },
   "order": {
@@ -73,6 +74,8 @@
     "showlight": "Cette musique a des effets de lumiere",
     "quickCopy": "Copier la commande",
     "noMeta": "Aucune information additionnelle",
+    "diplayTunnings": "Afficher les accordage des arrangements",
+    "byArtist": " de ",
     "prebuild": {
       "output": "Command output",
       "copy": "Copier la commande",
@@ -85,5 +88,8 @@
     "tags": {
       "Officielle": "Officielle"
     }
+  },
+  "topBar": {
+    "darkMode": "mode sombre"
   }
 }

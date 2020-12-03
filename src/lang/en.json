@@ -56,7 +56,8 @@
         "bass": "Bass"
       },
       "reset": "Reset",
-      "submit": "Search"
+      "submit": "Search",
+      "close": "Close"
     }
   },
   "order": {
@@ -73,6 +74,8 @@
     "showlight": "This song have light's effects",
     "quickCopy": "Copy command",
     "noMeta": "No additionnal info",
+    "diplayTunnings": "Toggle arrangement's tunning display",
+    "byArtist": " by ",
     "prebuild": {
       "output": "Command output",
       "copy": "Copy command",
@@ -85,5 +88,8 @@
     "tags": {
       "Officielle": "Official"
     }
+  },
+  "topBar": {
+    "darkMode": "dark mode"
   }
 }
