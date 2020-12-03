@@ -537,7 +537,6 @@ export default {
   .music-item {
 		position: relative;
 		--height: 67px;
-		height: var(--height);
 		min-height: var(--height);
 		max-height: var(--height);
 		max-width: 60ch;
@@ -1113,7 +1112,7 @@ export default {
 				max-width: 60ch;
 			}
 			&__card {
-				position: static;
+				position: relative;
 				overflow: unset;
 
 				@at-root .openned & {
@@ -1154,6 +1153,10 @@ export default {
 					width: 100%;
 					flex-grow: 1;
 					transform: none;
+
+					@at-root .openned & {
+						transform: none;
+					}
 				}
 			}
 
