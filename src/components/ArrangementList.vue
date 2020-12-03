@@ -44,7 +44,6 @@
 
 		<button
 			class="arrangements__toggle"
-			:class="{'open': open}"
 			@click="onclick"
 		>
 			<span class="sr-only">{{ $t('song.diplayTunnings') }}</span>
@@ -256,9 +255,6 @@ export default {
 			cursor: pointer;
 			margin-left: auto;
 
-			&.open {
-				background-color: var(--filler-2);
-			}
 			&:focus,
 			&:hover {
 				background-color: var(--filler-2-translucent);
