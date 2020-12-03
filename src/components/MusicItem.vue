@@ -496,9 +496,9 @@ export default {
 			this.$refs.outputExt.select();
 			document.execCommand('copy');
 
-			if ($event.layerX !== 0 && $event.layerY !== 0) {
-				this.$refs.quickCopyButton.style.setProperty('--mouse-x', `${ $event.layerX }px`);
-				this.$refs.quickCopyButton.style.setProperty('--mouse-y', `${ $event.layerY }px`);
+			if ($event.offsetX !== 0 && $event.offsetY !== 0) {
+				this.$refs.quickCopyButton.style.setProperty('--mouse-x', `${ $event.offsetX }px`);
+				this.$refs.quickCopyButton.style.setProperty('--mouse-y', `${ $event.offsetY }px`);
 			}
 
 			this.idState.isQuickCopyCliked = true;
