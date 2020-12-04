@@ -91,5 +91,6 @@
   },
   "topBar": {
     "darkMode": "mode sombre"
-  }
+  },
+  "loading": "Chargement de la liste"
 }

@@ -19,6 +19,15 @@
 				@refresh="refreshList"
 			/>
 
+			<!-- v-if="songList.length == 0" -->
+			<div
+				v-if="songList == 0"
+				class="wrapper"
+			>
+				<p>{{ $t('loading') }}</p>
+				<div class="loader" />
+			</div>
+
 			<DynamicScroller
 				class="scroller"
 				:items="songList"
@@ -220,5 +229,73 @@ export default {
 			border-radius: .4em;
 		}
 	}
+
+
+
+// 	body{
+//   background-color: #555555;
+//   display: flex;
+//   height: 100vh;
+//   margin: 0;
+//   font-family: Arial;
+// }
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background: var(--filler-1);
+  width: 60ch;
+  align-items: center;
+  padding: 2em 1em;
+  border-radius: 5px;
+  box-shadow: 0 0 .5em #0003;
+}
+
+.wrapper p{
+  color: white;
+  text-align: center;
+  margin: 0 0 1em;
+}
+.loader{
+  --fill: var(--filler-1);
+  width: 20em;
+  height: 1em;
+  background: var(--fill);
+  border-radius: 100vh;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 .5em #0003;
+  margin: 0;
+}
+
+.loader::before{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  left:50%;
+  background-color: #a2a2a2;
+  border-radius: 100vh;
+  animation: slide alternate 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 .25em var(--fill), 0 0 .5em .25em #0003;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-200%);
+    width: 25%;
+  }
+  50%{
+    width: 40%;
+  }
+  100% {
+    transform: translateX(100%);
+    width: 25%;
+  }
+}
+
+
 
 </style>

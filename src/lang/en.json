@@ -91,5 +91,6 @@
   },
   "topBar": {
     "darkMode": "dark mode"
-  }
+  },
+  "loading": "Loading the list"
 }
