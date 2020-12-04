@@ -20,14 +20,6 @@
 			/>
 
 			<div
-				v-if="songList == 0 && !error"
-				class="message-box"
-			>
-				<p>{{ $t('loading') }}</p>
-				<div class="loader" />
-			</div>
-
-			<div
 				v-if="error"
 				class="error message-box"
 			>
