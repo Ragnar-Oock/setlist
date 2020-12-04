@@ -101,19 +101,16 @@ const actions = {
 		}
 	},
 
-	async getSearch({ commit, dispatch, getters }) {
+	async getSearch({ commit, dispatch }) {
 		try {
 			prettyLog('setlist', 'API', 'Begining search');
 
 			// reset page number to 0 (first page)
 			commit('SET_PAGE', 0);
+			// empty the song list
+			commit('SET_SONG_LIST', []);
 			commit('SET_IS_SEARCH', true);
 
-			console.log(JSON.stringify({
-				limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
-				...getters.getOrderByOrSeed,
-				...getters.getSearchParams
-			}));
 			// get the first page
 			dispatch('getSongList');
 		}
