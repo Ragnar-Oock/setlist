@@ -48,7 +48,6 @@ const actions = {
 			// is the resived page the last?
 			if (response.obj.data.length < Number(process.env.VUE_APP_DEFAULT_PAGE_LENGTH)) {
 				commit('SET_LAST_PAGE', true);
-				console.log('the end');
 			}
 
 			// increment page counter
@@ -98,7 +97,6 @@ const actions = {
 					// is the resived page the last?
 					if (response.obj.data.length < Number(process.env.VUE_APP_DEFAULT_PAGE_LENGTH)) {
 						commit('SET_LAST_PAGE', true);
-						console.log('the end 2');
 
 					}
 
