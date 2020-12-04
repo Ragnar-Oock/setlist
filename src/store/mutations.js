@@ -66,6 +66,9 @@ const mutations = {
 	SET_LOADING(state, value) {
 		state.isLoading = value;
 	},
+	SET_LAST_PAGE(state, value) {
+		state.isLastPage = value;
+	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {

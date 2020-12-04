@@ -22,6 +22,7 @@ const actions = {
 	async getSongList({ commit, getters }) {
 		try {
 			commit('SET_LOADING', true);
+			commit('SET_LAST_PAGE', false);
 			prettyLog('setlist', 'API', 'Loading songs');
 
 			const client = await getClient();
@@ -42,7 +43,15 @@ const actions = {
 				});
 			}
 
+			// store response
 			commit('SET_SONG_LIST', response.obj.data);
+			// is the resived page the last?
+			if (response.obj.data.length < Number(process.env.VUE_APP_DEFAULT_PAGE_LENGTH)) {
+				commit('SET_LAST_PAGE', true);
+				console.log('the end');
+			}
+
+			// increment page counter
 			commit('INCREMENT_PAGE');
 			// erase api errors
 			commit('SET_API_ERROR', undefined);
@@ -59,34 +68,53 @@ const actions = {
 
 	async getMoreSongs({ commit, getters }) {
 		try {
-			if (getters.getPage > 0) {
+			if (!getters.isLastPage) {
+				if (getters.getPage > 0) {
 					// show the loader
 					commit('SET_LOADING', true);
 					prettyLog('setlist', 'API', 'Loading more songs');
 
-				const client = await getClient();
-				let response;
+					const client = await getClient();
+					let response;
 
-				if (getters.isSearch) {
-					response = await client.apis.public.search_get({
-						limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
-						padding: getters.getPage * process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
-						orderby: getters.getOrderByAsText,
-						...getters.getSearchParams
-					});
-				}
-				else {
-					response = await client.apis.public.songs_get({
-						limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
-						padding: getters.getPage * process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
-						...getters.getOrderByOrSeed
-					});
-				}
+					if (getters.isSearch) {
+						response = await client.apis.public.search_get({
+							limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+							padding: getters.getPage * process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+							orderby: getters.getOrderByAsText,
+							...getters.getSearchParams
+						});
+					}
+					else {
+						response = await client.apis.public.songs_get({
+							limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+							padding: getters.getPage * process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+							...getters.getOrderByOrSeed
+						});
+					}
 
-				commit('ADD_SONGS_TO_LIST', response.obj.data);
+					// store response
+					commit('ADD_SONGS_TO_LIST', response.obj.data);
+					// is the resived page the last?
+					if (response.obj.data.length < Number(process.env.VUE_APP_DEFAULT_PAGE_LENGTH)) {
+						commit('SET_LAST_PAGE', true);
+						console.log('the end 2');
+
+					}
+
+					// increment page counter
 					commit('INCREMENT_PAGE');
 					// hide loader
 					commit('SET_LOADING', false);
+				}
+				else {
+					prettyLog('setlist', 'API', 'First page of song not yet loaded, abord loading more songs');
+				}
+			}
+			else {
+				prettyLog('setlist', 'API', 'End of list reached, abort loading more songs');
+			}
+		}
 		catch (error) {
 			console.error(error);
 			// save API error

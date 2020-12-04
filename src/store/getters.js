@@ -74,6 +74,7 @@ const getters = {
 
 	},
 	isSearch: state => state.isSearch,
+	isLastPage: state => state.isLastPage,
 
 	getField
 };
