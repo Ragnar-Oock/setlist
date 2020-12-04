@@ -93,7 +93,6 @@
 				height="1em"
 				viewBox="0 0 16 16"
 				xmlns="http://www.w3.org/2000/svg"
-				class="search-bar__open-more-icon"
 			>
 				<use
 					xlink:href="../assets/images/copy.svg#el"
@@ -686,10 +685,15 @@ export default {
 				transition-property: max-width, margin-right;
 				display: flex;
 				height: 100%;
+				pointer-events: none;
 
 				span {
-						margin: auto;
-					}
+					margin: auto;
+				}
+
+				svg {
+					pointer-events: none;
+				}
 			}
 
 			&::before {
