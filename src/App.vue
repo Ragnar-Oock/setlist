@@ -19,13 +19,22 @@
 				@refresh="refreshList"
 			/>
 
-			<!-- v-if="songList.length == 0" -->
 			<div
-				v-if="songList == 0"
+				v-if="songList == 0 && !error"
 				class="wrapper"
 			>
 				<p>{{ $t('loading') }}</p>
 				<div class="loader" />
+			</div>
+
+			<div
+				v-if="error"
+				class="error wrapper"
+			>
+				<p class="error__title">
+					{{ $t('apiError') }}
+				</p>
+				<p>{{ error }}</p>
 			</div>
 
 			<DynamicScroller
@@ -91,7 +100,8 @@ export default {
 	},
 	computed:{
 		...mapState({
-			songList: 'songs'
+			songList: 'songs',
+			error: 'apiError',
 		}),
 		...mapGetters([
 			'isDarkModeOn'
@@ -231,15 +241,6 @@ export default {
 	}
 
 
-
-// 	body{
-//   background-color: #555555;
-//   display: flex;
-//   height: 100vh;
-//   margin: 0;
-//   font-family: Arial;
-// }
-
 .wrapper{
   display: flex;
   flex-direction: column;
@@ -250,10 +251,18 @@ export default {
   padding: 2em 1em;
   border-radius: 5px;
   box-shadow: 0 0 .5em #0003;
+  color: white;
+}
+
+.error {
+  background: linear-gradient(18deg, #531C1C  0%, #851E1E 100%);
+	&__title{
+		font-size: 1.2;
+		font-weight: bold;
+	}
 }
 
 .wrapper p{
-  color: white;
   text-align: center;
   margin: 0 0 1em;
 }

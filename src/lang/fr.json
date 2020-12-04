@@ -92,5 +92,6 @@
   "topBar": {
     "darkMode": "mode sombre"
   },
-  "loading": "Chargement de la liste"
+  "loading": "Chargement de la liste",
+  "apiError": "Une erreur est survenue"
 }

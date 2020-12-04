@@ -23,7 +23,8 @@ export function getDefaultState() {
 			odlc: false,
 			cdlc: false
 		},
-		orderByRandomSeed: Date.now()
+		orderByRandomSeed: Date.now(),
+		apiError: undefined,
 	};
 }
 

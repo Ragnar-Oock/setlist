@@ -60,6 +60,9 @@ const mutations = {
 	SET_IS_SEARCH(state, value) {
 		state.isSearch = value;
 	},
+	SET_API_ERROR(state, error) {
+		state.apiError = error;
+	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {

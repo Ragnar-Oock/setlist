@@ -92,5 +92,6 @@
   "topBar": {
     "darkMode": "dark mode"
   },
-  "loading": "Loading the list"
+  "loading": "Loading the list",
+  "apiError": "Something when wrong"
 }

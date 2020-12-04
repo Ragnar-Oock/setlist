@@ -43,8 +43,11 @@ const actions = {
 
 			commit('SET_SONG_LIST', response.obj.data);
 			commit('INCREMENT_PAGE');
+			// erase api errors
+			commit('SET_API_ERROR', undefined);
 		}
 		catch (error) {
+			commit('SET_API_ERROR', error);
 			console.error(error);
 		}
 	},
@@ -83,6 +86,8 @@ const actions = {
 		}
 		catch (error) {
 			console.error(error);
+			// save API error
+			commit('SET_API_ERROR', error);
 		}
 	},
 
