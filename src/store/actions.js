@@ -148,7 +148,6 @@ const actions = {
 			commit('SET_PAGE', 0);
 			// empty the song list
 			commit('SET_SONG_LIST', []);
-			commit('SET_IS_SEARCH', true);
 
 			// get the first page
 			dispatch('getSongList');

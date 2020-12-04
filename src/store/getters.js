@@ -1,5 +1,5 @@
 import { getField } from 'vuex-map-fields';
-import { getDiffKeys } from '@/helpers/methods';
+import { getDiffKeys, compareKeys } from '@/helpers/methods';
 import { getDefaultState } from './state';
 
 
@@ -73,7 +73,7 @@ const getters = {
 		return searchParams;
 
 	},
-	isSearch: state => state.isSearch,
+	isSearch: state => !compareKeys(getDefaultState().searchSettings, state.searchSettings),
 	isLastPage: state => state.isLastPage,
 
 	getField

@@ -57,9 +57,6 @@ const mutations = {
 		state.searchSettings = defaultForm;
 		state.searchSettings.arrangements = defaultForm.arrangements;
 	},
-	SET_IS_SEARCH(state, value) {
-		state.isSearch = value;
-	},
 	SET_API_ERROR(state, error) {
 		state.apiError = error;
 	},

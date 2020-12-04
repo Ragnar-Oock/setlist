@@ -2,7 +2,6 @@ export function getDefaultState() {
 	return {
 		songs: [],
 		page: 0,
-		isSearch: false,
 		percist: {
 			darkMode: false,
 			orderBy: [
