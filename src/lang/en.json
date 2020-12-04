@@ -93,5 +93,9 @@
     "darkMode": "dark mode"
   },
   "loading": "Loading the list",
-  "apiError": "Something when wrong"
+  "apiError": "Something when wrong",
+  "listEnd": {
+    "title": "This is the end...",
+    "hint": "Try searching for something else."
+  }
 }

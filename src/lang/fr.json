@@ -93,5 +93,9 @@
     "darkMode": "mode sombre"
   },
   "loading": "Chargement de la liste",
-  "apiError": "Une erreur est survenue"
+  "apiError": "Une erreur est survenue",
+  "listEnd": {
+    "title": "La fin du monde!",
+    "hint": "Vous etes arrivé à la fin de la liste.\nEssayez de chercher autre chose."
+  }
 }

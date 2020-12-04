@@ -21,7 +21,7 @@
 
 			<div
 				v-if="songList == 0 && !error"
-				class="wrapper"
+				class="message-box"
 			>
 				<p>{{ $t('loading') }}</p>
 				<div class="loader" />
@@ -29,16 +29,16 @@
 
 			<div
 				v-if="error"
-				class="error wrapper"
+				class="error message-box"
 			>
-				<p class="error__title">
+				<p class="message-box__title">
 					{{ $t('apiError') }}
 				</p>
 				<p>{{ error }}</p>
 			</div>
 
 			<DynamicScroller
-				class="scroller"
+				:class="{'scroller':!isLastPage}"
 				:items="songList"
 				:min-item-size="95"
 				key-field="id"
@@ -64,10 +64,19 @@
 
 			<div
 				v-if="isLoading && !error"
-				class="wrapper"
+				class="message-box"
 			>
 				<p>{{ $t('loading') }}</p>
 				<div class="loader" />
+			</div>
+			<div
+				v-if="isLastPage"
+				class="message-box"
+			>
+				<p class="message-box__title">
+					{{ $t('listEnd.title') }}
+				</p>
+				<p>{{ $t('listEnd.hint') }}</p>
 			</div>
 		</div>
 		<div
@@ -110,7 +119,8 @@ export default {
 		...mapState({
 			songList: 'songs',
 			error: 'apiError',
-			isLoading: 'isLoading'
+			isLoading: 'isLoading',
+			isLastPage: 'isLastPage'
 		}),
 		...mapGetters([
 			'isDarkModeOn'
@@ -250,71 +260,72 @@ export default {
 	}
 
 
-.wrapper{
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  background: var(--filler-1);
-  width: 60ch;
-  align-items: center;
-  padding: 2em 1em;
-  border-radius: 5px;
-  box-shadow: 0 0 .5em #0003;
-  color: white;
-	margin-top: .5em;
-}
+	.message-box{
+		display: flex;
+		flex-direction: column;
+		margin: auto;
+		background: var(--filler-1);
+		width: 60ch;
+		align-items: center;
+		padding: 2em 1em;
+		border-radius: 5px;
+		box-shadow: 0 0 .5em #0003;
+		color: white;
+		margin-top: .5em;
 
-.error {
-  background: linear-gradient(18deg, #531C1C  0%, #851E1E 100%);
-	&__title{
-		font-size: 1.2;
-		font-weight: bold;
+		&__title{
+			font-size: 1.2;
+			font-weight: bold;
+		}
+
+		& p{
+			text-align: center;
+			margin: 0 0 1em;
+			white-space: pre-line;
+		}
 	}
-}
 
-.wrapper p{
-  text-align: center;
-  margin: 0 0 1em;
-}
-.loader{
-  --fill: var(--filler-1);
-  width: 20em;
-  height: 1em;
-  background: var(--fill);
-  border-radius: 100vh;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 .5em #0003;
-  margin: 0;
-}
+	.error {
+		background: linear-gradient(18deg, #531C1C  0%, #851E1E 100%);
+	}
 
-.loader::before{
-  content: '';
-  display: block;
-  position: absolute;
-  width: 25%;
-  height: 100%;
-  left:50%;
-  background-color: #a2a2a2;
-  border-radius: 100vh;
-  animation: slide alternate 1.5s ease-in-out infinite;
-  box-shadow: 0 0 0 .25em var(--fill), 0 0 .5em .25em #0003;
-}
+	.loader{
+		--fill: var(--filler-1);
+		width: 20em;
+		height: 1em;
+		background: var(--fill);
+		border-radius: 100vh;
+		position: relative;
+		overflow: hidden;
+		box-shadow: inset 0 0 .5em #0003;
+		margin: 0;
 
-@keyframes slide {
-  0% {
-    transform: translateX(-200%);
-    width: 25%;
-  }
-  50%{
-    width: 40%;
-  }
-  100% {
-    transform: translateX(100%);
-    width: 25%;
-  }
-}
+		&::before{
+		content: '';
+		display: block;
+		position: absolute;
+		width: 25%;
+		height: 100%;
+		left:50%;
+		background-color: #a2a2a2;
+		border-radius: 100vh;
+		animation: slide alternate 1.5s ease-in-out infinite;
+		box-shadow: 0 0 0 .25em var(--fill), 0 0 .5em .25em #0003;
+	}
 
+	}
 
-
+	@keyframes slide {
+		0% {
+			transform: translateX(-200%);
+			width: 25%;
+		}
+		50%{
+			width: 40%;
+		}
+		100% {
+			transform: translateX(100%);
+			width: 25%;
+		}
+	}
 </style>
