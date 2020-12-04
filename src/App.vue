@@ -261,6 +261,7 @@ export default {
   border-radius: 5px;
   box-shadow: 0 0 .5em #0003;
   color: white;
+	margin-top: .5em;
 }
 
 .error {
