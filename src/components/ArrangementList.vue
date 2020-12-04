@@ -43,10 +43,11 @@
 		</div>
 
 		<button
+			v-tippy="{placement: 'right'}"
 			class="arrangements__toggle"
+			:content="$t('song.diplayTunnings')"
 			@click="onclick"
 		>
-			<span class="sr-only">{{ $t('song.diplayTunnings') }}</span>
 			<svg
 				aria-hidden="true"
 				fill="currentColor"
