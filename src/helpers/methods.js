@@ -17,10 +17,21 @@ export function prettyLog(module, tag, message, styles) {
 	}
 }
 
+
+/**
+ * compare to objects and determine if they are similar or not
+ * @param {Object} requiredKeys first set of key to compare
+ * @param {Object} providedKeys second set of key to compare
+ */
 export function compareKeys(requiredKeys, providedKeys) {
 	try {
 		let keysAreIdenticals = false;
 		const _requiredKeys = Object.entries(requiredKeys);
+
+		// if key number are dissymilar the objects are differents
+		if (_requiredKeys.length !== Object.entries(providedKeys).length) {
+			return false;
+		}
 
 		_requiredKeys.some(entry => {
 			const key = entry[0];
@@ -43,6 +54,11 @@ export function compareKeys(requiredKeys, providedKeys) {
 	}
 }
 
+/**
+ * Compare tow object and return the key that differs
+ * @param {Object} requiredKeys reference object
+ * @param {Object} providedKeys Object to be tested
+ */
 export function getDiffKeys(requiredKeys, providedKeys) {
 	try {
 		const diffKeys = [];
