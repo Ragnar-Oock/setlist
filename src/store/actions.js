@@ -21,6 +21,7 @@ function getClient() {
 const actions = {
 	async getSongList({ commit, getters }) {
 		try {
+			commit('SET_LOADING', true);
 			prettyLog('setlist', 'API', 'Loading songs');
 
 			const client = await getClient();
@@ -45,9 +46,13 @@ const actions = {
 			commit('INCREMENT_PAGE');
 			// erase api errors
 			commit('SET_API_ERROR', undefined);
+			// hide loader
+			commit('SET_LOADING', false);
+
 		}
 		catch (error) {
 			commit('SET_API_ERROR', error);
+			commit('SET_LOADING', false);
 			console.error(error);
 		}
 	},
@@ -55,7 +60,9 @@ const actions = {
 	async getMoreSongs({ commit, getters }) {
 		try {
 			if (getters.getPage > 0) {
-				prettyLog('setlist', 'API', 'Loading more songs');
+					// show the loader
+					commit('SET_LOADING', true);
+					prettyLog('setlist', 'API', 'Loading more songs');
 
 				const client = await getClient();
 				let response;
@@ -77,17 +84,16 @@ const actions = {
 				}
 
 				commit('ADD_SONGS_TO_LIST', response.obj.data);
-				commit('INCREMENT_PAGE');
-
-			}
-			else {
-				prettyLog('setlist', 'API', 'First page of song not yet loaded, abord loading more songs');
-			}
-		}
+					commit('INCREMENT_PAGE');
+					// hide loader
+					commit('SET_LOADING', false);
 		catch (error) {
 			console.error(error);
 			// save API error
 			commit('SET_API_ERROR', error);
+			// hide the loader
+			commit('SET_LOADING', false);
+
 		}
 	},
 

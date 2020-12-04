@@ -63,6 +63,9 @@ const mutations = {
 	SET_API_ERROR(state, error) {
 		state.apiError = error;
 	},
+	SET_LOADING(state, value) {
+		state.isLoading = value;
+	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {

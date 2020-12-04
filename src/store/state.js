@@ -25,6 +25,7 @@ export function getDefaultState() {
 		},
 		orderByRandomSeed: Date.now(),
 		apiError: undefined,
+		isLoading: false,
 	};
 }
 

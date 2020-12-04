@@ -61,6 +61,14 @@
 					</DynamicScrollerItem>
 				</template>
 			</DynamicScroller>
+
+			<div
+				v-if="isLoading && !error"
+				class="wrapper"
+			>
+				<p>{{ $t('loading') }}</p>
+				<div class="loader" />
+			</div>
 		</div>
 		<div
 			id="bottom"
@@ -102,6 +110,7 @@ export default {
 		...mapState({
 			songList: 'songs',
 			error: 'apiError',
+			isLoading: 'isLoading'
 		}),
 		...mapGetters([
 			'isDarkModeOn'
