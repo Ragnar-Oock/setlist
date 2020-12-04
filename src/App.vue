@@ -34,7 +34,7 @@
 				:min-item-size="95"
 				key-field="id"
 				page-mode
-				:buffer="1000"
+				:buffer="350"
 			>
 				<template v-slot="{ item, index, active }">
 					<DynamicScrollerItem
