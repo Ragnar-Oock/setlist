@@ -136,6 +136,7 @@ export default {
 			text-align: center;
 			position: relative;
 			z-index: 1;
+			transition: border-color 300ms ease-in-out;
 
 			&:hover,
 			&:focus {

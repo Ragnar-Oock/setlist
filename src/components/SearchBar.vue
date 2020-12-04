@@ -932,23 +932,32 @@ export default {
 			text-align: center;
 			font-weight: bold;
 			transition: 300ms ease-in-out;
-			transition-property: color, background-color;
+			transition-property: color, background-color, border-color;
+			border: 2px solid var(--filler-1);
+
+			&:hover {
+				border-color: var(--primary-2);
+			}
 		}
 
 		&__checkbox:checked + &__label {
 			background-color: var(--primary-2);
+			border-color: var(--primary-2);
+
 			color: black;
+
+			&:hover {
+				border-color: var(--filler-1);
+			}
 		}
 		&__checkbox:focus + &__label,
 		&__checkbox:active + &__label {
-			box-shadow: 0 0 5px 2px #0004;
-			background-color: var(--filler-2);
+			border-color: var(--primary-2);
 			outline: none;
 		}
 		&__checkbox:checked:focus + &__label,
 		&__checkbox:checked:active + &__label {
-			color: var(--white);
-			background-color: var(--primary-1);
+			border-color: var(--filler-1);
 		}
 
 		&__label {
@@ -978,8 +987,10 @@ export default {
 			padding: .25em;
 			box-shadow: var(--shadow);
 			border-radius: 5px;
+			border: 2px solid var(--filler-1);
 			cursor: pointer;
-			transition: background-color 300ms ease-in-out;
+			transition: 300ms ease-in-out;
+			transition-property: background-color, border-color;
 
 			&::before {
 				content:'';
@@ -995,6 +1006,10 @@ export default {
 				border-radius: 5px;
 				transition: background-color 300ms ease-in-out;
 			}
+
+			&:hover{
+				border: 2px solid var(--primary-2);
+			}
 		}
 
 		&__radio:checked + &__label::before {
@@ -1003,23 +1018,13 @@ export default {
 
 		&__radio:focus + &__label,
 		&__radio:active + &__label {
-			box-shadow: 0 0 5px 2px #0004;
-			background-color: var(--filler-2);
-
-			&::before {
-				box-shadow: 0 0 5px 2px #0004;
-				background-color: var(--filler-2);
-			}
+			border-color: var(--primary-2);
 		}
 
 		&__radio:checked:focus + &__label,
 		&__radio:checked:active + &__label {
-			box-shadow: 0 0 5px 2px #0004;
-			background-color: var(--primary-1);
-
 			&::before {
-				box-shadow: 0 0 5px 2px #0004;
-				background-color: var(--primary-1);
+				background-color: var(--primary-2);
 			}
 		}
 

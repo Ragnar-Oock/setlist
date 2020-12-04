@@ -162,13 +162,14 @@ export default {
 			text-align: center;
 			color: var(--text);
 			transition: 300ms ease-in-out;
-			transition-property: background-color, box-shadow;
+			transition-property: background-color, border-color;
 			box-shadow: var(--shadow);
+			border: 2px solid var(--filler-1);
 
-			&:focus {
-				box-shadow: 0 0 5px 2px #0004;
-				background-color: var(--filler-2);
+			&:focus,
+			&:hover {
 				outline: none;
+				border-color: var(--primary-2)
 			}
 
 			&:first-of-type {
