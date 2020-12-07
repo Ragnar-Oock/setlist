@@ -19,7 +19,9 @@
 				:for="key"
 				:content="value"
 				class="lang-selector__label"
-			>{{ key | toUpper }}</label>
+			>{{ key | toUpper }}
+				<span class="sr-only">{{ value }}</span>
+			</label>
 		</div>
 	</section>
 </template>
@@ -78,7 +80,7 @@ export default {
 			border: thin solid transparent;
 
 			&:hover {
-				border-color: var(--counter-text);
+				border-color: var(--text);
 			}
 		}
 
@@ -101,6 +103,9 @@ export default {
 
 		&__input:checked + &__label {
 			background-color: var(--primary-1);
+		}
+		&__input:focus + &__label{
+			border-color: var(--text);
 		}
   }
 </style>

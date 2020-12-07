@@ -171,7 +171,8 @@ export default {
 
 			&:focus,
 			&:hover {
-				border-color: var(--counter-text);
+				border-color: var(--text);
+				outline: none;
 			}
 		}
 

@@ -78,7 +78,6 @@ export default {
 			}
 		},
 		onEscape() {
-			console.log(escape);
 			this.togglePopup(false);
 		}
 	}
@@ -100,7 +99,8 @@ export default {
 
 			&:focus,
 			&:hover {
-				border-color: var(--counter-text);
+				border-color: var(--text);
+				outline: none;
 			}
 
 			img{
