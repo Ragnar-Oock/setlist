@@ -70,7 +70,6 @@ export default {
 			if (this.isOpen) {
 				this.$nextTick().then(() => {
 					this.$refs.popup.focus();
-					console.log(document.activeElement);
 				});
 			}
 			else {
