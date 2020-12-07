@@ -71,8 +71,6 @@ export default {
 </script>
 
 <style lang="scss">
-	@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
-
   .welcome-screen {
 		height: 100vh;
 		min-height: 670px;

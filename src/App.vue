@@ -176,8 +176,19 @@ export default {
 
 <style lang="scss">
 	@import 'node_modules/css-reset-and-normalize/scss/reset-and-normalize';
-	@import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Quicksand:wght@400;600&display=swap');
 	@import 'assets/scss/variables.scss';
+
+	@font-face {
+		font-family: 'Quicksand';
+		src: url('./assets/fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'Poiret One';
+		src: url('./assets/fonts/PoiretOne-Regular.ttf') format('truetype');
+		font-display: swap;
+	}
+
 	body {
 		font-family: 'Quicksand', sans-serif;
 		background-color: #fffef8;
