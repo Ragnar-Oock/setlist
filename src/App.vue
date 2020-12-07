@@ -4,7 +4,7 @@
 		class="app"
 	>
 		<div class="beta">
-			THIS IS A BETA VERSION
+			<p>{{ $t('beta.disclamer') }}</p>
 		</div>
 
 		<WelcomeScreen />
@@ -206,6 +206,7 @@ export default {
 		border-radius: 0.4em;
 		left: 1em;
 		bottom: 1em;
+		text-transform: uppercase;
 	}
 
 	.scroller {
