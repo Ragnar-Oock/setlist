@@ -170,6 +170,7 @@ export default {
 				background-image: url(../assets/images/Ko-fi.png);
 				background-position: center;
 				background-size: contain;
+				margin-right: .5em;
 			}
 		}
 	}
