@@ -12,7 +12,7 @@
 		>
 			<div class="music-item__col-left">
 				<span
-					v-if="idState.duration && idState.openned"
+					v-if="duration && idState.openned"
 					v-tippy="{placement: 'right'}"
 					class="music-item__duration"
 					:content="$t('song.duration')"
