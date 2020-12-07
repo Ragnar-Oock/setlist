@@ -255,7 +255,7 @@ paths:
           required: false
           schema:
             type: string
-            default: 'artist,name,similarity'
+            default: '-similarity,artist,name'
           description: |
             A coma separated list of field used by the order by method to sort the result set. `similarity` is the metric that compare the search string and the results. **This parameter is incompatible with `seed`.**
         - name: seed

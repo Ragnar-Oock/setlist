@@ -26,6 +26,9 @@ import i18n from './i18n';
 Vue.use(VueTippy);
 Vue.component('tippy', TippyComponent);
 
+import PortalVue from 'portal-vue';
+
+Vue.use(PortalVue);
 
 // enable devtools in prod
 Vue.config.devtools = true;

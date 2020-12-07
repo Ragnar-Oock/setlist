@@ -90,12 +90,19 @@
     }
   },
   "topBar": {
-    "darkMode": "dark mode"
+    "darkMode": "Dark mode"
   },
   "loading": "Loading the list",
   "apiError": "Something when wrong",
   "listEnd": {
     "title": "This is the end...",
     "hint": "Try searching for something else."
+  },
+  "kofi": {
+    "title":"Help the development of the new setlist.",
+    "quote":"If only 1% of the users gave 1€, at the end of the month I could buy a kebab...",
+    "signature": "Ragnar - 2020",
+    "button":"Buy me a coffee",
+    "tooltip":"Tips"
   }
 }

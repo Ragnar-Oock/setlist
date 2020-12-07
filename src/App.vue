@@ -75,6 +75,8 @@
 			id="bottom"
 			ref="bottom"
 		/>
+		<portal-target name="screen" />
+		<portal-target name="popup" />
 	</div>
 </template>
 
@@ -87,7 +89,6 @@ import MusicItem from './components/MusicItem';
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import debounce from 'debounce';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
-
 import { mapGetters, mapState } from 'vuex';
 
 export default {
@@ -262,7 +263,7 @@ export default {
 		padding: 2em 1em;
 		border-radius: 5px;
 		box-shadow: 0 0 .5em #0003;
-		color: white;
+		color: var(--text);
 		margin-top: .5em;
 
 		&__title{
@@ -279,6 +280,7 @@ export default {
 
 	.error {
 		background: linear-gradient(18deg, #531C1C  0%, #851E1E 100%);
+		color: white;
 	}
 
 	.loader{

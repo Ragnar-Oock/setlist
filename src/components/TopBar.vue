@@ -3,79 +3,88 @@
 		class="top-bar"
 		:class="{'docked': isSearchBarDocked}"
 	>
-		<LangSelector class="top-bar__item" />
-		<label
-			for="darkMode"
-			class="top-bar__label top-bar__item"
-			:class="{'checked': isDarkModeOn}"
-		>
-			<input
-				id="darkMode"
-				v-model="isDarkModeOn"
-				type="checkbox"
-				name="darkMode"
-				class="sr-only"
+		<div class="top-bar__left">
+			<LangSelector class="top-bar__item" />
+		</div>
+		<div class="top-bar__right">
+			<KoFi />
+			<label
+				v-tippy="{placement:'bottom'}"
+				for="darkMode"
+				class="top-bar__label top-bar__item"
+				:class="{'checked': isDarkModeOn}"
+				:content="$t('topBar.darkMode')"
 			>
+				<input
+					id="darkMode"
+					v-model="isDarkModeOn"
+					type="checkbox"
+					name="darkMode"
+					class="sr-only"
+				>
 
-			<transition
-				name="rise"
-				mode="out-in"
-			>
-				<!-- icon if darkMode is on -->
-				<svg
+				<transition
+					name="rise"
+					mode="out-in"
+				>
+					<!-- icon if darkMode is on -->
+					<svg
+						v-if="isDarkModeOn"
+						key="on"
+						aria-hidden="true"
+						class="top-bar__icon"
+						viewBox="0 0 16 16"
+						fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							fill-rule="evenodd"
+							d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"
+						/>
+					</svg>
+					<svg
+						v-else
+						key="off"
+						aria-hidden="true"
+						class="top-bar__icon"
+						viewBox="0 0 16 16"
+						fill="currentColor"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
+						<path
+							fill-rule="evenodd"
+							d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+						/>
+					</svg>
+				</transition>
+
+				<div
 					v-if="isDarkModeOn"
 					key="on"
-					aria-hidden="true"
-					class="top-bar__icon"
-					viewBox="0 0 16 16"
-					fill="currentColor"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						fill-rule="evenodd"
-						d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"
-					/>
-				</svg>
-				<svg
+					class="top-bar__horizon on"
+				/>
+				<div
 					v-else
 					key="off"
-					aria-hidden="true"
-					class="top-bar__icon"
-					viewBox="0 0 16 16"
-					fill="currentColor"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
-					<path
-						fill-rule="evenodd"
-						d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
-					/>
-				</svg>
-			</transition>
+					class="top-bar__horizon off"
+				/>
 
-			<div
-				v-if="isDarkModeOn"
-				key="on"
-				class="top-bar__horizon on"
-			/>
-			<div
-				v-else
-				key="off"
-				class="top-bar__horizon off"
-			/>
-
-			<span class="sr-only">{{ $t('topBar.darkMode') }}</span>
-		</label>
+				<span class="sr-only">{{ $t('topBar.darkMode') }}</span>
+			</label>
+		</div>
 	</div>
 </template>
 
 <script lang="js">
 import LangSelector from '@/components/LangSelector';
+import KoFi from '@/components/KoFi';
 
 export default {
 	name: 'TopBar',
 	components: {
-		LangSelector
+		LangSelector,
+		KoFi
 	},
 	props: {
 		isSearchBarDocked: {
@@ -137,6 +146,18 @@ export default {
 			}
 		}
 
+		&__left,
+		&__right{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: .25em;
+		}
+
+		&__left{
+			margin-right: auto;
+		}
+
 
 		&__label {
 			display: flex;
@@ -145,7 +166,13 @@ export default {
 			padding: .5em;
 			border-radius: 5px;
 			cursor: pointer;
-			margin-left: auto;
+			transition: border-color 300ms ease-in-out;
+			border: 1px solid transparent;
+
+			&:focus,
+			&:hover {
+				border-color: var(--counter-text);
+			}
 		}
 
 		&__horizon {
