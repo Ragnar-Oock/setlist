@@ -11,6 +11,10 @@
 			class="rules-page__article"
 			v-html="tuto"
 		/>
+		<footer
+			class="rules-page__footer"
+			v-html="footer"
+		/>
 	</div>
 </template>
 
@@ -21,11 +25,13 @@ export default {
 	name: 'RulesPage',
 	computed:{
 		rules() {
-			return marked(this.$t('rules'));
+			return marked(this.$t('rules.rules'));
 		},
 		tuto() {
-			return marked(this.$t('tuto'));
-
+			return marked(this.$t('rules.tuto'));
+		},
+		footer() {
+			return marked(this.$t('rules.footer'));
 		}
 	}
 };
@@ -49,6 +55,9 @@ export default {
 		&__article {
 			margin: 1em auto;
 		}
+		&__footer {
+			margin-top: 3em;
+		}
 		h2 {
 			margin: 2em 0 .5em;
 			font-weight: bold;
@@ -64,6 +73,22 @@ export default {
 				content: '-';
 				font-weight: bold;
 				padding: 0 .5em;
+			}
+		}
+
+		a {
+			color: var(--text);
+			font-weight: bold;
+			border: 1px solid transparent;
+			padding: .25em .15em;
+			border-radius: 5px;
+			margin: -0.05em;
+			transition: border-color 300ms ease-in-out;
+
+			&:hover,
+			&:focus {
+				border-color: var(--text);
+				outline: none;
 			}
 		}
 
