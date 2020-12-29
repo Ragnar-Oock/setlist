@@ -47,7 +47,7 @@
 					"string5":-1
 				},
 				"CapoFret":-1,
-				"tunning": "drop"	
+				"tuning": "drop"	
 			},
 			"2064D536B36960EFB9896219FFC28E92":{
 				"Name":"Rhythm",
@@ -69,7 +69,7 @@
 					"string5":10
 				},
 				"CapoFret":-1,
-				"tunning": "drop"	
+				"tuning": "drop"	
 			},
 			"F5FCC9E44C830DA0E0130D7830267E9B":{
 				"Name":"Lead",
@@ -91,7 +91,7 @@
 					"string5":10
 				},
 				"CapoFret":-1,
-				"tunning": "drop"	
+				"tuning": "drop"	
 			},
 			"7C7784D0492E54BED6CB2DFD2A5BFD56":{
 				"Name":"Bass",
@@ -113,7 +113,7 @@
 					"string5":-1
 				},
 				"CapoFret":-1,
-				"tunning": "drop"
+				"tuning": "drop"
 			},
 			"zxldokkjfhzsdlkhifgzslkiyftglki":{
 				"Name":"Guitare bass",
@@ -135,7 +135,7 @@
 					"string5":-1
 				},
 				"CapoFret":-1,
-				"tunning": "drop"
+				"tuning": "drop"
 			}
 		},
 		"showlight": true
@@ -170,7 +170,7 @@
 					"string5":-1
 				},
 				"CapoFret":-1,
-				"tunning": "drop"	
+				"tuning": "drop"	
 			},
 			"2064D536B36960EFB9896219FFC28E92":{
 				"Name":"Rhythm",
@@ -192,7 +192,7 @@
 					"string5":10
 				},
 				"CapoFret":-1,
-				"tunning": "drop"	
+				"tuning": "drop"	
 			},
 			"F5FCC9E44C830DA0E0130D7830267E9B":{
 				"Name":"Lead",
@@ -214,7 +214,7 @@
 					"string5":10
 				},
 				"CapoFret":-1,
-				"tunning": "drop"	
+				"tuning": "drop"	
 			},
 			"7C7784D0492E54BED6CB2DFD2A5BFD56":{
 				"Name":"Bass",
@@ -236,7 +236,7 @@
 					"string5":-1
 				},
 				"CapoFret":-1,
-				"tunning": "drop"
+				"tuning": "drop"
 			}
 		}
 	},
@@ -267,7 +267,7 @@
 					"string5":-1
 				},
 				"CapoFret":-1,
-				"tunning": "drop"	
+				"tuning": "drop"	
 			}
 		}
 	},

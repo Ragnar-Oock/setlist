@@ -4,7 +4,7 @@
   // ne pas envoyer sur l'API
   "FilePath":"E:\\Steam\\steamapps\\common\\Rocksmith2014\\songs.psarc",
   "CreationDate":1549400314.2170386,
-  // préformater les arrangement, convertir les tunning en affichage
+  // préformater les arrangement, convertir les tuning en affichage
   "Arrangements":{
     "B18A96F9F1C0080F54D17317C699970C":{
       "Name":"Rhythm",

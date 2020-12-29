@@ -33,7 +33,7 @@
 					>
 						<span
 							v-if="open"
-							class="arrangements__tunning"
+							class="arrangements__tuning"
 						>
 							: {{ arrangement.tuning }}
 						</span>
@@ -45,7 +45,7 @@
 		<button
 			v-tippy="{placement: 'right'}"
 			class="arrangements__toggle"
-			:content="$t('song.diplayTunnings')"
+			:content="$t('song.diplaytunings')"
 			@click="onclick"
 		>
 			<svg
@@ -241,7 +241,7 @@ export default {
 			outline: none;
 		}
 
-		&__tunning {
+		&__tuning {
 			display: inline-block;
 			white-space: nowrap;
 			padding-left: .5ch;
