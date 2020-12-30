@@ -242,11 +242,11 @@
 						</button>
 
 						<label
-							:for="data.id+'output'"
+							:for="data.uuid+'output'"
 							class="sr-only"
 						>{{ $t('song.prebuild.output') }}</label>
 						<input
-							:id="data.id+'output'"
+							:id="data.uuid+'output'"
 							ref="output"
 							class="music-item__output"
 							type="text"
