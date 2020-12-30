@@ -355,7 +355,7 @@ export default {
 		duration() {
 			let duration;
 
-			if (typeof this.data.length !== 'undefined') {
+			if (this.data.length !== 0) {
 				duration = new Date(this.data.length * 1000).toISOString().substr(14, 5);
 			}
 			else {
