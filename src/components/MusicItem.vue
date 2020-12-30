@@ -303,7 +303,7 @@ export default {
 		// eslint-disable-next-line new-cap
 		IdState({
 			// You can customize this
-			idProp: vm => vm.data.id
+			idProp: vm => vm.data.uuid
 		})
 	],
 	props: {

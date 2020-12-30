@@ -33,7 +33,7 @@
 				:class="{'scroller':!isLastPage}"
 				:items="songList"
 				:min-item-size="95"
-				key-field="id"
+				key-field="uuid"
 				page-mode
 				:buffer="350"
 			>
