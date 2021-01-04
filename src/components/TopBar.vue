@@ -7,7 +7,7 @@
 			<LangSelector class="top-bar__item" />
 		</div>
 		<div class="top-bar__right">
-			<KoFi />
+			<KoFi class="top-bar__item" />
 			<label
 				v-tippy="{placement:'bottom'}"
 				for="darkMode"
