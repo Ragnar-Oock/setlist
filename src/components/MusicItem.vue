@@ -159,7 +159,7 @@
 					</div>
 					<div class="music-item__section music-item__section--main">
 						<div
-							v-if="typeof data.metadata !== 'undefined' && data.metadata.length !== 0"
+							v-if="typeof data.metadata !== 'undefined' && Object.keys(data.metadata).length !== 0"
 							class="music-item__meta-list"
 						>
 							<div
