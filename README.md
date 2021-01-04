@@ -1,3 +1,6 @@
 # setlist
 
-An API driven list of all songs available for requests on twitch.tv/warths. Currently in development, see it live (not API integration yet) at https://ragnar-oock.github.io/setlist-staging/
+An API driven list of all songs available for requests on twitch.tv/warths.
+
+Version 1 is out!
+check the live version at https://api.warths.fr/static/setlist/
