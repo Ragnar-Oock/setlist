@@ -43,7 +43,7 @@
 		</div>
 
 		<button
-			v-tippy="{placement: 'right'}"
+			v-tippy="{placement: 'top'}"
 			class="arrangements__toggle"
 			:content="$t('song.diplaytunings')"
 			@click="onclick"

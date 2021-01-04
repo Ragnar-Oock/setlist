@@ -190,7 +190,7 @@
 					</div>
 					<div class="music-item__prebuild">
 						<button
-							v-tippy="{placement: 'right'}"
+							v-tippy="{placement: 'bottom right'}"
 							class="music-item__button music-item__vip"
 							:content="vipToggleTitle"
 							@click="toggleVip"
@@ -215,8 +215,7 @@
 						</button>
 
 						<button
-							ref="copyButton"
-							v-tippy="{placement: 'right'}"
+							v-tippy="{placement: 'bottom right'}"
 							class="music-item__button music-item__edit"
 							:content="editToggleTitle"
 							@click="toggleEdit"
@@ -256,7 +255,7 @@
 
 						<button
 							ref="copyButton"
-							v-tippy="{placement: 'right'}"
+							v-tippy="{placement: 'bottom right'}"
 							class="music-item__button music-item__copy"
 							:content="$t('song.prebuild.copy')"
 							@click="copy"
