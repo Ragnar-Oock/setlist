@@ -166,7 +166,8 @@ export default {
 			padding: .5em;
 			border-radius: 5px;
 			cursor: pointer;
-			transition: border-color 300ms ease-in-out;
+			transition: 300ms ease-in-out;
+			transition-property: border-color, opacity;
 			border: 1px solid transparent;
 
 			&:focus,
