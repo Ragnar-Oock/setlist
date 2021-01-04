@@ -159,11 +159,11 @@
 					</div>
 					<div class="music-item__section music-item__section--main">
 						<div
-							v-if="typeof data.meta !== 'undefined' && data.meta.length !== 0"
+							v-if="typeof data.metadata !== 'undefined' && data.metadata.length !== 0"
 							class="music-item__meta-list"
 						>
 							<div
-								v-for="(value, key, index) in data.meta"
+								v-for="(value, key, index) in data.metadata"
 								:key="index"
 								class="music-item__meta-item"
 							>
