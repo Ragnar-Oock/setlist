@@ -1056,25 +1056,31 @@ export default {
 		}
 
 		&__reset {
-			border: 3px solid var(--filler-2);
+			border: 3px solid var(--filler-1);
 			background-color: #0000;
 			box-shadow: var(--shadow), inset var(--shadow);
-			transition: box-shadow 300ms ease-in-out;
+			transition: 300ms ease-in-out;
+			transition-property: box-shadow, border-color;
 
-			&:focus {
+			&:focus,
+			&:hover {
 				outline: 0;
-				box-shadow: 0 0 5px 2px #0004, inset 0 0 5px 2px #0002;
+				// box-shadow: 0 0 5px 2px #0004, inset 0 0 5px 2px #0002;
+				border-color: var(--primary-2);
 			}
 		}
 
 		&__submit {
-			background-color: var(--filler-2);
-			border: 3px solid var(--filler-2);
+			background-color: var(--filler-1);
+			border: 3px solid var(--filler-1);
 			margin-left: auto;
+			transition: border-color 300ms ease-in-out;
 
-			&:focus {
+			&:focus,
+			&:hover {
 				outline: 0;
-				box-shadow: 0 0 5px 2px #0004;
+				// box-shadow: 0 0 5px 2px #0004;
+				border-color: var(--primary-2);
 			}
 		}
 	}
