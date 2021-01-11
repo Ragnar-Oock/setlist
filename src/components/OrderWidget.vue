@@ -126,10 +126,9 @@ export default {
 
 		&__btn {
 			padding: .25em .5em;
-			border: none;
 			color: var(--text);
 			border-radius: 5px;
-			border: 1px solid transparent;
+			border: 2px solid transparent;
 			overflow: hidden;
 			background: transparent;
 			cursor: pointer;
