@@ -654,78 +654,7 @@ export default {
 		}
 
 		&__quick-copy {
-			--mouse-x: 50%;
-			--mouse-y: 50%;
-
-			position: absolute;
-			left: calc(100% - 37px);
-			border: none;
-			top: 50%;
-			transform: translateY(-50%);
-			width: max-content;
-			left: unset;
-			right: 2.5em;
-			bottom: unset;
-			padding: 0.5em .75em;
-			border-radius: 5px;
-			opacity: 0;
-			color: var(--text);
-			background: var(--bg-gradient);
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			overflow: hidden;
-
-			&-text {
-				margin-right: .5em;
-				overflow: hidden;
-				white-space: nowrap;
-				transition: 300ms 100ms ease-out;
-				transition-property: max-width, margin-right;
-				display: flex;
-				height: 100%;
-				pointer-events: none;
-
-				span {
-					margin: auto;
-				}
-
-				svg {
-					pointer-events: none;
-				}
-			}
-
-			&::before {
-				content: '';
-				display: block;
-				width: 0;
-				height: 0;
-				position: absolute;
-				left: var(--mouse-x);
-				top: var(--mouse-y);
-				transform: translate(-50%, -50%);
-				border-radius: 50%;
-				box-shadow: inset 0 0 1em 0 #fff6;
-			}
-			&.play::before {
-				animation: click 500ms ease-out 1;
-			}
-
-			@keyframes click {
-				0% {
-					width: 0;
-					padding-top: 0;
-					opacity: 1;
-				}
-				80% {
-					opacity: 1;
-				}
-				100% {
-					width: 300px;
-					padding: 100%;
-					opacity: 0;
-				}
-			}
+			display: none;
 		}
 		&__quick-copy:focus,
 		&__quick-copy:hover {
@@ -749,10 +678,21 @@ export default {
 
 		@media screen  and (min-width: 60em){
 			&__quick-copy {
+				--mouse-x: 50%;
+				--mouse-y: 50%;
+
+				position: absolute;
+				border: none;
+				width: max-content;
+				color: var(--text);
+				background: var(--bg-gradient);
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				overflow: hidden;
 				top: 0;
 				bottom: 0;
 				left: 100%;
-				right: unset;
 				border-radius: 0 5px 5px 0;
 				padding: 0 8px 0 13px;
 				transition:
@@ -770,6 +710,53 @@ export default {
 				&-text {
 					max-width: 0ch;
 					margin-right: 0;
+					overflow: hidden;
+					white-space: nowrap;
+					transition: 300ms 100ms ease-out;
+					transition-property: max-width, margin-right;
+					display: flex;
+					height: 100%;
+					pointer-events: none;
+
+					span {
+						margin: auto;
+					}
+
+					svg {
+						pointer-events: none;
+					}
+				}
+
+				&::before {
+					content: '';
+					display: block;
+					width: 0;
+					height: 0;
+					position: absolute;
+					left: var(--mouse-x);
+					top: var(--mouse-y);
+					transform: translate(-50%, -50%);
+					border-radius: 50%;
+					box-shadow: inset 0 0 1em 0 #fff6;
+				}
+				&.play::before {
+					animation: click 500ms ease-out 1;
+				}
+
+				@keyframes click {
+					0% {
+						width: 0;
+						padding-top: 0;
+						opacity: 1;
+					}
+					80% {
+						opacity: 1;
+					}
+					100% {
+						width: 300px;
+						padding: 100%;
+						opacity: 0;
+					}
 				}
 
 				&:focus > &-text,
