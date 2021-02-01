@@ -28,6 +28,7 @@
 						@focus="toggleInputFocusState(true)"
 						@blur="toggleInputFocusState(false)"
 						@keydown.down="focusFirstSuggestion"
+						@keydown.esc="closeSuggestions"
 						@input="getSuggestions"
 					>
 					<button
@@ -365,12 +366,13 @@ export default {
 			isInputFocused: false,
 			isSuggestionFocused: false,
 			dbGetSuggestions: debounce(() => this.$store.dispatch('getSuggestions'), 100),
-			activeDescendant:''
+			activeDescendant:'',
+			hideSuggestions: false
 		};
 	},
 	computed: {
 		showSuggestions() {
-			return (this.isInputFocused || this.isSuggestionFocused) && this.search.length > 3 && (this.suggestionsSongs.length > 0 || this.suggestionsArtists.length > 0);
+			return (this.isInputFocused || this.isSuggestionFocused) && this.search.length > 3 && (this.suggestionsSongs.length > 0 || this.suggestionsArtists.length > 0) && !this.hideSuggestions;
 		},
 
 		orderBy: {
@@ -516,6 +518,9 @@ export default {
 			}
 
 		},
+		closeSuggestions() {
+			this.hideSuggestions = true;
+		},
 		selectArtist(index) {
 			this.search = this.suggestionsArtists[index].name;
 			this.$refs.submit.focus();
@@ -533,6 +538,7 @@ export default {
 		},
 		// load suggestions from the database when the search field is not empty
 		getSuggestions() {
+			this.hideSuggestions = false;
 			if (this.search.length > 3) {
 				this.dbGetSuggestions();
 			}
