@@ -21,7 +21,8 @@
     "suggestion": {
       "artists": "Artistes",
       "songs": "Musiques",
-      "number": "{0} suggestions on été trouvées. Utiliser fleche du haut ou fleche du bas pour les explorer."
+      "number": "{0} suggestions on été trouvées. Utiliser fleche du haut ou fleche du bas pour les explorer.",
+      "songArtistLink":"de"
     },
     "advenced": {
       "lastInterpretation": {

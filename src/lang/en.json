@@ -21,7 +21,8 @@
     "suggestion": {
       "artists": "Artists",
       "songs": "Songs",
-      "number": "{0} suggestions where found. Use the up and down arrows to explore it."
+      "number": "{0} suggestions where found. Use the up and down arrows to explore it.",
+      "songArtistLink":"by"
     },
     "advenced": {
       "lastInterpretation": {

@@ -164,6 +164,7 @@
 							<span class="suggestions__name">
 								{{ song.name }}
 							</span>
+							<span class="sr-only">{{ $t('search.suggestion.songArtistLink') }}</span>
 							<span class="suggestions__subname">
 								{{ song.artist }}
 							</span>
