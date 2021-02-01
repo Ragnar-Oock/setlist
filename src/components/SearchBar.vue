@@ -369,8 +369,7 @@ export default {
 	},
 	computed: {
 		showSuggestions() {
-			// return (this.isInputFocused || this.isSuggestionFocused) && this.search !== '';
-			return false;
+			return (this.isInputFocused || this.isSuggestionFocused) && this.search.length > 3 && (this.suggestionsSongs.length > 0 || this.suggestionsArtists.length > 0);
 		},
 
 		orderBy: {
