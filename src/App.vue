@@ -272,7 +272,8 @@ export default {
 		flex-direction: column;
 		margin: auto;
 		background: var(--filler-1);
-		width: 60ch;
+		width: 100%;
+		max-width: 60ch;
 		align-items: center;
 		padding: 2em 1em;
 		border-radius: 5px;
@@ -299,7 +300,8 @@ export default {
 
 	.loader{
 		--fill: var(--filler-1);
-		width: 20em;
+		width: 100%;
+		max-width: 20em;
 		height: 1em;
 		background: var(--fill);
 		border-radius: 100vh;

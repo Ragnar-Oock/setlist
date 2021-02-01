@@ -115,7 +115,7 @@ export default {
 		transform: translate(-50%,-50%);
 		z-index: 1000;
 		display: grid;
-		grid-template: 1fr 1fr / 1fr;
+		grid-template: auto 1fr / 1fr;
 		background: var(--bg-gradient);
 		border-radius: 5px;
 		overflow: hidden;
