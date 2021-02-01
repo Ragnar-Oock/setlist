@@ -21,6 +21,10 @@
 						name="search"
 						class="search-bar__input"
 						:placeholder="$t('search.placeholder')"
+						role="combobox"
+						aria-autocomplete="both"
+						aria-owns="suggestions"
+						:aria-activedescendant="activeDescendant"
 						@focus="toggleInputFocusState(true)"
 						@blur="toggleInputFocusState(false)"
 						@keydown.down="focusFirstSuggestion"
@@ -89,18 +93,37 @@
 			</div>
 
 			<div
+				id="suggestions"
 				ref="suggestions"
 				:class="{'show': showSuggestions}"
 				class="search-bar__suggestions suggestions"
+				role="listbox"
 			>
-				<div class="suggestions__wrapper">
-					<span class="suggestions__label">{{ $t('search.suggestion.artists') }}</span>
-					<ul class="suggestions__list">
+				<div
+					class="sr-only"
+					aria-live="assertive"
+				>
+					{{ $t('search.suggestion.number', [suggestionsArtists.length + suggestionsSongs.length]) }}
+				</div>
+				<div
+					v-if="suggestionsArtists.length > 0"
+					class="suggestions__wrapper"
+				>
+					<span
+						id="suggestion_artist_label"
+						class="suggestions__label"
+					>{{ $t('search.suggestion.artists') }}</span>
+					<ul
+						class="suggestions__list"
+						aria-labelledby="suggestion_artist_label"
+					>
 						<li
 							v-for="(artist, index) in suggestionsArtists"
+							:id="'suggestion_artist_' + index"
 							:key="index"
 							tabindex="-1"
 							class="suggestions__item"
+							role="option"
 							@keydown.down="focusSuggestion(1, $event)"
 							@keydown.up="focusSuggestion(-1, $event)"
 							@click="selectArtist(index)"
@@ -113,14 +136,25 @@
 						</li>
 					</ul>
 				</div>
-				<div class="suggestions__wrapper">
-					<span class="suggestions__label">{{ $t('search.suggestion.songs') }}</span>
-					<ul class="suggestions__list">
+				<div
+					v-if="suggestionsSongs.length > 0"
+					class="suggestions__wrapper"
+				>
+					<span
+						id="suggestion_song_label"
+						class="suggestions__label"
+					>{{ $t('search.suggestion.songs') }}</span>
+					<ul
+						class="suggestions__list"
+						aria-labelledby="suggestion_song_label"
+					>
 						<li
 							v-for="(song, index) in suggestionsSongs"
+							:id="'suggestion_song_' + index"
 							:key="index"
 							tabindex="-1"
 							class="suggestions__item"
+							role="option"
 							@keydown.down="focusSuggestion(1, $event)"
 							@keydown.up="focusSuggestion(-1, $event)"
 							@blur="isSuggestionFocused = false"
@@ -483,10 +517,13 @@ export default {
 			this.$refs.suggestions.querySelector('.suggestions__item').focus();
 		},
 		focusSuggestion(padding, event) {
+			// prevent cursor move in the search field
 			event.preventDefault();
+			// initiate variables
 			let index = -1;
 			const allSuggestions = this.$refs.suggestions.querySelectorAll('.suggestions__item');
 
+			// find the origin of the event
 			for (let i = 0; i < allSuggestions.length; i++) {
 				if (event.target === allSuggestions[i]) {
 					index = i;
@@ -494,8 +531,12 @@ export default {
 				}
 			}
 
+			// select the targeted suggestion
 			if (allSuggestions.length !== index + padding && index + padding >= 0) {
-				allSuggestions[(index + padding) % allSuggestions.length].focus();
+				const suggestion = allSuggestions[(index + padding) % allSuggestions.length];
+
+				this.activeDescendant = suggestion.id;
+				suggestion.focus();
 			}
 			else if (index + padding < 0) {
 				this.$refs.search.focus();
