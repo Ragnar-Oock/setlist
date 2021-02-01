@@ -49,6 +49,7 @@ export default {
 	methods:{
 		change() {
 			localStorage.setItem('langLocal', this.$i18n.locale);
+			document.documentElement.lang = this.$i18n.locale;
 		}
 	}
 };
