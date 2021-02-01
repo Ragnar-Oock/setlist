@@ -17,7 +17,7 @@ export function getDefaultState() {
 			interpretationNumber: [0, 100],
 			score: [0, 100],
 			arrangements: { 'rhythm': false, 'lead': false, 'bass': false },
-			showlight: false,
+			showlights: false,
 			vocals: false,
 			odlc: false,
 			cdlc: false

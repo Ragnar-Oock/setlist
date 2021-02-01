@@ -258,13 +258,13 @@
 					<div class="search-bar__row">
 						<div class="search-bar__group">
 							<input
-								id="showlight"
-								v-model="showlight"
+								id="showlights"
+								v-model="showlights"
 								type="checkbox"
 								class="search-bar__checkbox"
 							>
 							<label
-								for="showlight"
+								for="showlights"
 								class="search-bar__label"
 							>{{ $t('search.advenced.light.button') }}</label>
 						</div>
@@ -386,7 +386,7 @@ export default {
 			'searchSettings.lastInterpretation',
 			'searchSettings.interpretationNumber',
 			'searchSettings.score',
-			'searchSettings.showlight',
+			'searchSettings.showlights',
 			'searchSettings.vocals',
 			'searchSettings.odlc',
 			'searchSettings.cdlc'
