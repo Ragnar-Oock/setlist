@@ -14,13 +14,14 @@
     "scrolldown": "Section suivante"
   },
   "search": {
-    "label": "Rechercher une musique",
+    "label": "Rechercher une musique, un artist ou un album",
     "placeholder": "Recherche un titre, un artiste...",
     "submit": "Rechercher",
     "filters": "Filtres",
     "suggestion": {
       "artists": "Artistes",
-      "songs": "Musiques"
+      "songs": "Musiques",
+      "number": "{0} suggestions on été trouvées. Utiliser fleche du haut ou fleche du bas pour les explorer."
     },
     "advenced": {
       "lastInterpretation": {

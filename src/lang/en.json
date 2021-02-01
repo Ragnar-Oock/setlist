@@ -14,13 +14,14 @@
     "scrolldown": "Scrolldown"
   },
   "search": {
-    "label": "Search a song",
+    "label": "Search a song, an artist, or an album",
     "placeholder": "Search a song, an artist...",
     "submit": "Search",
     "filters": "Filters",
     "suggestion": {
       "artists": "Artists",
-      "songs": "Songs"
+      "songs": "Songs",
+      "number": "{0} suggestions where found. Use the up and down arrows to explore it."
     },
     "advenced": {
       "lastInterpretation": {
