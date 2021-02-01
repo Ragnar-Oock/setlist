@@ -241,11 +241,11 @@
 						</button>
 
 						<label
-							:for="data.uuid+'output'"
+							:for="data.id+'output'"
 							class="sr-only"
 						>{{ $t('song.prebuild.output') }}</label>
 						<input
-							:id="data.uuid+'output'"
+							:id="data.id+'output'"
 							ref="output"
 							class="music-item__output"
 							type="text"
@@ -302,7 +302,7 @@ export default {
 		// eslint-disable-next-line new-cap
 		IdState({
 			// You can customize this
-			idProp: vm => vm.data.uuid
+			idProp: vm => vm.data.id
 		})
 	],
 	props: {
