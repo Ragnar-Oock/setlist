@@ -361,33 +361,6 @@ export default {
 			interpretationNumberMax: 100,
 			scoreMin: 0,
 			scoreMax: 100,
-			suggestionsArtists: [
-				'A Day To Remember',
-				'A Nanana',
-				'Je suis un artiste'
-			],
-			suggestionsSongs: [
-				{
-					name: 'All I want',
-					artist: 'A Day To Remember'
-				},
-				{
-					name: 'All Sign Point to Lauderdale',
-					artist: 'A Day To Remember'
-				},
-				{
-					name: 'If It Means a Lot to You',
-					artist: 'A Day To Remember'
-				},
-				{
-					name: 'It\'s Complicated',
-					artist: 'A Day To Remember'
-				},
-				{
-					name: 'A Day To Depart',
-					artist: 'Noumena'
-				}
-			],
 			isInputFocused: false,
 			isSuggestionFocused: false,
 			dbGetSuggestions: debounce(() => this.$store.dispatch('getSuggestions'), 100),
