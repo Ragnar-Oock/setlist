@@ -30,6 +30,11 @@ const mutations = {
 		state.songs = songList;
 	},
 
+	SET_SUGGESTIONS(state, suggestions) {
+		state.suggestionsSongs = suggestions.song;
+		state.suggestionsArtists = suggestions.artist;
+	},
+
 	SET_PAGE(state, value) {
 		state.page = value;
 	},

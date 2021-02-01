@@ -25,7 +25,9 @@ export function getDefaultState() {
 		orderByRandomSeed: Date.now(),
 		apiError: undefined,
 		isLoading: false,
-		isLastPage: false
+		isLastPage: false,
+		suggestionsSongs: [],
+		suggestionsArtists: []
 	};
 }
 

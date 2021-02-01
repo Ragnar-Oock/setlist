@@ -153,6 +153,24 @@ const actions = {
 		catch (error) {
 			console.error(error);
 		}
+	},
+
+	async getSuggestions({ commit, getters }) {
+		try {
+			prettyLog('setlist', 'API', 'Get suggestions');
+
+			const client = await getClient();
+
+			const response = await client.apis.public.search_suggestion_get({
+				limit: process.env.VUE_APP_DEFAULT_PAGE_LENGTH,
+				...getters.getSearchParams
+			});
+
+			commit('SET_SUGGESTIONS', response.obj.data);
+		}
+		catch (error) {
+			console.error(error);
+		}
 	}
 
 };

@@ -24,6 +24,7 @@
 						@focus="toggleInputFocusState(true)"
 						@blur="toggleInputFocusState(false)"
 						@keydown.down="focusFirstSuggestion"
+						@input="getSuggestions"
 					>
 					<button
 						ref="submit"
@@ -107,7 +108,7 @@
 							@blur="isSuggestionFocused = false"
 						>
 							<span class="suggestions__name">
-								{{ artist }}
+								{{ artist.name }}
 							</span>
 						</li>
 					</ul>
@@ -305,6 +306,8 @@ import DoubleSliderRange from './DoubleSliderRange';
 import OrderWidget from './OrderWidget';
 import { mapFields } from 'vuex-map-fields';
 import ArrangementsFilter from './ArrangementsFilter';
+import { mapState } from 'vuex';
+import debounce from 'debounce';
 
 export default {
 	name: 'SearchBar',
@@ -352,7 +355,9 @@ export default {
 				}
 			],
 			isInputFocused: false,
-			isSuggestionFocused: false
+			isSuggestionFocused: false,
+			dbGetSuggestions: debounce(() => this.$store.dispatch('getSuggestions'), 100),
+			activeDescendant:''
 		};
 	},
 	computed: {
@@ -379,6 +384,10 @@ export default {
 			'searchSettings.vocals',
 			'searchSettings.odlc',
 			'searchSettings.cdlc'
+		]),
+		...mapState([
+			'suggestionsSongs',
+			'suggestionsArtists'
 		])
 	},
 	watch: {
@@ -494,7 +503,7 @@ export default {
 
 		},
 		selectArtist(index) {
-			this.search = this.suggestionsArtists[index];
+			this.search = this.suggestionsArtists[index].name;
 			this.$refs.submit.focus();
 			this.isSuggestionFocused = false;
 			this.submit();
@@ -507,6 +516,12 @@ export default {
 		},
 		refreshList() {
 			this.$emit('refresh');
+		},
+		// load suggestions from the database when the search field is not empty
+		getSuggestions() {
+			if (this.search.length > 3) {
+				this.dbGetSuggestions();
+			}
 		}
 	}
 };
