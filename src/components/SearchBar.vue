@@ -908,10 +908,12 @@ export default {
 		&__row {
 			display: flex;
 			flex-direction: row;
-			gap: 1em;
 
 			&:not(:last-child) {
 				margin-bottom: .75em;
+			}
+			& > * + *{
+				margin-left: 1em;
 			}
 
 		}
