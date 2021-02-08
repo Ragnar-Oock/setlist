@@ -3,10 +3,6 @@
 		id="app"
 		class="app"
 	>
-		<div class="beta">
-			<p>{{ $t('beta.disclamer') }}</p>
-		</div>
-
 		<WelcomeScreen />
 
 		<TopBar :is-search-bar-docked="isSearchBarDocked" />
@@ -37,7 +33,7 @@
 				page-mode
 				:buffer="350"
 			>
-				<template v-slot="{ item, index, active }">
+				<template #default="{ item, index, active }">
 					<DynamicScrollerItem
 						:item="item"
 						:active="active"
@@ -197,18 +193,6 @@ export default {
 		overflow-x: hidden;
 		width: 100%;
 		scroll-behavior: smooth;
-	}
-
-	.beta {
-		font-size: 1.2em;
-		background-color: red;
-		position: fixed;
-		z-index: 9999;
-		padding: 0.5em 1em;
-		border-radius: 0.4em;
-		left: 1em;
-		bottom: 1em;
-		text-transform: uppercase;
 	}
 
 	.scroller {
