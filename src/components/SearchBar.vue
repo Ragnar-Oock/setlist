@@ -431,11 +431,9 @@ export default {
 		observer.observe(this.$refs.searchBar);
 
 		document.addEventListener('click', event => {
-			this.isSuggestionFocused = event.composedPath().includes(this.$refs.suggestions);
-		});
-		this.$refs.suggestions.addEventListener('focusin', event => {
-			event.preventDefault();
-			this.isSuggestionFocused = event.composedPath().includes(this.$refs.suggestions);
+			// if clic is inside the suggestions let the suggestion as it is (openned or closed) to avoid reopening it after a selection
+			// otherwise close the suggestions
+			this.isSuggestionFocused = event.composedPath().includes(this.$refs.suggestions) ? this.isSuggestionFocused : false;
 		});
 	},
 	methods: {
