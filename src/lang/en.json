@@ -83,13 +83,28 @@
     "diplaytunings": "Toggle arrangement's tuning display",
     "byArtist": " by ",
     "prebuild": {
+      "vip": {
+        "label": "VIP",
+        "tooltip": "Make a VIP request"
+      },
+      "regular": {
+        "label": "Regular",
+        "tooltip": "Make a regular request"
+      },
+      "request": {
+        "label":"Request",
+        "tooltip":"Make a request"
+      },
+      "edit":{
+        "label": "Edit",
+        "tooltip": "Edit a request"
+      },
       "output": "Command output",
-      "copy": "Copy command",
-      "copied": "Command copied",
-      "vip": "Make a VIP request",
-      "regular": "Make a regular request",
-      "request": "Make a request",
-      "edit": "Edit a request"
+      "copy": {
+        "label": "Copy",
+        "tooltip": "Copy command"
+      },
+      "copied": "Command copied"
     },
     "tags": {
       "Officielle": "Official"

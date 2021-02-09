@@ -1,0 +1,150 @@
+<template lang="html">
+	<div class="prebuild">
+		<div class="button-group">
+			<button
+				class="btn small dull"
+				aria-live="assertive"
+				@click="toggleVip"
+			>
+				{{ vipToggleTitle }}
+			</button>
+			<button
+				class="btn small dull"
+				aria-live="assertive"
+				@click="toggleEdit"
+			>
+				{{ editToggleTitle }}
+			</button>
+		</div>
+		<input
+			type="text"
+			readonly="readonly"
+			class="output"
+			:value="command"
+		>
+		<div class="button-group">
+			<button class="btn small dull">
+				{{ $t('song.prebuild.copy.label') }}
+			</button>
+		</div>
+	</div>
+</template>
+
+<script lang="js">
+
+export default {
+	name: 'Prebuild',
+	props: {
+		selectedArrangement: {
+			type: Object,
+			required: true
+		},
+		song: {
+			type: Object,
+			required: true
+		}
+	},
+	data () {
+		return {
+			vip: false,
+			edit: false
+		};
+	},
+	computed: {
+		command() {
+			let command;
+
+			if (this.vip) {
+				if (this.edit) {
+					command = 'vipedit';
+				}
+				else {
+					command = 'vip';
+				}
+			}
+			else {
+				if (this.edit) {
+					command = 'edit';
+				}
+				else {
+					command = 'sr';
+				}
+			}
+
+			return `!${ command } ${ this.song.name } - ${ this.song.artist } ${ this.selectedArrangement.type ? `*${ this.selectedArrangement }` : '' }`;
+		},
+		vipToggleTitle() {
+			return this.vip ? this.$t('song.prebuild.regular.label') : this.$t('song.prebuild.vip.label');
+		},
+		editToggleTitle() {
+			return this.edit ? this.$t('song.prebuild.request.label') : this.$t('song.prebuild.edit.label');
+		}
+	},
+	methods: {
+		toggleVip() {
+			this.vip = !this.vip;
+		},
+		toggleEdit() {
+			this.edit = !this.edit;
+		},
+		copy() {
+			this.$refs.output.select();
+			document.execCommand('copy');
+			this.showTooltip = true;
+			setTimeout(() => {
+				this.showTooltip = false;
+			}, 1500);
+
+			this.$nextTick().then(() => {
+				this.$refs.copyButton.focus();
+			});
+		}
+	}
+};
+
+
+</script>
+
+<style scoped lang="scss">
+  .prebuild {
+		display: grid;
+		grid-template-areas: 'modifier output copy';
+		grid-template-columns: auto 1fr auto;
+		padding: var(--margin);
+		gap: var(--margin);
+		background-color: var(--filler-1);
+
+		@media screen and (max-width: 37.5rem) {
+			grid-template-areas: 'output output output' 'modifier . copy';
+			grid-template-columns: auto 1fr auto;
+		}
+
+		.button-group {
+			display: flex;
+
+			& > button:first-of-type{
+				border-top-left-radius: 5px;
+				border-bottom-left-radius: 5px;
+			}
+			& > button:last-of-type{
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
+			}
+		}
+
+		.output {
+			flex-grow: 1;
+			border-radius: 5px;
+			background-color: var(--root-bg);
+			border: 3px solid #0000;
+			cursor: default;
+			color: var(--text);
+			padding: calc(var(--margin-thin) - 3px) calc(var(--margin) - 3px);
+
+			&:focus{
+				outline: none;
+				border-color: var(--filler-3);
+			}
+		}
+  }
+</style>

@@ -222,99 +222,10 @@
 							:song-id="data.id"
 						/>
 					</div>
-					<div class="music-item__prebuild">
-						<button
-							v-tippy="{placement: 'bottom right'}"
-							class="music-item__button music-item__vip"
-							:content="vipToggleTitle"
-							@click="toggleVip"
-						>
-							<!-- don't change this svg import if you don't want to skrew up the styling -->
-							<svg
-								width="1em"
-								height="1em"
-								viewBox="0 0 16 16"
-								xmlns="http://www.w3.org/2000/svg"
-								aria-hidden="true"
-							>
-								<use
-									v-if="idState.vip"
-									xlink:href="../assets/images/diamond-fill.svg#el"
-								/>
-								<use
-									v-else
-									xlink:href="../assets/images/diamond.svg#el"
-								/>
-							</svg>
-						</button>
-
-						<button
-							v-tippy="{placement: 'bottom right'}"
-							class="music-item__button music-item__edit"
-							:content="editToggleTitle"
-							@click="toggleEdit"
-						>
-							<!-- don't change this svg import if you don't want to skrew up the styling -->
-							<svg
-								aria-hidden="true"
-								width="1em"
-								height="1em"
-								viewBox="0 0 16 16"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<use
-									v-if="idState.edit"
-									xlink:href="../assets/images/edit-fill.svg#el"
-								/>
-								<use
-									v-else
-									xlink:href="../assets/images/edit.svg#el"
-								/>
-							</svg>
-						</button>
-
-						<label
-							:for="data.id+'output'"
-							class="sr-only"
-						>{{ $t('song.prebuild.output') }}</label>
-						<input
-							:id="data.id+'output'"
-							ref="output"
-							class="music-item__output"
-							type="text"
-							:value="command"
-							readonly
-						>
-
-						<button
-							ref="copyButton"
-							v-tippy="{placement: 'bottom right'}"
-							class="music-item__button music-item__copy"
-							:content="$t('song.prebuild.copy')"
-							@click="copy"
-						>
-							<!-- don't change this svg import if you don't want to skrew up the styling -->
-							<svg
-								aria-hidden="true"
-								width="1em"
-								height="1em"
-								viewBox="0 0 16 16"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<use
-									xlink:href="../assets/images/copy.svg#el"
-								/>
-							</svg>
-							<transition name="in-out">
-								<div
-									v-if="idState.showTooltip"
-									class="music-item__success"
-								>
-									{{ $t('song.prebuild.copied') }}
-								</div>
-							</transition>
-						</button>
-					</div>
+					<Prebuild
+						:selected-arrangement="idState.selectedArrangement"
+						:song="data"
+					/>
 				</div>
 			</transition>
 		</div>
@@ -323,12 +234,14 @@
 
 <script lang="js">
 import ArrangementsSelector from '@/components/MusicItem/sub-components/ArrangementsSelector';
+import Prebuild from '@/components/MusicItem/sub-components/Prebuild';
 import { IdState } from 'vue-virtual-scroller';
 
 export default {
 	name: 'MusicItem',
 	components: {
 		ArrangementsSelector,
+		Prebuild
 	},
 	mixins: [
 		// eslint-disable-next-line new-cap
@@ -353,34 +266,6 @@ export default {
 	computed: {
 		haveTags() {
 			return typeof this.data.tags !== 'undefined' && this.data.tags.length > 0;
-		},
-		command() {
-			let command;
-
-			if (this.idState.vip) {
-				if (this.idState.edit) {
-					command = 'vipedit';
-				}
-				else {
-					command = 'vip';
-				}
-			}
-			else {
-				if (this.idState.edit) {
-					command = 'edit';
-				}
-				else {
-					command = 'sr';
-				}
-			}
-
-			return `!${ command } ${ this.data.name } - ${ this.data.artist } ${ this.idState.selectedArrangement !== '' ? `*${ this.idState.selectedArrangement }` : '' }`;
-		},
-		vipToggleTitle() {
-			return this.idState.vip ? this.$t('song.prebuild.regular') : this.$t('song.prebuild.vip');
-		},
-		editToggleTitle() {
-			return this.idState.edit ? this.$t('song.prebuild.request') : this.$t('song.prebuild.edit');
 		},
 		duration() {
 			let duration;
@@ -490,24 +375,6 @@ export default {
 			}
 
 			return colorToBW(invertColor(bgc));
-		},
-		toggleVip() {
-			this.idState.vip = !this.idState.vip;
-		},
-		toggleEdit() {
-			this.idState.edit = !this.idState.edit;
-		},
-		copy() {
-			this.$refs.output.select();
-			document.execCommand('copy');
-			this.idState.showTooltip = true;
-			setTimeout(() => {
-				this.idState.showTooltip = false;
-			}, 1500);
-
-			this.$nextTick().then(() => {
-				this.$refs.copyButton.focus();
-			});
 		},
 		quickCopy($event) {
 			this.$refs.outputExt.select();

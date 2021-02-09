@@ -83,13 +83,28 @@
     "diplaytunings": "Afficher les accordage des arrangements",
     "byArtist": " de ",
     "prebuild": {
-      "output": "Command output",
-      "copy": "Copier la commande",
-      "copied": "Commande copiée",
-      "vip": "faire une request VIP",
-      "regular": "faire une request normale",
-      "request": "faire une request",
-      "edit": "éditer un requete"
+      "vip": {
+        "label": "VIP",
+        "tooltip": "Faire une request VIP"
+      },
+      "regular": {
+        "label": "Normale",
+        "tooltip": "Faire une request normale"
+      },
+      "request": {
+        "label":"Request",
+        "tooltip":"Faire une request"
+      },
+      "edit":{
+        "label": "Editer",
+        "tooltip": "Modifier une request"
+      },
+      "output": "Commande",
+      "copy": {
+        "label": "Copier",
+        "tooltip": "Copier la commande"
+      },
+      "copied": "Commande copiée"
     },
     "tags": {
       "Officielle": "Officielle"
