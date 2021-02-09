@@ -192,7 +192,7 @@
 					</div>
 					<div class="music-item__section music-item__section--main">
 						<div
-							v-if="typeof data.metadata !== 'undefined' && Object.keys(data.metadata).length !== 0"
+							v-if="showMeta"
 							class="music-item__meta-list"
 						>
 							<div
@@ -281,6 +281,9 @@ export default {
 		},
 		source() {
 			return `${ this.data.artist || '' }${ this.data.artist && this.data.album ? ' - ' : '' }${ this.data.album || '' }`;
+		},
+		showMeta() {
+			return typeof this.data.metadata !== 'undefined' && Object.keys(this.data.metadata).length !== 0;
 		}
 	},
 	mounted() {
