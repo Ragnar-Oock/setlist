@@ -30,6 +30,9 @@ $dm-text: $white;
 	--gradient-2: var(--primary-1);
 
 	--bg-gradient: linear-gradient(18deg, var(--gradient-1) 0%, var(--gradient-2) 100%);
+
+	--margin : .5625em;
+	--margin-thin : .376em;
 }
 
 .dark {	

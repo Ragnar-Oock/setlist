@@ -1,0 +1,22 @@
+.btn {
+	border: 3px solid #0000;
+	background-color: var(--filler-1);
+	color: var(--text);
+	padding: 0.5em 1em;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		border-color: var(--primary-2);
+		outline: none;
+	}
+
+	&.small {
+		padding: calc(var(--margin-thin) - 3px) calc(var(--margin) - 3px)
+	}
+
+	&.dull {
+		background-color: var(--root-bg);
+	}
+
+}
