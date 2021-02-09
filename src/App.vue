@@ -175,6 +175,8 @@ export default {
 <style lang="scss">
 	@import 'node_modules/css-reset-and-normalize/scss/reset-and-normalize';
 	@import 'assets/scss/variables.scss';
+	@import 'assets/scss/button.scss';
+	@import 'assets/scss/checkbox.scss';
 
 	@font-face {
 		font-family: 'Quicksand';
