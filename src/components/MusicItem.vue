@@ -215,10 +215,11 @@
 							{{ $t('song.noMeta') }}
 						</div>
 
-						<ArrangementList
+						<ArrangementsSelector
 							v-if="data.arrangements"
 							v-model="idState.selectedArrangement"
 							:list="data.arrangements"
+							:song-id="data.id"
 						/>
 					</div>
 					<div class="music-item__prebuild">
@@ -321,13 +322,13 @@
 </template>
 
 <script lang="js">
-import ArrangementList from '@/components/ArrangementList';
+import ArrangementsSelector from '@/components/MusicItem/sub-components/ArrangementsSelector';
 import { IdState } from 'vue-virtual-scroller';
 
 export default {
 	name: 'MusicItem',
 	components: {
-		ArrangementList
+		ArrangementsSelector,
 	},
 	mixins: [
 		// eslint-disable-next-line new-cap
@@ -344,9 +345,8 @@ export default {
 			openned: false,
 			vip: false,
 			edit: false,
-			showTooltip: false,
 			isQuickCopyCliked: false,
-			selectedArrangement: '',
+			selectedArrangement: () => ({}),
 			hidden: true
 		};
 	},
