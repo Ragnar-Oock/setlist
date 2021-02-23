@@ -1,6 +1,6 @@
 <template lang="html">
 	<div class="prebuild">
-		<div class="button-group">
+		<div class="button-group modifier">
 			<button
 				class="btn small dull"
 				aria-live="assertive"
@@ -22,7 +22,7 @@
 			class="output"
 			:value="command"
 		>
-		<div class="button-group">
+		<div class="button-group copy">
 			<button class="btn small dull">
 				{{ $t('song.prebuild.copy.label') }}
 			</button>
@@ -114,7 +114,7 @@ export default {
 		gap: var(--margin);
 		background-color: var(--filler-1);
 
-		@media screen and (max-width: 37.5rem) {
+		@media screen and (max-width: 30rem) {
 			grid-template-areas: 'output output output' 'modifier . copy';
 			grid-template-columns: auto 1fr auto;
 		}
@@ -140,11 +140,18 @@ export default {
 			cursor: default;
 			color: var(--text);
 			padding: calc(var(--margin-thin) - 3px) calc(var(--margin) - 3px);
+			grid-area: output;
 
 			&:focus{
 				outline: none;
 				border-color: var(--filler-3);
 			}
+		}
+		.modifier {
+			grid-area: modifier;
+		}
+		.copy {
+			grid-area: copy;
 		}
   }
 </style>
