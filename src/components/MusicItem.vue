@@ -259,7 +259,7 @@ export default {
 			vip: false,
 			edit: false,
 			isQuickCopyCliked: false,
-			selectedArrangement: () => ({}),
+			selectedArrangement: Object(),
 			hidden: true
 		};
 	},

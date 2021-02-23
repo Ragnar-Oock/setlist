@@ -38,9 +38,9 @@ export default {
 			default: () => []
 		},
 		value: {
-			type: String,
+			type: Object,
 			required: false,
-			default: ''
+			default: () => ({})
 		},
 		songId:{
 			type: String,
