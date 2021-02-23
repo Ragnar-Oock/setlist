@@ -174,6 +174,7 @@ export default {
 			color: var(--text);
 			padding: calc(var(--margin-thin) - 3px) calc(var(--margin) - 3px);
 			grid-area: output;
+			transition: border-color ease-in-out 300ms;
 
 			&:focus{
 				outline: none;
