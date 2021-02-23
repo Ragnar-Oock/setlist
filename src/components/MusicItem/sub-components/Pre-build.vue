@@ -1,18 +1,45 @@
-<template lang="html">
+<template>
 	<div class="prebuild">
 		<div class="button-group modifier">
 			<button
-				class="btn small dull"
+				class="btn small dull with-icon"
 				aria-live="assertive"
 				@click="toggleVip"
 			>
+				<img
+					v-if="vip"
+					svg-inline
+					src="@/assets/images/diamond-fill.svg"
+					aria-hidden="true"
+				>
+				<img
+					v-else
+					svg-inline
+					class="icon"
+					src="@/assets/images/diamond.svg"
+					aria-hidden="true"
+				>
 				{{ vipToggleTitle }}
 			</button>
 			<button
-				class="btn small dull"
+				class="btn small dull with-icon"
 				aria-live="assertive"
 				@click="toggleEdit"
 			>
+				<img
+					v-if="edit"
+					svg-inline
+					class="icon"
+					src="@/assets/images/edit-fill.svg"
+					aria-hidden="true"
+				>
+				<img
+					v-else
+					svg-inline
+					class="icon"
+					src="@/assets/images/edit.svg"
+					aria-hidden="true"
+				>
 				{{ editToggleTitle }}
 			</button>
 		</div>
@@ -23,7 +50,13 @@
 			:value="command"
 		>
 		<div class="button-group copy">
-			<button class="btn small dull">
+			<button class="btn small dull with-icon">
+				<img
+					svg-inline
+					class="icon"
+					src="@/assets/images/clipboard-plus.svg"
+					aria-hidden="true"
+				>
 				{{ $t('song.prebuild.copy.label') }}
 			</button>
 		</div>
