@@ -107,10 +107,10 @@ export default {
 			return `!${ command } ${ this.song.name } - ${ this.song.artist } ${ this.selectedArrangement.type ? `*${ this.selectedArrangement }` : '' }`;
 		},
 		vipToggleTitle() {
-			return this.vip ? this.$t('song.prebuild.regular.label') : this.$t('song.prebuild.vip.label');
+			return this.vip ? this.$t('song.prebuild.vip.label') : this.$t('song.prebuild.regular.label');
 		},
 		editToggleTitle() {
-			return this.edit ? this.$t('song.prebuild.request.label') : this.$t('song.prebuild.edit.label');
+			return this.edit ? this.$t('song.prebuild.edit.label') : this.$t('song.prebuild.request.label');
 		}
 	},
 	methods: {
