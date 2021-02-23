@@ -104,7 +104,7 @@ export default {
 				}
 			}
 
-			return `!${ command } ${ this.song.name } - ${ this.song.artist } ${ this.selectedArrangement.type ? `*${ this.selectedArrangement }` : '' }`;
+			return `!${ command } ${ this.song.name } - ${ this.song.artist } ${ this.selectedArrangement.type ? `*${ this.selectedArrangement.type }` : '' }`;
 		},
 		vipToggleTitle() {
 			return this.vip ? this.$t('song.prebuild.vip.label') : this.$t('song.prebuild.regular.label');
