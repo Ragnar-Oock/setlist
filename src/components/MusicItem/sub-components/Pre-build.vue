@@ -1,6 +1,6 @@
 <template>
 	<div class="prebuild">
-		<div class="button-group modifier">
+		<div class="btn-group modifier">
 			<button
 				class="btn small dull with-icon"
 				aria-live="assertive"
@@ -49,7 +49,7 @@
 			class="output"
 			:value="command"
 		>
-		<div class="button-group copy">
+		<div class="btn-group copy">
 			<button class="btn small dull with-icon">
 				<img
 					svg-inline
