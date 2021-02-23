@@ -4,6 +4,7 @@
 	color: var(--text);
 	padding: 0.5em 1em;
 	cursor: pointer;
+	transition: border-color ease-in-out 300ms;
 
 	&:hover,
 	&:focus {
@@ -12,11 +13,37 @@
 	}
 
 	&.small {
-		padding: calc(var(--margin-thin) - 3px) calc(var(--margin) - 3px)
+		padding: calc(var(--margin-thin) - 3px) calc(var(--margin) - 3px);
+		font-size: .875em;
 	}
 
 	&.dull {
 		background-color: var(--root-bg);
 	}
 
+	&.with-icon {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		.icon {
+			margin-right: .2em
+		}
+	}
+
+	&-group {
+		display: flex;
+
+		& > .btn:first-of-type{
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+		}
+		& > .btn:last-of-type{
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+		& > .btn:not(.btn:first-of-type){
+			margin-left:.1em
+		}
+	}
 }
