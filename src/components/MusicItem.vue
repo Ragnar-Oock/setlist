@@ -234,7 +234,7 @@
 
 <script lang="js">
 import ArrangementsSelector from '@/components/MusicItem/sub-components/ArrangementsSelector';
-import Prebuild from '@/components/MusicItem/sub-components/Prebuild';
+import Prebuild from '@/components/MusicItem/sub-components/Pre-build';
 import { IdState } from 'vue-virtual-scroller';
 
 export default {
