@@ -122,7 +122,7 @@
 			aria-hidden="true"
 			class="music-item__output-ext"
 			type="text"
-			:value="command"
+			:value="shallowCommand"
 			readonly
 		>
 		<div class="music-item__body-wrapper">
@@ -284,6 +284,9 @@ export default {
 		},
 		showMeta() {
 			return typeof this.data.metadata !== 'undefined' && Object.keys(this.data.metadata).length !== 0;
+		},
+		shallowCommand() {
+			return `!sr ${ this.data.name } - ${ this.data.artist }`;
 		}
 	},
 	mounted() {
