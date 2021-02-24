@@ -3,7 +3,15 @@
 		ref="localRoot"
 		class="arrangements"
 	>
-		<summary>Arrangements</summary>
+		<summary>
+			<span class="title">Arrangements</span>
+			<img
+				svg-inline
+				class="icon arrow"
+				src="@/assets/images/scrolldown/chevron_down.svg"
+				aria-hidden="true"
+			>
+		</summary>
 		<ul>
 			<li
 				v-for="(arrangement, index) in list"
@@ -67,7 +75,35 @@ export default {
 		display: flex;
 		justify-items: space-between;
 		padding: 0 1.5em;
-		transform: rotate(0);
+
+		summary {
+			display: grid;
+			grid-template-columns: auto 1fr auto;
+			grid-template-areas: 'title spacer arrow';
+			gap: var(--margin);
+			align-items: center;
+			cursor: pointer;
+
+			&::after{
+				content:'';
+				display: block;
+				width: 100%;
+				height: .2em;
+				border-radius: 50vh;
+				transition: background-color ease-in-out 300ms;
+				grid-area: spacer;
+			}
+			&:hover::after{
+				background-color: var(--filler-2);
+			}
+			.arrow{
+				grid-area: arrow;
+			}
+		}
+		&[open] .arrow {
+			transform: rotate(180deg);
+		}
+
 		&__list {
 			display: flex;
 			height: auto;
