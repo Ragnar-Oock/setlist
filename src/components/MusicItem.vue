@@ -1087,7 +1087,13 @@ export default {
 			width: 1.25em;
 			height: 1.25em;
 			color: var(--text);
+
+			&.arrow {
+				width: 1em;
+				height: 0.5em;
+			}
 		}
+
 	}
 
 </style>
