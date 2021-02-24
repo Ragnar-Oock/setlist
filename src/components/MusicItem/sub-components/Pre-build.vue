@@ -44,13 +44,18 @@
 			</button>
 		</div>
 		<input
+			ref="output"
 			type="text"
 			readonly="readonly"
 			class="output"
 			:value="command"
 		>
 		<div class="btn-group copy">
-			<button class="btn small dull with-icon">
+			<button
+				ref="copyButton"
+				class="btn small dull with-icon"
+				@click="copy"
+			>
 				<img
 					svg-inline
 					class="icon"
@@ -120,17 +125,20 @@ export default {
 		toggleEdit() {
 			this.edit = !this.edit;
 		},
-		copy() {
+		/**
+		 * copy the command to the user's clipboard
+		 * @param {Bool} isQuick should the function give back the focus to the local copy button?
+		 */
+		copy(isQuick = false) {
 			this.$refs.output.select();
 			document.execCommand('copy');
-			this.showTooltip = true;
-			setTimeout(() => {
-				this.showTooltip = false;
-			}, 1500);
 
-			this.$nextTick().then(() => {
-				this.$refs.copyButton.focus();
-			});
+			// if the function is triggered by the quickcopy button don't try to give the focus to the local copy button
+			if(!isQuick) {
+				this.$nextTick().then(() => {
+					this.$refs.copyButton.focus();
+				});
+			}
 		}
 	}
 };
