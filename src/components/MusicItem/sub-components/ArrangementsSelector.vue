@@ -8,19 +8,24 @@
 			<li
 				v-for="(arrangement, index) in list"
 				:key="index"
+				class="radio__group meta"
 			>
 				<input
 					:id="'arrangement-'+songId+'-'+index"
 					:value="arrangement.type"
 					:checked="arrangement.type===value"
 					type="radio"
+					class="radio"
 					:name="'arrangement-'+songId"
 					@change="select(index)"
 				>
-				<label :for="'arrangement-'+songId+'-'+index">
-					{{ arrangement.name }}
+				<label
+					:for="'arrangement-'+songId+'-'+index"
+					class="radio__label"
+				>
+					<span class="key">{{ arrangement.name }}</span>
 					<div class="spacer" />
-					{{ arrangement.tuning }}
+					<span class="value">{{ arrangement.tuning }}</span>
 				</label>
 			</li>
 		</ul>
