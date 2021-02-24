@@ -173,10 +173,11 @@ export default {
 </script>
 
 <style lang="scss">
-	@import 'node_modules/css-reset-and-normalize/scss/reset-and-normalize';
-	@import 'assets/scss/variables.scss';
-	@import 'assets/scss/button.scss';
-	@import 'assets/scss/checkbox.scss';
+	@use 'node_modules/css-reset-and-normalize/scss/reset-and-normalize';
+	@use 'assets/scss/variables.scss';
+	@use 'assets/scss/button.scss';
+	@use 'assets/scss/checkbox.scss';
+	@use 'assets/scss/radio.scss';
 
 	@font-face {
 		font-family: 'Quicksand';
