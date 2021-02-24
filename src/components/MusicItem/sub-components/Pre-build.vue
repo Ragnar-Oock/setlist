@@ -146,7 +146,7 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   .prebuild {
 		display: grid;
 		grid-template-areas: 'modifier output copy';
