@@ -43,7 +43,12 @@
 				{{ editToggleTitle }}
 			</button>
 		</div>
+		<label
+			:for="song.id + 'output'"
+			class="sr-only"
+		>{{ $t('song.prebuild.output') }}</label>
 		<input
+			:id="song.id + 'output'"
 			ref="output"
 			type="text"
 			readonly="readonly"
