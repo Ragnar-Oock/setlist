@@ -819,10 +819,6 @@ export default {
 				display: flex;
 				flex-direction: column;
 				padding: .5em 0;
-
-				& > :last-child{
-					margin-top: auto;
-				}
 			}
 		}
 
