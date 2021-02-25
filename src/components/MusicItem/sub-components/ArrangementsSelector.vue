@@ -81,15 +81,17 @@ export default {
 
 <style lang="scss">
   .arrangements {
-		display: flex;
-		justify-items: space-between;
-		padding: 0 1.5em;
+		padding-left: var(--margin);
+		padding-right: var(--margin);
+		margin-top: var(--margin);
 
 		summary {
 			display: grid;
 			grid-template-columns: auto 1fr auto;
 			grid-template-areas: 'title spacer arrow';
 			gap: var(--margin);
+			padding-left: var(--margin);
+			padding-right: var(--margin);
 			align-items: center;
 			cursor: pointer;
 
@@ -104,8 +106,12 @@ export default {
 				opacity: 0;
 				transition: opacity ease-in-out 300ms;
 			}
-			&:hover::after{
+			&:hover::after,
+			&:focus::after{
 				opacity: 1;
+			}
+			&:focus {
+				outline: none;
 			}
 			.arrow{
 				grid-area: arrow;
@@ -113,6 +119,9 @@ export default {
 		}
 		&[open] .arrow {
 			transform: rotate(180deg);
+		}
+		.radio + .radio__label {
+			padding-right: var(--margin);
 		}
 	}
 </style>
