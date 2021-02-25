@@ -108,6 +108,10 @@
     },
     "tags": {
       "Officielle": "Official"
+    },
+    "arrangements": {
+      "tunning": ", tunning :",
+      "Inconnu": "unknown"
     }
   },
   "topBar": {

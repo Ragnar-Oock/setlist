@@ -99,7 +99,7 @@
         "label": "Editer",
         "tooltip": "Modifier une request"
       },
-      "output": "Commande",
+      "output": "Commande prégénérée",
       "copy": {
         "label": "Copier",
         "tooltip": "Copier la commande"
@@ -108,6 +108,10 @@
     },
     "tags": {
       "Officielle": "Officielle"
+    },
+    "arrangements": {
+      "tunning": ", accordage :",
+      "Inconnu": "Inconnu"
     }
   },
   "topBar": {
