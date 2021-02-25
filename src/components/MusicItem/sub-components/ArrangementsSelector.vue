@@ -32,8 +32,10 @@
 					class="radio__label"
 				>
 					<span class="key">{{ arrangement.name }}</span>
-					<div class="spacer" />
-					<span class="value">{{ arrangement.tuning }}</span>
+					<span class="value">
+						<span class="sr-only">{{ $t('song.arrangements.tunning') }}</span>
+						{{ i18nFallback('song.arrangements', arrangement.tuning) }}
+					</span>
 				</label>
 			</li>
 		</ul>
@@ -41,9 +43,11 @@
 </template>
 
 <script lang="js">
+import mixins from '@/mixins.js';
 
 export default {
 	name: 'ArrangementsSelector',
+	mixins:[mixins],
 	props: {
 		list: {
 			type: Array,
