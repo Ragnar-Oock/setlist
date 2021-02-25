@@ -92,14 +92,16 @@ export default {
 			&::after{
 				content:'';
 				display: block;
+				grid-area: spacer;
 				width: 100%;
 				height: .2em;
 				border-radius: 50vh;
-				transition: background-color ease-in-out 300ms;
-				grid-area: spacer;
+				background-color: var(--filler-2);
+				opacity: 0;
+				transition: opacity ease-in-out 300ms;
 			}
 			&:hover::after{
-				background-color: var(--filler-2);
+				opacity: 1;
 			}
 			.arrow{
 				grid-area: arrow;
