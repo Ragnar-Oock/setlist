@@ -20,11 +20,11 @@
 			>
 				<input
 					:id="'arrangement-'+songId+'-'+index"
+					:checked="arrangement.type===value.type"
 					:value="arrangement.type"
-					:checked="arrangement.type===value"
+					:name="'arrangement-'+songId"
 					type="radio"
 					class="radio"
-					:name="'arrangement-'+songId"
 					@change="select(index)"
 				>
 				<label
@@ -58,6 +58,11 @@ export default {
 		songId:{
 			type: String,
 			required: true
+		}
+	},
+	mounted() {
+		if (this.list.length === 1) {
+			this.select(0);
 		}
 	},
 	methods: {
