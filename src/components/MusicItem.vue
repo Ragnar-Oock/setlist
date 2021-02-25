@@ -148,7 +148,7 @@
 								class="music-item__tag"
 								:style="{'background-color': '#'+tag.color, 'color': calcColor(tag.color)}"
 							>
-								{{ i18nFallback(tag.name) }}
+								{{ i18nFallback('song.tags', tag.name) }}
 							</div>
 						</div>
 						<div
@@ -217,6 +217,7 @@ import ArrangementsSelector from '@/components/MusicItem/sub-components/Arrangem
 import Prebuild from '@/components/MusicItem/sub-components/Pre-build';
 import Metadata from '@/components/MusicItem/sub-components/Meta';
 import { IdState } from 'vue-virtual-scroller';
+import mixins from '@/mixins.js';
 
 export default {
 	name: 'MusicItem',
@@ -230,7 +231,8 @@ export default {
 		IdState({
 			// You can customize this
 			idProp: vm => vm.data.id
-		})
+		}),
+		mixins
 	],
 	props: {
 		data: { type: Object, required: true }
@@ -296,20 +298,6 @@ export default {
 		toggleMusic() {
 			this.idState.openned = !this.idState.openned;
 			this.$emit('open', this.idState.openned);
-		},
-		i18nFallback(key) {
-			if (key) {
-				const template = `song.tags.${ key }`;
-
-				const i18n = this.$t(template);
-
-				return i18n !== template ? i18n : key;
-			}
-			else {
-				return '';
-			}
-
-			// return i18n !== template ? i18n : key.replace('-', ' ');
 		},
 		/**
 		 * infer the font color from the background color to maximise the contrast
