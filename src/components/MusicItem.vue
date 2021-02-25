@@ -191,29 +191,9 @@
 						</div>
 					</div>
 					<div class="music-item__section music-item__section--main">
-						<div
-							v-if="showMeta"
-							class="music-item__meta-list"
-						>
-							<div
-								v-for="(value, key, index) in data.metadata"
-								:key="index"
-								class="music-item__meta-item"
-							>
-								<span class="music-item__meta-key">
-									{{ key }}
-								</span>
-								<span class="music-item__meta-value">
-									{{ value }}
-								</span>
-							</div>
-						</div>
-						<div
-							v-else
-							class="music-item__no-meta"
-						>
-							{{ $t('song.noMeta') }}
-						</div>
+						<Metadata
+							:meta="data.metadata"
+						/>
 
 						<ArrangementsSelector
 							v-if="data.arrangements"
@@ -235,13 +215,15 @@
 <script lang="js">
 import ArrangementsSelector from '@/components/MusicItem/sub-components/ArrangementsSelector';
 import Prebuild from '@/components/MusicItem/sub-components/Pre-build';
+import Metadata from '@/components/MusicItem/sub-components/Meta';
 import { IdState } from 'vue-virtual-scroller';
 
 export default {
 	name: 'MusicItem',
 	components: {
 		ArrangementsSelector,
-		Prebuild
+		Prebuild,
+		Metadata
 	},
 	mixins: [
 		// eslint-disable-next-line new-cap
