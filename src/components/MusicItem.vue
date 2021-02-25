@@ -194,7 +194,6 @@
 						<Metadata
 							:meta="data.metadata"
 						/>
-
 						<ArrangementsSelector
 							v-if="data.arrangements"
 							v-model="idState.selectedArrangement"
@@ -818,7 +817,21 @@ export default {
 				height: 100%;
 				display: flex;
 				flex-direction: column;
-				padding: .5em 0;
+				padding: var(--margin) 0;
+				overflow-y: auto;
+				scrollbar-width: thin;
+				scrollbar-color: var(--filler-2) var(--filler-1);
+				overscroll-behavior: contain;
+
+				&::-webkit-scrollbar {
+					width: .4em;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					background-color: var(--filler-2);
+					border-radius: .4em;
+					transition: opacity 300ms ease-in-out;
+				}
 			}
 		}
 
