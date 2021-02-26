@@ -573,7 +573,8 @@ export default {
 				transition: opacity 300ms ease-in-out;
 			}
 
-			&:focus {
+			&:focus,
+			&.focus {
 				outline: none;
 				background-color: var(--filler-2);
 
@@ -584,7 +585,8 @@ export default {
 			@at-root .docked & {
 				background-color: var(--filler-2-translucent);
 
-				&:focus {
+				&:focus,
+				&.focus {
 					background-color: var(--filler-2);
 
 					&::placeholder {
@@ -674,7 +676,8 @@ export default {
 			width: 100%;
 			border-radius: 5px;
 			transition: box-shadow 300ms ease-in-out;
-			&:focus-within {
+			&:focus-within,
+			&.focus-within {
 				box-shadow: 0 0 5px 0 #0003;
 			}
 		}
