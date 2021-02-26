@@ -414,6 +414,12 @@ export default {
 			// otherwise close the suggestions
 			this.isSuggestionFocused = event.composedPath().includes(this.$refs.suggestions) ? this.isSuggestionFocused : false;
 		});
+
+		document.addEventListener('keyup', event => {
+			if (event.which === 70 && event.ctrlKey && event.shiftKey) {
+				this.$refs.search.focus();
+			}
+		});
 	},
 	methods: {
 		submit(event) {
