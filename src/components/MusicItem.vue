@@ -236,7 +236,8 @@ export default {
 			this.idState.isQuickCopyCliked = true;
 
 			this.$nextTick().then(() => {
-				this.$refs.copyButton.focus();
+				this.$refs.quickCopyButton.focus();
+				this.$refs.quickCopyButton.blur();
 			});
 			setTimeout(() => {
 				this.idState.isQuickCopyCliked = false;
