@@ -657,6 +657,7 @@ export default {
 			overflow: hidden;
 			border-radius: 0 10px 10px 0;
 			margin: 4px 0;
+			background-color: var(--filler-1);
 
 			&-wrapper {
 				width: 100%;
@@ -690,9 +691,7 @@ export default {
 		}
 
 		&__section {
-			background-color: var(--filler-1);
 			color: var(--text);
-			margin: 0 0 3px;
 			padding: .5em 1.5em;
 			transition: background-color 300ms ease-in-out;
 
