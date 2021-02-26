@@ -123,4 +123,7 @@ export default {
 			padding-right: var(--margin);
 		}
 	}
+	details.arrangements summary::-webkit-details-marker {
+		display: none;
+	}
 </style>
