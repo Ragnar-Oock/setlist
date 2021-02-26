@@ -35,39 +35,24 @@
 				</p>
 			</div>
 			<div class="music-item__col-right">
-				<svg
+				<img
 					v-if="data.showlights"
 					v-tippy="{placement: 'bottom'}"
-					:content="$t('song.showlight')"
-					aria-hidden="true"
+					src="@/assets/images/light.svg"
+					svg-inline
 					class="icon"
-					viewBox="0 0 16 16"
-					fill="currentColor"
-					xmlns="http://www.w3.org/2000/svg"
+					:content="$t('song.showlight')"
+					:tabindex="idState.openned ? -1 : 0"
 				>
-					<path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" />
-					<path
-						fill-rule="evenodd"
-						d="M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
-					/>
-				</svg>
-				<svg
+				<img
 					v-if="data.vocals"
 					v-tippy="{placement: 'bottom'}"
-					:content="$t('song.lyrics')"
-					aria-hidden="true"
+					src="@/assets/images/file-earmark-music-fill.svg"
+					svg-inline
 					class="icon"
-					viewBox="0 0 16 16"
-					fill="currentColor"
-					xmlns="http://www.w3.org/2000/svg"
-					width="1em"
-					height="1em"
+					:content="$t('song.lyrics')"
+					:tabindex="idState.openned ? 0 : -1"
 				>
-					<path
-						fill-rule="evenodd"
-						d="M2 2a2 2 0 0 1 2-2h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm7.5 1.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 6.64a1 1 0 0 0-1.243-.97l-1 .25A1 1 0 0 0 8 6.89v4.306A2.572 2.572 0 0 0 7 11c-.5 0-.974.134-1.338.377-.36.24-.662.628-.662 1.123s.301.883.662 1.123c.364.243.839.377 1.338.377.5 0 .974-.134 1.338-.377.36-.24.662-.628.662-1.123V8.89l2-.5V6.64z"
-					/>
-				</svg>
 				<span
 					v-if="duration && !idState.openned"
 					v-tippy="{placement: 'bottom'}"
