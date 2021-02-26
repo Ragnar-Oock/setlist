@@ -81,9 +81,8 @@ export default {
 
 <style lang="scss">
   .arrangements {
-		padding-left: var(--margin);
-		padding-right: var(--margin);
-		margin-top: var(--margin);
+		padding: var(--margin);
+		margin-top: var(--margin-thin);
 
 		summary {
 			display: grid;
