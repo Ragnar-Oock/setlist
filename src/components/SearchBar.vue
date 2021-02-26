@@ -37,19 +37,12 @@
 						class="search-bar__button"
 					>
 						<span class="search-bar__button-text">{{ $t('search.submit') }}</span>
-						<!-- don't change this svg import if you don't want to skrew up the styling -->
-						<svg
-							aria-hidden="true"
-							width="1em"
-							height="1em"
-							viewBox="0 0 16 16"
-							xmlns="http://www.w3.org/2000/svg"
+						<img
+							svg-inline
 							class="search-bar__open-more-icon"
+							src="@/assets/images/search.svg"
+							aria-hidden="true"
 						>
-							<use
-								xlink:href="../assets/images/search.svg#el"
-							/>
-						</svg>
 					</button>
 				</div>
 				<svg
@@ -77,19 +70,12 @@
 					@click="openAdvencedSearch"
 				>
 					<span class="search-bar__open-more-text">{{ $t('search.filters') }}</span>
-					<!-- don't change this svg import if you don't want to skrew up the styling -->
-					<svg
-						aria-hidden="true"
-						width="1em"
-						height="1em"
-						viewBox="0 0 16 16"
-						xmlns="http://www.w3.org/2000/svg"
+					<img
+						svg-inline
 						class="search-bar__open-more-icon"
+						src="@/assets/images/gear.svg"
+						aria-hidden="true"
 					>
-						<use
-							xlink:href="../assets/images/gear.svg#el"
-						/>
-					</svg>
 				</button>
 			</div>
 
@@ -315,19 +301,12 @@
 					class="search-bar__submit search-bar__btn search-bar__btn--with-icon"
 				>
 					{{ $t('search.advenced.submit') }}
-					<!-- don't change this svg import if you don't want to skrew up the styling -->
-					<svg
-						aria-hidden="true"
+					<img
+						svg-inline
 						class="search-bar__btn-icon"
-						width="1em"
-						height="1em"
-						viewBox="0 0 16 16"
-						xmlns="http://www.w3.org/2000/svg"
+						src="@/assets/images/search.svg"
+						aria-hidden="true"
 					>
-						<use
-							xlink:href="../assets/images/search.svg#el"
-						/>
-					</svg>
 				</button>
 			</div>
 		</form>

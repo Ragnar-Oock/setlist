@@ -18,30 +18,18 @@
 				class="scrolldown__logo"
 				@click="scroll"
 			>
-				<svg
-					aria-hidden="true"
-					width="42px"
-					height="82px"
-					viewBox="0 0 42 82"
-					xmlns="http://www.w3.org/2000/svg"
+				<img
+					svg-inline
 					class="scrolldown__static"
-				>
-					<use
-						xlink:href="../assets/images/scrolldown/static.svg#el"
-					/>
-				</svg>
-				<svg
+					src="@/assets/images/scrolldown/static.svg"
 					aria-hidden="true"
-					width="31.796"
-					height="17.398"
-					viewBox="0 0 31.796 17.398"
-					xmlns="http://www.w3.org/2000/svg"
-					class="scrolldown__moving"
 				>
-					<use
-						xlink:href="../assets/images/scrolldown/moving.svg#el"
-					/>
-				</svg>
+				<img
+					svg-inline
+					class="scrolldown__moving"
+					src="@/assets/images/scrolldown/moving.svg"
+					aria-hidden="true"
+				>
 				<div class="sr-only">
 					{{ $t('welcome.scrolldown') }}
 				</div>

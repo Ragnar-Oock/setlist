@@ -17,21 +17,12 @@
 				class="order-widget__direction sr-only"
 				:class="item.direction"
 			>{{ item.direction }}</span>
-			<svg
-				aria-hidden="true"
+			<img
+				svg-inline
 				class="order-widget__arrow"
-				version="1.1"
-				viewBox="0 0 16 9.5"
-				xmlns="http://www.w3.org/2000/svg"
-			><path
-				class="a"
-				d="M 1.5,1.5 8,8 14.5,1.5"
-				fill="none"
-				stroke="currentColor"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="1.5"
-			/></svg>
+				src="@/assets/images/scrolldown/chevron_down.svg"
+				aria-hidden="true"
+			>
 		</button>
 	</div>
 </template>

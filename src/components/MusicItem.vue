@@ -62,21 +62,12 @@
 					{{ duration }}
 				</span>
 			</div>
-			<svg
-				aria-hidden="true"
+			<img
+				svg-inline
 				class="music-item__arrow"
-				version="1.1"
-				viewBox="0 0 16 9.4999"
-				xmlns="http://www.w3.org/2000/svg"
-			><path
-				class="a"
-				d="M 1.5,1.5 8,8 14.5,1.5"
-				fill="none"
-				stroke="currentColor"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="1.5"
-			/></svg>
+				src="@/assets/images/scrolldown/chevron_down.svg"
+				aria-hidden="true"
+			>
 		</div>
 
 		<button
@@ -87,18 +78,11 @@
 			@click="quickCopy"
 		>
 			<span class="music-item__quick-copy-text"><span>{{ $t('song.quickCopy') }}</span></span>
-			<!-- don't change this svg import if you don't want to skrew up the styling -->
-			<svg
+			<img
+				svg-inline
+				src="@/assets/images/copy.svg"
 				aria-hidden="true"
-				width="1em"
-				height="1em"
-				viewBox="0 0 16 16"
-				xmlns="http://www.w3.org/2000/svg"
 			>
-				<use
-					xlink:href="../assets/images/copy.svg#el"
-				/>
-			</svg>
 		</button>
 
 		<input
