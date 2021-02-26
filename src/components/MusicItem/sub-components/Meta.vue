@@ -62,7 +62,7 @@ export default {
 
 <style scoped lang="scss">
   .meta {
-		padding: var(--margin);
+		padding: 0 var(--margin);
 
 		&__item{
 			display: grid;
