@@ -132,18 +132,14 @@ export default {
 		},
 		/**
 		 * copy the command to the user's clipboard
-		 * @param {Bool} isQuick should the function give back the focus to the local copy button?
 		 */
-		copy(isQuick = false) {
+		copy() {
 			this.$refs.output.select();
 			document.execCommand('copy');
 
-			// if the function is triggered by the quickcopy button don't try to give the focus to the local copy button
-			if(!isQuick) {
-				this.$nextTick().then(() => {
-					this.$refs.copyButton.focus();
-				});
-			}
+			this.$nextTick().then(() => {
+				this.$refs.copyButton.focus();
+			});
 		}
 	}
 };
