@@ -32,10 +32,6 @@ module.exports = {
 			alias: {
 				'js-yaml': path.resolve(__dirname, './src/mock/js-yaml.js')
 			}
-		},
-		externals: {
-			esprima: 'esprima',
-			'js-yaml': 'jsyaml'
 		}
 	}
 };
