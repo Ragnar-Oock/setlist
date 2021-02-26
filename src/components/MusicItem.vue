@@ -384,6 +384,10 @@ export default {
 			}
 		}
 
+		.openned &__card:focus {
+			background-color: var(--primary-2);
+		}
+
 		&__arrow {
 			width: 1em;
 			height: 0.5em;
