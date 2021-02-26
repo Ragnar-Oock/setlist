@@ -7,7 +7,10 @@
 			autocomplete="off"
 			@submit="submit($event)"
 		>
-			<div class="container">
+			<div
+				class="container"
+				:class="{'focus-within': showSuggestions}"
+			>
 				<label
 					for="search"
 					class="sr-only"
@@ -20,6 +23,7 @@
 						type="text"
 						name="search"
 						class="search-bar__input"
+						:class="{'focus': showSuggestions}"
 						:placeholder="$t('search.placeholder')"
 						role="combobox"
 						aria-autocomplete="both"
@@ -473,6 +477,7 @@ export default {
 		focusFirstSuggestion(event) {
 			event.preventDefault();
 			this.$refs.suggestions.querySelector('.suggestions__item').focus();
+			this.isSuggestionFocused = true;
 		},
 		focusSuggestion(padding, event) {
 			// prevent cursor move in the search field
@@ -495,6 +500,7 @@ export default {
 
 				this.activeDescendant = suggestion.id;
 				suggestion.focus();
+				this.isSuggestionFocused = true;
 			}
 			else if (index + padding < 0) {
 				this.$refs.search.focus();
