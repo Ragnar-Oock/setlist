@@ -108,7 +108,7 @@
 						:has-showlights="data.showlights"
 						:has-vocals="data.vocals"
 					/>
-					<div class="music-item__section music-item__section--main">
+					<div class="music-item__scrollable">
 						<Metadata
 							:meta="data.metadata"
 						/>
@@ -674,31 +674,32 @@ export default {
 			}
 		}
 
-		&__section {
+		&__scrollable {
+			display: flex;
+			height: 100%;
+			padding: var(--margin) 0;
+
+			flex-grow: 1;
+			flex-direction: column;
+
 			color: var(--text);
-			padding: .5em 1.5em;
+
 			transition: background-color 300ms ease-in-out;
 
-			&--main {
-				flex-grow: 1;
-				height: 100%;
-				display: flex;
-				flex-direction: column;
-				padding: var(--margin) 0;
-				overflow-y: auto;
-				scrollbar-width: thin;
-				scrollbar-color: var(--filler-2) var(--filler-1);
-				overscroll-behavior: contain;
+			overflow-y: auto;
 
-				&::-webkit-scrollbar {
-					width: .4em;
-				}
+			scrollbar-width: thin;
+			overscroll-behavior: contain;
+			scrollbar-color: var(--filler-2) var(--filler-1);
 
-				&::-webkit-scrollbar-thumb {
-					background-color: var(--filler-2);
-					border-radius: .4em;
-					transition: opacity 300ms ease-in-out;
-				}
+			&::-webkit-scrollbar {
+				width: .4em;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background-color: var(--filler-2);
+				border-radius: .4em;
+				transition: opacity 300ms ease-in-out;
 			}
 		}
 
