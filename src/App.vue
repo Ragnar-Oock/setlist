@@ -24,6 +24,13 @@
 				</p>
 				<p>{{ error }}</p>
 			</div>
+			<div
+				v-if="isLoading && !error && getPage === 0"
+				class="message-box"
+			>
+				<p>{{ $t('loading') }}</p>
+				<div class="loader" />
+			</div>
 
 			<DynamicScroller
 				:class="{'scroller':!isLastPage}"
@@ -51,7 +58,7 @@
 			</DynamicScroller>
 
 			<div
-				v-if="isLoading && !error"
+				v-if="isLoading && !error && getPage > 0"
 				class="message-box"
 			>
 				<p>{{ $t('loading') }}</p>
@@ -112,7 +119,8 @@ export default {
 			isLastPage: 'isLastPage'
 		}),
 		...mapGetters([
-			'isDarkModeOn'
+			'isDarkModeOn',
+			'getPage'
 		])
 	},
 	watch: {
