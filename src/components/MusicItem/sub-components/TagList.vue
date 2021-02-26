@@ -93,5 +93,8 @@ export default {
 	}
 	.icon {
 		margin-right: var(--margin);
+		&:first-of-type {
+			margin-left: auto;
+		}
 	}
 </style>
