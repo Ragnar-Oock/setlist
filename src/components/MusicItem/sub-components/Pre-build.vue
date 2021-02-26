@@ -157,8 +157,8 @@ export default {
 		grid-template-areas: 'modifier output copy';
 		grid-template-columns: auto 1fr auto;
 		padding: var(--margin);
+		border-top: 1px solid var(--filler-2);
 		gap: var(--margin);
-		background-color: var(--filler-1);
 
 		@media screen and (max-width: 30rem) {
 			grid-template-areas: 'output output output' 'modifier . copy';
