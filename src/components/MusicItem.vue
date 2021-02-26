@@ -250,59 +250,6 @@ export default {
 			this.idState.openned = !this.idState.openned;
 			this.$emit('open', this.idState.openned);
 		},
-		/**
-		 * infer the font color from the background color to maximise the contrast
-		 * @param {String} bgc color of the background
-		 */
-		calcColor(bgc) {
-			function invertColor(color) {
-				let prefix = '';
-
-				if (color.includes('#')) {
-					prefix = '#';
-					color = color.substring(1, 7);
-				}
-
-				const r = color.slice(0, 2);
-				const g = color.slice(2, 4);
-				const b = color.slice(4, 6);
-
-				color = invertChannel(r) + invertChannel(g) + invertChannel(b);
-
-				return prefix + color;
-			}
-
-			function invertChannel(channel) {
-				let c = parseInt(channel, 16);
-
-				c = 255 - c;
-				c = c.toString(16);
-
-				return c;
-			}
-
-			function colorToBW(color) {
-				let prefix = '';
-
-				if (color.includes('#')) {
-					prefix = '#';
-					color = color.substring(1, 7);
-				}
-
-				color =
-				(parseInt(color.slice(0, 2), 16) +
-					parseInt(color.slice(2, 4), 16) +
-					parseInt(color.slice(4, 6), 16)) /
-					3 >
-				127
-					? 'ffffff'
-					: '000000';
-
-				return prefix + color;
-			}
-
-			return colorToBW(invertColor(bgc));
-		},
 		quickCopy($event) {
 			this.$refs.outputExt.select();
 			document.execCommand('copy');
