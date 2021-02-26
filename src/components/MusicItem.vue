@@ -9,6 +9,7 @@
 			tabindex="0"
 			@click="toggleMusic"
 			@keypress.enter="toggleMusic"
+			@keypress.space="toggleMusic"
 		>
 			<div class="music-item__col-left">
 				<span
@@ -215,7 +216,11 @@ export default {
 		io.observe(this.$refs.root);
 	},
 	methods: {
-		toggleMusic() {
+		toggleMusic(event) {
+			if (event) {
+				event.preventDefault();
+			}
+
 			this.idState.openned = !this.idState.openned;
 			this.$emit('open', this.idState.openned);
 		},
