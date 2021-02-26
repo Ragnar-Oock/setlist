@@ -129,7 +129,8 @@ const actions = {
 
 			// reset page number to 0 (first page)
 			commit('SET_PAGE', 0);
-
+			// clear the list
+			commit('SET_SONG_LIST', []);
 			// get the first page
 			dispatch('getSongList');
 		}
