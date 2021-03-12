@@ -876,6 +876,15 @@ export default {
 				width: unset;
 			}
 
+			&__col-right {
+				transition: opacity 150ms ease-in-out 50ms, z-index 0ms 300ms;
+
+				@at-root .openned & {
+					position: unset;
+					transition: opacity 150ms ease-in-out 50ms, z-index 0ms 300ms;
+				}
+			}
+
 			&__title {
 				height: auto;
 				padding: 0;
