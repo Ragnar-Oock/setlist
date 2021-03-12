@@ -156,7 +156,7 @@ export default {
 		border-top: 1px solid var(--filler-2);
 		gap: var(--margin);
 
-		@media screen and (max-width: 30rem) {
+		@media screen and (max-width: 32rem) {
 			grid-template-areas: 'output output output' 'modifier . copy';
 			grid-template-columns: auto 1fr auto;
 		}
