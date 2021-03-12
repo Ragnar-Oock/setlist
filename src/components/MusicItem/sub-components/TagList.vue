@@ -28,7 +28,7 @@
 		<img
 			v-if="hasVocals"
 			v-tippy="{placement: 'bottom'}"
-			src="@/assets/images/file-earmark-music-fill.svg"
+			src="@/assets/images/mic-fill.svg"
 			svg-inline
 			class="icon"
 			:content="$t('song.lyrics')"
