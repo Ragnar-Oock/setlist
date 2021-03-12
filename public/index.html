@@ -5,7 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Setlist</title>
+
+    <!-- open graph metadata -->
+    <meta property="og:title" content="Warths' setlist for rocksmith 2014 live streams">
+    <meta property="og:site_name" content="Setlist">
+    <meta property="og:url" content="setlist.warths.fr">
+    <meta property="og:description" content="Search within a list of more than 45 000 songs for the one you'll request on Warths' next live stream on twitch">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="<%=require('../src/assets/images/og-image.png')%>">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale:alternate" content="en_US"> 
+
+    <!-- twitter card meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@WarthsYT">
+    <meta name="twitter:description" content="Search within a list of more than 45 000 songs for the one you'll request on Warths' next live stream on twitch">
+    <meta name="twitter:title" content="Warths' setlist for rocksmith 2014 live streams">
+    <meta name="twitter:image" content="<%=require('../src/assets/images/og-image.png')%>">
+
+    <!-- authorship -->
+    <meta name="author" content="Warths">
+    <meta name="designer" content="Ragnar O'ock">
+    <meta name="web_author" content="Ragnar O'ock">
   </head>
   <body>
     <noscript>
