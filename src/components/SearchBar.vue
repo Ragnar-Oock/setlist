@@ -176,7 +176,7 @@
 			>
 				<span class="sr-only">{{ $t('search.advenced.close') }}</span>
 			</button>
-			<DoubleSliderRange
+			<!-- <DoubleSliderRange
 				v-model="lastInterpretation"
 				:min="lastInterpretationMin"
 				:max="lastInterpretationMax"
@@ -215,7 +215,7 @@
 				<template #label-max-value>
 					{{ $t('search.advenced.score.max') }}
 				</template>
-			</DoubleSliderRange>
+			</DoubleSliderRange> -->
 			<div class="search-bar__row search-bar__sm-col">
 				<div class="search-bar__col-left">
 					<div class="search-bar__row">
@@ -321,7 +321,7 @@
 
 <script lang="js">
 import { Fragment } from 'vue-fragment';
-import DoubleSliderRange from './DoubleSliderRange';
+// import DoubleSliderRange from './DoubleSliderRange';
 import OrderWidget from './OrderWidget';
 import { mapFields } from 'vuex-map-fields';
 import ArrangementsFilter from './ArrangementsFilter';
@@ -332,7 +332,7 @@ export default {
 	name: 'SearchBar',
 	components: {
 		Fragment,
-		DoubleSliderRange,
+		// DoubleSliderRange,
 		OrderWidget,
 		ArrangementsFilter
 	},
