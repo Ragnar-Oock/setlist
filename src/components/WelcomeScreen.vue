@@ -1,5 +1,8 @@
 <template lang="html">
-	<section class="welcome-screen">
+	<section
+		ref="root"
+		class="welcome-screen"
+	>
 		<div class="welcome-screen__texts">
 			<h1 class="welcome-screen__title">
 				WART<span class="fliker">H</span>S' STREAM SE<span class="fliker">T</span>LI<span class="fliker">S</span>T
@@ -50,7 +53,7 @@ export default {
 	},
 	methods: {
 		scroll() {
-			document.childNodes[1].scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+			document.childNodes[1].scrollTo({ top: this.$refs.root.clientHeight, behavior: 'smooth' });
 		}
 	}
 };
@@ -60,12 +63,17 @@ export default {
 
 <style lang="scss">
   .welcome-screen {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 		height: 100vh;
 		min-height: 670px;
 		display: flex;
 		flex-direction: column;
-		position: relative;
 		background-image: var(--bg-gradient);
+		z-index: 1000;
 
 		&__texts {
 			margin: auto;

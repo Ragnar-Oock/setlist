@@ -4,82 +4,85 @@
 		class="app"
 	>
 		<WelcomeScreen />
+		<main>
+			<!-- <div class="scroll-container"> -->
+			<TopBar :is-search-bar-docked="isSearchBarDocked" />
 
-		<TopBar :is-search-bar-docked="isSearchBarDocked" />
+			<RulesPage />
 
-		<RulesPage />
+			<div class="setlist">
+				<SearchBar
+					@docked="isSearchBarDocked=$event"
+					@refresh="refreshList"
+				/>
 
-		<div class="setlist">
-			<SearchBar
-				@docked="isSearchBarDocked=$event"
-				@refresh="refreshList"
+				<div
+					v-if="error"
+					class="error message-box"
+				>
+					<p class="message-box__title">
+						{{ $t('apiError') }}
+					</p>
+					<p>{{ error }}</p>
+				</div>
+				<div
+					v-if="isLoading && !error && getPage === 0"
+					class="message-box"
+				>
+					<p>{{ $t('loading') }}</p>
+					<div class="loader" />
+				</div>
+
+				<DynamicScroller
+					:class="{'scroller':!isLastPage}"
+					:items="songList"
+					:min-item-size="95"
+					key-field="id"
+					page-mode
+					:buffer="350"
+				>
+					<template #default="{ item, index, active }">
+						<DynamicScrollerItem
+							:item="item"
+							:active="active"
+							:size-dependencies="[
+								item.open
+							]"
+							:data-index="index"
+						>
+							<MusicItem
+								:data="item"
+								@open="open(index)"
+							/>
+						</DynamicScrollerItem>
+					</template>
+				</DynamicScroller>
+
+				<div
+					v-if="isLoading && !error && getPage > 0"
+					class="message-box"
+				>
+					<p>{{ $t('loading') }}</p>
+					<div class="loader" />
+				</div>
+				<div
+					v-if="isLastPage"
+					class="message-box"
+				>
+					<p class="message-box__title">
+						{{ $t('listEnd.title') }}
+					</p>
+					<p>{{ $t('listEnd.hint') }}</p>
+				</div>
+			</div>
+			<div
+				id="bottom"
+				ref="bottom"
 			/>
-
-			<div
-				v-if="error"
-				class="error message-box"
-			>
-				<p class="message-box__title">
-					{{ $t('apiError') }}
-				</p>
-				<p>{{ error }}</p>
-			</div>
-			<div
-				v-if="isLoading && !error && getPage === 0"
-				class="message-box"
-			>
-				<p>{{ $t('loading') }}</p>
-				<div class="loader" />
-			</div>
-
-			<DynamicScroller
-				:class="{'scroller':!isLastPage}"
-				:items="songList"
-				:min-item-size="95"
-				key-field="id"
-				page-mode
-				:buffer="350"
-			>
-				<template #default="{ item, index, active }">
-					<DynamicScrollerItem
-						:item="item"
-						:active="active"
-						:size-dependencies="[
-							item.open
-						]"
-						:data-index="index"
-					>
-						<MusicItem
-							:data="item"
-							@open="open(index)"
-						/>
-					</DynamicScrollerItem>
-				</template>
-			</DynamicScroller>
-
-			<div
-				v-if="isLoading && !error && getPage > 0"
-				class="message-box"
-			>
-				<p>{{ $t('loading') }}</p>
-				<div class="loader" />
-			</div>
-			<div
-				v-if="isLastPage"
-				class="message-box"
-			>
-				<p class="message-box__title">
-					{{ $t('listEnd.title') }}
-				</p>
-				<p>{{ $t('listEnd.hint') }}</p>
-			</div>
-		</div>
-		<div
-			id="bottom"
-			ref="bottom"
-		/>
-		<portal-target name="screen" />
-		<portal-target name="popup" />
+			<portal-target name="screen" />
+			<portal-target name="popup" />
+			<!-- </div> -->
+		</main>
 	</div>
 </template>
 
@@ -198,13 +201,44 @@ export default {
 		font-display: swap;
 	}
 
+	html {
+		scrollbar-color: var(--filler-1) var(--root-bg);
+
+		&::-webkit-scrollbar {
+			width: .6em;
+			background-color: var(--root-bg);
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: var(--filler-1);
+			border-radius: .4em;
+		}
+	}
+
 	body {
 		font-family: 'Quicksand', sans-serif;
 		background-color: #fffef8;
 		overflow-x: hidden;
 		width: 100%;
 		scroll-behavior: smooth;
+		background-color: var(--root-bg);
 	}
+
+	.app {
+		transition: background-color 300ms ease-in-out;
+		height: 200vh;
+	}
+
+	main {
+		margin: auto;
+		position: sticky;
+		width: 100%;
+		top: 0;
+		max-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
 
 	.scroller {
 		min-height: 100vh;
@@ -225,7 +259,8 @@ export default {
 	.setlist {
 		margin: 0 auto;
 		padding: 3em .25em 50vh;
-		min-height: calc(100vh - 64px);
+		// min-height: calc(100vh - 64px);
+		width: 100%;
 	}
 
 	// from Bootstrap
@@ -241,26 +276,6 @@ export default {
 		white-space: nowrap;
 		border: 0;
 	}
-
-	.app {
-		transition: background-color 300ms ease-in-out;
-		background-color: var(--root-bg);
-	}
-
-	html {
-		scrollbar-color: var(--filler-1) var(--root-bg);
-
-		&::-webkit-scrollbar {
-			width: .6em;
-			background-color: var(--root-bg);
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background-color: var(--filler-1);
-			border-radius: .4em;
-		}
-	}
-
 
 	.message-box{
 		display: flex;
@@ -306,17 +321,17 @@ export default {
 		margin: 0;
 
 		&::before{
-		content: '';
-		display: block;
-		position: absolute;
-		width: 25%;
-		height: 100%;
-		left:50%;
-		background-color: #a2a2a2;
-		border-radius: 100vh;
-		animation: slide alternate 1.5s ease-in-out infinite;
-		box-shadow: 0 0 0 .25em var(--fill), 0 0 .5em .25em #0003;
-	}
+			content: '';
+			display: block;
+			position: absolute;
+			width: 25%;
+			height: 100%;
+			left:50%;
+			background-color: #a2a2a2;
+			border-radius: 100vh;
+			animation: slide alternate 1.5s ease-in-out infinite;
+			box-shadow: 0 0 0 .25em var(--fill), 0 0 .5em .25em #0003;
+		}
 
 	}
 
