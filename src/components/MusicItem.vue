@@ -2,7 +2,7 @@
 	<div
 		ref="root"
 		class="music-item"
-		:class="{'openned': idState.openned, 'closed': !idState.openned, 'hidden': idState.hidden}"
+		:class="[data.custom_class, {'openned': idState.openned, 'closed': !idState.openned, 'hidden': idState.hidden}]"
 	>
 		<div
 			class="music-item__card"
