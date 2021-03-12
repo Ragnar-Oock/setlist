@@ -156,6 +156,7 @@ export default {
 		&__arrow {
 			color: var(--text);
 			width: 1em;
+			height: .5em;
 			opacity: 0;
 			position: absolute;
 			right: .2em;
