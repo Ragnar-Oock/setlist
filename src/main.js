@@ -20,11 +20,10 @@ store.subscribe((mutation, state) => {
 
 import mixins from './mixins';
 
-import VueTippy, { TippyComponent } from 'vue-tippy';
+import VueTippy from 'vue-tippy';
 import i18n from './i18n';
 
 Vue.use(VueTippy);
-Vue.component('tippy', TippyComponent);
 
 import PortalVue from 'portal-vue';
 
