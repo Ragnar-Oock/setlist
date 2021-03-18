@@ -48,12 +48,38 @@ export default {
 	props: [],
 	data () {
 		return {
-
 		};
+	},
+	mounted() {
+		const options = {
+			rootMargin: '0px 0px 0px 0px',
+			threshold: [0, 1]
+		};
+		const observer = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					if (entry.intersectionRatio === 1) {
+						this.$emit('visible', true);
+					}
+					else if (entry.intersectionRatio < 1) {
+						this.scroll();
+					}
+				}
+				else if (!entry.isIntersecting && entry.intersectionRatio == 0) {
+					this.$emit('visible', false);
+				}
+			});
+		}, options);
+
+		observer.observe(this.$refs.root);
 	},
 	methods: {
 		scroll() {
 			document.childNodes[1].scrollTo({ top: this.$refs.root.clientHeight, behavior: 'smooth' });
+
+			setTimeout(() => {
+				this.$emit('visible', false);
+			}, 500);
 		}
 	}
 };
