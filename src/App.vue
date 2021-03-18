@@ -3,12 +3,12 @@
 		id="app"
 		class="app"
 	>
-		<WelcomeScreen />
+		<WelcomeScreen @visible="onWelcomeScreenVisiblityChange" />
 		<main>
 			<!-- <div class="scroll-container"> -->
 			<TopBar :is-search-bar-docked="isSearchBarDocked" />
 
-			<RulesPage />
+			<RulesPage :show="showRules" />
 
 			<div class="setlist">
 				<SearchBar
@@ -111,6 +111,7 @@ export default {
 	data () {
 		return {
 			isSearchBarDocked: false,
+			isWelcomeScreenVisible: true,
 			dbRefreshList: debounce(() => this.$store.dispatch('refreshList'), 300)
 		};
 	},
@@ -124,7 +125,10 @@ export default {
 		...mapGetters([
 			'isDarkModeOn',
 			'getPage'
-		])
+		]),
+		showRules() {
+			return !this.isWelcomeScreenVisible;
+		}
 	},
 	watch: {
 		isDarkModeOn() {
@@ -178,6 +182,9 @@ export default {
 		refreshList() {
 			// execute de debounced version of the refresh function
 			this.dbRefreshList();
+		},
+		onWelcomeScreenVisiblityChange(event) {
+			this.isWelcomeScreenVisible = event;
 		}
 	}
 };
