@@ -71,6 +71,9 @@ const mutations = {
 	SET_LAST_PAGE(state, value) {
 		state.isLastPage = value;
 	},
+	SET_LAST_ACCEPTED_RULE_VERSION(state, value) {
+		state.percist.lastAcceptedRuleVersion = value;
+	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
 	RELOAD_FROM_LOCALSTORAGE(state) {

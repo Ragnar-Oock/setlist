@@ -9,7 +9,8 @@ export function getDefaultState() {
 				{ name:'album', direction:'', weight:0 },
 				{ name:'artist', direction:'', weight:0 },
 				{ name:'update_date', direction:'', weight:0 }
-			]
+			],
+			lastAcceptedRuleVersion: 0
 		},
 		searchSettings:{
 			search: '',
