@@ -541,7 +541,7 @@ export default {
 <style lang="scss">
   .search-bar {
 		padding: 0;
-		margin: 0 auto 2em;
+		margin: 4em auto 2em;
 		width: 100%;
 		max-width: 60ch;
 		transition:
