@@ -9,7 +9,7 @@
  * @param {String} styles.message style for the message
  */
 export function prettyLog(module, tag, message, styles) {
-	if (process.env.VUE_APP_SHOW_LOG) {
+	if (process.env.VUE_APP_SHOW_LOG === 'true') {
 		styles = { ...{ module:'background: #583A94; color:#fff; border-radius:3px 0 0 3px',
 			tag: 'background: lightblue; color:#404040; border-radius:0 3px 3px 0',
 			message: 'background: none' }, ...styles };
