@@ -4,9 +4,7 @@ import App from './App.vue';
 // Vuex Store
 import store from './store/index.js';
 
-Vue.config.productionTip = false;
-
-// Local storage
+// reload percistend local storage
 store.commit('RELOAD_FROM_LOCALSTORAGE');
 store.subscribe((mutation, state) => {
 	try {
@@ -18,15 +16,12 @@ store.subscribe((mutation, state) => {
 	}
 });
 
-import mixins from './mixins';
-
-import i18n from './i18n';
-
+// custom tippy plugin
 import TippyPlugin from './helpers/tippy-plugin';
 Vue.use(TippyPlugin);
 
+// Portal Vue
 import PortalVue from 'portal-vue';
-
 Vue.use(PortalVue);
 
 // modal
@@ -35,7 +30,14 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
 
 // enable devtools in prod
-Vue.config.devtools = true;
+// Vue.config.devtools = true;
+// Vue.config.productionTip = false;
+
+// custom mixins
+import mixins from './mixins';
+
+// i18n plugin
+import i18n from './i18n';
 
 new Vue({
 	mixins: [mixins],
