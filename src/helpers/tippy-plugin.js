@@ -5,7 +5,8 @@ import 'tippy.js/dist/tippy.css';
 
 const defaultConfig = {
 	plugins: [animateFill],
-	animateFill: true
+	animateFill: true,
+	arrow: false
 };
 
 const plugin = {
@@ -16,7 +17,6 @@ const plugin = {
  */
 	// eslint-disable-next-line no-undef
 	install(Vue, options) {
-		console.log(tippy);
 		tippy.setDefaultProps({
 			...options
 		});
