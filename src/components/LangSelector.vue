@@ -98,7 +98,7 @@ export default {
 				top: -.25em;
 				left: calc(-.25em - 3px);
 				border-radius: 100px;
-				background-color: #fff;
+				background-color: var(--text);
 			}
 		}
 
