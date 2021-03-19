@@ -228,24 +228,9 @@ export default {
 		overflow-x: hidden;
 		width: 100%;
 		scroll-behavior: smooth;
+		transition: background-color 300ms ease-in-out;
 		background-color: var(--root-bg);
 	}
-
-	.app {
-		transition: background-color 300ms ease-in-out;
-		height: 200vh;
-	}
-
-	main {
-		margin: auto;
-		position: sticky;
-		width: 100%;
-		top: 0;
-		max-height: 100vh;
-		display: flex;
-		flex-direction: column;
-	}
-
 
 	.scroller {
 		min-height: 100vh;

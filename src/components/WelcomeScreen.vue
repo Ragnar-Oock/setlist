@@ -1,7 +1,9 @@
 <template lang="html">
 	<section
+		v-if="!isScrolled"
 		ref="root"
 		class="welcome-screen"
+		:class="{'scrolling': isScrolling}"
 	>
 		<div class="welcome-screen__texts">
 			<h1 class="welcome-screen__title">
@@ -48,42 +50,36 @@ export default {
 	props: [],
 	data () {
 		return {
+			isScrolled: false,
+			isScrolling: false
 		};
 	},
 	mounted() {
-		const options = {
-			rootMargin: '0px 0px 0px 0px',
-			threshold: [0, 1]
-		};
-		const observer = new IntersectionObserver(entries => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					if (entry.intersectionRatio === 1) {
-						this.$emit('visible', true);
-					}
-					else if (entry.intersectionRatio < 1) {
-						this.scroll();
-					}
-				}
-				else if (!entry.isIntersecting && entry.intersectionRatio == 0) {
-					this.$emit('visible', false);
-				}
-			});
-		}, options);
-
-		observer.observe(this.$refs.root);
+		document.addEventListener('scroll', this.scroll, { once: true });
 	},
 	methods: {
 		scroll() {
-			document.childNodes[1].scrollTo({ top: this.$refs.root.clientHeight, behavior: 'smooth' });
+			// trigger animation
+			this.isScrolling = true;
+			// reset scroll to top
+			document.childNodes[1].scrollTo({ top: 0 });
 
-			setTimeout(() => {
-				this.$emit('visible', false);
-			}, 500);
+			// after animation
+			this.$refs.root.addEventListener('animationend', e => {
+				// check if the animation that ended is the on scroll one
+				if (e.animationName === 'scroll') {
+					// emit the new value for the visibility flag
+					this.$emit('visible', false);
+					// update internal flags relative to the scroll animation
+					this.$nextTick(() => {
+						this.isScrolled = true;
+						this.isScrolling = false;
+					});
+				}
+			});
 		}
 	}
 };
-
 
 </script>
 
@@ -249,6 +245,19 @@ export default {
 					opacity: 0;
 					transform: translate(-50%, 130%);
 				}
+			}
+		}
+
+		&.scrolling {
+			animation: cubic-bezier(.46,.03,.52,.96) 500ms scroll 1 forwards;
+		}
+
+		@keyframes scroll {
+			0% {
+				transform: translateY(0vh);
+			}
+			100% {
+				transform: translateY(-100vh);
 			}
 		}
   }
