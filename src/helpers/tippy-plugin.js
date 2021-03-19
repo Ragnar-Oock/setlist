@@ -3,6 +3,11 @@ import 'tippy.js/dist/backdrop.css';
 import 'tippy.js/animations/shift-away.css';
 import 'tippy.js/dist/tippy.css';
 
+const defaultConfig = {
+	plugins: [animateFill],
+	animateFill: true
+};
+
 const plugin = {
 /**
  * add tippy as a vue plugin
@@ -17,11 +22,19 @@ const plugin = {
 		});
 		Vue.prototype.$tippy = function (targets, optionalProps) {
 			tippy(targets, {
-				plugins: [animateFill],
-				animateFill: true,
+				...defaultConfig,
 				...optionalProps
 			});
 		};
+
+		Vue.directive('tippy', {
+			inserted: function (el, binding) {
+				tippy(el, {
+					...defaultConfig,
+					...binding.value
+				});
+			}
+		});
 	}
 };
 
