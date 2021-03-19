@@ -4,6 +4,7 @@
 		ref="root"
 		class="welcome-screen"
 		:class="{'scrolling': isScrolling}"
+		@transitionend="focusOut"
 	>
 		<div class="welcome-screen__texts">
 			<h1 class="welcome-screen__title">
@@ -77,6 +78,13 @@ export default {
 					});
 				}
 			});
+		},
+		// check if the root element lost :focus-within and scroll
+		focusOut(e) {
+			console.log(e);
+			if (e.target == this.$refs.root) {
+				this.scroll();
+			}
 		}
 	}
 };
@@ -96,6 +104,17 @@ export default {
 		flex-direction: column;
 		background-image: var(--bg-gradient);
 		z-index: 1000;
+
+		// this is used to know when the focus escape the welcome screen
+		outline-width: 0;
+		outline-color: #0000;
+		transition: outline-color 1ms linear;
+
+		&:focus-within{
+			outline-color: #1111;
+			transition: none;
+		}
+		// end of the focus tracking
 
 		&__texts {
 			margin: auto;
