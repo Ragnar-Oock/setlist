@@ -17,7 +17,7 @@
 			<label
 				v-tippy="{placement: 'bottom'}"
 				:for="key"
-				:content="value"
+				:data-tippy-content="value"
 				class="lang-selector__label"
 			>{{ key | toUpper }}
 				<span class="sr-only">{{ value }}</span>

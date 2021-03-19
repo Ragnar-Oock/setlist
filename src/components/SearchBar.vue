@@ -244,7 +244,7 @@
 						<div
 							v-tippy="{placement: 'right'}"
 							class="search-bar__nob"
-							:content="$t('search.advenced.dlc.help')"
+							:data-tippy-content="$t('search.advenced.dlc.help')"
 						/>
 					</div>
 					<div class="search-bar__row">
@@ -263,7 +263,7 @@
 						<div
 							v-tippy="{placement: 'right'}"
 							class="search-bar__nob"
-							:content="$t('search.advenced.light.help')"
+							:data-tippy-content="$t('search.advenced.light.help')"
 						/>
 					</div>
 					<div class="search-bar__row">
@@ -282,7 +282,7 @@
 						<div
 							v-tippy="{placement: 'right'}"
 							class="search-bar__nob"
-							:content="$t('search.advenced.lirics.help')"
+							:data-tippy-content="$t('search.advenced.lirics.help')"
 						/>
 					</div>
 				</div>

@@ -20,10 +20,11 @@ store.subscribe((mutation, state) => {
 
 import mixins from './mixins';
 
-import VueTippy from 'vue-tippy';
 import i18n from './i18n';
 
-Vue.use(VueTippy);
+import TippyPlugin from './helpers/tippy-plugin';
+Vue.use(TippyPlugin);
+console.log(Vue.$tippy);
 
 import PortalVue from 'portal-vue';
 

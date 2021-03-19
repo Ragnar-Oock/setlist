@@ -22,7 +22,7 @@
 			src="@/assets/images/light.svg"
 			svg-inline
 			class="icon"
-			:content="$t('song.showlight')"
+			:data-tippy-content="$t('song.showlight')"
 			tabindex="0"
 		>
 		<img
@@ -31,7 +31,7 @@
 			src="@/assets/images/mic-fill.svg"
 			svg-inline
 			class="icon"
-			:content="$t('song.lyrics')"
+			:data-tippy-content="$t('song.lyrics')"
 			tabindex="0"
 		>
 	</div>
