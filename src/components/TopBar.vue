@@ -10,7 +10,7 @@
 			<KoFi class="top-bar__item" />
 			<label
 				ref="darkmode"
-				v-tippy="{placement:'bottom'}"
+				v-tippy="{placement:'bottom', popperOptions: {strategy: 'fixed'}}"
 				for="darkMode"
 				class="top-bar__label top-bar__item"
 				:class="{'checked': isDarkModeOn}"
@@ -95,15 +95,6 @@ export default {
 				this.$store.commit('SET_DARK_MODE', newValue);
 			}
 		}
-	},
-	mounted() {
-		// eslint-disable-next-line no-undef
-		this.$tippy(this.$refs.darkmode, {
-			popperOptions: {
-				strategy: 'fixed'
-			},
-			arrow: false
-		});
 	},
 	methods: {
 		toggleMenu(state) {

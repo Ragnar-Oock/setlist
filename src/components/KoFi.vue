@@ -2,7 +2,7 @@
 	<div class="ko-fi">
 		<a
 			ref="open"
-			v-tippy="{placement:'bottom'}"
+			v-tippy="{placement:'bottom', popperOptions: {strategy: 'fixed'}}"
 			class="ko-fi__button"
 			:data-tippy-content="$t('kofi.tooltip')"
 			@click="togglePopup(true)"

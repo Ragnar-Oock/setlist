@@ -15,7 +15,7 @@
 				@change="change"
 			>
 			<label
-				v-tippy="{placement: 'bottom'}"
+				v-tippy="{placement: 'bottom', popperOptions: {strategy: 'fixed'}}"
 				:for="key"
 				:data-tippy-content="value"
 				class="lang-selector__label"
