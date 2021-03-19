@@ -8,9 +8,9 @@
 			<slot />
 			<div
 				v-if="help"
-				v-tippy="{placement: 'right'}"
+				v-tippy="{placement: 'right', allowHTML: true }"
 				class="double-slider-range__nob"
-				:content="help"
+				:data-tippy-content="help"
 			/>
 		</div>
 		<div class="double-slider-range__wrapper">

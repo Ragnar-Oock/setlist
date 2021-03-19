@@ -14,9 +14,9 @@
 			<div class="music-item__col-left">
 				<span
 					v-if="duration && idState.openned"
-					v-tippy="{placement: 'right'}"
+					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
-					:content="$t('song.duration')"
+					:data-tippy-content="$t('song.duration')"
 				>
 					{{ duration }}
 				</span>
@@ -42,7 +42,7 @@
 					src="@/assets/images/light.svg"
 					svg-inline
 					class="icon"
-					:content="$t('song.showlight')"
+					:data-tippy-content="$t('song.showlight')"
 					:tabindex="idState.openned ? -1 : 0"
 				>
 				<img
@@ -51,14 +51,14 @@
 					src="@/assets/images/mic-fill.svg"
 					svg-inline
 					class="icon"
-					:content="$t('song.lyrics')"
+					:data-tippy-content="$t('song.lyrics')"
 					:tabindex="idState.openned ? 0 : -1"
 				>
 				<span
 					v-if="duration && !idState.openned"
 					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
-					:content="$t('song.duration')"
+					:data-tippy-content="$t('song.duration')"
 				>
 					{{ duration }}
 				</span>

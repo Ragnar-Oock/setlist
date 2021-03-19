@@ -4,7 +4,7 @@
 			ref="open"
 			v-tippy="{placement:'bottom'}"
 			class="ko-fi__button"
-			:content="$t('kofi.tooltip')"
+			:data-tippy-content="$t('kofi.tooltip')"
 			@click="togglePopup(true)"
 		><img
 			src="../assets/images/Ko-fi-cropped.png"
@@ -60,9 +60,6 @@ export default {
 		return {
 			isOpen: false
 		};
-	},
-	computed: {
-
 	},
 	methods: {
 		togglePopup(state) {
