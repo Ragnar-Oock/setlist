@@ -131,10 +131,10 @@
 </template>
 
 <script lang="js">
-import ArrangementsSelector from '@/components/MusicItem/sub-components/ArrangementsSelector';
-import Prebuild from '@/components/MusicItem/sub-components/Pre-build';
-import Metadata from '@/components/MusicItem/sub-components/Meta';
-import TagList from '@/components/MusicItem/sub-components/TagList';
+import ArrangementsSelector from '@/components/MusicItem/ArrangementsSelector';
+import Prebuild from '@/components/MusicItem/Pre-build';
+import Metadata from '@/components/MusicItem/Meta';
+import TagList from '@/components/MusicItem/TagList';
 
 import { IdState } from 'vue-virtual-scroller';
 import mixins from '@/mixins.js';
