@@ -24,7 +24,6 @@ import i18n from './i18n';
 
 import TippyPlugin from './helpers/tippy-plugin';
 Vue.use(TippyPlugin);
-console.log(Vue.$tippy);
 
 import PortalVue from 'portal-vue';
 
