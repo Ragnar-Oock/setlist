@@ -27,7 +27,7 @@
     "advenced": {
       "lastInterpretation": {
         "title": "Last interpretation (in days)",
-        "help": "Number of days since the music was last played<br>100 equals to neverplayed",
+        "help": "Number of days since the music was last played<br>100 equals to never played",
         "min": "Lower bound",
         "max": "Upper bound"
       },
