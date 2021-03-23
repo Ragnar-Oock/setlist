@@ -172,6 +172,18 @@ const actions = {
 		catch (error) {
 			console.error(error);
 		}
+	},
+
+	async activateItem({ commit }, index) {
+		commit('TOGGLE_ITEM_ACTIVITY', { index, value: true });
+		setTimeout(() => {
+			commit('TOGGLE_ITEM_ACTIVITY', { index, value: false });
+		}, 500);
+	},
+
+	async openItem({ commit, dispatch }, index) {
+		commit('SET_ITEM_OPEN_STATE', { index: index, value: true });
+		dispatch('activateItem');
 	}
 
 };

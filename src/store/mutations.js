@@ -1,5 +1,5 @@
 import { getDefaultState } from './state';
-import { prettyLog } from '@/helpers/methods';
+import { prettyLog, initializeSongList } from '@/helpers/methods';
 import Vue from 'vue';
 import { updateField } from 'vuex-map-fields';
 
@@ -27,7 +27,7 @@ const mutations = {
 	 * @param {Object[]} songList array of songs to be added to the list
 	 */
 	SET_SONG_LIST(state, songList) {
-		state.songs = songList;
+		state.songs = initializeSongList(songList);
 	},
 
 	SET_SUGGESTIONS(state, suggestions) {
@@ -42,11 +42,11 @@ const mutations = {
 		state.page += 1;
 	},
 
-	ACTIVATE_ITEM(state, index) {
-		state.songs[index].open = true;
-		setTimeout(() => {
-			state.songs[index].open = false;
-		}, 500);
+	TOGGLE_ITEM_ACTIVITY(state, { index, value }) {
+		state.songs[index].isOpenning = value;
+	},
+	SET_ITEM_OPEN_STATE(state, { index, value }) {
+		state.songs[index].state.isOpen = value;
 	},
 
 	SET_ARRANGEMENTS_FILTER(state, arrangements) {

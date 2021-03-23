@@ -46,13 +46,13 @@
 							:item="item"
 							:active="active"
 							:size-dependencies="[
-								item.open
+								item.isOpenning
 							]"
 							:data-index="index"
 						>
 							<MusicItem
 								:data="item"
-								@open="open(index)"
+								@open="onOpen(index)"
 							/>
 						</DynamicScrollerItem>
 					</template>
@@ -176,12 +176,12 @@ export default {
 					console.error(e);
 				});
 		},
-		open(index) {
-			this.$store.commit('ACTIVATE_ITEM', index);
-		},
 		refreshList() {
 			// execute de debounced version of the refresh function
 			this.dbRefreshList();
+		},
+		onOpen(index) {
+			this.$store.dispatch('activateItem', index);
 		},
 		onWelcomeScreenVisiblityChange(event) {
 			this.isWelcomeScreenVisible = event;

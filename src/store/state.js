@@ -32,6 +32,13 @@ export function getDefaultState() {
 	};
 }
 
+export function getDefaultSongState() {
+	return {
+		isOpen: false,
+		isOpenning: false
+	};
+}
+
 const state = getDefaultState();
 
 export default state;

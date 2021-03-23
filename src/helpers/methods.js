@@ -1,3 +1,5 @@
+import { getDefaultSongState } from '../store/state';
+
 /**
  * Log a message prefixed with a colored module and tag
  * @param {String} module module issuing a log
@@ -16,7 +18,6 @@ export function prettyLog(module, tag, message, styles) {
 		console.log(`%c ${ module } %c ${ tag } %c   ${ message }`, styles.module, styles.tag, styles.message);
 	}
 }
-
 
 /**
  * compare to objects and determine if they are similar or not
@@ -88,3 +89,17 @@ export function getDiffKeys(requiredKeys, providedKeys) {
 	}
 }
 
+export function initializeSongList(songList) {
+	const initialisedSongList = [];
+
+	for (let i = 0; i < songList.length; i++) {
+		const song = songList[i];
+
+		initialisedSongList.push({
+			...song,
+			state: getDefaultSongState()
+		});
+	}
+
+	return initialisedSongList;
+}
