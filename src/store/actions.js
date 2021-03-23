@@ -183,8 +183,8 @@ const actions = {
 	},
 
 	async toggleItem({ commit, dispatch }, { index, value = true }) {
-		commit('SET_ITEM_OPEN_STATE', { index: index, value: value });
 		dispatch('activateItem', index);
+		commit('SET_ITEM_OPEN_STATE', { index: index, value: value });
 	}
 
 };
