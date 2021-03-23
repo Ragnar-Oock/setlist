@@ -44,7 +44,6 @@ const mutations = {
 
 	TOGGLE_ITEM_ACTIVITY(state, { index, value }) {
 		state.songs[index].state.isOpenning = value;
-		console.log(state.songs[index].state.isOpenning);
 	},
 	SET_ITEM_OPEN_STATE(state, { index, value }) {
 		state.songs[index].state.isOpen = value;
