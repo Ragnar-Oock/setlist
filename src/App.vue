@@ -5,7 +5,6 @@
 	>
 		<WelcomeScreen @visible="onWelcomeScreenVisiblityChange" />
 		<main>
-			<!-- <div class="scroll-container"> -->
 			<TopBar :is-search-bar-docked="isSearchBarDocked" />
 
 			<RulesPage :show="showRules" />
@@ -85,7 +84,6 @@
 				name="tutorial"
 				:steps="steps"
 			/>
-			<!-- </div> -->
 		</main>
 	</div>
 </template>
