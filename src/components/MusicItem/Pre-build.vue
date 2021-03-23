@@ -9,6 +9,7 @@
 				<img
 					v-if="vip"
 					svg-inline
+					class="icon"
 					src="@/assets/images/diamond-fill.svg"
 					aria-hidden="true"
 				>
