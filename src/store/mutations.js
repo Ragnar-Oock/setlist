@@ -43,7 +43,8 @@ const mutations = {
 	},
 
 	TOGGLE_ITEM_ACTIVITY(state, { index, value }) {
-		state.songs[index].isOpenning = value;
+		state.songs[index].state.isOpenning = value;
+		console.log(state.songs[index].state.isOpenning);
 	},
 	SET_ITEM_OPEN_STATE(state, { index, value }) {
 		state.songs[index].state.isOpen = value;
@@ -73,6 +74,10 @@ const mutations = {
 	},
 	SET_LAST_ACCEPTED_RULE_VERSION(state, value) {
 		state.percist.lastAcceptedRuleVersion = value;
+	},
+
+	SET_TUTORIAL_COMPLETION(state, value) {
+		state.percist.isTutorialComplited = value;
 	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
