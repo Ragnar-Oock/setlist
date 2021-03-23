@@ -81,7 +81,6 @@ export default {
 		},
 		// check if the root element lost :focus-within and scroll
 		focusOut(e) {
-			console.log(e);
 			if (e.target == this.$refs.root) {
 				this.scroll();
 			}
