@@ -282,7 +282,11 @@ export default {
 		},
 		onWelcomeScreenVisiblityChange(event) {
 			this.isWelcomeScreenVisible = event;
-			this.$tours['tutorial'].start();
+			if (!this.isWelcomeScreenVisible) {
+				this.$tours['tutorial'].start();
+			}
+		}
+	}
 };
 </script>
 
