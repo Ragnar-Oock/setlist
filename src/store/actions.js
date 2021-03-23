@@ -176,14 +176,15 @@ const actions = {
 
 	async activateItem({ commit }, index) {
 		commit('TOGGLE_ITEM_ACTIVITY', { index, value: true });
-		setTimeout(() => {
+		await new Promise(resolve => setTimeout(() => {
 			commit('TOGGLE_ITEM_ACTIVITY', { index, value: false });
-		}, 500);
+			resolve();
+		}, 500));
 	},
 
-	async openItem({ commit, dispatch }, index) {
-		commit('SET_ITEM_OPEN_STATE', { index: index, value: true });
-		dispatch('activateItem');
+	async toggleItem({ commit, dispatch }, { index, value = true }) {
+		commit('SET_ITEM_OPEN_STATE', { index: index, value: value });
+		dispatch('activateItem', index);
 	}
 
 };
