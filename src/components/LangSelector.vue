@@ -1,5 +1,8 @@
 <template>
-	<section class="lang-selector">
+	<section
+		id="lang-selector"
+		class="lang-selector"
+	>
 		<div
 			v-for="(value, key) in supportedLocales"
 			:key="key"

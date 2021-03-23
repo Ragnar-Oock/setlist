@@ -67,9 +67,9 @@
 					</defs>
 				</svg>
 				<button
+					id="advenced-search"
 					type="button"
 					class="search-bar__open-more"
-					title="recherche avancée"
 					:class="{'active': isAdvencedSearchOpen}"
 					@click="openAdvencedSearch"
 				>

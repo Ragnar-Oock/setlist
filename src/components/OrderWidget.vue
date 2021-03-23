@@ -1,5 +1,8 @@
 <template lang="html">
-	<div class="order-widget">
+	<div
+		id="order-widget"
+		class="order-widget"
+	>
 		<p class="sr-only">
 			{{ $t('order.by') }}
 		</p>

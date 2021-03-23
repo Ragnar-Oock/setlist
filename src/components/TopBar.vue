@@ -9,6 +9,7 @@
 		<div class="top-bar__right">
 			<KoFi class="top-bar__item" />
 			<label
+				id="darkmode-label"
 				ref="darkmode"
 				v-tippy="{placement:'bottom', popperOptions: {strategy: 'fixed'}}"
 				for="darkMode"

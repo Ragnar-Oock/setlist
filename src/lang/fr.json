@@ -132,5 +132,19 @@
     "signature": "Ragnar - 2020",
     "button":"Achete moi un café",
     "tooltip":"Tips"
+  },
+  "tutorial": {
+    "languageSelector": "Change la langue de l'application.",
+    "darkmode": "Eteind la lumière.",
+    "search": "Commence a chercher quelque chose, on essaiera de le trouver.",
+    "filters": "Affine ta recherche avec les filtres avancés.",
+    "order": "Ordone les résultats comme tu le veux.",
+    "openItem": "Clique sur une musique pour en savoir plus.",
+    "arrangementSelector": "Choisi un arrangement dans la liste.",
+    "prebuildVIP": "Fait une requete VIP ou regulière (tu as besoin de point VIP pour faire une requete VIP, tu peux savoir combient tu en as en envoyant !vip dans le chat twitch)",
+    "prebuildEdit": "Tu peux faire une nouvelle requete ou modifier une existante.",
+    "prebuildCopy": "Copie ta commande et colle la dans le chat twitch pour l'enregistrer.",
+    "tips": "Si tu aimes cette application pense a faire un don.",
+    "bugs": "Tu as trouvé un bug 🐜 ? Signale le sur <a href=\"https://github.com/Ragnar-Oock/setlist/issues\" target=\"_blank\">Github</a>"
   }
 }

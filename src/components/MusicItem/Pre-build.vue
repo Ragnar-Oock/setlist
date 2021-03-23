@@ -2,7 +2,7 @@
 	<div class="prebuild">
 		<div class="btn-group modifier">
 			<button
-				class="btn small dull with-icon"
+				class="btn small dull with-icon vip"
 				aria-live="assertive"
 				@click="toggleVip"
 			>
@@ -23,7 +23,7 @@
 				{{ vipToggleTitle }}
 			</button>
 			<button
-				class="btn small dull with-icon"
+				class="btn small dull with-icon edit"
 				aria-live="assertive"
 				@click="toggleEdit"
 			>

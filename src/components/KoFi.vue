@@ -1,5 +1,8 @@
 <template lang="html">
-	<div class="ko-fi">
+	<div
+		id="kofi"
+		class="ko-fi"
+	>
 		<a
 			ref="open"
 			v-tippy="{placement:'bottom', popperOptions: {strategy: 'fixed'}}"
