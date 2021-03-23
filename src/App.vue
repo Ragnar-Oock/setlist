@@ -238,8 +238,6 @@ export default {
 		// set scroll position to top
 		document.documentElement.scroll({ top:0 });
 
-		document.documentElement.lang = this.$i18n.locale;
-
 		// get first songs page
 		this.$store
 			.dispatch('getSongList')
