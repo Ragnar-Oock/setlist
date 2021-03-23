@@ -2,7 +2,7 @@
 	<div
 		ref="root"
 		class="music-item"
-		:class="[data.custom_class, {'openned': idState.openned, 'closed': !idState.openned, 'hidden': idState.hidden}]"
+		:class="[data.custom_class, {'openned': isOpen, 'closed': !isOpen, 'hidden': idState.hidden}]"
 	>
 		<div
 			class="music-item__card"
@@ -13,7 +13,7 @@
 		>
 			<div class="music-item__col-left">
 				<span
-					v-if="duration && idState.openned"
+					v-if="duration && isOpen"
 					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
 					:data-tippy-content="$t('song.duration')"
@@ -21,14 +21,14 @@
 					{{ duration }}
 				</span>
 				<p
-					:key="idState.openned"
+					:key="isOpen"
 					class="music-item__title"
 				>
 					{{ data.name }}
 				</p>
 				<hr class="music-item__hr">
 				<p
-					:key="idState.openned+'source'"
+					:key="isOpen+'source'"
 					class="music-item__source"
 				>
 					<span class="sr-only">{{ $t('song.byArtist') }}</span>
@@ -43,7 +43,7 @@
 					svg-inline
 					class="icon"
 					:data-tippy-content="$t('song.showlight')"
-					:tabindex="idState.openned ? -1 : 0"
+					:tabindex="isOpen ? -1 : 0"
 				>
 				<img
 					v-if="data.vocals"
@@ -52,10 +52,10 @@
 					svg-inline
 					class="icon"
 					:data-tippy-content="$t('song.lyrics')"
-					:tabindex="idState.openned ? 0 : -1"
+					:tabindex="isOpen ? 0 : -1"
 				>
 				<span
-					v-if="duration && !idState.openned"
+					v-if="duration && !isOpen"
 					v-tippy="{placement: 'bottom'}"
 					class="music-item__duration"
 					:data-tippy-content="$t('song.duration')"
@@ -75,7 +75,7 @@
 			ref="quickCopyButton"
 			class="music-item__quick-copy"
 			:class="{'play': idState.isQuickCopyCliked}"
-			:tabindex="idState.openned?-1:0"
+			:tabindex="isOpen?-1:0"
 			@click="quickCopy"
 		>
 			<span class="music-item__quick-copy-text"><span>{{ $t('song.quickCopy') }}</span></span>
@@ -101,7 +101,7 @@
 				name="open"
 			>
 				<div
-					v-show="idState.openned"
+					v-show="isOpen"
 					class="music-item__body"
 				>
 					<TagList
@@ -160,7 +160,6 @@ export default {
 	},
 	idState () {
 		return {
-			openned: false,
 			vip: false,
 			edit: false,
 			isQuickCopyCliked: false,
@@ -192,6 +191,14 @@ export default {
 		},
 		shallowCommand() {
 			return `!sr ${ this.data.name } - ${ this.data.artist }`;
+		},
+		isOpen: {
+			get() {
+				return this.data.state.isOpen;
+			},
+			set(value) {
+				this.$store.commit('SET_ITEM_OPEN_STATE', { index: this.$refs.root.parentNode.dataset.index, value: value });
+			}
 		}
 	},
 	mounted() {
@@ -221,8 +228,8 @@ export default {
 				event.preventDefault();
 			}
 
-			this.idState.openned = !this.idState.openned;
-			this.$emit('open', this.idState.openned);
+			this.isOpen = !this.isOpen;
+			this.$emit('open', this.isOpen);
 		},
 		quickCopy($event) {
 			this.$refs.outputExt.select();
