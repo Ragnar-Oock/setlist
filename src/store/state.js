@@ -10,7 +10,8 @@ export function getDefaultState() {
 				{ name:'artist', direction:'', weight:0 },
 				{ name:'update_date', direction:'', weight:0 }
 			],
-			lastAcceptedRuleVersion: 0
+			lastAcceptedRuleVersion: 0,
+			isTutorialCompleted: false
 		},
 		searchSettings:{
 			search: '',

@@ -29,10 +29,6 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
 
-import VueTour from 'vue-tour';
-import 'vue-tour/dist/vue-tour.css';
-Vue.use(VueTour);
-
 // enable devtools in prod
 // Vue.config.devtools = true;
 // Vue.config.productionTip = false;

@@ -80,10 +80,7 @@
 			/>
 			<portal-target name="screen" />
 			<portal-target name="popup" />
-			<v-tour
-				name="tutorial"
-				:steps="steps"
-			/>
+			<TourWrapper v-if="!isWelcomeScreenVisible && !isTutorialCompleted" />
 		</main>
 	</div>
 </template>
@@ -108,106 +105,15 @@ export default {
 		MusicItem,
 		DynamicScroller,
 		DynamicScrollerItem,
-		SearchBar
+		SearchBar,
+		// load only when needed
+		TourWrapper: () => import(/* webpackPrefetch: true */ './components/TourWrapper')
 	},
 	data () {
 		return {
 			isSearchBarDocked: false,
 			isWelcomeScreenVisible: true,
-			dbRefreshList: debounce(() => this.$store.dispatch('refreshList'), 300),
-			steps: [
-				{
-					target: '#lang-selector',
-					content: this.$t('tutorial.languageSelector'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '#darkmode-label',
-					content: this.$t('tutorial.darkmode'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '#search',
-					content: this.$t('tutorial.search'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '#advenced-search',
-					content: this.$t('tutorial.filters'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '#order-widget',
-					content: this.$t('tutorial.order'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '.music-item',
-					content: this.$t('tutorial.openItem'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '.music-item .arrangements',
-					content: this.$t('tutorial.arrangementSelector'),
-					before: () => new Promise((resolve, reject) => {
-						this.$store.dispatch('toggleItem', { index: 0, value: true }).then(() => {
-							new Promise(res => setTimeout(res, 500)).then(resolve);
-						}).catch(reject);
-					}),
-					params: {
-						enableScrolling: false,
-						placement: 'top'
-					}
-				},
-				{
-					target: '.music-item .vip',
-					content: this.$t('tutorial.prebuildVIP'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '.music-item .edit',
-					content: this.$t('tutorial.prebuildEdit'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '.music-item .copy',
-					content: this.$t('tutorial.prebuildCopy'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '#kofi',
-					content: this.$t('tutorial.tips'),
-					params: {
-						enableScrolling: false
-					}
-				},
-				{
-					target: '#kofi',
-					content: this.$t('tutorial.bugs'),
-					params: {
-						enableScrolling: false
-					}
-				}
-
-			]
+			dbRefreshList: debounce(() => this.$store.dispatch('refreshList'), 300)
 		};
 	},
 	computed:{
@@ -215,7 +121,8 @@ export default {
 			songList: 'songs',
 			error: 'apiError',
 			isLoading: 'isLoading',
-			isLastPage: 'isLastPage'
+			isLastPage: 'isLastPage',
+			isTutorialCompleted: state => state.percist.isTutorialCompleted
 		}),
 		...mapGetters([
 			'isDarkModeOn',
@@ -278,9 +185,6 @@ export default {
 		},
 		onWelcomeScreenVisiblityChange(event) {
 			this.isWelcomeScreenVisible = event;
-			if (!this.isWelcomeScreenVisible) {
-				this.$tours['tutorial'].start();
-			}
 		}
 	}
 };
