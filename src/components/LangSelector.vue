@@ -88,18 +88,21 @@ export default {
 			}
 		}
 
+		&__item {
+			display: flex;
+		}
+
 		&__item + &__item{
 			position: relative;
-			margin-left: calc(.5em + 3px);
+			margin-left: calc(.5em + 2px);
 
 			&::before {
 				content: '';
 				position: absolute;
 				display: block;
-				width: 3px;
-				height: calc(100% + .5em);
-				top: -.25em;
-				left: calc(-.25em - 3px);
+				width: 2px;
+				height: 100%;
+				left: calc(-.25em - 2px);
 				border-radius: 100px;
 				background-color: var(--text);
 			}
