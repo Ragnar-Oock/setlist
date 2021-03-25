@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-v-html -->
 <template lang="html">
 	<Fragment />
 </template>
