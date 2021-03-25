@@ -5,7 +5,7 @@ import { updateField } from 'vuex-map-fields';
 
 const mutations = {
 	SET_DARK_MODE(state, isEnabled) {
-		state.percist.darkMode = isEnabled;
+		state.percist.isDarkModeOn = isEnabled;
 	},
 
 	SET_ORDER_BY(state, orderBy) {

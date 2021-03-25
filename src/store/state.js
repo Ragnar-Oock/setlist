@@ -3,7 +3,7 @@ export function getDefaultState() {
 		songs: [],
 		page: 0,
 		percist: {
-			darkMode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
+			isDarkModeOn: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches,
 			orderBy: [
 				{ name:'name', direction:'', weight:0 },
 				{ name:'album', direction:'', weight:0 },

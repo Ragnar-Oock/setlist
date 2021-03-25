@@ -122,10 +122,10 @@ export default {
 			error: 'apiError',
 			isLoading: 'isLoading',
 			isLastPage: 'isLastPage',
+			isDarkModeOn: state => state.percist.isDarkModeOn,
 			isTutorialCompleted: state => state.percist.isTutorialCompleted
 		}),
 		...mapGetters([
-			'isDarkModeOn',
 			'getPage'
 		]),
 		showRules() {
