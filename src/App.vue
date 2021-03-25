@@ -91,6 +91,7 @@ import TopBar from './components/TopBar';
 import RulesPage from './components/RulesPage';
 import SearchBar from './components/SearchBar';
 import MusicItem from './components/MusicItem';
+
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller';
 import debounce from 'debounce';
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
@@ -107,7 +108,7 @@ export default {
 		DynamicScrollerItem,
 		SearchBar,
 		// load only when needed
-		TourWrapper: () => import(/* webpackPrefetch: true */ './components/TourWrapper')
+		TourWrapper: () => import(/* webpackPrefetch: true */ './components/Tour/TourWrapper')
 	},
 	data () {
 		return {
