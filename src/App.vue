@@ -7,7 +7,7 @@
 		<main>
 			<TopBar :is-search-bar-docked="isSearchBarDocked" />
 
-			<RulesPage :show="showRules" />
+			<RulesPage :show="!isWelcomeScreenVisible" />
 
 			<div class="setlist">
 				<SearchBar
@@ -127,10 +127,7 @@ export default {
 		}),
 		...mapGetters([
 			'getPage'
-		]),
-		showRules() {
-			return !this.isWelcomeScreenVisible;
-		}
+		])
 	},
 	watch: {
 		isDarkModeOn() {
