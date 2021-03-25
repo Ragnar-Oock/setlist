@@ -1,0 +1,11 @@
+@mixin grid-area($area) {
+	.#{$area} {
+		grid-area: $area;
+	}
+}
+
+@mixin multi-grid-area($list) {
+	@each $item in $list {
+		@include grid-area($item)
+	}
+}
