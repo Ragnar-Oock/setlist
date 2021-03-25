@@ -176,7 +176,6 @@ export default {
 		}
 
 		.output {
-			flex-grow: 1;
 			border-radius: 5px;
 			background-color: var(--root-bg);
 			border: 3px solid #0000;
@@ -184,6 +183,7 @@ export default {
 			color: var(--text);
 			padding: calc(var(--margin-thin) - 3px) calc(var(--margin) - 3px);
 			grid-area: output;
+			min-width: 1em;
 			transition: border-color ease-in-out 300ms;
 
 			&:focus{
