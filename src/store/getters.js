@@ -74,6 +74,7 @@ const getters = {
 	},
 	isSearch: state => !compareKeys(getDefaultState().searchSettings, state.searchSettings),
 	isLastPage: state => state.isLastPage,
+	isLastRuleVersionAccepted: state => state.percist.lastAcceptedRuleVersion >= process.env.VUE_APP_RULES_VERSION,
 
 	getField
 };

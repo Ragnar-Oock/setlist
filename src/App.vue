@@ -80,7 +80,7 @@
 			/>
 			<portal-target name="screen" />
 			<portal-target name="popup" />
-			<TourWrapper v-if="!isWelcomeScreenVisible && !isTutorialCompleted" />
+			<TourWrapper v-if="!isWelcomeScreenVisible && !isTutorialCompleted && isLastRuleVersionAccepted" />
 		</main>
 	</div>
 </template>
@@ -127,7 +127,8 @@ export default {
 			isTutorialCompleted: state => state.percist.isTutorialCompleted
 		}),
 		...mapGetters([
-			'getPage'
+			'getPage',
+			'isLastRuleVersionAccepted'
 		])
 	},
 	watch: {
