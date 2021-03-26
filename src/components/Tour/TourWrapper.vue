@@ -64,7 +64,7 @@
 							<button
 								v-if="actions.actions.isLast && actions.actions.isButtonEnabled('buttonStop')"
 								class="finish btn dull small"
-								@click.prevent="actions.actions.finish"
+								@click.prevent="onFinish"
 							>
 								{{ $t('tutorial.buttons.finish') }}
 							</button>
