@@ -145,7 +145,7 @@
         "title": "Eteind la lumière"
       },
       "search": {
-        "content": "Commence à taper ce que tu cherches, on essayera de le trouver pour toi.",
+        "content": "Commence à taper ce que tu cherches, on essayera de le trouver pour toi.<br><br><strong>Conseil de pro</strong> : appuis sur <strong>CTRL + SHIFT + F</strong> pour acceder a ce champ depuis n'importe ou sur la page",
         "title": "Mieux que google"
       },
       "filters": {

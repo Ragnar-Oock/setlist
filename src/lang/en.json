@@ -145,7 +145,7 @@
         "title": "Turn off the ligths"
       },
       "search": {
-        "content": "Begin to type what you want to search, we'll try to find it for you.",
+        "content": "Begin to type what you want to search, we'll try to find it for you.<br><br><strong>Pro tip</strong> : press CTRL + SHIFT + F to access this field from anywhere on the page",
         "title": "Better than google"
       },
       "filters": {
