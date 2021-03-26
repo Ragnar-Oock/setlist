@@ -103,9 +103,9 @@ export default {
 		steps() {
 			return [
 				{
-					target: '#lang-selector',
-					content: this.$t('tutorial.steps.languageSelector.content'),
-					header: { title: this.$t('tutorial.steps.languageSelector.title') },
+					target: '#startTutorial',
+					content: this.$t('tutorial.steps.start.content'),
+					header: { title: this.$t('tutorial.steps.start.title') },
 					params: {
 						enableScrolling: false
 					}

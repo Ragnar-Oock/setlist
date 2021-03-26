@@ -136,9 +136,9 @@
   },
   "tutorial": {
     "steps":{
-      "languageSelector": {
-        "content": "Change la langue de l'application.",
-        "title": "Comme à la maison"
+      "start": {
+        "content": "Commencer le tutoriel.",
+        "title": "Visite gratuite"
       },
       "darkmode": {
         "content": "Change entre le mode sombre et le mode classique.",

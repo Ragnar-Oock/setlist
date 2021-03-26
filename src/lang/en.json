@@ -136,9 +136,9 @@
   },
   "tutorial": {
     "steps": {
-      "languageSelector": {
-        "content": "Change the language of the app to your liking.",
-        "title": "Just like home"
+      "start": {
+        "content": "Begin the tutorial.",
+        "title": "Let me show you arround"
       },
       "darkmode": {
         "content": "Switch between light and dark mode.",
