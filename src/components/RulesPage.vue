@@ -20,15 +20,6 @@ export default {
 		}
 	},
 	computed:{
-		rules() {
-			return marked(this.$t('rules.rules.body'));
-		},
-		tuto() {
-			return marked(this.$t('rules.tuto'));
-		},
-		footer() {
-			return marked(this.$t('rules.footer'));
-		},
 		...mapState({
 			lastAcceptedRuleVersion: state => state.percist.lastAcceptedRuleVersion
 		})
