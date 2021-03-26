@@ -232,6 +232,7 @@ export default {
   .v-tour.tutorial{
 		.v-step{
 			background-color: var(--filler-1);
+			filter: drop-shadow(0 0 5px #0003);
 
 			&__arrow {
 				border-color: var(--filler-1);
@@ -239,6 +240,7 @@ export default {
 
 			&__header {
 				background-color: var(--filler-1);
+				color: var(--text);
 				text-align: left;
 				font-weight: bold;
 				margin: 0;
@@ -246,6 +248,7 @@ export default {
 			}
 
 			&__content {
+				color: var(--text);
 				text-align: left;
 			}
 		}
