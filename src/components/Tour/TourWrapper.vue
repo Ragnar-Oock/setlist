@@ -3,6 +3,7 @@
 		name="tutorial"
 		class="tutorial"
 		:steps="steps"
+		:callbacks="callbacks"
 	>
 		<template slot-scope="tour">
 			<transition name="fade">
@@ -215,6 +216,9 @@ export default {
 	methods: {
 		log() {
 			console.log(...arguments);
+		},
+		onFinish() {
+			this.$store.commit('SET_TUTORIAL_COMPLETION', true);
 		}
 	}
 };

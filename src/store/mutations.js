@@ -76,7 +76,7 @@ const mutations = {
 	},
 
 	SET_TUTORIAL_COMPLETION(state, value) {
-		state.percist.isTutorialComplited = value;
+		state.percist.isTutorialCompleted = value;
 	},
 
 	// fetch any possible store data stored in the localstorage and restore it into the actual store
