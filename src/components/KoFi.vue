@@ -9,10 +9,11 @@
 			class="ko-fi__button"
 			:data-tippy-content="$t('kofi.tooltip')"
 			@click="togglePopup(true)"
-		><img
-			src="../assets/images/Ko-fi-cropped.png"
-			alt="Ko-fi logo"
-		></a>
+			<img
+				svg-inline
+				src="@/assets/images/ko-fi-icon-noBG.svg"
+				aria-hidden="true"
+			>
 		<portal to="popup">
 			<div
 				v-if="isOpen"
