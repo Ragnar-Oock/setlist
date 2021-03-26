@@ -7,7 +7,10 @@
 		<main>
 			<TopBar :is-search-bar-docked="isSearchBarDocked" />
 
-			<RulesPage :show="!isWelcomeScreenVisible" />
+			<RulesPage
+				v-if="!isLastRuleVersionAccepted"
+				:show="!isWelcomeScreenVisible"
+			/>
 
 			<div class="setlist">
 				<SearchBar
@@ -88,7 +91,6 @@
 <script>
 import WelcomeScreen from './components/WelcomeScreen';
 import TopBar from './components/TopBar';
-import RulesPage from './components/RulesPage';
 import SearchBar from './components/SearchBar';
 import MusicItem from './components/MusicItem';
 
@@ -102,13 +104,13 @@ export default {
 	components: {
 		WelcomeScreen,
 		TopBar,
-		RulesPage,
 		MusicItem,
 		DynamicScroller,
 		DynamicScrollerItem,
 		SearchBar,
 		// load only when needed
-		TourWrapper: () => import(/* webpackPrefetch: true */ './components/Tour/TourWrapper')
+		TourWrapper: () => import(/* webpackPrefetch: true */ './components/Tour/TourWrapper'),
+		RulesPage: () => import(/* webpackPrefetch: true */ './components/RulesPage')
 	},
 	data () {
 		return {
