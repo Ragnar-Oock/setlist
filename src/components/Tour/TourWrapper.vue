@@ -273,10 +273,26 @@ export default {
 		a {
 			color: var(--text);
 
-			&:focus {
+			&:focus,
+			&:hover {
 				outline: 3px var(--primary-2) solid;
 				outline-offset: 2px;
 			}
+		}
+
+		.fade-enter-active,
+		.fade-leave-active {
+			transition: opacity 300ms ease-out;
+		}
+
+		.fade-enter,
+		.fade-leave-to {
+			opacity: 0;
+		}
+
+		.fade-enter-to,
+		.fade-leave {
+			opacity: 1;
 		}
 	}
 </style>
