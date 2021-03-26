@@ -1,19 +1,19 @@
 <template lang="html">
-	<div
-		id="kofi"
-		class="ko-fi"
-	>
-		<a
+	<Fragment>
+		<button
+			id="kofi"
 			ref="open"
 			v-tippy="{placement:'bottom', popperOptions: {strategy: 'fixed'}}"
-			class="ko-fi__button"
+			class="ko-fi top-bar__button"
 			:data-tippy-content="$t('kofi.tooltip')"
 			@click="togglePopup(true)"
+		>
 			<img
 				svg-inline
 				src="@/assets/images/ko-fi-icon-noBG.svg"
 				aria-hidden="true"
 			>
+		</button>
 		<portal to="popup">
 			<div
 				v-if="isOpen"
@@ -52,13 +52,18 @@
 				@click="togglePopup(false)"
 			/>
 		</portal>
-	</div>
+	</Fragment>
 </template>
 
 <script lang="js">
 
+import { Fragment } from 'vue-fragment';
+
 export default {
 	name: 'KoFi',
+	components: {
+		Fragment
+	},
 	props: [],
 	data () {
 		return {
@@ -88,25 +93,24 @@ export default {
 
 <style lang="scss">
   .ko-fi {
-		&__button{
-			cursor: pointer;
-			border-radius: 5px;
-			transition: border-color 300ms ease-in-out;
-			display: block;
-			height: 100%;
-			padding: .5em;
-			border: 1px solid transparent;
+		cursor: pointer;
+		border-radius: 5px;
+		transition: border-color 300ms ease-in-out;
+		display: block;
+		height: 100%;
+		padding: .5em;
+		border: 1px solid transparent;
 
-			&:focus,
-			&:hover {
-				border-color: var(--text);
-				outline: none;
-			}
+		&:focus,
+		&:hover {
+			border-color: var(--text);
+			outline: none;
+		}
 
-			img{
-				width: 20px;
-				height: 20px;
-			}
+		svg {
+			width: 1.25em;
+			height: 1.25em;
+			color: var(--text);
 		}
   }
 	.popup {
