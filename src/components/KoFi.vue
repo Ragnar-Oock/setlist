@@ -25,7 +25,7 @@
 				<div class="popup__col-left">
 					<img
 						src="https://media.giphy.com/media/ZEgBHVeRlmTqjCPlqx/giphy.gif"
-						alt="Sponge Bob"
+						:alt="$t('kofi.imageAlt')"
 					>
 				</div>
 				<div class="popup__col-right">
