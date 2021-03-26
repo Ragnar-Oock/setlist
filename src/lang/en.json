@@ -118,7 +118,8 @@
     }
   },
   "topBar": {
-    "darkMode": "Dark mode"
+    "darkMode": "Dark mode",
+    "startTutorial": "Tutoriel"
   },
   "loading": "Loading the list",
   "apiError": "Something when wrong",

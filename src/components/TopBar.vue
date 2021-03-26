@@ -7,6 +7,20 @@
 			<LangSelector class="top-bar__item" />
 		</div>
 		<div class="top-bar__right">
+			<button
+				id="startTutorial"
+				v-tippy="{placement:'bottom', popperOptions: {strategy: 'fixed'}}"
+				class="top-bar__button"
+				:data-tippy-content="$t('topBar.startTutorial')"
+				@click="startTutorial"
+			>
+				<img
+					svg-inline
+					class="top-bar__icon"
+					src="@/assets/images/question-circle-fill.svg"
+					aria-hidden="true"
+				>
+			</button>
 			<KoFi class="top-bar__item" />
 			<label
 				id="darkmode-label"
@@ -105,6 +119,9 @@ export default {
 			else {
 				this.isMenuOpen = !this.isMenuOpen;
 			}
+		},
+		startTutorial() {
+			this.$store.commit('SET_TUTORIAL_COMPLETION', false);
 		}
 	}
 };
@@ -148,8 +165,8 @@ export default {
 			margin-right: auto;
 		}
 
-
-		&__label {
+		&__label,
+		&__button {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -159,6 +176,7 @@ export default {
 			transition: 300ms ease-in-out;
 			transition-property: border-color, opacity;
 			border: 1px solid transparent;
+			background-color: #0000;
 
 			&:focus,
 			&:hover {
@@ -222,21 +240,6 @@ export default {
 		.rise-leave-to {
 			transform: translateY(100%);
 			clip-path: inset(0 0 100% 0);
-		}
-
-		.fade-enter-active,
-		.fade-leave-active {
-			transition: opacity 300ms ease-out;
-		}
-
-		.fade-enter,
-		.fade-leave-to {
-			opacity: 0;
-		}
-
-		.fade-enter-to,
-		.fade-leave {
-			opacity: 1;
 		}
 	}
 </style>

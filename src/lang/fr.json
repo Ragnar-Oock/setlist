@@ -118,7 +118,8 @@
     }
   },
   "topBar": {
-    "darkMode": "Mode sombre"
+    "darkMode": "Mode sombre",
+    "startTutorial": "Tutoriel"
   },
   "loading": "Chargement de la liste",
   "apiError": "Une erreur est survenue",
