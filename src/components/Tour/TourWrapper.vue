@@ -35,7 +35,7 @@
 									src="@/assets/images/scrolldown/chevron_down.svg"
 									aria-hidden="true"
 								>
-								{{ actions.actions.labels.buttonPrevious }}
+								{{ $t('tutorial.buttons.previous') }}
 							</button>
 							<!-- skip tour -->
 							<button
@@ -43,7 +43,7 @@
 								class="skip btn dull small"
 								@click.prevent="actions.actions.skip"
 							>
-								{{ actions.actions.labels.buttonSkip }}
+								{{ $t('tutorial.buttons.skip') }}
 							</button>
 							<!-- next -->
 							<button
@@ -51,7 +51,7 @@
 								class="next btn dull small"
 								@click.prevent="actions.actions.nextStep"
 							>
-								{{ actions.actions.labels.buttonNext }}
+								{{ $t('tutorial.buttons.next') }}
 								<img
 									svg-inline
 									class="icon arrow right"
@@ -65,7 +65,7 @@
 								class="finish btn dull small"
 								@click.prevent="actions.actions.finish"
 							>
-								{{ actions.actions.labels.buttonStop }}
+								{{ $t('tutorial.buttons.finish') }}
 							</button>
 						</div>
 					</template>
@@ -90,61 +90,69 @@ export default {
 	components: {
 		CustomStep
 	},
+	data() {
+		return {
+			callbacks: {
+				onFinish: this.onFinish,
+				onSkip: this.onFinish
+			}
+		};
+	},
 	computed: {
 		steps() {
 			return [
 				{
 					target: '#lang-selector',
-					content: this.$t('tutorial.languageSelector.content'),
-					header: { title: this.$t('tutorial.languageSelector.title') },
+					content: this.$t('tutorial.steps.languageSelector.content'),
+					header: { title: this.$t('tutorial.steps.languageSelector.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '#darkmode-label',
-					content: this.$t('tutorial.darkmode.content'),
-					header: { title: this.$t('tutorial.darkmode.title') },
+					content: this.$t('tutorial.steps.darkmode.content'),
+					header: { title: this.$t('tutorial.steps.darkmode.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '#search',
-					content: this.$t('tutorial.search.content'),
-					header: { title: this.$t('tutorial.search.title') },
+					content: this.$t('tutorial.steps.search.content'),
+					header: { title: this.$t('tutorial.steps.search.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '#advenced-search',
-					content: this.$t('tutorial.filters.content'),
-					header: { title: this.$t('tutorial.filters.title') },
+					content: this.$t('tutorial.steps.filters.content'),
+					header: { title: this.$t('tutorial.steps.filters.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '#order-widget',
-					content: this.$t('tutorial.order.content'),
-					header: { title: this.$t('tutorial.order.title') },
+					content: this.$t('tutorial.steps.order.content'),
+					header: { title: this.$t('tutorial.steps.order.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '.music-item',
-					content: this.$t('tutorial.openItem.content'),
-					header: { title: this.$t('tutorial.openItem.title') },
+					content: this.$t('tutorial.steps.openItem.content'),
+					header: { title: this.$t('tutorial.steps.openItem.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '.music-item .arrangements',
-					content: this.$t('tutorial.arrangementSelector.content'),
-					header: { title: this.$t('tutorial.arrangementSelector.title') },
+					content: this.$t('tutorial.steps.arrangementSelector.content'),
+					header: { title: this.$t('tutorial.steps.arrangementSelector.title') },
 					before: () => new Promise((resolve, reject) => {
 						this.$store.dispatch('toggleItem', { index: 0, value: true }).then(() => {
 							new Promise(res => setTimeout(res, 500)).then(resolve);
@@ -159,40 +167,40 @@ export default {
 				},
 				{
 					target: '.music-item .vip',
-					content: this.$t('tutorial.prebuildVIP.content'),
-					header: { title: this.$t('tutorial.prebuildVIP.title') },
+					content: this.$t('tutorial.steps.prebuildVIP.content'),
+					header: { title: this.$t('tutorial.steps.prebuildVIP.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '.music-item .edit',
-					content: this.$t('tutorial.prebuildEdit.content'),
-					header: { title: this.$t('tutorial.prebuildEdit.title') },
+					content: this.$t('tutorial.steps.prebuildEdit.content'),
+					header: { title: this.$t('tutorial.steps.prebuildEdit.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '.music-item .copy',
-					content: this.$t('tutorial.prebuildCopy.content'),
-					header: { title: this.$t('tutorial.prebuildCopy.title') },
+					content: this.$t('tutorial.steps.prebuildCopy.content'),
+					header: { title: this.$t('tutorial.steps.prebuildCopy.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '#kofi',
-					content: this.$t('tutorial.tips.content'),
-					header: { title: this.$t('tutorial.tips.title') },
+					content: this.$t('tutorial.steps.tips.content'),
+					header: { title: this.$t('tutorial.steps.tips.title') },
 					params: {
 						enableScrolling: false
 					}
 				},
 				{
 					target: '#kofi',
-					content: this.$t('tutorial.bugs.content'),
-					header: { title: this.$t('tutorial.bugs.title') },
+					content: this.$t('tutorial.steps.bugs.content'),
+					header: { title: this.$t('tutorial.steps.bugs.title') },
 					params: {
 						enableScrolling: false
 					}

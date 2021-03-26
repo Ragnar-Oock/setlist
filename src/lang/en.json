@@ -134,53 +134,61 @@
     "tooltip":"Tips"
   },
   "tutorial": {
-    "languageSelector": {
-      "content": "Change the language of the app to your liking.",
-      "title": "Just like home"
+    "steps": {
+      "languageSelector": {
+        "content": "Change the language of the app to your liking.",
+        "title": "Just like home"
+      },
+      "darkmode": {
+        "content": "Switch between light and dark mode.",
+        "title": "Turn off the ligths"
+      },
+      "search": {
+        "content": "Begin to type what you want to search, we'll try to find it for you.",
+        "title": "Better than google"
+      },
+      "filters": {
+        "content": "Fine tune your search with the advenced filters.",
+        "title": "Get your hands dirty"
+      },
+      "order": {
+        "content": "Order the results to your liking.",
+        "title": "All in order"
+      },
+      "openItem": {
+        "content": "Click an item of the list to learn more about it.",
+        "title": "Explore the world"
+      },
+      "arrangementSelector": {
+        "content": "Choose an arrangement from the list.",
+        "title": "Be nitpicky"
+      },
+      "prebuildVIP": {
+        "content": "Make a VIP or a regular request (you need VIP points to make a VIP request, check if you have some by typing !vip in the twitch chat)",
+        "title": "Requests types"
+      },
+      "prebuildEdit": {
+        "content": "You can make a new request or edit your pending ones.",
+        "title": "Change your mind"
+      },
+      "prebuildCopy": {
+        "content": "Copy your command and paste it in the twitch chat to submit it",
+        "title": "Copy pasta"
+      },
+      "tips": {
+        "content": "If you like this app, you can support me on Ko-Fi",
+        "title": "Black, without sugar"
+      },
+      "bugs": {
+        "content": "Found a bug 🐜 ? report it on <a href=\"https://github.com/Ragnar-Oock/setlist/issues\" target=\"_blank\">Github</a>.",
+        "title": "Smach the bugs"
+      }
     },
-    "darkmode": {
-      "content": "Switch between light and dark mode.",
-      "title": "Turn off the ligths"
-    },
-    "search": {
-      "content": "Begin to type what you want to search, we'll try to find it for you.",
-      "title": "Better than google"
-    },
-    "filters": {
-      "content": "Fine tune your search with the advenced filters.",
-      "title": "Get your hands dirty"
-    },
-    "order": {
-      "content": "Order the results to your liking.",
-      "title": "All in order"
-    },
-    "openItem": {
-      "content": "Click an item of the list to learn more about it.",
-      "title": "Explore the world"
-    },
-    "arrangementSelector": {
-      "content": "Choose an arrangement from the list.",
-      "title": "Be nitpicky"
-    },
-    "prebuildVIP": {
-      "content": "Make a VIP or a regular request (you need VIP points to make a VIP request, check if you have some by typing !vip in the twitch chat)",
-      "title": "Requests types"
-    },
-    "prebuildEdit": {
-      "content": "You can make a new request or edit your pending ones.",
-      "title": "Change your mind"
-    },
-    "prebuildCopy": {
-      "content": "Copy your command and paste it in the twitch chat to submit it",
-      "title": "Copy pasta"
-    },
-    "tips": {
-      "content": "If you like this app, you can support me on Ko-Fi",
-      "title": "Black, without sugar"
-    },
-    "bugs": {
-      "content": "Found a bug 🐜 ? report it on <a href=\"https://github.com/Ragnar-Oock/setlist/issues\" target=\"_blank\">Github</a>.",
-      "title": "Smach the bugs"
+    "buttons": {
+      "previous": "Previous",
+      "next": "Next",
+      "skip": "Skip tour",
+      "finish": "Finish"
     }
   }
 }

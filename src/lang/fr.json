@@ -134,53 +134,61 @@
     "tooltip":"Tips"
   },
   "tutorial": {
-    "languageSelector": {
-      "content": "Change la langue de l'application.",
-      "title": "Comme à la maison"
+    "steps":{
+      "languageSelector": {
+        "content": "Change la langue de l'application.",
+        "title": "Comme à la maison"
+      },
+      "darkmode": {
+        "content": "Change entre le mode sombre et le mode classique.",
+        "title": "Eteind la lumière"
+      },
+      "search": {
+        "content": "Commence à taper ce que tu cherches, on essayera de le trouver pour toi.",
+        "title": "Mieux que google"
+      },
+      "filters": {
+        "content": "Affine ta recherche avec les filtres avancés.",
+        "title": "Les mains dans le cambouis"
+      },
+      "order": {
+        "content": "Change l'ordre des resultats comme il te convient.",
+        "title": "Tout est en ordre"
+      },
+      "openItem": {
+        "content": "Clique sur un item pour en apprendre plus à son sujet.",
+        "title": "Explore le monde"
+      },
+      "arrangementSelector": {
+        "content": "Choisi un arrangement dans la liste.",
+        "title": "Soit tatillon"
+      },
+      "prebuildVIP": {
+        "content": "Fait une requete VIP ou regulière. Tu as besoin de point VIP pour faire une requete VIP. Envoye !vip dans le chat twitch pour savoir combien tu en as.",
+        "title": "Types de requetes"
+      },
+      "prebuildEdit": {
+        "content": "Tu peux faire une nouvelle requete ou éditer celle en attente.",
+        "title": "Change d'idée"
+      },
+      "prebuildCopy": {
+        "content": "Copy ta commande et colle la dans le chat twitch pour enregistrer ta requete.",
+        "title": "Copy pasta"
+      },
+      "tips": {
+        "content": "Si tu aime cette application, soutient moi sur Ko-Fi.",
+        "title": "Noir, sans sucre"
+      },
+      "bugs": {
+        "content": "Tu as trouvé un bug 🐜 ? Signale le sur <a href=\"https://github.com/Ragnar-Oock/setlist/issues\" target=\"_blank\">Github</a>.",
+        "title": "Ecrase les bugs"
+      }
     },
-    "darkmode": {
-      "content": "Change entre le mode sombre et le mode classique.",
-      "title": "Eteind la lumière"
-    },
-    "search": {
-      "content": "Commence à taper ce que tu cherches, on essayera de le trouver pour toi.",
-      "title": "Mieux que google"
-    },
-    "filters": {
-      "content": "Affine ta recherche avec les filtres avancés.",
-      "title": "Les mains dans le cambouis"
-    },
-    "order": {
-      "content": "Change l'ordre des resultats comme il te convient.",
-      "title": "Tout est en ordre"
-    },
-    "openItem": {
-      "content": "Clique sur un item pour en apprendre plus à son sujet.",
-      "title": "Explore le monde"
-    },
-    "arrangementSelector": {
-      "content": "Choisi un arrangement dans la liste.",
-      "title": "Soit tatillon"
-    },
-    "prebuildVIP": {
-      "content": "Fait une requete VIP ou regulière. Tu as besoin de point VIP pour faire une requete VIP. Envoye !vip dans le chat twitch pour savoir combien tu en as.",
-      "title": "Types de requetes"
-    },
-    "prebuildEdit": {
-      "content": "Tu peux faire une nouvelle requete ou éditer celle en attente.",
-      "title": "Change d'idée"
-    },
-    "prebuildCopy": {
-      "content": "Copy ta commande et colle la dans le chat twitch pour enregistrer ta requete.",
-      "title": "Copy pasta"
-    },
-    "tips": {
-      "content": "Si tu aime cette application, soutient moi sur Ko-Fi.",
-      "title": "Noir, sans sucre"
-    },
-    "bugs": {
-      "content": "Tu as trouvé un bug 🐜 ? Signale le sur <a href=\"https://github.com/Ragnar-Oock/setlist/issues\" target=\"_blank\">Github</a>.",
-      "title": "Ecrase les bugs"
+    "buttons": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "skip": "Quitter",
+      "finish": "Terminer"
     }
   }
 }
