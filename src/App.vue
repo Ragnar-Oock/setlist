@@ -4,9 +4,8 @@
 		class="app"
 	>
 		<WelcomeScreen @visible="onWelcomeScreenVisiblityChange" />
+		<TopBar :is-search-bar-docked="isSearchBarDocked" />
 		<main>
-			<TopBar :is-search-bar-docked="isSearchBarDocked" />
-
 			<RulesPage
 				v-if="!isLastRuleVersionAccepted"
 				:show="!isWelcomeScreenVisible"

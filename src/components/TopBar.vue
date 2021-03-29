@@ -1,5 +1,5 @@
 <template>
-	<div
+	<header
 		class="top-bar"
 		:class="{'docked': isSearchBarDocked}"
 	>
@@ -76,7 +76,7 @@
 				<span class="sr-only">{{ $t('topBar.darkMode') }}</span>
 			</label>
 		</div>
-	</div>
+	</header>
 </template>
 
 <script lang="js">
@@ -152,7 +152,7 @@ export default {
 			gap: .25em;
 
 			transition: opacity 300ms ease-in-out;
-			@media screen and (max-width: 67.3em) {
+			@media screen and (max-width: 68em) {
 				@at-root .docked & {
 					opacity: 0;
 				}
