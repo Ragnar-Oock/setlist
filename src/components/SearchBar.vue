@@ -553,10 +553,6 @@ export default {
 		position: relative;
 		border-radius: 5px;
 
-		// &:focus-within {
-		// 	box-shadow: 0 0 10px 3px #0003;
-		// }
-
 		&__input {
 			width: 100%;
 			height: 100%;
