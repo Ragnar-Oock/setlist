@@ -1,12 +1,8 @@
 {
-  "message": "salut i18n !!",
   "rules": {
-    "rules": {
-      "title": "Les regles",
-      "body": "Les requêtes standard sont jouées dans un ordre aléatoire et les VIP dans l'ordre d'ajout.\n\nUn modérateur peut vous demander de modifier votre requête pour diverse raison parmis mais non limité à :\n- la musique a déjà été joué durant le live en cours\n- l'accordage n'est pas possible à reproduire avec le matériel à disposition\n- le lien vers le fichier de la musique est mort\n- la musique est mal chartée\n- la musique est trop compliquée\n\nNe pas obéir à une telle demande mènera au blocage de votre requête.\n\nVotre requête sera automatiquement supprimée si vous êtes absent pour une trop longue période.\n\nNe pas se conformer aux règles mènera au blocage de votre requête. Toute infraction répétées mèneront à des sanctions à la discrétion des modérateurs (suppression de la requête, bannissement temporaire ou définitif du chat... ).",
-      "agree": "J'accepte les regles"
-    },
-    "footer":"Vous avez trouvé un bug? Ouvrez une issue sur [Github](https://github.com/Ragnar-Oock/setlist/issues)"
+    "title": "Les regles",
+    "body": "<p><strong>Dites bonjour</strong> avant de faire une requête ou d&#39;utiliser le bot, il vous ignorera si votre premier message du live est une commande.</p><p><strong>La liste présentée sur cette page est générée automatiquement</strong>, les musiques ne sont pas validées manuellement et peuvent donc ne pas respecter les règles, à vous de le faire.</p><p>Nous n&#39;acceptons pas les requêtes:</p><ul><li><strong>Sans guitare</strong>, c&#39;est une live de guitare, pas de chant</li><li><strong>Trop difficile</strong>, le but n&#39;est pas de tester les capacités de Warths</li><li><strong>De plus de 8 minutes</strong>, votre requete n&#39;est pas la seule</li><li><strong>Requête troll</strong>, ça devient très vite inintéressant pour tout le monde</li><li><strong>Genres extrêmes/avant-gardistes</strong>, trop complexe a jouer sans entrainement</li><li><strong>Musique Jap, d&#39;anime et jeux vidéo</strong>, les charts sont trop souvent mal faites</li></ul><p><strong>Toute requête ne respectant pas les règles sera gelée ou supprimée</strong> (décision à la discrétion des modérateurs) et la musique ajoutée à la banlist.</p>",
+    "agree": "J'accepte les regles"
   },
   "welcome" : {
     "message": {

@@ -1,12 +1,8 @@
 {
-  "message": "salut i18n !!",
   "rules": {
-    "rules": {
-      "title": "The rules",
-      "body": "Standard requests are performed in random order, and VIP requests are played in order.\n\nA moderator can ask you to change your request for various reasons that can be but are not limited to:\n- the song has been played already during the current stream\n- the tuning is not achievable with the hardware on hand\n- the link to the chart is dead\n- the song is poorly charted\n- the chart is too hard to perform  \nNot complying with the injunction of the moderator will result in your request being blocked.\n\nYour request is automatically removed from the playlist if you were absent for a prolonged period.\n\nNot respecting the rules will lead to the blocking of the request. Any repeated infraction will lead to sanctions at the discretion of the moderators (removing of your request, temporary or definitive banishment on the chat...)",
-      "agree": "I agree with the rules"
-    },
-    "footer": "Found a bug? Open an issue on [Github](https://github.com/Ragnar-Oock/setlist/issues)"
+    "title": "The rules",
+    "body": "<p><strong>Say hello</strong> before making a request or using the bot, it will ignore you if your first message of the stream is a command.</p><p><strong>The list presented on this page is generated automatically</strong>, all the songs aren&#39;t validated manually and thus can infringe the rules, it&#39;s up to you to respect them.</p><p>We don&#39;t accept the requests :</p><ul><li><strong>Without a guitar track</strong>, it&#39;s a guitar stream, not a singing one</li><li><strong>Too hard</strong>, the purpose of the stream is not to test Warths&#39; habilities</li><li><strong>More than 8 minutes long</strong>, your request is not the only one</li><li><strong>Troll request</strong>, it becomes uninteresting really quickly</li><li><strong>Of genre extreme or avant-gardist</strong>, too complex to play without training</li><li><strong>Japanese music, anime, or video game soundtrack</strong>, the charts are most of the time badly made</li></ul><p><strong>Any infringing request will be frozen or deleted</strong> (at the discretion of the moderators) and the song added to the ban list.</p>",
+    "agree": "I agree with the rules"
   },
   "welcome" : {
     "message": {

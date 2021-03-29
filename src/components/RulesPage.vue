@@ -3,7 +3,6 @@
 </template>
 
 <script lang="js">
-import marked from 'marked';
 import { mapState } from 'vuex';
 import { Fragment } from 'vue-fragment';
 
@@ -35,8 +34,8 @@ export default {
 		showAlert() {
 			// Use sweetalert2
 			this.$swal({
-				title: this.$t('rules.rules.title'),
-				html: marked(this.$t('rules.rules.body')),
+				title: this.$t('rules.title'),
+				html: this.$t('rules.body'),
 				customClass: {
 					container: 'container',
 					popup: 'popup-box',
@@ -58,7 +57,7 @@ export default {
 					footer: 'footer'
 				},
 				allowOutsideClick: false,
-				confirmButtonText: this.$t('rules.rules.agree'),
+				confirmButtonText: this.$t('rules.agree'),
 				focusConfirm: false
 			})
 				.then(result => {
@@ -163,6 +162,7 @@ export default {
 			text-align: unset;
 			font-size: 1rem;
 			padding-top: 2em;
+			line-height: 1.3;
 
 			h2 {
 				margin: 2em 0 .5em;
@@ -173,7 +173,7 @@ export default {
 				margin: 1em 0 0;
 			}
 			li {
-				padding: .25em 0;
+				padding: .25em 0 0;
 
 				&::before {
 					content: '-';
