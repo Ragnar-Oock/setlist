@@ -4,7 +4,7 @@
 		:class="{'docked': isSearchBarDocked}"
 	>
 		<div class="top-bar__left">
-			<LangSelector class="top-bar__item" />
+			<LangSelector />
 		</div>
 		<div class="top-bar__right">
 			<button
@@ -21,13 +21,13 @@
 					aria-hidden="true"
 				>
 			</button>
-			<KoFi class="top-bar__item" />
+			<KoFi />
 			<label
 				id="darkmode-label"
 				ref="darkmode"
 				v-tippy="{placement:'bottom', popperOptions: {strategy: 'fixed'}}"
 				for="darkMode"
-				class="top-bar__label top-bar__item"
+				class="top-bar__label"
 				:class="{'checked': isDarkModeOn}"
 				:data-tippy-content="$t('topBar.darkMode')"
 			>
@@ -144,21 +144,19 @@ export default {
 		padding: 0 2em;
 		transition: background-image 300ms ease-in-out;
 
-		&__item {
-			transition: opacity 300ms ease-in-out;
-			@media screen and (max-width: 63.75em) {
-				@at-root .docked & {
-					opacity: 0;
-				}
-			}
-		}
-
 		&__left,
 		&__right{
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			gap: .25em;
+
+			transition: opacity 300ms ease-in-out;
+			@media screen and (max-width: 67.3em) {
+				@at-root .docked & {
+					opacity: 0;
+				}
+			}
 		}
 
 		&__left{
