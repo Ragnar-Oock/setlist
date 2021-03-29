@@ -107,7 +107,8 @@ export default {
 					content: this.$t('tutorial.steps.start.content'),
 					header: { title: this.$t('tutorial.steps.start.title') },
 					params: {
-						enableScrolling: false
+						enableScrolling: false,
+						positionFixed: true
 					}
 				},
 				{
@@ -115,7 +116,8 @@ export default {
 					content: this.$t('tutorial.steps.darkmode.content'),
 					header: { title: this.$t('tutorial.steps.darkmode.title') },
 					params: {
-						enableScrolling: false
+						enableScrolling: false,
+						positionFixed: true
 					}
 				},
 				{
@@ -160,10 +162,7 @@ export default {
 						}).catch(reject);
 					}),
 					params: {
-						enableScrolling: false,
-						modifier: {
-							placement: 'top'
-						}
+						enableScrolling: false
 					}
 				},
 				{
@@ -194,8 +193,13 @@ export default {
 					target: '#kofi',
 					content: this.$t('tutorial.steps.tips.content'),
 					header: { title: this.$t('tutorial.steps.tips.title') },
+					before: () => new Promise(resolve => {
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+						resolve();
+					}),
 					params: {
-						enableScrolling: false
+						enableScrolling: false,
+						positionFixed: true
 					}
 				},
 				{
@@ -203,7 +207,8 @@ export default {
 					content: this.$t('tutorial.steps.bugs.content'),
 					header: { title: this.$t('tutorial.steps.bugs.title') },
 					params: {
-						enableScrolling: false
+						enableScrolling: false,
+						positionFixed: true
 					}
 				}
 
