@@ -7,7 +7,7 @@
 		<TopBar :is-search-bar-docked="isSearchBarDocked" />
 		<main>
 			<RulesPage
-				v-if="!isLastRuleVersionAccepted"
+				v-if="enableRules"
 				:show="!isWelcomeScreenVisible"
 			/>
 
@@ -129,8 +129,13 @@ export default {
 		}),
 		...mapGetters([
 			'getPage',
-			'isLastRuleVersionAccepted'
-		])
+			'isLastRuleVersionAccepted',
+			'isForceShowRulesUp'
+		]),
+		enableRules() {
+			return !this.isLastRuleVersionAccepted || this.isForceShowRulesUp;
+		}
+
 	},
 	watch: {
 		isDarkModeOn() {

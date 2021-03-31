@@ -3,7 +3,7 @@
 </template>
 
 <script lang="js">
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import { Fragment } from 'vue-fragment';
 
 export default {
@@ -19,13 +19,14 @@ export default {
 		}
 	},
 	computed:{
-		...mapState({
-			lastAcceptedRuleVersion: state => state.percist.lastAcceptedRuleVersion
-		})
+		...mapGetters([
+			'isLastRuleVersionAccepted',
+			'isForceShowRulesUp'
+		])
 	},
 	watch:{
 		show(newValue) {
-			if (newValue && this.lastAcceptedRuleVersion < process.env.VUE_APP_RULES_VERSION) {
+			if (newValue && (!this.isLastRuleVersionAccepted || this.isForceShowRulesUp)) {
 				this.showAlert();
 			}
 		}
