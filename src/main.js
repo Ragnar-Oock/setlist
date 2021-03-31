@@ -24,11 +24,6 @@ Vue.use(TippyPlugin);
 import PortalVue from 'portal-vue';
 Vue.use(PortalVue);
 
-// modal
-import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
-Vue.use(VueSweetalert2);
-
 // custom mixins
 import mixins from './mixins';
 
