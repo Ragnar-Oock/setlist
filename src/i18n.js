@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { supportedLocalesInclude } from '@/lang/supported';
+import { getUrlPrameters } from './helpers/methods';
 
 Vue.use(VueI18n);
 
@@ -46,28 +47,37 @@ export function getSavedLocal() {
 	return localStorage.getItem('langLocal') || '';
 }
 
+function getForcedLocal() {
+	return getUrlPrameters().lang || '';
+}
+
 function getStartingLocale() {
 	const browserLocale = getBrowserLocale({ countryCodeOnly: true });
 	const savedLocale = getSavedLocal();
+	const forcedLocale = getForcedLocal();
 
-	// if a lang was shousen by the user use it
-	// otherwise use the browser local
+	// if the lang is set in the url use ir
+	// else if a lang was chosen by the user use it
+	// else use the browser local
 	// fallback to the app local if previous options are not satifisable
-	// if everithing else fail, use french
-	if (savedLocale !== '' && supportedLocalesInclude(savedLocale)) {
+	// if everithing else fail, use english
+	if (forcedLocale !== '' && supportedLocalesInclude(forcedLocale)) {
+		return forcedLocale;
+	}
+	else if (savedLocale !== '' && supportedLocalesInclude(savedLocale)) {
 		return savedLocale;
 	}
 	else if (supportedLocalesInclude(browserLocale)) {
 		return browserLocale;
 	}
 	else {
-		return process.env.VUE_APP_I18N_LOCALE || 'fr';
+		return process.env.VUE_APP_I18N_LOCALE;
 	}
 }
 
 export default new VueI18n({
 	locale: getStartingLocale(),
-	fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'fr',
+	fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE,
 	messages: loadLocaleMessages(),
 	silentTranslationWarn: true
 });

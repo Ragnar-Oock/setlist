@@ -103,3 +103,21 @@ export function initializeSongList(songList) {
 
 	return initialisedSongList;
 }
+
+/**
+ * parse and return url parameters as an object
+ * @returns {Object} parameters in key value paires
+ */
+export function getUrlPrameters() {
+	const parameters = {};
+
+	if (window.location.search.length > 1) {
+		for (let i = 0, paires = window.location.search.substr(1).split('&'); i < paires.length; i++) {
+			const splitedPaire = paires[i].split('=');
+
+			parameters[unescape(splitedPaire[0])] = unescape(splitedPaire[1]) || '';
+		}
+	}
+
+	return parameters;
+}
