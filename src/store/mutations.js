@@ -18,7 +18,7 @@ const mutations = {
 	 * @param {Object[]} songList array of songs to be added to the list
 	 */
 	ADD_SONGS_TO_LIST(state, songList) {
-		state.songs = [... state.songs, ...songList];
+		state.songs = [...state.songs, ...initializeSongList(songList)];
 	},
 
 	/**
