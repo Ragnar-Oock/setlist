@@ -29,10 +29,6 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 Vue.use(VueSweetalert2);
 
-// enable devtools in prod
-// Vue.config.devtools = true;
-// Vue.config.productionTip = false;
-
 // custom mixins
 import mixins from './mixins';
 

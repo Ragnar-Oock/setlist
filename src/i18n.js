@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { supportedLocalesInclude } from '@/lang/supported';
-import { getUrlPrameters } from './helpers/methods';
+import { getUrlPrameters } from '@/helpers/methods';
 
 Vue.use(VueI18n);
 
